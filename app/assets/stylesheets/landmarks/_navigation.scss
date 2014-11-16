@@ -1,0 +1,122 @@
+/* ---------------------------------------------------------------------
+Main Navigation
+------------------------------------------------------------------------ */
+/* Show mobile menu on hover for sites that don't have javascript */
+.no-js .navigation:hover .navigation-menu {
+    @include isNotHidden();
+}
+
+.navigation-menu-item-link {
+    display: block;
+    padding-bottom: 15px;
+    padding-left: 7px;
+    color: $COLOR_WHITE;   
+    font-family: $FONT_HEADLINE;
+    text-transform: uppercase;
+    font-size: 17px;    
+}
+
+.navigation-menu-item + .navigation-menu-item .navigation-menu-item-link {
+    padding-top: 15px;
+    border-top: 1px solid #b2b2b2;
+}
+
+.navigation-menu {
+    padding: 15px;
+    background-color: $COLOR_BLACK;
+}
+
+ @include breakpoint(mobile) {
+ 	
+	/* ---------------------------------------------------------------------
+	Main Navigation (Mobile)
+	------------------------------------------------------------------------ */
+
+	.navigation-button {
+	    position: absolute;
+	    top: 11px;
+	    right: 10px;
+	    display: block;
+	    width: 35px;
+	    height: 30px;
+	    text-indent: -9999px; /* Hiding "menu" button text accessibly */
+	    z-index:1;
+	}
+
+	/* Styling navigation menu for mobile and hiding it just off of the browser, preparing for slide in */
+	.navigation-menu {
+	    position: absolute;
+	    top:-400px;
+	    display: block;
+	    right:5%;
+	    left:5%;
+	    @include transition(all .5s ease-in); /* Transition is used for slide effect */    
+	}
+
+	/* This class is added by javascript and is used to slide the menu in when the Menu button is clicked */
+	.navigation-menu_open {
+	    top: $HEADER_HEIGHT;
+	    @include transition(all .5s ease-out); /* Transition is used for slide effect */
+	}
+
+
+}
+
+
+ @include breakpoint(desktop) {
+
+	/* ---------------------------------------------------------------------
+	Main Navigation (Desktop)
+	------------------------------------------------------------------------ */
+	.navigation-button {
+	    display: none;
+	}
+
+	.navigation {
+	}
+
+	.navigation-menu {
+	    position: relative;
+ 		width:940px;
+ 		margin: 0 auto;
+ 		top:auto;	    
+	    left:auto;
+	    right:auto;
+	    padding:0;
+	    text-align: right;
+	    background:none;
+	}
+
+	.navigation-menu-item {
+	    display: inline-block;
+	    margin-left: 4.2%;
+	}
+
+	/* This extension is to add extra spacing around the center logo */
+	.navigation-menu-item_center {
+	    margin-left: 22%;
+	}
+
+	/* This extension is for the second half of the buttons which have less spacing */
+	.navigation-menu-item_alt {
+	    margin-left: 3.7%;
+	}
+
+	.navigation-menu-item-link {
+	    /* removing styles from mobile view */
+	    padding-bottom: 15px;
+	    padding-top: 15px;
+	    padding-left: 0;
+	    text-decoration: none;
+	}
+
+	.navigation-menu-item-link:hover {
+	}
+
+	.navigation-menu-item + .navigation-menu-item .navigation-menu-item-link {
+	    /* removing styles from mobile view */
+	    padding-top: 0;
+	    border-top: 0;
+	}
+
+}

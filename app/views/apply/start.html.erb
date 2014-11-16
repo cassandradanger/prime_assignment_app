@@ -1,0 +1,13 @@
+<h1>Start</h1>
+
+<p>General instruction text and directions go here.</p>
+
+<%- if @admission_application.application_status == "complete" -%>
+
+	<p>Information about what to expect after submission here...</p>	
+
+<%- else -%>
+
+	<p><%= link_to @admission_application.new_record? ? "Start Your Application" : "Continue Your Application", wizard_path(:general) %></p>
+
+<%- end -%>

@@ -1,0 +1,23 @@
+<h1>Submit</h1>
+
+<%= render "apply_navigation" %>
+
+<%= simple_form_for @admission_application, url: wizard_path, method: :put do |f| -%>
+
+	<% if @admission_application.errors.any? %>
+	  <div id="error_explanation">
+	   <div class="alert alert-error">
+	     Your application contains <%= pluralize(@admission_application.errors.count, "error") %>. Please make corrections and resubmit your application.
+	   </div>
+	  <ul>
+	   <% @admission_application.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	   <% end %>
+	 </ul>
+	</div>
+	<% end %>
+
+	<%= f.hidden_field :application_status, :value=>"complete" %>
+	<%= f.button :submit, "Submit your application" %>
+
+<% end %>

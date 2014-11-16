@@ -1,0 +1,52 @@
+@mixin isHidden() {
+    position: absolute;
+    left: -9999px;
+}
+
+@mixin isNotHidden() {
+    position: relative;
+    left: 0;
+}
+
+/* isAlwaysHidden is irreversible with CSS. It is a more strict way of hidding,
+needed when absolute positioning isn't enough */
+@mixin isAlwaysHidden() {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0;
+    height: 0;
+}
+
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: $WIDTH_DESKTOP) { @content; }
+  }
+  @else if $point == tablet {
+    @media (min-width: $WIDTH_TABLET) { @content; }
+  }
+  @if $point == mobile {
+    @media (max-width: $WIDTH_DESKTOP) { @content; }
+  }  
+}
+
+/* isAlwaysHidden is irreversible with CSS. It is a more strict way of hidding,
+needed when absolute positioning isn't enough */
+.isAlwaysHidden {
+    @include isAlwaysHidden();
+}
+
+.isHidden {
+    @include isHidden();
+}
+
+.isHiddenMobile {
+    @media only screen and (min-width: $WIDTH_DESKTOP) {
+        @include isHidden();
+    }
+}
+
+.isHiddenDesktop {
+    @media only screen and (max-width: $WIDTH_DESKTOP) {
+        @include isHidden();
+    }
+}

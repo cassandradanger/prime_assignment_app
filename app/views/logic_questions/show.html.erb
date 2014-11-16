@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @logic_question.question %>
+</p>
+
+<p>
+  <strong>Solution:</strong>
+  <%= @logic_question.solution %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @logic_question.status %>
+</p>
+
+<%= link_to 'Edit', edit_logic_question_path(@logic_question) %> |
+<%= link_to 'Back', logic_questions_path %>

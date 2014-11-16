@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  logic_question_id: 1
+  admission_application_id: 1
+  answer: MyString
+  explanation: MyText
+
+two:
+  logic_question_id: 1
+  admission_application_id: 1
+  answer: MyString
+  explanation: MyText

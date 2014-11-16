@@ -1,0 +1,61 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  date_of_birth: 2014-11-15
+  email: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  legal_status: MyString
+  education: MyString
+  employment_status: MyString
+  linkedin_account: MyString
+  twitter_account: MyString
+  github_account: MyString
+  website_link: MyString
+  personal_link: MyString
+  resume_link: MyString
+  referral_source: MyString
+  question_reason_for_applying: MyText
+  question_why_prime: MyText
+  question_intensity: MyText
+  question_technology_background: MyText
+  question_self_differentiation: MyText
+  question_three_month_prediction: MyText
+  question_three_year_aspiration: MyText
+  question_actions_toward_goals: MyText
+  application_status: MyString
+  application_step: MyString
+
+two:
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  date_of_birth: 2014-11-15
+  email: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  legal_status: MyString
+  education: MyString
+  employment_status: MyString
+  linkedin_account: MyString
+  twitter_account: MyString
+  github_account: MyString
+  website_link: MyString
+  personal_link: MyString
+  resume_link: MyString
+  referral_source: MyString
+  question_reason_for_applying: MyText
+  question_why_prime: MyText
+  question_intensity: MyText
+  question_technology_background: MyText
+  question_self_differentiation: MyText
+  question_three_month_prediction: MyText
+  question_three_year_aspiration: MyText
+  question_actions_toward_goals: MyText
+  application_status: MyString
+  application_step: MyString

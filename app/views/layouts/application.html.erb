@@ -1,0 +1,66 @@
+<!doctype html>
+<html class="no-js" lang="en-us">
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--[if IE]><meta http-equiv="cleartype" content="on" /><![endif]-->
+
+    <!-- SEO -->
+    <title>PrimeAcademy.io</title>
+    <meta name="description" content="Public recruiting website for Prime." />
+    <meta name="author" content="" />
+
+    <!-- SECURITY -->
+	<%= csrf_meta_tags %>
+
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ env.URL_BASE }}assets/media/images/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="{{ env.URL_BASE }}assets/media/images/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ env.URL_BASE }}assets/media/images/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="{{ env.URL_BASE }}assets/media/images/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{ env.URL_BASE }}assets/media/images/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ env.URL_BASE }}assets/media/images/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ env.URL_BASE }}assets/media/images/mstile-144x144.png">        
+
+    <!-- STYLESHEETS -->
+    <%= stylesheet_link_tag 'modern', media: 'screen, projection', 'data-turbolinks-track' => true %>
+    <!--[if lte IE 8]><%= stylesheet_link_tag 'legacy', media: 'screen, projection', 'data-turbolinks-track' => true %><![endif]-->
+    <%= stylesheet_link_tag 'print', media: 'print', 'data-turbolinks-track' => true %>
+
+</head>
+<body>
+    
+    <div class="layout">
+
+        <div class="layout-header">
+        </div><!-- /layout-header -->
+
+        <div class="layout-flash">
+			<div class="notice"><%= notice %></div>
+			<div class="alert"><%= alert %></div>
+        </div><!-- /layout-flash -->
+
+        <div class="layout-body">
+            <!-- CONTENT -->         
+            <%= yield %>
+        </div><!-- /layout-body -->    
+
+        <div class="layout-footer" id="footer">
+            <p>Footer content</p>
+        </div><!-- /layout-footer -->
+    </div><!-- /layout -->
+
+    <!-- JAVASCRIPT -->
+    <%= requirejs_include_tag 'application' %>
+</body>
+</html>

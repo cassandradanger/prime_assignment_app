@@ -1,0 +1,29 @@
+/* ---------------------------------------------------------------------
+ Base Element Styles
+------------------------------------------------------------------------ */
+
+body {
+	font-family: $FONT_BODY;
+	font-size:15px;
+}
+
+h1, h2 {
+	font-family: $FONT_LARGE_HEADLINE;
+} 
+
+h1 {
+	font-size:30px;
+}
+
+h2 {
+	font-size:26px;	
+}
+
+h3, h4, h5, h6 {
+	font-family: $FONT_HEADLINE;
+	text-transform: uppercase;	
+}
+
+p + p {
+    margin-top: 10px;
+}

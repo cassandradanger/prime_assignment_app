@@ -1,0 +1,5 @@
+.layout {
+  width: 100%;
+  @include breakpoint(desktop) { width: 940px; }
+  margin: 0 auto;
+}

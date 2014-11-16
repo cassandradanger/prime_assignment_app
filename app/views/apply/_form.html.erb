@@ -1,0 +1,8 @@
+<%= simple_form_for @admission_application, url: wizard_path, method: :put do |f| -%>
+
+	<%= render "form_general", :f=>f if @step.to_s == "general" -%>
+	<%= render "form_personal", :f=>f if @step.to_s == "personal" -%>
+	<%= render "form_logic", :f=>f if @step.to_s == "logic" -%>
+	<%= f.button :submit, "Save Your Application and Continue" %>
+
+<% end %>

@@ -1,0 +1,7 @@
+shim:
+    modernizr:
+        exports: 'Modernizr'
+paths:
+    jquery: 'jquery/jquery'
+    modernizr: 'modernizr/modernizr'
+    waypoints: 'jquery-waypoints/waypoints'
