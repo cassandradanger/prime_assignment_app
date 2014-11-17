@@ -1,3 +1,7 @@
+.layout {
+	padding-top: $HEADER_HEIGHT;
+}
+
 .video-header {
 	background:#BBBBBB;
 	height:500px;
@@ -12,7 +16,7 @@
 	position:absolute;
 	top:0;
 	left:50%;
-	margin-left:-512px;
+	margin-left:-812px;
 }
 
 .layout-header {
@@ -20,7 +24,7 @@
 	background: $COLOR_BLACK;
 	height: $HEADER_HEIGHT;
 	width:100%;
-	top:0;
+	top: 0;
 	left:0;
 	z-index:1;
 }
@@ -53,6 +57,7 @@
  		margin-left:0px;
  		position:absolute;
  		display:none;
+ 		z-index:1;
  	}
 
  	.layout-header-fixed .logo {
@@ -68,7 +73,7 @@
  	.layout-header-fixed {
  		background:rgba(0,0,0,1);
  		position: fixed;
- 		top:auto;
+ 		top:0;
 	    @include transition(background .5s ease-out);
 		z-index:1
  	}

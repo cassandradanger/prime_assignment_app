@@ -41,7 +41,7 @@
 <body>
     
     <div class="video-header">
-    	<%= image_tag "image-header.jpg", :class=>"video-header-video" %>
+    	<%= image_tag "image-header.jpg", :class=>"video-header-video", :height=>"610", :width=>"1625" %>
     </div>
 
     <div class="layout">
@@ -49,7 +49,7 @@
         <div class="layout-header">
             <div class="layout-header-banner">
                 <div class="logo">
-                    <a href="{{ env.URL_SITE }}" class="logo-link">
+                    <a href="<%= root_path %>" class="logo-link">
                         <%= image_tag "logo-prime-horizontal.png", :alt=>"Prime - Software Engineering Academy", :itemprop=>"logo" %>
                         <h1 class="isHidden" itemprop="name">Prime Software Engineering Academy</h1>
                     </a>
@@ -63,7 +63,7 @@
                         <li class="navigation-menu-item"><a href="#tuition" class="navigation-menu-item-link">Tuition</a></li>
                         <li class="navigation-menu-item"><a href="#network" class="navigation-menu-item-link">Network</a></li>
                         <li class="navigation-menu-item"><a href="#faq" class="navigation-menu-item-link">FAQ</a></li>
-                        <li class="navigation-menu-item"><a href="/apply" class="navigation-menu-item-link">Apply</a></li>
+                        <li class="navigation-menu-item"><a href="/apply" class="navigation-menu-item-link button">Apply</a></li>
                     </ul>
                 </div><!-- /navigation -->
             </div><!-- /layout-header-banner -->

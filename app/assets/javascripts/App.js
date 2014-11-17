@@ -3,6 +3,7 @@ define(function(require, exports, module) { // jshint ignore:line
     
     var Modernizr = require('modernizr');
     var jQuery = require('jquery');
+    var jQueryUjs = require('jquery-ujs');
     var Waypoints = require('waypoints');
 
     /**

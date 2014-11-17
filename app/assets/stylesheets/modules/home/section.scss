@@ -3,24 +3,28 @@ Section Styles (Page Featurettes)
 ------------------------------------------------------------------------ */
 
 .section {
-	padding:20px;
-	padding-top: $HEADER_HEIGHT_WITHOUT_UNITS+20px; 
-	margin-top: $HEADER_HEIGHT_WITHOUT_UNITS*-1px;	
+	padding:$HEADER_HEIGHT 20px $HEADER_HEIGHT_WITHOUT_UNITS+60px 20px;
+	margin-top: $NEGATIVE_HEADER_HEIGHT;	
 }
 
 .section + .section {
-	border-bottom: 5px solid $COLOR_BLACK;
+	border-top: 5px solid $COLOR_BLACK;
 }
 
 .section-intro {
 	padding-top:200px;
-	min-height:500px;
 	position:relative;
 	margin-top:0;
 }
 
 .section-intro-logo {
 	position: absolute;
-	top:30px;
+	top:-20px;
 	left:10px;
+}
+
+.section-intro-banner {
+	height:270px;
+	color:$COLOR_WHITE;
+	text-align:center;
 }

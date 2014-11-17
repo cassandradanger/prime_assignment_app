@@ -3,5 +3,6 @@ shim:
         exports: 'Modernizr'
 paths:
     jquery: 'jquery/jquery'
+    jquery-ujs: 'jquery_ujs'
     modernizr: 'modernizr/modernizr'
     waypoints: 'jquery-waypoints/waypoints'

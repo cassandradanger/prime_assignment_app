@@ -4,7 +4,8 @@
 
 body {
 	font-family: $FONT_BODY;
-	font-size:15px;
+	font-size:16px;
+	line-height:24px;
 }
 
 h1, h2 {
@@ -13,17 +14,41 @@ h1, h2 {
 
 h1 {
 	font-size:30px;
+	margin-bottom:20px;
 }
 
 h2 {
-	font-size:26px;	
+	font-size:26px;
+	margin-top:20px;	
+	margin-bottom:15px;
 }
 
 h3, h4, h5, h6 {
 	font-family: $FONT_HEADLINE;
 	text-transform: uppercase;	
+	margin-top:10px;
+	margin-bottom:5px;
 }
 
-p + p {
+p + p, p + ul {
     margin-top: 10px;
+}
+
+ul {
+	list-style: disc;
+	padding-left:25px;
+}
+
+.button {
+	background: $COLOR_DARK;
+	@include border-radius(5px);
+	font-family: $FONT_HEADLINE;
+	text-transform: uppercase;
+	color: $COLOR_WHITE;
+	text-decoration: none;
+	padding:10px;
+}
+
+.button:hover {
+	background: $COLOR_BRIGHT
 }

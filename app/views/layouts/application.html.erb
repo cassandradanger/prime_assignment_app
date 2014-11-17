@@ -42,7 +42,27 @@
     
     <div class="layout">
 
-        <div class="layout-header">
+        <div class="layout-header layout-header-fixed">
+            <div class="layout-header-banner">
+                <div class="logo">
+                    <a href="<%= root_path %>" class="logo-link">
+                        <%= image_tag "logo-prime-horizontal.png", :alt=>"Prime - Software Engineering Academy", :itemprop=>"logo" %>
+                        <h1 class="isHidden" itemprop="name">Prime Software Engineering Academy</h1>
+                    </a>
+                </div>
+                <button class="navigation-button">Menu</button>
+                <div class="navigation">
+                    <h2 class="isHidden">Navigation</h2>
+                    <ul class="navigation-menu">
+                        <li class="navigation-menu-item"><a href="#program" class="navigation-menu-item-link">Program</a></li>
+                        <li class="navigation-menu-item"><a href="#curriculum" class="navigation-menu-item-link">Curriculum</a></li>
+                        <li class="navigation-menu-item"><a href="#tuition" class="navigation-menu-item-link">Tuition</a></li>
+                        <li class="navigation-menu-item"><a href="#network" class="navigation-menu-item-link">Network</a></li>
+                        <li class="navigation-menu-item"><a href="#faq" class="navigation-menu-item-link">FAQ</a></li>
+                        <li class="navigation-menu-item"><a href="/apply" class="navigation-menu-item-link">Apply</a></li>
+                    </ul>
+                </div><!-- /navigation -->
+            </div><!-- /layout-header-banner -->            
         </div><!-- /layout-header -->
 
         <div class="layout-flash">
