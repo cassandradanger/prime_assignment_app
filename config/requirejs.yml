@@ -1,6 +1,7 @@
 shim:
     modernizr:
         exports: 'Modernizr'
+    jquery-ujs: 'jquery'
 paths:
     jquery: 'jquery/jquery'
     jquery-ujs: 'jquery_ujs'
