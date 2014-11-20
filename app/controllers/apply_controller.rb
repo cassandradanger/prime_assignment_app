@@ -4,14 +4,10 @@ class ApplyController < ApplicationController
 
 	# Setup application wizard support.
 	include Wicked::Wizard
-	steps :start, :general, :personal, :logic, :submit
+	steps :start, :general, :personal, :logic, :technical, :submit
 
+  	# GET /apply/{step}
 	def show
-		# case step
-		# 	when :find_friends
-		# 		@friends = @user.find_friends
-		# 	end
-		# @step = step
 		if @admission_application.application_status == "complete" && step != :start
 			redirect_to wizard_path(:start)
 		else
@@ -25,13 +21,14 @@ class ApplyController < ApplicationController
 		end
 	end
 
-  # PATCH/PUT /admission_applications
+  # PATCH/PUT /apply/{step}
   def update
     respond_to do |format|
       params[:admission_application][:application_step] = step.to_s
 			if step == steps.last
 				params[:admission_application][:application_step] = 'active'
-				params[:admission_application][:application_status] = "complete"
+				params[:admission_application][:application_status] = 'complete'
+				params[:admission_application][:completed_at] = Time.now
 			end
       if @admission_application.update(admission_application_params)
         format.html { redirect_to next_wizard_path }
@@ -53,8 +50,8 @@ class ApplyController < ApplicationController
       params.require(:admission_application).permit(:first_name, :last_name, :application_status, :application_step, :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation])
     end
 
-		def finish_wizard_path
-		  wizard_path(:start)
-		end    
+	def finish_wizard_path
+	  wizard_path(:start)
+	end    
 
 end

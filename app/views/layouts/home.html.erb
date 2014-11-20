@@ -14,7 +14,6 @@
     <!-- SECURITY -->
 	<%= csrf_meta_tags %>
 
-
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="57x57" href="<%= image_path('apple-touch-icon-57x57.png') %>">
     <link rel="apple-touch-icon" sizes="114x114" href="<%= image_path('apple-touch-icon-114x114.png') %>">
@@ -42,7 +41,14 @@
 <body>
     
     <div class="video-header">
-    	<%= image_tag "image-header.jpg", :class=>"video-header-video", :height=>"610", :width=>"1625" %>
+        <video autoplay loop class="video-header-video">
+            <!-- <source src="http://benkaminski.com/wp-content/themes/coffee-cream-sugar/img/header-video.mp4" type="video/mp4"/> -->
+            <source src="http://d2iogj2iksjkai.cloudfront.net/video/keyboardbw.mp4" type="video/mp4"/>
+            <source src="http://yourwebsite.com/your-video-file.ogg" type="video/ogg"/>
+            <source src="http://yourwebsite.com/your-video-file.webm" type="video/webm"/>
+            Your browser does not support the video tag. I suggest you upgrade your browser.
+        </video>        
+    	<%#= image_tag "image-header.jpg", :class=>"video-header-video", :height=>"610", :width=>"1625" %>
     </div>
 
     <div class="layout">

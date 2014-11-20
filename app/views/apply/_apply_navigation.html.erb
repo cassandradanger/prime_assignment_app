@@ -1,9 +1,10 @@
 <%= link_to "Back to Application Home", wizard_path(:start) %>
 <%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
 
-<ol>
-	<li><%= link_to "General", wizard_path(:general) %></li>
-	<li><%= link_to "Personal", wizard_path(:personal) %></li>
-	<li><%= link_to "Logic", wizard_path(:logic) %></li>
-	<li><%= link_to "Submit", wizard_path(:submit) %></li>
+<ol class="navigation-menu">
+	<li class="navigation-menu-item"><%= link_to "General", wizard_path(:general) %></li>
+	<li class="navigation-menu-item"><%= link_to "Personal", wizard_path(:personal) %></li>
+	<li class="navigation-menu-item"><%= link_to "Logic", wizard_path(:logic) %></li>
+	<li class="navigation-menu-item"><%= link_to "Technical", wizard_path(:technical) %></li>
+	<li class="navigation-menu-item"><%= link_to "Submit", wizard_path(:submit) %></li>
 </ol>

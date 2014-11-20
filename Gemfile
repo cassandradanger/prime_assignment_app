@@ -29,6 +29,7 @@ gem 'wicked'
 gem 'simple_form'
 # Use paperclip for attachment uploads. Read more: https://github.com/thoughtbot/paperclip
 gem "paperclip", "~> 4.2"
+gem "aws-sdk"
 # Use the requirejs gem to use require within rails
 gem 'requirejs-rails'
 # Use Heroku deployment
