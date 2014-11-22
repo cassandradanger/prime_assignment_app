@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: MyText
+  published: true
+  scoring_guideline_1: MyText
+  scoring_guideline_2: MyText
+  scoring_guideline_3: MyText
+  scoring_guideline_4: MyText
+  scoring_guideline_5: MyText
+
+two:
+  question: MyText
+  published: true
+  scoring_guideline_1: MyText
+  scoring_guideline_2: MyText
+  scoring_guideline_3: MyText
+  scoring_guideline_4: MyText
+  scoring_guideline_5: MyText

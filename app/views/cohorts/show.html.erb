@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prework start:</strong>
+  <%= @cohort.prework_start %>
+</p>
+
+<p>
+  <strong>Classroom start:</strong>
+  <%= @cohort.classroom_start %>
+</p>
+
+<p>
+  <strong>Graduation:</strong>
+  <%= @cohort.graduation %>
+</p>
+
+<p>
+  <strong>Applications open:</strong>
+  <%= @cohort.applications_open %>
+</p>
+
+<p>
+  <strong>Applications close:</strong>
+  <%= @cohort.applications_close %>
+</p>
+
+<%= link_to 'Edit', edit_cohort_path(@cohort) %> |
+<%= link_to 'Back', cohorts_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prework_start: 2014-11-20
+  classroom_start: 2014-11-20
+  graduation: 2014-11-20
+  applications_open: 2014-11-20
+  applications_close: 2014-11-20
+
+two:
+  prework_start: 2014-11-20
+  classroom_start: 2014-11-20
+  graduation: 2014-11-20
+  applications_open: 2014-11-20
+  applications_close: 2014-11-20

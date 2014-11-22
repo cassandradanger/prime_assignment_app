@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120171436) do
+ActiveRecord::Schema.define(version: 20141121052729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,28 @@ ActiveRecord::Schema.define(version: 20141120171436) do
     t.datetime "completed_at"
   end
 
+  create_table "admission_applications_cohort_interests", force: true do |t|
+    t.integer "admission_application_id"
+    t.integer "cohort_interest_id"
+  end
+
+  create_table "cohort_interests", force: true do |t|
+    t.integer  "cohort_id"
+    t.integer  "admission_application_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cohorts", force: true do |t|
+    t.date     "prework_start"
+    t.date     "classroom_start"
+    t.date     "graduation"
+    t.date     "applications_open"
+    t.date     "applications_close"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "logic_question_answers", force: true do |t|
     t.integer  "logic_question_id"
     t.integer  "admission_application_id"
@@ -88,6 +110,27 @@ ActiveRecord::Schema.define(version: 20141120171436) do
     t.string   "question_image_content_type"
     t.integer  "question_image_file_size"
     t.datetime "question_image_updated_at"
+  end
+
+  create_table "profile_question_answers", force: true do |t|
+    t.text     "answer"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "admission_application_id"
+    t.integer  "profile_question_id"
+  end
+
+  create_table "profile_questions", force: true do |t|
+    t.text     "question"
+    t.boolean  "published"
+    t.text     "scoring_guideline_1"
+    t.text     "scoring_guideline_2"
+    t.text     "scoring_guideline_3"
+    t.text     "scoring_guideline_4"
+    t.text     "scoring_guideline_5"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

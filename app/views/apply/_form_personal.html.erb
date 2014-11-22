@@ -1,8 +1,7 @@
-<%= f.input :question_reason_for_applying -%>
-<%= f.input :question_why_prime -%>
-<%= f.input :question_intensity -%>
-<%= f.input :question_technology_background -%>
-<%= f.input :question_self_differentiation -%>
-<%= f.input :question_three_month_prediction -%>
-<%= f.input :question_three_year_aspiration -%>
-<%= f.input :question_actions_toward_goals -%>
+<%= f.simple_fields_for :profile_question_answers do |answer_form| %>
+	<%= div_for answer_form.object do %>
+		<%= answer_form.input :answer, :label=>answer_form.object.profile_question.question %>
+		<%= answer_form.hidden_field :profile_question_id, :value=>answer_form.object.profile_question.id %>
+		<%= answer_form.hidden_field :id, :value=>answer_form.object.id %>
+	<% end %>
+<% end %>
