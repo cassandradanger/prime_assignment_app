@@ -6,7 +6,6 @@
 
 @import "landmarks/layout";
 @import "landmarks/header";
-@import "landmarks/navigation";
 @import "landmarks/body";
 @import "landmarks/footer";
 
@@ -20,28 +19,20 @@
 //  General Modern Styles
 // ------------------------------------------------------------------------ */
 
-// @import "screen";
+.layout {
+  padding-top:100px;
+}
 
-// /* ---------------------------------------------------------------------
-//  Larger Mobile Device Specific Styles
-// ------------------------------------------------------------------------ */
+.layout-header-navigation-banner {
+  width:100%;
+  background:#4D4D4D;
+  position:absolute;
+  top:$HEADER_HEIGHT;
+}
 
-// @media only screen and (min-width: $WIDTH_TABLET) {
-
-//     @import "screen_small";
-
-// } // end of media query
-
-// /* ---------------------------------------------------------------------
-//  Desktop Specific Styles
-// ------------------------------------------------------------------------ */
-
-// @media only screen and (min-width: $WIDTH_DESKTOP) {
-
-//     @import "screen_medium";
-
-// } // end of media query
-
+.layout-header {
+  height:100px;
+}
 
 .layout-footer {
   margin-top:30px;
@@ -50,24 +41,9 @@
   padding:20px;
 }
 
-
-
-
-
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
+.layout-body {
+  width:100%;
+  max-width:940px;
+  margin: 0 auto;
+  padding:30px 20px;
 }
-
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
-}
-
-#notice {
-  color: green;
-}
-

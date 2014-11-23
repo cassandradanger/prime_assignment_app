@@ -6,7 +6,6 @@
 
 @import "landmarks/layout";
 @import "landmarks/header";
-@import "landmarks/navigation";
 @import "landmarks/body";
 @import "landmarks/footer";
 
@@ -15,29 +14,8 @@
 ------------------------------------------------------------------------ */
 
 @import "modules/home/section";
+@import "modules/home/navigation";
 
 // /* ---------------------------------------------------------------------
 //  General Modern Styles
 // ------------------------------------------------------------------------ */
-
-// @import "screen";
-
-// /* ---------------------------------------------------------------------
-//  Larger Mobile Device Specific Styles
-// ------------------------------------------------------------------------ */
-
-// @media only screen and (min-width: $WIDTH_TABLET) {
-
-//     @import "screen_small";
-
-// } // end of media query
-
-// /* ---------------------------------------------------------------------
-//  Desktop Specific Styles
-// ------------------------------------------------------------------------ */
-
-// @media only screen and (min-width: $WIDTH_DESKTOP) {
-
-//     @import "screen_medium";
-
-// } // end of media query

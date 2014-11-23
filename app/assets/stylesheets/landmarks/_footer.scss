@@ -1,2 +1,11 @@
 .layout-footer {
+	background:$COLOR_BLACK;
+	color:$COLOR_WHITE;
+}
+
+.layout-footer-body {
+	width:100%;
+	max-width:940px;
+	margin:0 auto;
+	padding: 30px 0;
 }
