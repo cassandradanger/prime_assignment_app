@@ -35,22 +35,25 @@ gem 'unicorn'
 
 group :production do 
 	# Use Heroku deployment
-	gem 'rails_12factor', group: :production
+	gem 'rails_12factor'
 end
 
 group :development do
 	# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-	gem 'spring',        group: :development
+	gem 'spring'
+	gem 'spring-commands-rspec'
 end
 
 group :test do
 	gem 'capybara'
-	gem 'shoulda'
+	gem 'shoulda-matchers'
 	gem 'mocha'
+  	gem 'database_cleaner'
 end
 
 group :development, :test do
 	gem 'factory_girl_rails'
+	gem 'rspec-rails'
 end
 
 

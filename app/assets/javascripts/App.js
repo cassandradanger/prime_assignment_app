@@ -15,7 +15,7 @@ define(function(require, exports, module) { // jshint ignore:line
     var App = function() {
         this.init();
         
-        $('.section-intro-logo').waypoint(
+        $('.section-masthead-logo').waypoint(
             function(direction) {
                 if(direction=="up") {
                     $('.layout-header').removeClass("layout-header-fixed")
@@ -38,6 +38,12 @@ define(function(require, exports, module) { // jshint ignore:line
                 $('.navigation-menu').toggleClass('navigation-menu_open');
             }
         );
+
+
+        // $(window).scroll(function() {
+        //     var speed = 5.0;
+        //     $('#intro').css("background-position", "50% " + (-window.pageYOffset / speed) + "px");
+        // });
 
     var proto = App.prototype;
 

@@ -3,5 +3,5 @@
 	<%= render "form_personal", :f=>f if @step.to_s == "personal" -%>
 	<%= render "form_logic", :f=>f if @step.to_s == "logic" -%>
 	<%= render "form_technical", :f=>f if @step.to_s == "technical" -%>
-	<%= f.button :submit, "Save Your Application and Continue" %>
+	<%= f.button :submit, "Save Your Application and Continue", class: "button" %>
 <% end %>

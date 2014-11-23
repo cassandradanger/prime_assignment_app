@@ -6,9 +6,9 @@
 
 	<% if @admission_application.errors.any? %>
 	  <div id="error_explanation">
-	   <div class="alert alert-error">
+	   <h2 class="alert alert-error">
 	     Your application contains <%= pluralize(@admission_application.errors.count, "error") %>. Please make corrections and resubmit your application.
-	   </div>
+	   </h2>
 	  <ul>
 	   <% @admission_application.errors.full_messages.each do |msg| %>
 	    <li><%= msg %></li>
@@ -17,7 +17,7 @@
 	</div>
 	<% end %>
 
-	<%= f.hidden_field :application_status, :value=>"complete" %>
-	<%= f.button :submit, "Submit your application" %>
+	<%= f.hidden_field "process_application", :value=>"true" %>
+	<%= f.button :submit, "Submit your application", class: "button" %>
 
 <% end %>

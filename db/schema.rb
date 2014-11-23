@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121052729) do
+ActiveRecord::Schema.define(version: 20141123020114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,18 +67,12 @@ ActiveRecord::Schema.define(version: 20141121052729) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "completed_at"
+    t.string   "address"
   end
 
-  create_table "admission_applications_cohort_interests", force: true do |t|
+  create_table "admission_applications_cohorts", force: true do |t|
     t.integer "admission_application_id"
-    t.integer "cohort_interest_id"
-  end
-
-  create_table "cohort_interests", force: true do |t|
-    t.integer  "cohort_id"
-    t.integer  "admission_application_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "cohort_id"
   end
 
   create_table "cohorts", force: true do |t|
@@ -103,13 +97,13 @@ ActiveRecord::Schema.define(version: 20141121052729) do
   create_table "logic_questions", force: true do |t|
     t.text     "question"
     t.string   "solution"
-    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "question_image_file_name"
     t.string   "question_image_content_type"
     t.integer  "question_image_file_size"
     t.datetime "question_image_updated_at"
+    t.boolean  "published"
   end
 
   create_table "profile_question_answers", force: true do |t|

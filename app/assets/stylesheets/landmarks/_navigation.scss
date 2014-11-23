@@ -26,6 +26,14 @@ Main Navigation
 	text-decoration: none;
 }
 
+.navigation-menu-item-link:hover {
+	color:$COLOR_BRIGHT;
+}
+
+.navigation-menu-item-link.button:hover {
+	color:$COLOR_WHITE;	
+}
+
  @include breakpoint(mobile) {
  	
 	/* ---------------------------------------------------------------------

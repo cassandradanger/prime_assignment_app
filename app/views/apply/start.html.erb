@@ -1,3 +1,5 @@
+<%= render "navigation" %>
+
 <h1>Start</h1>
 
 <p>General instruction text and directions go here.</p>
@@ -8,6 +10,6 @@
 
 <%- else -%>
 
-	<p><%= link_to @admission_application.new_record? ? "Start Your Application" : "Continue Your Application", wizard_path(:general) %></p>
+	<p><%= link_to "Start Your Application", wizard_path(:general), class: "button" %></p>
 
 <%- end -%>

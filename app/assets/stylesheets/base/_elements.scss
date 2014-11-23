@@ -15,11 +15,10 @@ h1, h2 {
 h1 {
 	font-size:30px;
 	margin-bottom:20px;
-	text-shadow: 1px 0px 3px rgba(0,0,0,.9)
 }
 
 h2 {
-	font-size:26px;
+	font-size:24px;
 	margin-top:20px;	
 	margin-bottom:15px;
 }
@@ -48,8 +47,10 @@ ul {
 	color: $COLOR_WHITE;
 	text-decoration: none;
 	padding:10px;
+	border:none;
 }
 
 .button:hover {
-	background: $COLOR_BRIGHT
+	background: $COLOR_BRIGHT;
+	color:$COLOR_WHITE;
 }

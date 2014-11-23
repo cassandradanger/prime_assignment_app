@@ -3,28 +3,67 @@ Section Styles (Page Featurettes)
 ------------------------------------------------------------------------ */
 
 .section {
-	padding:$HEADER_HEIGHT 20px $HEADER_HEIGHT_WITHOUT_UNITS+60px 20px;
-	margin-top: $NEGATIVE_HEADER_HEIGHT;	
+	// padding:$HEADER_HEIGHT 20px $HEADER_HEIGHT_WITHOUT_UNITS+60px 20px;
+	// margin-top: $NEGATIVE_HEADER_HEIGHT;	
+	padding:20px;
+}
+
+.section-body {
+	@include breakpoint(desktop) { width: 940px; }
+	margin: 0 auto;
 }
 
 .section + .section {
-	border-top: 5px solid $COLOR_BLACK;
+	// border-top: 5px solid $COLOR_BLACK;
 }
 
-.section-intro {
-	padding-top:200px;
-	position:relative;
-	margin-top:0;
-}
-
-.section-intro-logo {
-	position: absolute;
-	top:-20px;
-	left:10px;
-}
-
-.section-intro-banner {
-	height:270px;
+.section-masthead {		
+	height:460px;
 	color:$COLOR_WHITE;
 	text-align:center;
+	text-shadow: 1px 0px 3px rgba(0,0,0,.9);		
+	position:relative;
+	overflow:hidden;
+}
+
+.section-masthead .section-body {
+	padding-top:230px;	
+	position:relative;
+}
+
+.section-masthead-logo {
+	position: absolute;
+	top:10px;
+	left:0px;
+	background: rgba(255,255,255,.5);
+	padding:10px;
+}
+
+.video-header {
+	background: $COLOR_BLACK;
+	height:500px;
+	position:absolute;
+	top:0;
+	right:0;
+	left:0;
+	z-index: -1;
+	overflow:hidden;
+}
+
+.video-header-video {
+	position:absolute;
+	top:0;
+	left:50%;
+	margin-left:-720px;
+}
+
+
+.section-intro {
+	// background-image: url('image-header.jpg');
+	// background-position: 50% 0px;
+	// background-repeat: no-repeat;
+}
+
+.section-program {
+	background:grey;
 }

@@ -1,0 +1,40 @@
+.admissions-menu {
+	height:40px;
+	margin:0 0 30px 0;
+	padding:0;
+	background:#666666;	
+}
+
+.admissions-menu-item {
+	display:inline;
+	margin:0;
+	padding:0;
+}
+
+.admissions-menu-item-link {
+	display:block;
+	border:1px;
+	float:left;
+	height:20px;
+	margin:0;
+	padding:10px 30px;
+	text-align:center;
+	text-decoration: none;
+	font-family: $FONT_HEADLINE;
+	text-transform: uppercase;
+	color:$COLOR_BLACK;
+	line-height:20px;
+}
+
+.admissions-menu-item-link:hover {
+	background:#999999;
+}
+
+.admissions-menu-itemLogout {
+	float:right;
+	font-size:12px;
+}
+
+.admissions-menu-item-linkCurrent {
+	background:#999999;
+}

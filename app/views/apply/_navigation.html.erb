@@ -1,10 +1,9 @@
-<%= link_to "Back to Application Home", wizard_path(:start) %>
-<%= link_to "Log Out", destroy_user_session_path, :method => :delete %>
-
-<ol class="navigation-menu">
-	<li class="navigation-menu-item"><%= link_to "General", wizard_path(:general) %></li>
-	<li class="navigation-menu-item"><%= link_to "Personal", wizard_path(:personal) %></li>
-	<li class="navigation-menu-item"><%= link_to "Logic", wizard_path(:logic) %></li>
-	<li class="navigation-menu-item"><%= link_to "Technical", wizard_path(:technical) %></li>
-	<li class="navigation-menu-item"><%= link_to "Submit", wizard_path(:submit) %></li>
+<ol class="navigation-menu admissions-menu">
+	<li class="navigation-menu-item admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:start)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+	<li class="navigation-menu-item admissions-menu-item"><%= link_to "General", wizard_path(:general), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:general)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+	<li class="navigation-menu-item admissions-menu-item"><%= link_to "Personal", wizard_path(:personal), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:personal)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+	<li class="navigation-menu-item admissions-menu-item"><%= link_to "Logic", wizard_path(:logic), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:logic)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+	<li class="navigation-menu-item admissions-menu-item"><%= link_to "Technical", wizard_path(:technical), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:technical)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+	<li class="navigation-menu-item admissions-menu-item"><%= link_to "Submit", wizard_path(:submit), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:submit)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+	<li class="navigation-menu-item admissions-menu-item admissions-menu-itemLogout"><%= link_to "Log Out", destroy_user_session_path, :method => :delete, :class=>"admissions-menu-item-link" %></li>
 </ol>

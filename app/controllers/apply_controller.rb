@@ -13,6 +13,9 @@ class ApplyController < ApplicationController
 		else
 			if step == :general
 				@cohorts = Cohort.current
+			elsif step == :submit
+				@admission_application.application_step = "active"
+				@admission_application.valid?
 			end
 			render_wizard
 		end
@@ -23,6 +26,7 @@ class ApplyController < ApplicationController
     respond_to do |format|
       	params[:admission_application][:application_step] = step.to_s
 		if step == steps.last
+			@admission_application.populate_questions
 			params[:admission_application][:application_step] = 'active'
 			params[:admission_application][:application_status] = 'complete'
 			params[:admission_application][:completed_at] = Time.now

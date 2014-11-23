@@ -1,7 +1,7 @@
 class AdmissionApplication < ActiveRecord::Base
 
-	before_validation :populate_questions, on: :update
-	after_save :populate_questions, on: :create
+	after_create :populate_questions, on: :create
+	before_validation :populate_questions_on_submit
 
 	belongs_to :user
 
@@ -17,7 +17,6 @@ class AdmissionApplication < ActiveRecord::Base
 	validates_associated :profile_question_answers, :if => :active?, :message=>"must all be answered."
 	
 	validates :last_name, :presence => true, :if => :active_or_general?	
-
 
 	def active?
 		application_step == 'active'
@@ -35,21 +34,18 @@ class AdmissionApplication < ActiveRecord::Base
 		application_step == 'personal' || active?
 	end
 
-	private
+	def populate_questions_on_submit
+		populate_questions if active?
+	end
 
-		# add questions upon creation of a new application
-		def populate_questions
-			LogicQuestion.transaction do 
-				LogicQuestion.current.each do |question|
-					logic_question_answers.find_or_create_by!(logic_question_id: question.id)
-				end
-			end
-			ProfileQuestion.transaction do
-				ProfileQuestion.current.each do |question|
-					profile_question_answers.find_or_create_by!(profile_question_id: question.id)
-					ProfileQuestion.connection.commit_db_transaction
-				end
-			end
+	# add questions upon creation of a new application
+	def populate_questions
+		LogicQuestion.current.each do |question|
+			logic_question_answers.find_or_create_by!(logic_question_id: question.id)
 		end
+		ProfileQuestion.current.each do |question|
+			profile_question_answers.find_or_create_by!(profile_question_id: question.id)
+		end
+	end
 
 end
