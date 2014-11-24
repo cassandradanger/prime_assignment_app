@@ -23,9 +23,10 @@ Section Styles (Page Featurettes)
 	bottom:-5px;
 	left:0;
 	width:100%;
-	height:11px;
+	height:12px;
 	background: asset-url('bg-section-divider.png') 0 0 repeat-x;
 	z-index:1;
+	@include image-2x('bg-section-divider@2x.png',1454px,12px)
 }
 
 .section-masthead {		
