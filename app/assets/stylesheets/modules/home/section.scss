@@ -5,7 +5,7 @@ Section Styles (Page Featurettes)
 .section {
 	// padding:$HEADER_HEIGHT 20px $HEADER_HEIGHT_WITHOUT_UNITS+60px 20px;
 	// margin-top: $NEGATIVE_HEADER_HEIGHT;	
-	padding:20px;
+	padding:40px 20px;
 	position:relative;
 }
 
@@ -29,7 +29,7 @@ Section Styles (Page Featurettes)
 }
 
 .section-masthead {		
-	height:460px;
+	height:420px;
 	color:$COLOR_WHITE;
 	text-align:center;
 	text-shadow: 1px 0px 3px rgba(0,0,0,.9);		
@@ -38,27 +38,53 @@ Section Styles (Page Featurettes)
 	line-height:2.3em;
 }
 
-.section-masthead .section-body {
-	padding-top:230px;	
-	position:relative;
+ @include breakpoint(mobile) {
+
+	.section-masthead .section-body {
+		padding-top:80px;	
+	}
+
+	.section-masthead-logo {
+		background: rgba(255,255,255,1);
+		padding:20px 10px 5px 10px;
+		z-index:10;
+		@include box-shadow(0 1px 1px rgba(0,0,0,.075));
+		border-radius:4px;
+		opacity: 1;
+	    @include transition(opacity .2s);	
+	    display:block;
+	    max-width:140px;
+	    text-align:center;
+	    margin: 0 auto 20px auto;
+	}
+
 }
 
-.section-masthead-logo {
-	position: absolute;
-	top:-20px;
-	left:0;
-	background: rgba(255,255,255,1);
-	padding:20px 17px 7px 17px;
-	z-index:10;
-	@include box-shadow(0 1px 1px rgba(0,0,0,.075));
-	border-radius:0 0 4px 4px;
-	opacity: 1;
-    @include transition(opacity .2s);	
-}
+ @include breakpoint(desktop) {
 
-.section-masthead-logo-hidden {
-    @include transition(opacity .2s);
-	opacity: 0;
+	.section-masthead .section-body {
+		padding-top:230px;	
+		position:relative;
+	}
+
+	.section-masthead-logo {
+		position: absolute;
+		top:-40px;
+		left:0;
+		background: rgba(255,255,255,1);
+		padding:20px 17px 7px 17px;
+		z-index:10;
+		@include box-shadow(0 1px 1px rgba(0,0,0,.075));
+		border-radius:0 0 4px 4px;
+		opacity: 1;
+	    @include transition(opacity .2s);	
+	}
+
+	.section-masthead-logo-hidden {
+	    @include transition(opacity .2s);
+		opacity: 0;
+	}
+
 }
 
 .video-header {
@@ -79,13 +105,14 @@ Section Styles (Page Featurettes)
 	margin-left:-720px;
 }
 
-
-.section-intro {
-	// background-image: url('image-header.jpg');
-	// background-position: 50% 0px;
-	// background-repeat: no-repeat;
+.section-network {
+	background: asset-url('bg-section-abstract-waves.jpg') 100% 0 no-repeat
 }
 
 .section-program {
 	background:grey;
+}
+
+.section-tuition {
+	background: $COLOR_DARK;
 }

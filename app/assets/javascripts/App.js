@@ -15,18 +15,6 @@ define(function(require, exports, module) { // jshint ignore:line
     var App = function() {
         this.init();
         
-        // $('.section-masthead-logo').waypoint(
-        //     function(direction) {
-        //         if(direction=="up") {
-        //             $('.layout-header').removeClass("layout-header-fixed");
-        //             // console.log("going up");
-        //         } else {
-        //             $('.layout-header').addClass("layout-header-fixed");                    
-        //             // console.log("going down");
-        //         }
-        //     }, { offset: -45}
-        // );
-
         $('.section-masthead-logo').waypoint(
             {
               handler: function(direction) {
@@ -51,22 +39,27 @@ define(function(require, exports, module) { // jshint ignore:line
             }
         );
 
+
         $('.navigation-button').click(
             function() {
                 $('.navigation-menu').toggleClass('navigation-menu_open');
             }
         );
 
-        $('.navigation-menu-item-link').click(
-            function() {
+        $('.slider-link').click(
+            function(event) {
+                event.preventDefault();
                 $('.navigation-menu').toggleClass('navigation-menu_open');
+                $('html, body').animate({
+                    scrollTop: $(event.target.hash).offset().top-60
+                }, 1000);                
             }
         );
 
-        // $(window).scroll(function() {
-        //     var speed = 5.0;
-        //     $('#intro').css("background-position", "50% " + (-window.pageYOffset / speed) + "px");
-        // });
+        $(window).scroll(function() {
+            var speed = 8.0;
+            $('.section-network').css("background-position", "100% " + (-window.pageYOffset / speed) + "px");
+        });
 
     }
 
