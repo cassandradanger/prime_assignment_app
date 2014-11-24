@@ -43,7 +43,7 @@
     
     <div class="layout">
 
-        <div class="layout-header layout-header-fixed">
+        <div class="layout-header layout-header-fixed <%= "layout-header-logged-in" if user_signed_in? %>">
             <div class="layout-header-banner">
                 <div class="logo">
                     <a href="<%= root_path %>" class="logo-link">
@@ -51,7 +51,8 @@
                         <h1 class="isHidden" itemprop="name">Prime Software Engineering Academy</h1>
                     </a>
                 </div>                
-            </div><!-- /layout-header-banner -->         
+            </div><!-- /layout-header-banner -->
+            <% if user_signed_in? %>         
             <div class="layout-header-navigation-banner">    
                 <ol class="navigation-menu admissions-menu">
                     <li class="navigation-menu-item admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:start)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
@@ -63,6 +64,7 @@
                     <li class="navigation-menu-item admissions-menu-item admissions-menu-item admissions-menu-itemLogout"><%= link_to "Log Out", destroy_user_session_path, :method => :delete, :class=>"admissions-menu-item-link admissions-menu-item-linkLogout" %></li>
                 </ol>            
             </div><!-- /layout-header-navigation-banner -->
+            <% end %>
         </div><!-- /layout-header -->
 
         <div class="layout-flash">

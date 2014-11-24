@@ -15,17 +15,41 @@ define(function(require, exports, module) { // jshint ignore:line
     var App = function() {
         this.init();
         
+        // $('.section-masthead-logo').waypoint(
+        //     function(direction) {
+        //         if(direction=="up") {
+        //             $('.layout-header').removeClass("layout-header-fixed");
+        //             // console.log("going up");
+        //         } else {
+        //             $('.layout-header').addClass("layout-header-fixed");                    
+        //             // console.log("going down");
+        //         }
+        //     }, { offset: -45}
+        // );
+
         $('.section-masthead-logo').waypoint(
-            function(direction) {
+            {
+              handler: function(direction) {
                 if(direction=="up") {
-                    $('.layout-header').removeClass("layout-header-fixed")
-                    console.log("going up");
+                    $('.layout-header').removeClass("layout-header-fixed");
                 } else {
-                    $('.layout-header').addClass("layout-header-fixed")                    
-                    console.log("going down");
+                    $('.layout-header').addClass("layout-header-fixed");                    
                 }
-            }, { offset: -20});
-        };
+              }, offset: -45
+            }
+        );
+
+       $('.section-masthead-logo').waypoint(
+            {
+              handler: function(direction) {
+                if(direction=="up") {
+                    $('.section-masthead-logo').removeClass("section-masthead-logo-hidden");
+                } else {
+                    $('.section-masthead-logo').addClass("section-masthead-logo-hidden");                   
+                }
+              }, offset: -108
+            }
+        );
 
         $('.navigation-button').click(
             function() {
@@ -39,11 +63,13 @@ define(function(require, exports, module) { // jshint ignore:line
             }
         );
 
-
         // $(window).scroll(function() {
         //     var speed = 5.0;
         //     $('#intro').css("background-position", "50% " + (-window.pageYOffset / speed) + "px");
         // });
+
+    }
+
 
     var proto = App.prototype;
 

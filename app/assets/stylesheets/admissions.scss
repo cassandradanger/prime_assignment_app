@@ -31,8 +31,27 @@
 }
 
 .layout-header {
+  height:60px;
+}
+
+.layout-header-logged-in {
   height:100px;
 }
+
+.logo {
+  position: absolute;
+  width: 100%;
+  height: $HEADER_HEIGHT;
+  z-index:1;
+}
+
+.logo-link {
+  position:absolute;
+  left:50%;
+  margin-left:-63px;
+}
+
+
 
 .layout-footer {
   margin-top:30px;
