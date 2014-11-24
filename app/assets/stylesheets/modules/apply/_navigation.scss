@@ -30,7 +30,7 @@
 }
 
 .admissions-menu-item-link:hover {
-	background: url(asset-url("bg-admissions-menu-itemCurrent-left.png")) 0 0 no-repeat, #777777 asset-url("bg-admissions-menu-itemCurrent-right.png") 100% 0 no-repeat;
+	background: asset-url("bg-admissions-menu-itemCurrent-left.png") 0 0 no-repeat, #777777 asset-url("bg-admissions-menu-itemCurrent-right.png") 100% 0 no-repeat;
 }
 
 .admissions-menu-item-linkLogout {
