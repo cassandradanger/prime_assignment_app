@@ -41,7 +41,7 @@
 </head>
 <body>
     
-    <div class="layout">
+    <div class="layout <%= "layout-logged-in" if user_signed_in? %>">
 
         <div class="layout-header layout-header-fixed <%= "layout-header-logged-in" if user_signed_in? %>">
             <div class="layout-header-banner">
@@ -67,12 +67,10 @@
             <% end %>
         </div><!-- /layout-header -->
 
-        <div class="layout-flash">
-			<div class="notice"><%= notice %></div>
-			<div class="alert"><%= alert %></div>
-        </div><!-- /layout-flash -->
-
         <div class="layout-body">
+            <% flash.each do |name, msg| %>
+                <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+            <% end %>
             <!-- CONTENT -->         
             <%= yield %>
         </div><!-- /layout-body -->    

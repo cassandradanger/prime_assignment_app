@@ -39,7 +39,7 @@ ul {
 	padding-left:25px;
 }
 
-.button {
+.button, .btn {
 	background: $COLOR_DARK;
 	@include border-radius(5px);
 	font-family: $FONT_HEADLINE;
@@ -50,7 +50,7 @@ ul {
 	border:none;
 }
 
-.button:hover {
+.button:hover, .btn:hover {
 	background: $COLOR_BRIGHT;
 	color:$COLOR_WHITE;
 }

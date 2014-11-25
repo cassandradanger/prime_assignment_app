@@ -14,9 +14,9 @@ feature 'A visitor who is not logged in' do
 	  end
 
 	  scenario 'then logs in and is redirected to application start' do	  	
-	    fill_in 'user_email', with: @user.email
-	    fill_in 'user_password', with: @user.password
-	    click_button 'Log in'
+	    fill_in 'user_login_email', with: @user.email
+	    fill_in 'user_login_password', with: @user.password
+	    click_button 'Continue Your Application'
 	    current_path.should == '/apply/start'
 	  end
 

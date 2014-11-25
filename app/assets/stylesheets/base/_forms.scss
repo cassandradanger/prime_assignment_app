@@ -6,7 +6,7 @@
 	display:block;
 }
 
-.input input[type=text] {
+.input input[type=text], .input input[type=email], .input input[type=password] {
 	max-width:400px;
 	width:100%;
 	display:block;
@@ -45,8 +45,23 @@ label.check_boxes {
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
+
+    label {
+      color:red;
+    }
+
+    input[type=text], textarea.text {
+      border-color:red;
+      border-radius: 4px 4px 4px 0px;
+    }
+
+    .error {
+      background:red;
+      padding:4px;
+      border-radius:0 0 4px 4px;
+      color:$COLOR_WHITE;
+    }
+
 }
 
 textarea.text {
@@ -56,6 +71,7 @@ textarea.text {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  display:block;
   @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));  
 }
 
@@ -64,6 +80,7 @@ textarea.text {
   margin-bottom: 20px;
   background-color: red;
   color:$COLOR_WHITE;
+  border-radius:4px;
   h2 {
     margin: 0 0 10px 0;
     font-size:18px;

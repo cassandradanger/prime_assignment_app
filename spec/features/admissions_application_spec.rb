@@ -6,9 +6,9 @@ feature 'A logged in visitor' do
 		@cohort = FactoryGirl.create(:cohort)
 		@user = FactoryGirl.create(:user)
 		visit new_user_session_path
-		fill_in 'user_email', with: @user.email
-		fill_in 'user_password', with: @user.password
-		click_button 'Log in'	    
+		fill_in 'user_login_email', with: @user.email
+		fill_in 'user_login_password', with: @user.password
+		click_button 'Continue Your Application'	    
 	end
 
 	scenario 'vists the start step page successfully' do
@@ -40,16 +40,16 @@ feature 'A logged in visitor' do
 
 		scenario 'tries to submit their application and is displayed an error' do
 			visit '/apply/submit'
-			click_button 'Submit'
-	    current_path.should == '/apply/submit'			
-	    page.has_content?('error')
+			click_button 'Submit your application'
+		    current_path.should == '/apply/submit'			
+		    page.has_content?('error')
 		end
 
 		scenario 'tries to submit the incomplete general page and recieves an error' do
 			visit '/apply/general'
 			click_button 'Save Your Application and Continue'
-	    current_path.should == '/apply/general'			
-	    page.has_content?('error')
+		    current_path.should == '/apply/general'			
+		    page.has_content?('error')
 		end
 
 	end
@@ -62,7 +62,7 @@ feature 'A logged in visitor' do
 
 		scenario 'visits the submit page and completes their application' do
 			visit '/apply/submit'
-			click_button 'Submit'
+			click_button 'Submit your application'
 	    	page.has_no_content?('error')			
 	    	current_path.should == '/apply/start'			
 		end
@@ -70,7 +70,7 @@ feature 'A logged in visitor' do
 		scenario 'visits the submit page and completes application after a new logic question was added and receives an error' do
 			FactoryGirl.create(:logic_question)
 			visit '/apply/submit'
-			click_button 'Submit'
+			click_button 'Submit your application'
 	    	page.has_content?('error')			
 	    	current_path.should == '/apply/submit'			
 		end
@@ -78,7 +78,7 @@ feature 'A logged in visitor' do
 		scenario 'visits the submit page and completes application after a new profile question was added and receives an error' do
 			FactoryGirl.create(:profile_question)
 			visit '/apply/submit'
-			click_button 'Submit'
+			click_button 'Submit your application'
 	    	page.has_content?('error')			
 	    	current_path.should == '/apply/submit'			
 		end

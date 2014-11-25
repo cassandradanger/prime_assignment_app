@@ -65,3 +65,12 @@ needed when absolute positioning isn't enough */
     background-size: $width $height;
   }
 }
+
+
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

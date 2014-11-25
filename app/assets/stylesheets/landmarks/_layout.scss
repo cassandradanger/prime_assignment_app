@@ -1,3 +1,24 @@
 .layout {
   width: 100%;
 }
+
+.alert {
+	border-radius:4px;
+	color: $COLOR_WHITE;
+	padding:15px;
+	margin:20px;	
+	max-width:940px;
+	margin:0 auto;
+}
+
+.alert-notice {
+	background: $COLOR_DARK;
+}
+
+.alert-error {
+	background: red;
+}
+
+.alert-alert {
+	background: $COLOR_DARK;	
+}
