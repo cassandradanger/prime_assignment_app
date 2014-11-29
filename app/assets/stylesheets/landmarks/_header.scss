@@ -1,0 +1,26 @@
+.layout-header {
+	background: $COLOR_BLACK;
+	width:100%;
+}
+
+.logo {
+	height: $HEADER_HEIGHT;
+	display:block;
+	background:$COLOR_BLACK;
+	text-align:center;
+}
+
+.logo-link {
+	padding-top:10px;
+	display:block;
+}
+
+
+ @include breakpoint(desktop) {
+ 	
+ 	.layout-header-fixed {
+ 		position: fixed;
+ 		top:0;
+ 	}
+
+ }
