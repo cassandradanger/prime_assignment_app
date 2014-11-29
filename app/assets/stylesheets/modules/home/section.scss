@@ -294,3 +294,48 @@ Section Styles (Page Featurettes)
 	}
 	@extend %clearfix;		
 }
+
+
+
+
+
+
+
+.section-curriculum {
+	background: linear-gradient($COLOR_SCREEN, $COLOR_WHITE 15%);	
+}
+
+.curriculum-image {
+	width:100%;
+	margin:40px 0;
+}
+
+.section-toybox {
+	position:relative;
+	color:$COLOR_WHITE;
+	background-image: asset-url('bg-toybox.jpg');
+	@include image-2x('bg-toybox@2x.jpg',738px,252px);
+	background-color:$COLOR_DARKGRAY;
+	background-position: 100% 100%;
+	background-repeat:no-repeat;
+
+	.sidebar-toybox {
+		max-width:400px;
+	}
+
+	h3 {
+		color:inherit;
+	}
+
+}
+
+
+
+
+
+
+
+
+.section-schedule {
+	
+}
