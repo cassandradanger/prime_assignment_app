@@ -1,55 +1,106 @@
 .admissions-menu {
-	height:40px;
-	margin:0 auto;
-	padding:0;
+	color: $COLOR_WHITE;
+	font-family: $FONT_HEADLINE;
+	text-transform: uppercase;
 	background:#4D4D4D;	
-	width:100%;
-	max-width: 940px;
-}
-
-.admissions-menu-item {
-	display:inline;
-	margin:0;
-	padding:0;
 }
 
 .admissions-menu-item-link {
 	display:block;
-	border:1px;
-	float:left;
-	height:20px;
-	margin:0;
-	padding:10px 30px;
-	text-align:center;
-	text-decoration: none;
-	font-family: $FONT_HEADLINE;
-	text-transform: uppercase;
-	color:$COLOR_WHITE;
-	line-height:20px;
-	background: asset-url("bg-admissions-menu-item.png") 0 0 no-repeat, asset-url("bg-admissions-menu-item.png") 100% 0 no-repeat;		
+	padding:5px;
+	color: $COLOR_WHITE;
+	text-decoration: none;	
 }
-
-.admissions-menu-item-link:hover {
-	background: asset-url("bg-admissions-menu-itemCurrent-left.png") 0 0 no-repeat, #777777 asset-url("bg-admissions-menu-itemCurrent-right.png") 100% 0 no-repeat;
-}
-
-.admissions-menu-item-linkLogout {
-	float:right;
-	font-size:13px;
-	color:#333333;
-	background:none;
-}
-
-.admissions-menu-item-linkLogout:hover {
-	background:none;
-	color:#000000;
-}
-
 
 .admissions-menu-item-linkCurrent {
-	background: asset-url("bg-admissions-menu-itemCurrent-left.png") 0 0 no-repeat, $COLOR_DARK asset-url("bg-admissions-menu-itemCurrent-right.png") 100% 0 no-repeat;
+	background-color: $COLOR_DARK;
 }
 
-.admissions-menu-item-linkCurrent:hover {
-	background-color:$COLOR_BRIGHT;
+.admissions-menu-account, .admissions-menu-logout {
+	color: $COLOR_WHITE;
+	font-family: $FONT_HEADLINE;
+	text-transform: uppercase;
+	text-decoration:none;	
+	top:15px;
+	position:absolute;
+}
+
+.admissions-menu-account {
+	left:15px;
+}
+
+.admissions-menu-logout {
+	right:15px;
+}
+
+@include breakpoint(desktop) {
+
+	.admissions-menu {
+		height:40px;
+		margin:0 auto;
+		padding:0;	
+		width:100%;
+		max-width: 940px;
+	}
+
+	.admissions-menu-item {
+		display:inline;
+		margin:0;
+		padding:0;
+	}
+
+	.admissions-menu-item-link {
+		display:block;
+		border:1px;
+		float:left;
+		height:20px;
+		margin:0;
+		padding:10px 30px;
+		text-align:center;
+		line-height:20px;
+		background: asset-url("bg-admissions-menu-item.png") 0 0 no-repeat, asset-url("bg-admissions-menu-item.png") 100% 0 no-repeat;		
+		@include retina {
+			background: asset-url("bg-admissions-menu-item@2x.png") 0 0 no-repeat, asset-url("bg-admissions-menu-item@2x.png") 100% 0 no-repeat;					
+			background-size: contain;
+		}
+	}
+
+	.admissions-menu-item-link:hover {
+		background: asset-url("bg-admissions-menu-itemCurrent-left.png") 0 0 no-repeat, #777777 asset-url("bg-admissions-menu-itemCurrent-right.png") 100% 0 no-repeat;
+		@include retina {
+			background: asset-url("bg-admissions-menu-itemCurrent-left@2x.png") 0 0 no-repeat, #777777 asset-url("bg-admissions-menu-itemCurrent-right@2x.png") 100% 0 no-repeat;
+			background-size: contain;
+		}		
+	}
+
+	.admissions-menu-item-linkLogout, .admissions-menu-item-linkAccount {
+		font-size:13px;
+		color:#333333;
+		background:none;
+		width:auto;
+		padding:10px;
+	}
+
+	.admissions-menu-item-linkLogout {
+		float:right;
+	}
+
+	.admissions-menu-item-linkLogout:hover, .admissions-menu-item-linkAccount:hover {
+		background:none;
+		color:#000000;
+	}
+
+
+	.admissions-menu-item-linkCurrent {
+		background: asset-url("bg-admissions-menu-itemCurrent-left.png") 0 0 no-repeat, $COLOR_DARK asset-url("bg-admissions-menu-itemCurrent-right.png") 100% 0 no-repeat;
+		@include retina {
+			background: asset-url("bg-admissions-menu-itemCurrent-left@2x.png") 0 0 no-repeat, $COLOR_DARK asset-url("bg-admissions-menu-itemCurrent-right.png") 100% 0 no-repeat;
+			background-size: contain;
+		}				
+	}
+
+	.admissions-menu-item-linkCurrent:hover {
+		background-color:$COLOR_BRIGHT;
+	}
+
 }

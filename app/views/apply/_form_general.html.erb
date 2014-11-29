@@ -1,22 +1,22 @@
 <h2>Name and Address</h2>
-<%= f.input :first_name %>
+<%= f.input :first_name, required:true, hint:"testing" %>
 <%= f.input :middle_name %>
-<%= f.input :last_name %>
-<%= f.input :address %>
-<%= f.input :city %>
-<%= f.input :state %>
-<%= f.input :zip_code %>
+<%= f.input :last_name, required:true %>
+<%= f.input :address, required:true %>
+<%= f.input :city, required:true %>
+<%= f.input :state, required:true %>
+<%= f.input :zip_code, required:true %>
 <h2>Education and Employment</h2>
-<%= f.input :legal_status, collection: ["US Citizen","Permanent Resident","Other"] %>
-<%= f.input :education, collection: ["High School","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed" %>
-<%= f.input :employment_status, collection: ["Employed Fulltime","Employed Parttime","Unemployed"] %>
+<%= f.input :legal_status, collection: ["US Citizen","Permanent Resident","Other"], required:true %>
+<%= f.input :education, collection: ["High School","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed", required:true %>
+<%= f.input :employment_status, collection: ["Employed Fulltime","Employed Parttime","Unemployed"], required:true %>
 <h2>Links and Social Accounts</h2>
 <%= f.input :linkedin_account, label: "Link to your LinkedIn profile" %>
 <%= f.input :twitter_account, label: "Your Twitter username" %>
 <%= f.input :github_account, label: "Your Github username" %>
 <%= f.input :website_link, label: "Your personal website" %>
 <%= f.input :personal_link %>
-<%= f.input :referral_source, collection: ["Search Engine","Personal Referral","Media Coverage","Other"], label: "How did you hear about Prime?" %>
-<h2>Cohorts</h2>
+<%= f.input :referral_source, collection: ["Search Engine","Personal Referral","Media Coverage","Other"], label: "How did you hear about Prime?", required:true %>
+<h2>Cohorts *</h2>
 <p>Check the box for each cohort that would work for you. Selecting more cohorts improves your chances at acceptance.</p>
 <%= f.association :cohorts, as: :check_boxes, label_method: :label, label: false, error: false %>

@@ -19,40 +19,22 @@
 //  General Modern Styles
 // ------------------------------------------------------------------------ */
 
-.layout {
-  padding-top:$HEADER_HEIGHT;
-}
+@include breakpoint(desktop) {
 
-.layout-logged-in {
- padding-top:100px; 
-}
+  .layout {
+    padding-top:$HEADER_HEIGHT;
+  }
 
-.layout-header-navigation-banner {
-  width:100%;
-  background:#4D4D4D;
-  position:absolute;
-  top:$HEADER_HEIGHT;
-}
+  .layout-logged-in {
+   padding-top:100px; 
+  }
 
-.layout-header {
-  height:60px;
-}
+  .layout-header-navigation-banner {
+    width:100%;
+    background:#4D4D4D;
+    top:$HEADER_HEIGHT;
+  }
 
-.layout-header-logged-in {
-  height:100px;
-}
-
-.logo {
-  position: absolute;
-  width: 100%;
-  height: $HEADER_HEIGHT;
-  z-index:1;
-}
-
-.logo-link {
-  position:absolute;
-  left:50%;
-  margin-left:-63px;
 }
 
 .layout-footer {
@@ -63,7 +45,6 @@
 }
 
 .layout-body {
-  width:100%;
   max-width:940px;
   margin: 0 auto;
   padding:30px 20px;

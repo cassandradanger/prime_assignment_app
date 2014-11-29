@@ -19,10 +19,83 @@
 <div class="section section-intro" id="intro">
     <div class="section-body">
         <h2>Code tomorrow.</h2>
-        <p>The world is being changed by ubiquitous computing. People with the ability to design and build software have become essential to progress in science, technology, politics, healthcare and business — but there aren’t enough of them to go around. We believe there’s an untapped army of smart, passionate problem solvers able to rise to the challenge of building tomorrow’s software. They just need some help getting ready. That’s why we founded Prime.</p>
-        <p>The future needs software, enroll in Prime’s Software Engineering Academy and code tomorrow.</p>
+        <p class="preface">Computing is changing the world. People with the skills to design and build software have become essential for progress in science, technology, politics, healthcare and business  — but there isn’t enough skilled talent to go around. Prime believes there is an untapped army of smart, passionate problem solvers able to rise to the challenge of building tomorrow’s software; we’re here to help them get ready.</p>
+        <p>Working directly with employers, we’ve re-engineered software engineering education to prioritize the capabilities newcomers need to make immediate contributions to the future of software. Our students learn modern technologies, real world methodology and relevant behavioral skills through hands-on, experiential learning. We’re empowering learners from diverse backgrounds to start contributing to the software revolution in months, not years.</p>
+
+        <h3>WHEN DOES YOUR TOMORROW START?</h3>
+        <table class="cohorts-table">
+            <thead>
+                <tr>
+                    <th>Applications Close</th>    
+                    <th>Prework Begins</th>
+                    <th>Classroom Begins</th>
+                    <th>Graduation</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% already_processed_first_pass = false %>   
+            <% Cohort.current.each do |cohort| -%>    
+                <tr <% unless already_processed_first_pass %>class="first"<% end %>>
+                    <td><%= 30.days.from_now > cohort.applications_close ? "In " + (cohort.applications_close - Date.today).to_i.to_s + " Days" : cohort.applications_close.strftime("%b %e") %></td>
+                    <td><%= cohort.prework_start.strftime("%b %e") %></td>
+                    <td><%= cohort.classroom_start.strftime("%b %e") %></td>
+                    <td><%= cohort.graduation.strftime("%b %e") %></td>
+                </tr>
+                <% already_processed_first_pass = true %>   
+            <% end %>
+            </tbody>
+        </table>
+
+        <p class="cta">Develop a future in software, apply to Prime and code tomorrow.</p>
+
+        <%= link_to "START YOUR APPLICATION NOW","/apply", class: "button section-intro-cta-button" %>
+
     </div>
-    <div class="section-divider"></div>
+</div>
+
+<div class="section section-numbers" id="numbers">
+    <div class="section-body">
+        <h2>We have plenty to say about the tech talent gap, but we’ll let the numbers (and the employers) speak for themselves.</h2>
+        
+        <div class="section-numbers-block">
+            <div class="block-statistic">
+                <div class="block-statistic-number">28<span class="symbol">%</span></div>
+                <p>increase in US application development jobs projected by 2020.</p>
+            </div>
+            <div class="block-quote">
+                <blockquote>
+                    “We are always looking for smart people who’ve taken the initiative to learn to program. A computer science background is a lot less important to us than a passion for problem solving and the ability to do the work    
+                </blockquote>
+                <p class="speaker">John Smith, President, Company</p>
+            </div>
+        </div>
+    
+        <div class="section-numbers-block section-numbers-block-even">
+            <div class="block-statistic">
+                <div class="block-statistic-number">60<span class="symbol">%</span></div>
+                <p>of US companies have unfilled tech jobs.</p>
+            </div>
+            <div class="block-quote">
+                <blockquote>
+                    “We are always looking for smart people who’ve taken the initiative to learn to program. A computer science background is a lot less important to us than a passion for problem solving and the ability to do the work    
+                </blockquote>
+                <p class="speaker">John Smith, President, Company</p>
+            </div>
+        </div>
+
+        <div class="section-numbers-block">
+            <div class="block-statistic">
+                <div class="block-statistic-number">50<span class="symbol">K</span></div>
+                <p>is the average salary of an entry level developer in MN.</p>
+            </div>
+            <div class="block-quote">
+                <blockquote>
+                    “We are always looking for smart people who’ve taken the initiative to learn to program. A computer science background is a lot less important to us than a passion for problem solving and the ability to do the work    
+                </blockquote>
+                <p class="speaker">John Smith, President, Company</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section section-program" id="program">
@@ -94,6 +167,9 @@
     </div>
     <div class="section-divider"></div>    
 </div>
+
+
+
 
 <div class="section section-network" id="network">
     <div class="section-body">

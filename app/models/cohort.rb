@@ -1,5 +1,5 @@
 class Cohort < ActiveRecord::Base
-	scope :current, -> { where("? BETWEEN applications_open AND applications_close", Date.today)}
+	scope :current, -> { where("? BETWEEN applications_open AND applications_close", Date.today).order(applications_close: :asc)}
 	has_and_belongs_to_many :admission_applications
 
 	def label

@@ -1,43 +1,34 @@
 class ApplyController < ApplicationController
-	
-	before_action :authenticate_user!, :set_admission_application
 
 	# Setup application wizard support.
 	include Wicked::Wizard
-	steps :start, :general, :personal, :logic, :technical, :submit
+	steps :start, :general, :personal, :logic, :technical, :submit, :thanks
+	
+	before_action :authenticate_user!, :set_admission_application, :redirect_completed_applicants
 
-  	# GET /apply/{step}
+	# GET /apply/{step}
 	def show
-		if @admission_application.application_status == "complete" && step != :start
-			redirect_to wizard_path(:start)
-		else
-			if step == :general
+		case step
+			when :general
 				@cohorts = Cohort.current
-			elsif step == :submit
-				@admission_application.application_step = "active"
+			when :submit
 				@admission_application.valid?
-			end
-			render_wizard
 		end
+		render_wizard
 	end
 
-  # PATCH/PUT /apply/{step}
-  def update
-    respond_to do |format|
-      	params[:admission_application][:application_step] = step.to_s
-		if step == steps.last
-			@admission_application.populate_questions
-			params[:admission_application][:application_step] = 'active'
-			params[:admission_application][:application_status] = 'complete'
-			params[:admission_application][:completed_at] = Time.now
+	# PATCH/PUT /apply/{step}
+	def update
+		respond_to do |format|
+		  	@admission_application.application_step = step.to_s
+			if @admission_application.update(admission_application_params)
+				format.html { redirect_to next_wizard_path }
+			else
+				flash.now[:error] = 'There was a problem with your submission, your changes have not yet been saved. Please make corrections and resubmit.'
+				format.html { render_wizard }
+			end
 		end
-		if @admission_application.update(admission_application_params)
-			format.html { redirect_to next_wizard_path }
-		else
-			format.html { render_wizard }
-		end
-    end
-  end
+	end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -46,13 +37,17 @@ class ApplyController < ApplicationController
     	@admission_application = @user.admission_application || @user.create_admission_application()
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def admission_application_params
-      params.require(:admission_application).permit(:first_name, :last_name, :application_status, :application_step, :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation], :profile_question_answers_attributes => [:id,:profil_question_id,:answer], :cohort_ids => [])
+    def redirect_completed_applicants
+		redirect_to wizard_path(:thanks) if @admission_application.completed? && step != :thanks
     end
 
 	def finish_wizard_path
 	  wizard_path(:start)
 	end    
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def admission_application_params
+      params.require(:admission_application).permit(:first_name, :middle_name, :last_name, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :linkedin_account, :twitter_account, :github_account, :website_link, :personal_link, :referral_source, :resume_link, :payment_plan, :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation], :profile_question_answers_attributes => [:id,:profil_question_id,:answer], :cohort_ids => [])
+    end
 
 end

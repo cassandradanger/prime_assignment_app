@@ -32,6 +32,10 @@ gem "aws-sdk"
 gem 'requirejs-rails'
 # Use unicorn as the app server
 gem 'unicorn'
+# Use airbrake for error reporting
+gem "airbrake"	
+# Use gibbon for interaction with Mailchimp lists
+gem "gibbon"
 
 group :production do 
 	# Use Heroku deployment
@@ -42,6 +46,7 @@ group :development do
 	# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 	gem 'spring'
 	gem 'spring-commands-rspec'
+	gem 'quiet_assets'
 end
 
 group :test do

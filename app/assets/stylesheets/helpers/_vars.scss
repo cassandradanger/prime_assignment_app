@@ -3,13 +3,22 @@ $WIDTH_DESKTOP: 940px;
 
 $COLOR_BRIGHT: #07AA9E;
 $COLOR_DARK: #337277;
-$COLOR_SCREEN: #EBF1F1;
+$COLOR_SCREEN: #DAE5E3;
 $COLOR_BLACK: #000000;
 $COLOR_WHITE: #FFFFFF;
+$COLOR_LIGHTGRAY: #809E9B;
+$COLOR_DARKGRAY: #6A7575;
 
-$FONT_HEADLINE: 'Interstate', sans-serif;
-$FONT_LARGE_HEADLINE: 'Interstate-Light', sans-serif;
-$FONT_BODY: "Garamond", serif;
+
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+$INTERSTATE: Interstate, sans-serif;
+$INTERSTATE_LIGHT: "Interstate Light", sans-serif;
+$FONT_HEADLINE: Interstate, sans-serif;
+$FONT_LARGE_HEADLINE: "Interstate Light", sans-serif;
+// $FONT_BODY: "Garamond", serif;
+$FONT_BODY: "Source Sans Pro", sans-serif;
 
 $HEADER_HEIGHT_WITHOUT_UNITS: 60;
 $HEADER_HEIGHT: $HEADER_HEIGHT_WITHOUT_UNITS+px;

@@ -32,7 +32,8 @@
 }
 
 .input select.date {
-	max-width:120px;
+  display:inline;
+  width:auto;
 }
 
 .hint {
@@ -60,6 +61,7 @@ label.check_boxes {
       padding:4px;
       border-radius:0 0 4px 4px;
       color:$COLOR_WHITE;
+      margin-right:5px;
     }
 
 }

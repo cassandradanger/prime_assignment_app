@@ -40,47 +40,84 @@ feature 'A logged in visitor' do
 
 		scenario 'tries to submit their application and is displayed an error' do
 			visit '/apply/submit'
+			check 'admission_application_payment_plan'
 			click_button 'Submit your application'
 		    current_path.should == '/apply/submit'			
-		    page.has_content?('error')
+		    page.has_content?('problem')
 		end
 
 		scenario 'tries to submit the incomplete general page and recieves an error' do
 			visit '/apply/general'
 			click_button 'Save Your Application and Continue'
 		    current_path.should == '/apply/general'			
-		    page.has_content?('error')
+		    page.has_content?('problem')
 		end
 
 	end
 
-	feature 'with a completed profile' do
+	feature 'with a complete profile' do
 
 		before :each do
-			FactoryGirl.create(:admission_application, user: @user)
+			@admission_application = FactoryGirl.create(:admission_application, user: @user)
 		end
 
-		scenario 'visits the submit page and completes their application' do
+		scenario 'visits the submit page and submits their application without accepting the payment plan' do
 			visit '/apply/submit'
 			click_button 'Submit your application'
-	    	page.has_no_content?('error')			
-	    	current_path.should == '/apply/start'			
+	    	page.has_content?('problem')			
+	    	current_path.should == '/apply/submit'			
 		end
 
-		scenario 'visits the submit page and completes application after a new logic question was added and receives an error' do
+		scenario 'visits the submit page and submits their application, accepting the payment plan' do
+			visit '/apply/submit'
+			check 'admission_application_payment_plan'
+			click_button 'Submit your application'
+	    	page.has_no_content?('problem')			
+	    	current_path.should == '/apply/thanks'			
+		end
+
+
+		scenario 'visits the submit page and submits application after a new logic question was added and receives an error' do
 			FactoryGirl.create(:logic_question)
 			visit '/apply/submit'
+			check 'admission_application_payment_plan'
 			click_button 'Submit your application'
-	    	page.has_content?('error')			
+	    	page.has_content?('problem')			
 	    	current_path.should == '/apply/submit'			
 		end
 
-		scenario 'visits the submit page and completes application after a new profile question was added and receives an error' do
+		scenario 'visits the submit page and submits application after a new profile question was added and receives an error' do
 			FactoryGirl.create(:profile_question)
 			visit '/apply/submit'
+			check 'admission_application_payment_plan'
 			click_button 'Submit your application'
-	    	page.has_content?('error')			
+	    	page.has_content?('problem')			
 	    	current_path.should == '/apply/submit'			
+		end
+
+		feature 'that has submitted their profile' do
+
+			before :each do
+				visit '/apply/submit'
+				check "admission_application_payment_plan"
+				click_button 'Submit your application'
+			end
+
+			scenario 'is redirected to the thanks page when visiting any other application page' do
+				visit '/apply/start'
+		    	current_path.should == '/apply/thanks'
+				visit '/apply/general'
+		    	current_path.should == '/apply/thanks'
+				visit '/apply/personal'
+		    	current_path.should == '/apply/thanks'
+				visit '/apply/logic'
+		    	current_path.should == '/apply/thanks'
+				visit '/apply/technical'
+		    	current_path.should == '/apply/thanks'
+				visit '/apply/submit'
+		    	current_path.should == '/apply/thanks'
+			end
+
 		end
 
 	end

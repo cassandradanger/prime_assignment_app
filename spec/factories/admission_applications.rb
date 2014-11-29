@@ -5,6 +5,7 @@ FactoryGirl.define do
 	last_name "Doe"
 	middle_name "Theodore"
 	date_of_birth "1978-07-19"
+	address "123 Fake St."
 	city "Minneapolis"
 	state "Minnesota"
 	zip_code "55412"
@@ -16,6 +17,9 @@ FactoryGirl.define do
 	personal_link "http://primeacademy.io"
 	resume_link "http://primeacademy.io"
 	referral_source "Search engine"
+	payment_plan "1"
+	education "High School"
+
 	user
 	after(:create) do |application| 
 		application.cohorts = [create(:cohort)]

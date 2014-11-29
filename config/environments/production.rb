@@ -79,4 +79,14 @@ Rails.application.configure do
   # Setup mailer url options
   config.action_mailer.default_url_options = { host: 'primeacademy.io' }
 
+  # Setup mailer options
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port: '587',
+    address: 'smtp.mandrillapp.com',
+    user_name: ENV['MANDRILL_USERNAME'],
+    password: ENV['MANDRILL_APIKEY'],
+    domain: 'staging.primeacademy.io',
+    authentication: :plain }
+
 end

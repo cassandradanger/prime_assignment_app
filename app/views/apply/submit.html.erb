@@ -3,8 +3,8 @@
 <%= simple_form_for @admission_application, url: wizard_path, method: :put do |f| -%>
 
 	<% if @admission_application.errors.any? %>
-	  <div id="error_explanation">
-	   <h2 class="alert alert-error">
+	  <div class="alert alert-error">
+	   <h2 class="alert-heading">
 	     Please address the items listed below before submiting your application:
 	   </h2>
 	  <ul>
@@ -13,7 +13,14 @@
 	   <% end %>
 	 </ul>
 	</div>
+	<% else %>
+	<div class="alert alert-notice">
+		<h2 class="alert-heading">Congratulation, it looks like you're ready to submit.</h2>
+		<p>Review your information below and click "Submit your application" when you're ready.</p>
+	</div>
 	<% end %>
+
+	<%= f.input :payment_plan, as: :boolean, label: "If accepted, I know I will be required to provide a $1,500 deposit to hold my position; I know how I will secure funds to pay my full tuition.", error: false %>
 
 	<%= f.hidden_field "process_application", :value=>"true" %>
 	<%= f.button :submit, "Submit your application", class: "button" %>

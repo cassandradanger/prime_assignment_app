@@ -41,28 +41,29 @@
 </head>
 <body>
     
-    <div class="layout <%= "layout-logged-in" if user_signed_in? %>">
+    <div class="layout <%= "layout-logged-in" if user_signed_in? && params[:controller] == "apply" %>">
 
-        <div class="layout-header layout-header-fixed <%= "layout-header-logged-in" if user_signed_in? %>">
+        <div class="layout-header layout-header-fixed <%= "layout-header-logged-in" if user_signed_in? && params[:controller] == "apply" %>">
             <div class="layout-header-banner">
                 <div class="logo">
                     <a href="<%= root_path %>" class="logo-link">
-                        <%= image_tag "logo-prime-horizontal.png", :alt=>"Prime - Software Engineering Academy", :itemprop=>"logo" %>
+                        <%= image_tag "logo-prime-horizontal.svg", :alt=>"Prime - Software Engineering Academy", :itemprop=>"logo" %>
                         <h1 class="isHidden" itemprop="name">Prime Software Engineering Academy</h1>
                     </a>
                 </div>                
             </div><!-- /layout-header-banner -->
-            <% if user_signed_in? %>         
+            <% if user_signed_in? && params[:controller] == "apply"%>         
             <div class="layout-header-navigation-banner">    
                 <ol class="navigation-menu admissions-menu">
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:start)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "General", wizard_path(:general), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:general)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Personal", wizard_path(:personal), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:personal)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Logic", wizard_path(:logic), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:logic)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Technical", wizard_path(:technical), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:technical)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Review", wizard_path(:submit), :class=>"admissions-menu-item-link"+(current_page?(wizard_path(:submit)) ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item admissions-menu-item admissions-menu-itemLogout"><%= link_to "Log Out", destroy_user_session_path, :method => :delete, :class=>"admissions-menu-item-link admissions-menu-item-linkLogout" %></li>
+                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(step == :start ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "General", wizard_path(:general), :class=>"admissions-menu-item-link"+(step == :general ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Personal", wizard_path(:personal), :class=>"admissions-menu-item-link"+(step == :personal ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Logic", wizard_path(:logic), :class=>"admissions-menu-item-link"+(step == :logic ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Technical", wizard_path(:technical), :class=>"admissions-menu-item-link"+(step == :technical ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Review", wizard_path(:submit), :class=>"admissions-menu-item-link"+(step == :submit ? " admissions-menu-item-linkCurrent" : "" ) %></li>
                 </ol>            
+                <%= link_to "Account", edit_user_registration_path, :class=>"admissions-menu-account" %>
+                <%= link_to "Log Out", destroy_user_session_path, :method => :delete, :class=>"admissions-menu-logout" %>               
             </div><!-- /layout-header-navigation-banner -->
             <% end %>
         </div><!-- /layout-header -->
