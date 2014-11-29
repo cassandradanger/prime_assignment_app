@@ -6,10 +6,12 @@ body {
 	font-family: $FONT_BODY;
 	font-size:16px;
 	line-height:24px;
+	color:$COLOR_COPY;
 }
 
 h1, h2 {
 	font-family: $FONT_LARGE_HEADLINE;
+	color: $COLOR_BLACK;
 } 
 
 h1 {

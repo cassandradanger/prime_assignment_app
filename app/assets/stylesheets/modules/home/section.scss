@@ -107,11 +107,6 @@ Section Styles (Page Featurettes)
 }
 
 .section-network {
-	background: asset-url('bg-section-abstract-waves.jpg') 100% 0 no-repeat
-}
-
-.section-program {
-	background:grey;
 }
 
 .section-tuition {
@@ -124,6 +119,7 @@ Section Styles (Page Featurettes)
 	line-height:1.5em;
 	font-family:$INTERSTATE_LIGHT;
 	color: $COLOR_DARK;	
+	clear:both;
 }
 
 
@@ -245,4 +241,56 @@ Section Styles (Page Featurettes)
 		vertical-align:super;
 	}
 
+}
+
+
+
+
+
+
+.section-program {
+	background: asset-url('bg-section-abstract-waves.jpg') 100% 0 no-repeat;
+}
+
+.program-diagram {
+	width:100%;
+	margin:60px 0;
+}
+
+.program-components {
+	padding-left:0;
+	@extend %clearfix;			
+}
+
+.program-component {
+	list-style:none;
+	float:left;
+	width:50%;
+	margin-bottom:20px;
+	min-width:340px;
+}
+
+.program-component-body{
+	padding:0 30px;
+}
+
+.program-component-build {
+	clear:left;
+}
+
+.section-program .cta {
+	margin:50px 0;
+	p {
+		text-align:right;
+		width:46%;
+		float:left;
+		margin:0;
+	}
+	.button {
+		width:46%;
+		float:right;
+		display:block;
+		text-align:center;
+	}
+	@extend %clearfix;		
 }

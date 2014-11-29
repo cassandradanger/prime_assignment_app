@@ -56,10 +56,10 @@ define(function(require, exports, module) { // jshint ignore:line
             }
         );
 
-        $(window).scroll(function() {
-            var speed = 8.0;
-            $('.section-network').css("background-position", "100% " + (-window.pageYOffset / speed) + "px");
-        });
+        // $(window).scroll(function() {
+        //     var speed = 8.0;
+        //     $('.section-network').css("background-position", "100% " + (-window.pageYOffset / speed) + "px");
+        // });
 
     }
 

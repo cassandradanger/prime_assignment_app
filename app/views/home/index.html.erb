@@ -34,7 +34,7 @@
             </thead>
             <tbody>
             <% already_processed_first_pass = false %>   
-            <% Cohort.current.each do |cohort| -%>    
+            <% @cohorts.each do |cohort| -%>    
                 <tr <% unless already_processed_first_pass %>class="first"<% end %>>
                     <td><%= 30.days.from_now > cohort.applications_close ? "In " + (cohort.applications_close - Date.today).to_i.to_s + " Days" : cohort.applications_close.strftime("%b %e") %></td>
                     <td><%= cohort.prework_start.strftime("%b %e") %></td>
@@ -101,14 +101,43 @@
 <div class="section section-program" id="program">
     <div class="section-body">
     	<h2>Our Program at a Glance</h2>
-        <p>Working with employers, we’ve re-engineered software engineering education to prioritize capabilities beginners need to make immediate contributions to the future of software. Our students learn modern technologies, real world methodology and relevant behavioral skills through hands-on, experiential learning. We’re empowering adult learners from diverse backgrounds to start contributing to the software revolution in months, not years.</p>
+        <p>Prime prepares students to join the industry as entry-level software engineers through a program centered around a 12 week immersive, classroom experience. We’ll use modern technologies like HTML / CSS, Javascript, jQuery, AngularJS and Node.js to give you a foundational knowledge in software engineering you’ll be apply in any technical environment. Your experience with Prime will look like this:</p>
         <p>We prepare students to join the industry as entry-level software engineers through a program centered around a 12 week immersive, classroom experience. We’ll use modern technologies like NodeJS, Angular and MongoDB to give you a foundational knowledge in software engineering that you can apply in any technical environment. Your experience with Prime will look like this:</p>
-        <ul>
-            <li>Preload</li>
-            <li>Boot</li>
-            <li>Build</li>
-            <li>Launch</li>
+
+        <%= image_tag "diagram-program.svg", class: "program-diagram" %>
+
+        <ul class="program-components">
+            <li class="program-component program-component-preload">
+                <div class="program-component-body">
+                    <h3>Pre-Load</h3>
+                    <p>Students come to Prime from different backgrounds and varying levels of technical experience. Pre-loading is our way of ensuring everyone shows up to the first day in class ready to speak the same language and successfully learn together.  You’ll warm up for your classroom experience over 6 weeks, learning on your schedule and checking in weekly with the instructor who’ll lead your cohort when you arrive at school.</p>
+                </div>
+            </li>
+            <li class="program-component program-component-boot">
+                <div class="program-component-body">
+                    <h3>Boot</h3>
+                    <p>Your first six weeks at Prime is coding bootcamp. As you begin your classroom experience, you’ll dive headfirst into fundamental software engineering concepts. You’ll learn from instructors, mentors and each other as you apply concepts from lectures inhands-on challenges. The days are long, but the skills you learn in Boot are foundational to your new career.</p>
+                </div>
+            </li>
+            <li class="program-component program-component-build">
+                <div class="program-component-body">
+                    <h3>Build</h3>
+                    <p>You learn by doing, that’s why the second six weeks of the classroom experience is focused on project work. You’ll learn how to be part of a software development team, practicing behaviors and techniques you’ll use every day as a working engineer. You’ll have the chance to work on projects of your own design as well as helping real world startups to build prototypes to prove their concepts.</p>
+                </div>
+            </li>
+            <li class="program-component program-component-launch">
+                <div class="program-component-body">
+                    <h3>Launch</h3>
+                    <p>After 18 weeks, your classroom experience is over and you’re ready to start learning on-the-job. Some students seek entry-level positions immediately, but many will explore Prime’s apprenticeship network. Developed with employers specifically for graduates of Prime, these apprenticeships provide a way to earn some real world experience and make some money while you’re at it.</p>
+                </div>
+            </li>
         </ul>
+
+        <div class="cta">
+            <p>Start training in <%= @cohorts.first.prework_start.strftime("%B") %>, begin your new career by <%= @cohorts.first.graduation.strftime("%B") %>!</p>
+        <%= link_to "START YOUR APPLICATION","/apply", class: "button section-program-cta-button" %>
+        </div>
+
     </div>
     <div class="section-divider"></div>
 </div>
