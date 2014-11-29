@@ -1,13 +1,3 @@
-@mixin border-radius($radius) {
-    -webkit-border-radius: $radius; /* For iOS Safari <= 3.2, Android Browser <= 2.1 */
-    border-radius: $radius;
-}
-
-@mixin box-shadow($shadow) {
-    -webkit-box-shadow: $shadow; /* For iOS Safari <= 4.1, Android Browser <= 3.0, Blackberry <= 7.0 */
-    box-shadow: $shadow;
-}
-
 @mixin box-sizing($sizing) {
     -webkit-box-sizing: $sizing; /* iOS Safari <= 4.3, Android Browser <= 3.0, Blackberry <= 7.0 */
     -moz-box-sizing: $sizing; /* Firefox <= 28 */

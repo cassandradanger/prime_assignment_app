@@ -9,33 +9,36 @@ body {
 	color:$COLOR_COPY;
 }
 
-h1, h2 {
-	font-family: $FONT_LARGE_HEADLINE;
-	color: $COLOR_BLACK;
-} 
 
 h1 {
 	font-size:30px;
 	margin-bottom:20px;
+	color: $COLOR_BLACK;
+	font-family: $INTERSTATE_LIGHT;
 }
 
 h2 {
 	font-size:30px;
 	margin-top:20px;	
 	margin-bottom:15px;
+	color: $COLOR_BLACK;	
+	font-family: $INTERSTATE_LIGHT;
 }
 
 h3 {
 	font-size:23px;
 	line-height:25px;
+	text-transform: uppercase;		
 	color: $COLOR_DARKGRAY;
+	font-family: $INTERSTATE;
 }
 
-h3, h4, h5, h6 {
-	font-family: $FONT_HEADLINE;
-	text-transform: uppercase;	
+h4 {
+	font-family: $INTERSTATE;
+	line-height:24px;
+	font-size: 16px;
 	margin-top:10px;
-	margin-bottom:5px;
+	margin-bottom:0;
 }
 
 p + p, p + ul {

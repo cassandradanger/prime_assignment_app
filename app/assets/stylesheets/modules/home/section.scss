@@ -337,5 +337,79 @@ Section Styles (Page Featurettes)
 
 
 .section-schedule {
-	
+
+}
+
+.schedule-planner {
+	padding:0 20px;
+	background: asset-url('bg-schedulegrid.svg') 0 0 no-repeat;
+	background-size: 100% 100%;
+	margin-top:30px;
+	@extend %clearfix;	
+}
+
+.schedule-column-left {
+	padding:20px 0 0 0; // 1/2 vertical margin on itmems(30)
+	margin-bottom:40px;
+}
+.schedule-column-right {
+	padding:0 0 20px 0; // 1/2 vertical margin on itmems(30)
+}	
+
+@include breakpoint(desktop) {
+	.schedule-planner {
+		@extend %clearfix;
+		background: asset-url('bg-schedulegridcolumns.svg') 0 0 no-repeat;
+		background-size: 100% 100%;			
+	}
+
+	.schedule-column-left {
+		float:left;
+		width:48%;
+		margin-bottom:20px;
+	}
+	.schedule-column-right {
+		float:right;
+		width:48%;	
+		margin-top:20px;
+	}		
+}
+
+.schedule-item {
+	background: $COLOR_SCREEN;
+	@include box-shadow;
+	padding:25px;
+	position:relative;
+	margin-bottom:40px;
+	height:144px;
+
+	h4 {
+		margin-top:0;
+	}
+}
+
+.schedule-item:first-child {
+	margin-top:0;
+}
+
+.schedule-item:last-child {
+	margin-bottom:0;
+}
+
+.schedule-item-double {
+	height:378px; // 2x schedule-item height(72) + vertical padding(50) + vertical margin(30)
+}
+
+.schedule-item-time {
+	position:absolute;
+	height:28px;
+	top: -33px;
+	left: -10px;
+	font-family: $INTERSTATE;
+	font-weight: bold;
+	font-size: 16px;
+	line-height:28px;
+	color: $COLOR_DARKGRAY;
+	padding: 0 10px 0 45px;
+	background: $COLOR_WHITE asset-url('icon-clock.svg') 10px 0 no-repeat;
 }
