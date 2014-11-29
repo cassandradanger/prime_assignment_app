@@ -134,7 +134,11 @@
         </ul>
 
         <div class="cta">
-            <p>Start training in <%= @cohorts.first.prework_start.strftime("%B") %>, begin your new career by <%= @cohorts.first.graduation.strftime("%B") %>!</p>
+            <% unless @cohorts.blank? %>
+                <p>Start training in <%= @cohorts.first.prework_start.strftime("%B") %>, begin your new career by <%= @cohorts.first.graduation.strftime("%B") %>!</p>
+            <% else %>
+                <p>Start training soon and begin your new career in months!</p>
+            <% end %>
         <%= link_to "START YOUR APPLICATION","/apply", class: "button section-program-cta-button" %>
         </div>
 
@@ -170,14 +174,14 @@
                     <li class="schedule-item">
                         <div class="schedule-item-time">8:00</div>
                         <h4>Morning Ramp-Up</h4>
-                        <p>Come in, grab some coffee, and get answers to the questions that might be plaguing you from the day before. Or, show us all something cool that you did over night!</p>
+                        <p>Grab some coffee and get answers to questions that might be plaguing you from yesterday or show us something cool that you did overnight!</p>
                     </li>
-                    <li class="schedule-item">
+                    <li class="schedule-item schedule-item-class">
                         <div class="schedule-item-time">9:00</div>
                         <h4>Morning Concept</h4>
                         <p>Your instructor introduces the morning’s concept with a lecture. Things stay interactive with live coding, class interaction and plenty of time for questions.</p>
                     </li>
-                    <li class="schedule-item">
+                    <li class="schedule-item  schedule-item-class">
                         <div class="schedule-item-time">10:00</div>
                         <h4>Pair Challenge</h4>
                         <p>You’ll tackle the morning challenge by pairing with one of your classmates. Working together you’ll apply the concepts you’ve just learned to a programming challenge.</p>
@@ -196,12 +200,12 @@
             </div> 
             <div class="schedule-column schedule-column-right">                
                 <ol>
-                    <li class="schedule-item schedule-item-double">
+                    <li class="schedule-item schedule-item-double schedule-item-class">
                         <div class="schedule-item-time">1:00</div>
                         <h4>Afternoon Concept</h4>
                         <p>Afternoon concepts will be more complex and will require more hands-on practice. During this time, we‘ll help make sure that you have ample time to engage with this new material.</p>
                     </li>                
-                    <li class="schedule-item schedule-item-double">
+                    <li class="schedule-item schedule-item-double schedule-item-class">
                         <div class="schedule-item-time">3:00</div>
                         <h4>Evening Challenge</h4>
                         <p>Cap off the day with a challenge covering everything you’ve learned. We’ll talk through the problem as a group before breaking you up into teams to divide and conquer the task at hand.</p>
