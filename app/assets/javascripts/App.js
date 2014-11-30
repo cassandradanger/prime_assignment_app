@@ -25,7 +25,7 @@ define(function(require, exports, module) { // jshint ignore:line
                     $('.layout-header').addClass("layout-header-fixed");                    
                     $('.section-masthead-logo').addClass("section-masthead-logo-hidden");                                       
                 }
-              }, offset: 60
+              }, offset: -25
             }
         );
 
