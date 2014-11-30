@@ -577,3 +577,32 @@ Section Styles (Page Featurettes)
 	}
 
 }
+
+
+
+
+
+
+.section-network {
+
+}
+
+.network-logos {
+	margin:35px 0; 
+	padding:0;
+	list-style:none;
+	li {
+		float:left;
+		width:20%;
+	}
+	@extend %clearfix;
+}
+
+.partner-link{
+	display:block;	
+}
+
+.partner-logo {
+	display:block;
+	width:100%;
+}
