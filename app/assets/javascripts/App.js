@@ -64,6 +64,8 @@ define(function(require, exports, module) { // jshint ignore:line
             $('.difference-item-experts').css("background-position-y", ($('.difference-item-experts')[0].getBoundingClientRect().top / speed) + "px");
             $('.difference-item-doing').css("background-position-y", ($('.difference-item-doing')[0].getBoundingClientRect().top / speed) + "px");       
             $('.difference-item-apprenticeship').css("background-position-y", ($('.difference-item-apprenticeship')[0].getBoundingClientRect().top / speed) + "px");       
+            $('.video-header-video').css("top", -($(window).scrollTop() / 5) + "px");       
+
         });
 
     }

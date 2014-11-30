@@ -108,6 +108,15 @@ Section Styles (Page Featurettes)
 		overflow:hidden;
 	}
 
+	.video-shadow {
+		position:absolute;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		background: linear-gradient(rgba(0,0,0,.5) 0%, rgba(0,0,0,.35) 1%, rgba(0,0,0,.2) 2%, rgba(0,0,0,.1) 3%, rgba(0,0,0,0) 4%, rgba(0,0,0,0) 96%, rgba(0,0,0,.1) 97%, rgba(0,0,0,.2) 98%, rgba(0,0,0,.35) 99%, rgba(0,0,0,.5) 100%)
+	}
+
 	.video-header-video {
 		position:absolute;
 		display:block;
@@ -119,7 +128,7 @@ Section Styles (Page Featurettes)
 }
 
 
-.cta {
+.cta-copy {
 	font-size:22px;
 	line-height:1.5em;
 	font-family:$INTERSTATE_LIGHT;
@@ -321,9 +330,9 @@ Section Styles (Page Featurettes)
 .section-program .cta {
 	margin:30px 0;
 
-	p {
+	.cta-copy {
 		text-align:center;
-		margin:0 0 10px 0;
+		margin:10px 0 10px 0;
 	}
 	.button {
 		display:block;
@@ -332,21 +341,23 @@ Section Styles (Page Featurettes)
 }
 
 @include breakpoint(tablet) {
-.section-program .cta {
-	margin:50px 0;
-	@include clearfix;
 
-	p {
-		text-align:right;
-		width:46%;
+	.program-applicants-info {
+		@include clearfix;
+	}
+
+	.program-applicants {
 		float:left;
-		margin:0;
+		width:47%;
 	}
-	.button {
-		width:46%;
+
+	.program-applicants-info .cta {
+		width:47%;
 		float:right;
+		clear:none;
+		margin-top:75px;
+		text-align:left;
 	}
-}
 
 }
 
@@ -685,6 +696,38 @@ Section Styles (Page Featurettes)
 	}
 
 }
+
+.section-tuition .cta {
+	margin:30px 0;
+
+	p {
+		text-align:center;
+		margin:0 0 10px 0;
+	}
+	.button {
+		display:block;
+		text-align:center;
+	}
+}
+
+@include breakpoint(tablet) {
+	.section-tuition .cta {
+		margin:50px 0;
+		@include clearfix;
+
+		p {
+			text-align:right;
+			width:46%;
+			float:left;
+			margin:0;
+		}
+		.button {
+			width:46%;
+			float:right;
+		}
+	}
+}
+
 
 
 

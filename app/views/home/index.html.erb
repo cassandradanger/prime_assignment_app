@@ -9,7 +9,8 @@
             <source src="<%= asset_url("header.mp4") %>" type="video/mp4"/>
             <source src="<%= asset_url("header.ogg") %>" type="video/ogg"/>
             <source src="<%= asset_url("header.webm") %>" type="video/webm"/>
-        </video>        
+        </video>
+        <div class="video-shadow"></div>        
     </div>    
 </div>
 
@@ -20,7 +21,7 @@
         <div class="section-intro-columns">
             <div class="section-intro-column column-copy">
                 <p>Working directly with employers, we’ve re-engineered software engineering education to prioritize the capabilities newcomers need to make immediate contributions to the future of software. Our students learn modern technologies, real world methodology and relevant behavioral skills through hands-on, experiential learning. We’re empowering learners from diverse backgrounds to start contributing to the software revolution in months, not years.</p>
-                <p class="cta">Develop a future in software, apply to Prime and code tomorrow.</p>
+                <p class="cta-copy">Develop a future in software, apply to Prime and code tomorrow.</p>
             </div>            
             <div class="section-intro-column column-cohorts">
                 <h3>WHEN TOMORROW START FOR YOU?</h3>
@@ -133,26 +134,26 @@
             </li>
         </ul>
 
-        <h2>Who Should Apply?</h2>
-        <p>The world’s best software engineers have one thing in common: they all started with no experience. Our accelerated learning program primes high potential students to begin their careers in software development and provides them with a framework to keep developing themselves while they develop software to solve real-world problems.</p>
-        <p>Here’s what makes a prospective student stand out from the crowd:</p>
-        <ul>    
-            <li>Resiliency to learn from failure and keep experimenting</li>
-            <li>Curiosity, with a voracious learning mindset</li>
-            <li>Intense personal drive, pragmatism, and resourcefulness</li>
-            <li>Commitment to empathy and inclusivity</li>
-            <li>Enough experience to know coding is for you</li>
-        </ul>        
+        <div class="program-applicants-info">
+            <div class="program-applicants">
+                <h2>Who Should Apply?</h2>
+                <p>The world’s best software engineers all have one thing in common: they all started with no experience. Our accelerated learning program primes high potential students to begin their careers in software development and provides them with a framework to keep developing themselves while they develop software to solve real-world problems.</p>
 
-        <div class="cta">
-            <% unless @cohorts.blank? %>
-                <p>Start training in <%= @cohorts.first.prework_start.strftime("%B") %>, begin your new career by <%= @cohorts.first.graduation.strftime("%B") %>!</p>
-            <% else %>
-                <p>Start training soon and begin your new career in months!</p>
-            <% end %>
-        <%= link_to "START YOUR APPLICATION","/apply", class: "button section-program-cta-button" %>
+                <p>Here’s what we're looking for in Prime applicants:</p>
+                <ul>    
+                    <li>Resiliency to learn from failure and keep experimenting</li>
+                    <li>Curiosity, with a voracious learning mindset</li>
+                    <li>Intense personal drive, pragmatism, and resourcefulness</li>
+                    <li>Commitment to empathy and inclusivity</li>
+                    <li>Enough experience to know coding is for you</li>
+                </ul>        
+            </div>
+            <div class="cta">
+                <p>You don’t need to be a seasoned coder to succeed at Prime. In fact, our program is designed to ensure that even if you come to us with no coding experience, we’ll get you ready for your first job by the time we send you on your way. If you’re new to software, our application process includes links to resources you can explore to make sure software engineering is the right future for you.</p>
+                <p class="cta-copy">Are you ready to start your career in software development?</p>
+                <%= link_to "START YOUR APPLICATION","/apply", class: "button section-program-cta-button" %>
+            </div>
         </div>
-
     </div>
     <div class="section-divider"></div>
 </div>
@@ -323,6 +324,12 @@
             <h3>Financial Support For Minnesota Students Available</h3>
             <p>We’re proud to partner with The City of Minneapolis, the Minnesota High Tech Association and the Creating IT Futures Foundation to bring Prime to smart Minnesotans who would be otherwise unable to afford the program. The application process screens for individuals who may be eligible for student aid, funds are available on a first come, first served basis so apply today.</p>
         </div>
+
+        <div class="cta">
+            <p class="cta-copy">Apply today to discuss options for financing your education.</p>
+            <%= link_to "START YOUR APPLICATION","/apply", class: "button section-program-cta-button" %>
+        </div>
+
     </div>
     <div class="section-divider"></div>    
 </div>
@@ -370,5 +377,17 @@
         </ul>
         <h3>Our Origin Story</h3>
         <p>Though we wish we could say we were bit by a radioactive software engineer, our origin is a bit more mild mannered. Prime was founded by the creators of The Nerdery, a custom software development company whose super power is the collective intelligence of its 500+ employees. Inspired by the challenge that The Nerdery, its partners and clients were facing in finding qualified software engineers, Prime was created to do something to help Minnesota’s tech industry develop the talent they need to drive innovation in software.</p>
+    
+        <div class="cta">
+            <% unless @cohorts.blank? %>
+                <p class="cta-copy">Start training in <%= @cohorts.first.prework_start.strftime("%B") %>, begin your new career by <%= @cohorts.first.graduation.strftime("%B") %>!</p>
+            <% else %>
+                <p class="cta-copy">Start training soon and begin your new career in months!</p>
+            <% end %>
+            <%= link_to "START YOUR APPLICATION","/apply", class: "button section-program-cta-button" %>
+        </div>
+
+
+
     </div>
 </div>
