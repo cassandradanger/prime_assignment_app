@@ -493,13 +493,10 @@ Section Styles (Page Featurettes)
 	background-image: asset-url('bg-toybox.jpg');
 	@include image-2x('bg-toybox@2x.jpg',738px,252px);
 
-	h3, p {
+	.difference-item-body {
 		max-width:500px;
 	}	
 
-	h3 {
-		color:inherit;
-	}
 }
 
 .difference-item-inside {
@@ -508,10 +505,10 @@ Section Styles (Page Featurettes)
 
 .difference-item-experts {
 	background: $COLOR_BLACK;
-	h3, p {
+	@extend %clearfix;
+	.difference-item-body {
 		float:right;
 	}
-	@extend %clearfix;
 }
 
 .difference-item-doing {
@@ -520,10 +517,10 @@ Section Styles (Page Featurettes)
 
 .difference-item-apprenticeship {
 	background: $COLOR_DARKGRAY;
-	h3, p {
-		float:right;
-	}
 	@extend %clearfix;	
+	.difference-item-body {
+		float:right;
+	}	
 }
 
 
@@ -661,12 +658,6 @@ Section Styles (Page Featurettes)
 
 
 
-
-
-.section-network {
-
-}
-
 .network-logos {
 	margin:35px 0; 
 	padding:0;
@@ -685,4 +676,14 @@ Section Styles (Page Featurettes)
 .partner-logo {
 	display:block;
 	width:100%;
+}
+
+
+
+
+
+
+
+.section-about {
+	background:$COLOR_DARK;
 }
