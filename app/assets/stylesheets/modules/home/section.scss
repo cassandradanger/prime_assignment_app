@@ -86,9 +86,7 @@ Section Styles (Page Featurettes)
 		position: absolute;
 		top:-10px;
 		left:20px;
-		// padding:20px;
-		// background:$COLOR_WHITE;
-		@include box-shadow(0 1px 1px rgba(0,0,0,.075));
+		@include box-shadow(none);
 	    @include transition(opacity .2s);	
 	}
 
