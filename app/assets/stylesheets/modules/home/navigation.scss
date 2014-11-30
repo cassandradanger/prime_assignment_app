@@ -42,13 +42,21 @@ Main Navigation
 
 	.navigation-button {
 	    position: absolute;
+	    background: asset-url('button-menu.svg') 0 0 no-repeat;
+	    background-size: 100%;
 	    top: 11px;
 	    right: 10px;
 	    display: block;
-	    width: 35px;
-	    height: 30px;
+	    width: 38px;
+	    height: 38px;
 	    text-indent: -9999px; /* Hiding "menu" button text accessibly */
 	    z-index:1;
+	    border:none;
+	}
+
+	.navigation-button-menu-open {
+	    background: asset-url('button-menuclose.svg') 0 0 no-repeat;		
+	    background-size: 100%;	    
 	}
 
 	/* Styling navigation menu for mobile and hiding it just off of the browser, preparing for slide in */
@@ -62,7 +70,7 @@ Main Navigation
 	}
 
 	/* This class is added by javascript and is used to slide the menu in when the Menu button is clicked */
-	.navigation-menu_open {
+	.navigation-menu-open {
 	    top: $HEADER_HEIGHT;
 	    @include transition(top .5s ease-out); /* Transition is used for slide effect */
 	}

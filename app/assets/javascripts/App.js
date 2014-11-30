@@ -42,7 +42,8 @@ define(function(require, exports, module) { // jshint ignore:line
 
         $('.navigation-button').click(
             function() {
-                $('.navigation-menu').toggleClass('navigation-menu_open');
+                $('.navigation-menu').toggleClass('navigation-menu-open');
+                $('.navigation-button').toggleClass('navigation-button-menu-open');                
             }
         );
 

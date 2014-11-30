@@ -116,7 +116,9 @@ Section Styles (Page Featurettes)
 
 
 
-
+.section-intro {
+	padding-top:20px;
+}
 
 .preface {
 	font-size:20px;
@@ -415,6 +417,10 @@ Section Styles (Page Featurettes)
 
 .schedule-item-class {
 	background:$COLOR_LIGHTGRAY;
+}
+
+.schedule-item-work {
+	background:$COLOR_BRIGHT;
 }
 
 .schedule-item-time {

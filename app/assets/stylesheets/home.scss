@@ -38,7 +38,7 @@
 		width: 100%;
 		height: $HEADER_HEIGHT;
 		z-index:1;
-		background: $COLOR_BLACK;
+		background: $COLOR_BLACK asset-url('bg-navigation.svg') 10px 10px no-repeat;
 	}
 
 	.logo-link {
