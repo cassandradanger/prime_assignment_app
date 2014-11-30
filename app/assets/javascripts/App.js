@@ -20,24 +20,26 @@ define(function(require, exports, module) { // jshint ignore:line
               handler: function(direction) {
                 if(direction=="up") {
                     $('.layout-header').removeClass("layout-header-fixed");
+                    $('.section-masthead-logo').removeClass("section-masthead-logo-hidden");                    
                 } else {
                     $('.layout-header').addClass("layout-header-fixed");                    
+                    $('.section-masthead-logo').addClass("section-masthead-logo-hidden");                                       
                 }
               }, offset: -45
             }
         );
 
-       $('.section-masthead-logo').waypoint(
-            {
-              handler: function(direction) {
-                if(direction=="up") {
-                    $('.section-masthead-logo').removeClass("section-masthead-logo-hidden");
-                } else {
-                    $('.section-masthead-logo').addClass("section-masthead-logo-hidden");                   
-                }
-              }, offset: -108
-            }
-        );
+       // $('.section-masthead-logo').waypoint(
+       //      {
+       //        handler: function(direction) {
+       //          if(direction=="up") {
+       //              $('.section-masthead-logo').removeClass("section-masthead-logo-hidden");
+       //          } else {
+       //              $('.section-masthead-logo').addClass("section-masthead-logo-hidden");                   
+       //          }
+       //        }, offset: -108
+       //      }
+       //  );
 
 
         $('.navigation-button').click(
@@ -56,10 +58,13 @@ define(function(require, exports, module) { // jshint ignore:line
             }
         );
 
-        // $(window).scroll(function() {
-        //     var speed = 8.0;
-        //     $('.section-network').css("background-position", "100% " + (-window.pageYOffset / speed) + "px");
-        // });
+        $(window).scroll(function() {
+            var speed = 10.0;
+            $('.difference-item-inside').css("background-position-y", ($('.difference-item-inside')[0].getBoundingClientRect().top / speed) + "px");               
+            $('.difference-item-experts').css("background-position-y", ($('.difference-item-experts')[0].getBoundingClientRect().top / speed) + "px");
+            $('.difference-item-doing').css("background-position-y", ($('.difference-item-doing')[0].getBoundingClientRect().top / speed) + "px");       
+            $('.difference-item-apprenticeship').css("background-position-y", ($('.difference-item-apprenticeship')[0].getBoundingClientRect().top / speed) + "px");       
+        });
 
     }
 

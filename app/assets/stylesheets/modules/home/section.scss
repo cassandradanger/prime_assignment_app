@@ -37,9 +37,19 @@ Section Styles (Page Featurettes)
 	position:relative;
 	overflow:hidden;
 	line-height:2.3em;
+
+	h1 {
+		background: rgba(0,0,0,.5);
+		padding:10px;
+	}
+
 }
 
  @include breakpoint(mobile) {
+
+	.section-masthead {
+		background: asset-url('bg-masthead.jpg') 50% 50% no-repeat;
+	}
 
 	.section-masthead .section-body {
 		padding-top:80px;	
@@ -61,6 +71,10 @@ Section Styles (Page Featurettes)
 
 }
 
+.video-header-video {
+	display:none;
+}
+
  @include breakpoint(desktop) {
 
 	.section-masthead .section-body {
@@ -70,14 +84,11 @@ Section Styles (Page Featurettes)
 
 	.section-masthead-logo {
 		position: absolute;
-		top:-40px;
-		left:0;
-		background: rgba(255,255,255,1);
-		padding:20px 17px 7px 17px;
-		z-index:10;
+		top:-10px;
+		left:20px;
+		// padding:20px;
+		// background:$COLOR_WHITE;
 		@include box-shadow(0 1px 1px rgba(0,0,0,.075));
-		border-radius:0 0 4px 4px;
-		opacity: 1;
 	    @include transition(opacity .2s);	
 	}
 
@@ -86,25 +97,27 @@ Section Styles (Page Featurettes)
 		opacity: 0;
 	}
 
+	.video-header {
+		background: $COLOR_BLACK;
+		height:500px;
+		position:absolute;
+		top:0;
+		right:0;
+		left:0;
+		z-index: -1;
+		overflow:hidden;
+	}
+
+	.video-header-video {
+		position:absolute;
+		display:block;
+		top:0;
+		left:50%;
+		margin-left:-720px;
+	}
+
 }
 
-.video-header {
-	background: $COLOR_BLACK;
-	height:500px;
-	position:absolute;
-	top:0;
-	right:0;
-	left:0;
-	z-index: -1;
-	overflow:hidden;
-}
-
-.video-header-video {
-	position:absolute;
-	top:0;
-	left:50%;
-	margin-left:-720px;
-}
 
 .cta {
 	font-size:22px;
@@ -500,11 +513,21 @@ Section Styles (Page Featurettes)
 }
 
 .difference-item-inside {
-	background: $COLOR_DARK;
+	background-position: 100% 100%;
+	background-repeat:no-repeat;
+	background-color: $COLOR_DARK;
+	background-image: asset-url('bg-difference-inside.jpg');
+	background-size: auto auto;
+	// @include image-2x('bg-difference-experts@2x.jpg',auto,100%);	
 }
 
 .difference-item-experts {
-	background: $COLOR_BLACK;
+	background-position: 0 100%;
+	background-repeat:no-repeat;
+	background-color: $COLOR_BLACK;
+	background-image: asset-url('bg-difference-experts.jpg');
+	background-size: auto auto;	
+	// @include image-2x('bg-difference-experts@2x.jpg',auto,100%);
 	@extend %clearfix;
 	.difference-item-body {
 		float:right;
@@ -512,11 +535,19 @@ Section Styles (Page Featurettes)
 }
 
 .difference-item-doing {
-	background: $COLOR_BRIGHT;
+	background-position: 100% 100%;
+	background-repeat:no-repeat;
+	background-color: $COLOR_BRIGHT;
+	background-image: asset-url('bg-difference-doing.jpg');
+	background-size: auto auto;
 }
 
 .difference-item-apprenticeship {
-	background: $COLOR_DARKGRAY;
+	background-position: 0 100%;
+	background-repeat:no-repeat;
+	background-color: rgba(0,0,0,.75);
+	background-image: asset-url('bg-difference-apprenticeship.jpg');
+	background-size: auto auto;		
 	@extend %clearfix;	
 	.difference-item-body {
 		float:right;
