@@ -54,7 +54,7 @@ Main Navigation
 	    border:none;
 	}
 
-	.navigation-button-menu-open {
+	.menu-open .navigation-button {
 	    background: asset-url('button-menuclose.svg') 0 0 no-repeat;		
 	    background-size: 100%;	    
 	}
@@ -62,22 +62,38 @@ Main Navigation
 	/* Styling navigation menu for mobile and hiding it just off of the browser, preparing for slide in */
 	.navigation-menu {
 	    position: absolute;
-	    top:-400px;
+	    background: linear-gradient(#2C3030, $COLOR_DARKERGRAY 5%);
+	    right:-166px;
+	    width:150px;
+	    top:$HEADER_HEIGHT;
 	    display: block;
-	    right:5%;
-	    left:5%;
-	    @include transition(top .5s ease-in); /* Transition is used for slide effect */    
+	    height:1000%;
+	    @include transition(right .3s ease-in); /* Transition is used for slide effect */    
 	}
 
 	/* This class is added by javascript and is used to slide the menu in when the Menu button is clicked */
-	.navigation-menu-open {
-	    top: $HEADER_HEIGHT;
-	    @include transition(top .5s ease-out); /* Transition is used for slide effect */
+	.menu-open .navigation-menu {
+	    right:0;
+	    @include transition(right .3s ease-out); /* Transition is used for slide effect */
 	}
 
 	.navigation-menu-item + .navigation-menu-item {
-	    border-top: 1px solid #b2b2b2;
+	    // border-top: 1px solid #b2b2b2;
 	}
+
+	.layout-body {
+		left:0;
+		position:relative;		
+		@include transition(left .3s ease-in); /* Transition is used for slide effect */    	
+	}
+
+	.menu-open .layout-body {
+		position:relative;
+		left:-166px;
+	    @include transition(left .3s ease-out); /* Transition is used for slide effect */    		
+	}
+
+
 
 }
 

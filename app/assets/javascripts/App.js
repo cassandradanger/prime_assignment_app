@@ -42,15 +42,14 @@ define(function(require, exports, module) { // jshint ignore:line
 
         $('.navigation-button').click(
             function() {
-                $('.navigation-menu').toggleClass('navigation-menu-open');
-                $('.navigation-button').toggleClass('navigation-button-menu-open');                
+                $('body').toggleClass('menu-open');
             }
         );
 
         $('.slider-link').click(
             function(event) {
                 event.preventDefault();
-                $('.navigation-menu').toggleClass('navigation-menu_open');
+                $('body').toggleClass('menu-open');
                 $('html, body').animate({
                     scrollTop: $(event.target.hash).offset().top-60
                 }, 1000);                
