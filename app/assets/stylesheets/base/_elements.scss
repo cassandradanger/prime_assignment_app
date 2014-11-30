@@ -13,15 +13,14 @@ body {
 h1 {
 	font-size:30px;
 	margin-bottom:20px;
-	color: $COLOR_BLACK;
 	font-family: $INTERSTATE_LIGHT;
 }
 
 h2 {
 	font-size:30px;
+	line-height:45px;
 	margin-top:20px;	
 	margin-bottom:15px;
-	color: $COLOR_BLACK;	
 	font-family: $INTERSTATE_LIGHT;
 }
 
@@ -29,7 +28,7 @@ h3 {
 	font-size:23px;
 	line-height:25px;
 	text-transform: uppercase;		
-	color: $COLOR_DARKGRAY;
+	color: inherit;
 	font-family: $INTERSTATE;
 }
 

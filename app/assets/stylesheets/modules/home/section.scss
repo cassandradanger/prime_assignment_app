@@ -106,14 +106,6 @@ Section Styles (Page Featurettes)
 	margin-left:-720px;
 }
 
-.section-network {
-}
-
-.section-tuition {
-	background: $COLOR_DARK;
-}
-
-
 .cta {
 	font-size:22px;
 	line-height:1.5em;
@@ -311,13 +303,12 @@ Section Styles (Page Featurettes)
 }
 
 .section-toybox {
-	position:relative;
 	color:$COLOR_WHITE;
-	background-image: asset-url('bg-toybox.jpg');
-	@include image-2x('bg-toybox@2x.jpg',738px,252px);
 	background-color:$COLOR_DARKGRAY;
 	background-position: 100% 100%;
 	background-repeat:no-repeat;
+	background-image: asset-url('bg-toybox.jpg');
+	@include image-2x('bg-toybox@2x.jpg',738px,252px);
 
 	.sidebar-toybox {
 		max-width:400px;
@@ -341,7 +332,7 @@ Section Styles (Page Featurettes)
 }
 
 .schedule-planner {
-	padding:0 20px;
+	padding:0 12px;
 	background: asset-url('bg-schedulegrid.svg') 0 0 no-repeat;
 	background-size: 100% 100%;
 	margin-top:30px;
@@ -359,18 +350,14 @@ Section Styles (Page Featurettes)
 .schedule-item {
 	background: $COLOR_SCREEN;
 	@include box-shadow;
-	padding:25px;
+	padding:14px 25px;
 	position:relative;
 	margin-bottom:40px;
 	height:144px;
 
 	h4 {
-		margin-top:0;
+		margin:0;
 	}
-}
-
-.schedule-item-class {
-	background:$COLOR_LIGHTGRAY;
 }
 
 .schedule-item:first-child {
@@ -381,15 +368,15 @@ Section Styles (Page Featurettes)
 	margin-bottom:0;
 }
 
-.schedule-item-double {
-	height:378px; // 2x schedule-item height(72) + vertical padding(50) + vertical margin(30)
+.schedule-item-class {
+	background:$COLOR_LIGHTGRAY;
 }
 
 .schedule-item-time {
 	position:absolute;
 	height:28px;
 	top: -33px;
-	left: -10px;
+	left: -5px;
 	font-family: $INTERSTATE;
 	font-weight: bold;
 	font-size: 16px;
@@ -408,22 +395,185 @@ Section Styles (Page Featurettes)
 
 	.schedule-column-left {
 		float:left;
-		width:48%;
+		width:48.75%;
 		margin-bottom:20px;
 	}
 	.schedule-column-right {
 		float:right;
-		width:48%;	
+		width:48.75%;	
 		margin-top:20px;
 	}		
 
 	.schedule-item {
-		height:126px;
+		height:94px;
 	}
 
 	.schedule-item-double {
-		height:342px; // 2x schedule-item height(72) + vertical padding(50) + vertical margin(30)
+		height:256px; // 2x schedule-item height(94) + 2x vertical padding(28) + vertical margin(40)
+	}
+}
+
+
+
+
+
+
+
+
+
+.section-difference {
+	background:$COLOR_BLACK;
+	color:$COLOR_WHITE;
+}
+
+.difference-item {
+	color:$COLOR_WHITE;
+	background-color:$COLOR_DARKGRAY;
+	background-position: 100% 100%;
+	background-repeat:no-repeat;
+	background-image: asset-url('bg-toybox.jpg');
+	@include image-2x('bg-toybox@2x.jpg',738px,252px);
+
+	h3, p {
+		max-width:500px;
+	}	
+
+	h3 {
+		color:inherit;
+	}
+}
+
+.difference-item-inside {
+	background: $COLOR_DARK;
+}
+
+.difference-item-experts {
+	background: $COLOR_BLACK;
+	h3, p {
+		float:right;
+	}
+	@extend %clearfix;
+}
+
+.difference-item-doing {
+	background: $COLOR_BRIGHT;
+}
+
+.difference-item-apprenticeship {
+	background: $COLOR_DARKGRAY;
+	h3, p {
+		float:right;
+	}
+	@extend %clearfix;	
+}
+
+
+
+
+
+
+
+
+.section-tuition {
+	background: linear-gradient($COLOR_SCREEN,$COLOR_LIGHTGRAY);
+}
+
+.tuition-plans {
+	margin:45px 0 30px 0;
+}
+
+.tuition-plan {
+	background:$COLOR_BRIGHT;
+	color:$COLOR_WHITE;
+	width: 211px;
+	padding:25px 33px;
+	margin:0 auto 20px auto;
+
+	h3 {
+		font-size:30px;
+		text-transform: none;
+		color:inherit;
+		font-family:$INTERSTATE_LIGHT;
+		span {
+			font-size:18px;
+			line-height:24px;
+			margin-bottom:10px;
+			text-transform: uppercase;
+			display:block;
+			color:$COLOR_DARK;
+			font-family:$INTERSTATE;
+			font-weight:bold;
+		}
+
+	}
+}
+
+.tuition-plan-price {
+	font-size:40px;
+	font-family:$INTERSTATE;
+	line-height:50px;
+
+	span {
+		font-size:20px;
+		vertical-align:super;		
+	}
+}
+
+.tuition-plan-notes {
+	margin-top:10px;
+	font-size:10px;
+}
+
+.sidebar-funding {
+	background:$COLOR_BLACK;
+	padding:44px;
+	color:$COLOR_WHITE;
+	margin-top:30px;
+
+	h3 {
+		padding-left:125px;
+		background:$COLOR_BLACK asset-url("bg-minnesota.svg") 0 50% no-repeat;
+		min-height:100px;
+		margin-bottom:20px;
+		vertical-align:middle;
+	}
+}
+
+@include breakpoint(desktop) {
+	.sidebar-funding {
+		background:$COLOR_BLACK asset-url("bg-minnesota.svg") 44px 50% no-repeat;
+		padding:44px 44px 44px 180px;
+
+		h3 {
+			padding:0px;
+			background:none;
+			min-height:0px;
+			margin-bottom:0px;
+		}
 	}
 
+	.tuition-plan {
+		float:left;
+		min-height:281px;
+		margin-right:36px;	
+		position:relative;
+		z-index:1;	
+	}
+	.tuition-plan:last-child {
+		margin-right:18px;
+	}
+	.tuition-plan:first-child {
+		margin-left:18px;
+	}
+
+	.tuition-plans-banner {
+		height:281px;
+		margin-top:20px;
+		width:100%;
+		position:absolute;
+		right:0;
+		left:0;
+		background:$COLOR_DARK;
+	}
 
 }
