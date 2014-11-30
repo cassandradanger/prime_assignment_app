@@ -25,22 +25,62 @@ define(function(require, exports, module) { // jshint ignore:line
                     $('.layout-header').addClass("layout-header-fixed");                    
                     $('.section-masthead-logo').addClass("section-masthead-logo-hidden");                                       
                 }
-              }, offset: -45
+              }, offset: 60
             }
         );
 
-       // $('.section-masthead-logo').waypoint(
-       //      {
-       //        handler: function(direction) {
-       //          if(direction=="up") {
-       //              $('.section-masthead-logo').removeClass("section-masthead-logo-hidden");
-       //          } else {
-       //              $('.section-masthead-logo').addClass("section-masthead-logo-hidden");                   
-       //          }
-       //        }, offset: -108
-       //      }
-       //  );
+        $('#program').waypoint(
+            {
+              handler: function(direction) {
+                $(".navigation-menu-item-link").removeClass("current");
+                $(".navigation-menu-item-link-program").addClass("current");
+              }, offset: 60
+            }
+        );
 
+        $('#curriculum').waypoint(
+            {
+              handler: function(direction) {
+                $(".navigation-menu-item-link").removeClass("current");
+                $(".navigation-menu-item-link-curriculum").addClass("current");
+              }, offset: 60
+            }
+        );
+
+        $('#tuition').waypoint(
+            {
+              handler: function(direction) {
+                $(".navigation-menu-item-link").removeClass("current");
+                $(".navigation-menu-item-link-tuition").addClass("current");
+              }, offset: 60
+            }
+        );
+
+        $('#network').waypoint(
+            {
+              handler: function(direction) {
+                $(".navigation-menu-item-link").removeClass("current");
+                $(".navigation-menu-item-link-network").addClass("current");
+              }, offset: 60
+            }
+        );
+
+        $('#about').waypoint(
+            {
+              handler: function(direction) {
+                $(".navigation-menu-item-link").removeClass("current");
+                $(".navigation-menu-item-link-about").addClass("current");
+              }, offset: 60
+            }
+        );
+
+        $('#intro').waypoint(
+            {
+              handler: function(direction) {
+                $(".navigation-menu-item-link").removeClass("current");
+              }, offset: 60
+            }
+        );
 
         $('.navigation-button').click(
             function() {
@@ -54,7 +94,7 @@ define(function(require, exports, module) { // jshint ignore:line
                 $('body').toggleClass('menu-open');
                 $('html, body').animate({
                     scrollTop: $(event.target.hash).offset().top-60
-                }, 1000);                
+                }, 1000, function(){$('.navigation-menu-item-link').removeClass("current");$(event.target).addClass("current");});                
             }
         );
 
