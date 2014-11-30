@@ -368,8 +368,8 @@ Section Styles (Page Featurettes)
 	background-color:$COLOR_DARKGRAY;
 	background-position: 100% 100%;
 	background-repeat:no-repeat;
-	background-image: asset-url('assets/bg-toybox.jpg');
-	@include image-2x('assets/bg-toybox@2x.jpg',738px,252px);
+	background-image: asset-url('bg-toybox.jpg');
+	@include image-2x('bg-toybox@2x.jpg',738px,252px);
 
 	.sidebar-toybox {
 		max-width:400px;
