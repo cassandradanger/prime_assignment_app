@@ -5,7 +5,7 @@
     <tr>
       <th>Question</th>
       <th>Solution</th>
-      <th>Status</th>
+      <th>Published</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
       <tr>
         <td><%= logic_question.question %></td>
         <td><%= logic_question.solution %></td>
-        <td><%= logic_question.status %></td>
+        <td><%= logic_question.published %></td>
         <td><%= link_to 'Show', logic_question %></td>
         <td><%= link_to 'Edit', edit_logic_question_path(logic_question) %></td>
         <td><%= link_to 'Destroy', logic_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
