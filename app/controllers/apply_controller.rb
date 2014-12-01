@@ -12,6 +12,8 @@ class ApplyController < ApplicationController
 			when :general
 				@cohorts = Cohort.current
 			when :submit
+				# trigger final validation
+				@admission_application.application_step = step.to_s
 				@admission_application.valid?
 		end
 		render_wizard
