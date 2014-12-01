@@ -86,7 +86,7 @@ Rails.application.configure do
     address: 'smtp.mandrillapp.com',
     user_name: ENV['MANDRILL_USERNAME'],
     password: ENV['MANDRILL_APIKEY'],
-    domain: 'staging.primeacademy.io',
+    domain: 'primeacademy.io',
     authentication: :plain }
 
   # Setup S3/paperclip interface
