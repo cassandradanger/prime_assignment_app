@@ -87,13 +87,15 @@ Rails.application.configure do
     user_name: ENV['MANDRILL_USERNAME'],
     password: ENV['MANDRILL_APIKEY'],
     domain: 'primeacademy.io',
-    authentication: :plain }
+    authentication: :plain 
+  }
 
   # Setup S3/paperclip interface
   config.paperclip_defaults = {
-  :storage => :s3,
-  :s3_credentials => {
-    :bucket => ENV['S3_BUCKET_NAME'],
-  }  
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => ENV['S3_BUCKET_NAME'],
+    }  
+  }
 
 end
