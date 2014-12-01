@@ -43,6 +43,6 @@ class LogicQuestionsController < ApplicationController
     end
 
     def logic_question_params
-      params.require(:logic_question).permit(:question, :solution, :status, :question_image)
+      params.require(:logic_question).permit(:question, :solution, :published, :question_image)
     end
 end
