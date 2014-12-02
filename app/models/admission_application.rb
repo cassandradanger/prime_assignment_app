@@ -18,7 +18,10 @@ class AdmissionApplication < ActiveRecord::Base
 	accepts_nested_attributes_for :profile_question_answers	
 	validates_associated :profile_question_answers, :if => :active?, :message=>"must all be answered."
 	
-	validates :last_name, :first_name, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :referral_source, :presence => true, :if => :active_or_general?	
+	validates :last_name, :first_name, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :referral_source, :phone ,:presence => true, :if => :active_or_general?	
+	validates_format_of :website_link, :linkedin_account, :with => URI::regexp(%w(http https)), allow_blank: true, message: "is not a valid URL", :if => :active_or_general?
+	validates_format_of :resume_link, :with => URI::regexp(%w(http https)), allow_blank: true, message: "is not a valid URL", :if => :active?
+	validates_format_of :phone, with: /\d{3}-\d{3}-\d{4}/, message: "is not formatted properly", allow_blank: true
 
 	validates_acceptance_of :payment_plan, :if => :active?, :message=>"must be acknowledged", allow_nil: false
 

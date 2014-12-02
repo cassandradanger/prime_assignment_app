@@ -20,69 +20,73 @@
 	</div>
 	<% end %>
 
-	<h2>Name and Address</h2>
-	<dl>
-		<dt>Name</dt>
-		<dd><%= @admission_application.name || "incomplete" %></dd>
-		<dt>Address</dt>
-		<dd>
-			<address>
-				<%= @admission_application.full_address || "incomplete" %>
-			</address>
-		</dd>
-	</dl>
-	<h2>Education and Employment</h2>
-	<dl>
-		<dt>Legal Status</dt>
-		<dd><%= @admission_application.legal_status || "incomplete" %></dd>
-		<dt>Education</dt>
-		<dd><%= @admission_application.education || "incomplete" %></dd>		
-		<dt>Employment Status</dt>
-	</dl>
-	<h2>Links and Social Accounts</h2>
-	<dl>
-		<dd><%= @admission_application.employment_status || "incomplete" %></dd>
-		<dt>LinkedIn</dt>
-		<dd><%= @admission_application.linkedin_account || "incomplete" %></dd>		
-		<dt>Twitter</dt>
-		<dd><%= @admission_application.twitter_account || "incomplete" %></dd>				
-		<dt>Github</dt>
-		<dd><%= @admission_application.github_account || "incomplete" %></dd>	
-		<dt>Your Website</dt>
-		<dd><%= @admission_application.website_link || "incomplete" %></dd>					
-		<dt>Personal Link</dt>
-		<dd><%= @admission_application.personal_link || "incomplete" %></dd>					
-	</dl>
-	<h2>Cohorts</h2>
-	<p>You indicated interest in the following cohorts:</p>
-	<ul>
-		<% @admission_application.cohorts.each do |cohort| %>
-		<li><%= cohort.label %></li>
+	<div class="review">
+		<h3>Name and Contact</h3>
+		<dl>
+			<dt>Name</dt>
+			<dd><%= @admission_application.name || "incomplete" %></dd>
+			<dt>Phone</dt>
+			<dd><%= @admission_application.phone || "incomplete" %></dd>			
+			<dt>Address</dt>
+			<dd>
+				<address>
+					<%= simple_format(@admission_application.full_address) || "incomplete" %>
+				</address>
+			</dd>
+		</dl>
+		<h3>Education and Employment</h3>
+		<dl>
+			<dt>Legal Status</dt>
+			<dd><%= @admission_application.legal_status || "incomplete" %></dd>
+			<dt>Education</dt>
+			<dd><%= @admission_application.education || "incomplete" %></dd>		
+			<dt>Employment Status</dt>
+			<dd><%= @admission_application.employment_status || "incomplete" %></dd>
+		</dl>
+		<h3>Links and Social Accounts</h3>
+		<dl>
+			<dt>LinkedIn</dt>
+			<dd><%= @admission_application.linkedin_account || "incomplete" %></dd>		
+			<dt>Twitter</dt>
+			<dd><%= @admission_application.twitter_account || "incomplete" %></dd>				
+			<dt>Github</dt>
+			<dd><%= @admission_application.github_account || "incomplete" %></dd>	
+			<dt>Your Website</dt>
+			<dd><%= @admission_application.website_link || "incomplete" %></dd>					
+			<dt>Personal Link</dt>
+			<dd><%= @admission_application.personal_link || "incomplete" %></dd>					
+		</dl>
+		<h3>Cohorts</h3>
+		<p>You indicated interest in the following cohorts:</p>
+		<ul>
+			<% @admission_application.cohorts.each do |cohort| %>
+			<li><%= cohort.label %></li>
+			<% end %>
+		</ul>
+
+		<h3>Personal Questions</h3>
+		<% if @admission_application.errors[:profile_question_answers].present? -%>
+		<p>You must complete the <%= link_to "personal questions", wizard_path(:personal) %> to be able to submit your application.</p>
+		<% else %>
+		<p>You've completed all the personal questions.</p>
 		<% end %>
-	</ul>
 
-	<h2>Personal Questions</h2>
-	<% if @admission_application.errors[:profile_question_answers].present? -%>
-	<p>You must complete the <%= link_to "personal questions", wizard_path(:personal) %> to be able to submit your application.</p>
-	<% else %>
-	<p>You've completed all the personal questions.</p>
-	<% end %>
+		<h3>Logic Questions</h3>
+		<% if @admission_application.errors[:logic_question_answers].present? -%>
+		<p>You must complete the <%= link_to "logic questions", wizard_path(:logic) %> to be able to submit your application.</p>
+		<% else %>
+		<p>You've completed all the logic questions.</p>
+		<% end %>
 
-	<h2>Logic Questions</h2>
-	<% if @admission_application.errors[:logic_question_answers].present? -%>
-	<p>You must complete the <%= link_to "logic questions", wizard_path(:logic) %> to be able to submit your application.</p>
-	<% else %>
-	<p>You've completed all the logic questions.</p>
-	<% end %>
+		<h3>Technical Challenges</h3>
+		<% if @admission_application.resume_link.blank? %>
+		<p>You have not yet submitted your resume link.</p>
+		<% else %>
+		<p>Your resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
+		<% end %>
+	</div>
 
-	<h2>Technical Challenges</h2>
-	<% if @admission_application.resume_link.blank? %>
-	<p>You have not yet submitted your resume link.</p>
-	<% else %>
-	<p>Your resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
-	<% end %>
-
-	<h2>Legal Notices</h2>
+	<h3>Legal Notices</h3>
 
 	<%= f.input :payment_plan, as: :boolean, label: "If accepted, I know I will be required to provide a $1,500 deposit to hold my position; I know how I will secure funds to pay my full tuition.", error: false %>
 	<%= f.button :submit, "Submit your application", class: "button" %>

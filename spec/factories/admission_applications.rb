@@ -5,6 +5,7 @@ FactoryGirl.define do
 	last_name "Doe"
 	middle_name "Theodore"
 	date_of_birth "1978-07-19"
+	phone "123-456-7890"
 	address "123 Fake St."
 	city "Minneapolis"
 	state "Minnesota"

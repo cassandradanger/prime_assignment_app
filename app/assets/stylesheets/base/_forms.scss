@@ -6,7 +6,7 @@
 	display:block;
 }
 
-.input input[type=text], .input input[type=email], .input input[type=password] {
+.input input[type=text], .input input[type=email], .input input[type=password], .input input[type=tel] {
 	max-width:400px;
 	width:100%;
 	display:block;
@@ -36,6 +36,10 @@
   width:auto;
 }
 
+.input.check_boxes label {
+  display:block;
+}
+
 .hint {
 	font-size:smaller;
 	color:#BBBBBB;
@@ -48,20 +52,21 @@ label.check_boxes {
 .field_with_errors {
 
     label {
-      color:red;
+      color:$COLOR_ERROR;
     }
 
     input[type=text], textarea.text {
-      border-color:red;
+      border-color:$COLOR_ERROR;
       border-radius: 4px 4px 4px 0px;
     }
 
     .error {
-      background:red;
-      padding:4px;
-      border-radius:0 0 4px 4px;
+      background:$COLOR_ERROR;
+      padding:2px 6px;
+      border-radius:4px;
       color:$COLOR_WHITE;
       margin-right:5px;
+      font-size:smaller;      
     }
 
 }
@@ -80,7 +85,7 @@ textarea.text {
 #error_explanation {
   padding: 20px;
   margin-bottom: 20px;
-  background-color: red;
+  background-color: $COLOR_ERROR;
   color:$COLOR_WHITE;
   border-radius:4px;
   h2 {
