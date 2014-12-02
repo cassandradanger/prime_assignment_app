@@ -5,7 +5,7 @@
 	<% if @admission_application.errors.any? %>
 	  <div class="alert alert-error">
 	   <h2 class="alert-heading">
-	     Please address the items listed below before submiting your application:
+	     Please address the items below before submiting:
 	   </h2>
 	  <ul>
 	   <% @admission_application.errors.full_messages.each do |msg| %>
@@ -20,9 +20,71 @@
 	</div>
 	<% end %>
 
-	<%= f.input :payment_plan, as: :boolean, label: "If accepted, I know I will be required to provide a $1,500 deposit to hold my position; I know how I will secure funds to pay my full tuition.", error: false %>
+	<h2>Name and Address</h2>
+	<dl>
+		<dt>Name</dt>
+		<dd><%= @admission_application.name || "incomplete" %></dd>
+		<dt>Address</dt>
+		<dd>
+			<address>
+				<%= @admission_application.full_address || "incomplete" %>
+			</address>
+		</dd>
+	</dl>
+	<h2>Education and Employment</h2>
+	<dl>
+		<dt>Legal Status</dt>
+		<dd><%= @admission_application.legal_status || "incomplete" %></dd>
+		<dt>Education</dt>
+		<dd><%= @admission_application.education || "incomplete" %></dd>		
+		<dt>Employment Status</dt>
+	</dl>
+	<h2>Links and Social Accounts</h2>
+	<dl>
+		<dd><%= @admission_application.employment_status || "incomplete" %></dd>
+		<dt>LinkedIn</dt>
+		<dd><%= @admission_application.linkedin_account || "incomplete" %></dd>		
+		<dt>Twitter</dt>
+		<dd><%= @admission_application.twitter_account || "incomplete" %></dd>				
+		<dt>Github</dt>
+		<dd><%= @admission_application.github_account || "incomplete" %></dd>	
+		<dt>Your Website</dt>
+		<dd><%= @admission_application.website_link || "incomplete" %></dd>					
+		<dt>Personal Link</dt>
+		<dd><%= @admission_application.personal_link || "incomplete" %></dd>					
+	</dl>
+	<h2>Cohorts</h2>
+	<p>You indicated interest in the following cohorts:</p>
+	<ul>
+		<% @admission_application.cohorts.each do |cohort| %>
+		<li><%= cohort.label %></li>
+		<% end %>
+	</ul>
 
-	<%= f.hidden_field "process_application", :value=>"true" %>
+	<h2>Personal Questions</h2>
+	<% if @admission_application.errors[:profile_question_answers].present? -%>
+	<p>You must complete the <%= link_to "personal questions", wizard_path(:personal) %> to be able to submit your application.</p>
+	<% else %>
+	<p>You've completed all the personal questions.</p>
+	<% end %>
+
+	<h2>Logic Questions</h2>
+	<% if @admission_application.errors[:logic_question_answers].present? -%>
+	<p>You must complete the <%= link_to "logic questions", wizard_path(:logic) %> to be able to submit your application.</p>
+	<% else %>
+	<p>You've completed all the logic questions.</p>
+	<% end %>
+
+	<h2>Technical Challenges</h2>
+	<% if @admission_application.resume_link.blank? %>
+	<p>You have not yet submitted your resume link.</p>
+	<% else %>
+	<p>Your resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
+	<% end %>
+
+	<h2>Legal Notices</h2>
+
+	<%= f.input :payment_plan, as: :boolean, label: "If accepted, I know I will be required to provide a $1,500 deposit to hold my position; I know how I will secure funds to pay my full tuition.", error: false %>
 	<%= f.button :submit, "Submit your application", class: "button" %>
 
 <% end %>

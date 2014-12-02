@@ -22,6 +22,14 @@ class AdmissionApplication < ActiveRecord::Base
 
 	validates_acceptance_of :payment_plan, :if => :active?, :message=>"must be acknowledged", allow_nil: false
 
+	def name
+		"#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
+	end
+
+	def full_address
+		"#{self.address}\n#{self.city}, #{self.state} #{self.zip_code}" unless self.address.blank? || self.city.blank? || self.state.blank? || self.zip_code.blank?
+	end
+
 	def completed?
 		application_status == "complete"
 	end
