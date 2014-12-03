@@ -15,7 +15,6 @@ FactoryGirl.define do
 	linkedin_account "http://linkedin.com/profile/view?id=123456"
 	twitter_account "http://twitter.com/goprimeacademy"
 	github_account "https://github.com/primeacademy"
-	personal_link "http://primeacademy.io"
 	resume_link "http://primeacademy.io"
 	referral_source "Search engine"
 	payment_plan "1"

@@ -31,7 +31,7 @@ gem 'simple_form'
 gem "paperclip", "~> 4.2"
 gem "aws-sdk"
 # Use the requirejs gem to use require within rails
-gem 'requirejs-rails'
+# gem 'requirejs-rails'
 # Use unicorn as the app server
 gem 'unicorn'
 # Use airbrake for error reporting

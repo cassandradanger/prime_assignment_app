@@ -76,6 +76,7 @@
  		top:0;
 	    @include transition(background .5s ease-out);
 		z-index:2;
+		-webkit-transform: translateZ(0); // fixes isssue with fixed positioning not working in come version of chrome		
  	}
 
   	.layout-header-banner {
