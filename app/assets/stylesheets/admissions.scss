@@ -80,6 +80,16 @@
 
   dt {
     font-weight:bold;
+    margin-right:10px;
+  }
+  dd {
+    margin-bottom:5px;
+  }
+}
+
+
+@include breakpoint(desktop) {
+  dt {
     width:170px;
     text-align:right;
     float:left;
@@ -89,6 +99,7 @@
 
   dd {
     float:left;
+    margin-bottom:0px;
   }
 
   dl {
@@ -100,4 +111,3 @@
   }
 
 }
-

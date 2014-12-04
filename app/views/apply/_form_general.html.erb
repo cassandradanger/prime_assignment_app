@@ -11,6 +11,8 @@
 <%= f.input :legal_status, collection: ["US Citizen","Permanent Resident","Other"], required:true %>
 <%= f.input :education, collection: ["High School","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed", required:true %>
 <%= f.input :employment_status, collection: ["Employed Fulltime","Employed Parttime","Unemployed"], required:true %>
+<h3>Income</h3>
+<%= f.input :income, label:"Current Annual Income", hint: "Example: 25000 (This will help us determine your eligibility for aid and will be verified later.)", as: :string, wrapper_html: { class: "currency"} %>
 <h3>Links and Social Accounts</h3>
 <%= f.input :linkedin_account, label: "Link to your LinkedIn profile", hint:"Example: http://www.linkedin.com/in/myprofile" %>
 <%= f.input :twitter_account, label: "Your Twitter username", hint:"Example: \"goprimeacademy\" (do not include the @ symbol)" %>

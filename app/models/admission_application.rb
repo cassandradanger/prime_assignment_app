@@ -22,7 +22,7 @@ class AdmissionApplication < ActiveRecord::Base
 	validates_format_of :website_link, :linkedin_account, :with => URI::regexp(%w(http https)), allow_blank: true, message: "is not a valid URL", :if => :active_or_general?
 	validates_format_of :resume_link, :with => URI::regexp(%w(http https)), allow_blank: true, message: "is not a valid URL", :if => :active?
 	validates_format_of :phone, with: /\d{3}-\d{3}-\d{4}/, message: "is not formatted properly", allow_blank: true
-
+	validates_numericality_of :income, allow_blank: true
 	validates_acceptance_of :payment_plan, :if => :active?, :message=>"must be acknowledged", allow_nil: false
 
 	def name

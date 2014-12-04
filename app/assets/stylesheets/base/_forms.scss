@@ -6,6 +6,21 @@
 	display:block;
 }
 
+.input.currency {
+    label::after { 
+      content: "$";
+      float:left;
+      clear:left;
+      margin-top:1.5em;
+      width:.75em;
+    }
+  
+    label {
+      margin-left:-.75em;
+    }
+
+}
+
 .input input[type=text], .input input[type=email], .input input[type=password], .input input[type=tel] {
 	max-width:400px;
 	width:100%;
@@ -57,7 +72,6 @@ label.check_boxes {
 
     input[type=text], textarea.text {
       border-color:$COLOR_ERROR;
-      border-radius: 4px 4px 4px 0px;
     }
 
     .error {
