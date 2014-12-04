@@ -87,44 +87,7 @@
             <%= yield %>
         </div><!-- /layout-body -->    
 
-        <div class="layout-footer" id="footer">
-            <div class="layout-footer-body">
-
-                <div class="footer-contact">
-                    <div class="footer-contact-phone">(952) 222-8108</div>
-                    <div class="footer-contact-email"><%= mail_to "hello@primeacademy.com", "hello@primeacademy.com", encode: "javascript" %></div>
-                    <address class="footer-contact-address">
-                        Prime Digital Academy<br/>
-                        9555 James Ave S, Suite 152<br/>
-                        Bloomington, MN 55431
-                    </address>
-                </div>
-
-                <div class="footer-social">
-                    <%= link_to image_tag("icon-facebook.svg"), "http://facebook.com/primedigitalacademy" %> 
-                    <%= link_to image_tag("icon-twitter.svg"),"http://twitter.com/goprimeacademy" %>
-                </div>
-
-                <div class="footer-updates">
-                    <p>Get email updates on what we're up to.</p>
-                    <form action="//primeacademy.us9.list-manage.com/subscribe/post?u=a75596ab791d7d0e42dbf02ab&amp;id=423c3f6b96" method="post" target="_blank" novalidate>
-                        <input type="email" value="" name="EMAIL" class="email" placeholder="Your email address" required>
-                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                        <div style="position: absolute; left: -5000px;"><input type="text" name="b_a75596ab791d7d0e42dbf02ab_423c3f6b96" tabindex="-1" value=""></div>
-                        <input type="submit" value="Get Updates" name="subscribe" class="button">
-                    </form>
-                </div>
-
-
-                <div class="footer-legal">
-                    <div class="privacy-policy">
-                        <a href="//www.iubenda.com/privacy-policy/773399" class="iubenda-black iubenda-embed" title="Privacy Policy">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>                    
-                    </div>
-                    <p class="copyright">&copy; <%= Date.today.strftime('%Y') %> Prime Digital Academy. All rights reserved.</p>
-                </div>
-
-            </div><!-- /layout-footer-body -->
-        </div><!-- /layout-footer -->
+        <%= render "layouts/footer" %>
     </div><!-- /layout -->
 
     <!-- JAVASCRIPT -->

@@ -57,7 +57,7 @@
             </div><!-- /layout-header-banner -->
             <% if user_signed_in? && params[:controller] == "apply"%>         
             <div class="layout-header-navigation-banner">    
-                <ol class="navigation-menu admissions-menu">
+                <ol class="navigation-menu admissions-menu <%= "disabled" if params[:controller] == "apply" && @admission_application.completed? %>">
                     <li class="navigation-menu-item admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(step == :start ? " admissions-menu-item-linkCurrent" : "" ) %></li>
                     <li class="navigation-menu-item admissions-menu-item"><%= link_to "General", wizard_path(:general), :class=>"admissions-menu-item-link"+(step == :general ? " admissions-menu-item-linkCurrent" : "" ) %></li>
                     <li class="navigation-menu-item admissions-menu-item"><%= link_to "Personal", wizard_path(:personal), :class=>"admissions-menu-item-link"+(step == :personal ? " admissions-menu-item-linkCurrent" : "" ) %></li>
@@ -79,9 +79,7 @@
             <%= yield %>
         </div><!-- /layout-body -->    
 
-        <div class="layout-footer" id="footer">
-            <p>Footer content</p>
-        </div><!-- /layout-footer -->
+        <%= render "layouts/footer" %>
     </div><!-- /layout -->
 
     <!-- JAVASCRIPT -->

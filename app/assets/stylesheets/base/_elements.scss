@@ -43,7 +43,7 @@ h4 {
 	margin-bottom:0;
 }
 
-p + p, p + ul {
+p + p, p + ul, p + ol, ul + p, ol + p {
     margin-top: 10px;
 }
 
@@ -51,6 +51,12 @@ ul {
 	list-style: disc;
 	padding-left:25px;
 }
+
+ol {
+	list-style: decimal;
+	padding-left:25px;
+}
+
 
 .button, .btn {
 	background: $COLOR_DARK;
