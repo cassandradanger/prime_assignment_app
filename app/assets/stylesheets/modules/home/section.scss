@@ -443,7 +443,7 @@ Section Styles (Page Featurettes)
 }
 
 .schedule-item-work {
-	background:$COLOR_BRIGHT;
+	background:$COLOR_DARK;
 }
 
 .schedule-item-time {
@@ -622,14 +622,14 @@ Section Styles (Page Featurettes)
 }
 
 .sidebar-funding {
-	background:$COLOR_BLACK;
+	background:$COLOR_LIGHTGRAY;
 	padding:44px;
 	color:$COLOR_WHITE;
 	margin-top:30px;
 
 	h3 {
 		padding-left:125px;
-		background:$COLOR_BLACK asset-url("bg-minnesota.svg") 0 50% no-repeat;
+		background:$COLOR_LIGHTGRAY asset-url("bg-minnesota.svg") 0 50% no-repeat;
 		min-height:100px;
 		margin-bottom:20px;
 		vertical-align:middle;
@@ -638,7 +638,7 @@ Section Styles (Page Featurettes)
 
 @include breakpoint(tablet) {
 	.sidebar-funding {
-		background:$COLOR_BLACK asset-url("bg-minnesota.svg") 44px 50% no-repeat;
+		background:$COLOR_LIGHTGRAY asset-url("bg-minnesota.svg") 44px 50% no-repeat;
 		padding:44px 44px 44px 180px;
 
 		h3 {
@@ -692,7 +692,7 @@ Section Styles (Page Featurettes)
 		position:absolute;
 		right:0;
 		left:0;
-		background:$COLOR_DARK;
+		background:$COLOR_BLACK;
 	}
 
 }
@@ -739,6 +739,10 @@ Section Styles (Page Featurettes)
 	li {
 		float:left;
 		width:20%;
+
+		a {
+			padding:0 10px;
+		}
 	}
 	@extend %clearfix;
 }
@@ -759,5 +763,53 @@ Section Styles (Page Featurettes)
 
 
 .section-about {
-	background:$COLOR_DARK;
+	background:$COLOR_DARK asset-url("bg-about.jpg") 50% 50% no-repeat;
+	color:$COLOR_WHITE;
+
+	.cta-copy {
+		color:$COLOR_WHITE;
+	}
+
+	.button {
+		background: $COLOR_BRIGHT;
+	}
 }
+
+.prime-logo {
+	float:right;
+	padding:0 0 30px 30px;
+	margin-right:30px;
+}
+
+
+.section-about .cta {
+	margin:30px 0;
+
+	p {
+		text-align:center;
+		margin:0 0 10px 0;
+	}
+	.button {
+		display:block;
+		text-align:center;
+	}
+}
+
+@include breakpoint(tablet) {
+	.section-about .cta {
+		margin:50px 0;
+		@include clearfix;
+
+		p {
+			text-align:right;
+			width:46%;
+			float:left;
+			margin:0;
+		}
+		.button {
+			width:46%;
+			float:right;
+		}
+	}
+}
+
