@@ -38,6 +38,8 @@ gem 'unicorn'
 gem "airbrake"	
 # Use gibbon for interaction with Mailchimp lists
 gem "gibbon"
+# Encode email addresses
+gem "actionview-encoded_mail_to"
 
 group :production do 
 	# Use Heroku deployment

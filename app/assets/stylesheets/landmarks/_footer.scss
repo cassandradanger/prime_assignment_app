@@ -8,5 +8,100 @@
 	width:100%;
 	max-width:940px;
 	margin:0 auto;
-	padding: 30px 0;
+	padding: 50px 0 5px 0;
+}
+
+.footer-contact, .footer-social, .footer-updates {
+	text-align:center;
+	margin-bottom:20px;
+}
+
+
+.footer-contact-phone {
+	font-size:34px;
+	font-family:$INTERSTATE_LIGHT;
+	color:$COLOR_DARK;
+	line-height:36px;
+	margin-bottom:10px;
+}
+
+.footer-contact-email a {
+	font-size:20px;
+	font-family:$INTERSTATE_LIGHT;
+	color:$COLOR_DARK;
+	text-decoration:none;
+	line-height:30px;
+}
+
+.footer-contact-address {
+	font-size:14px;
+}
+
+@include breakpoint(desktop) {
+	.footer-contact {
+		float:left;
+		width:480px;
+		text-align:left;
+	}
+
+	.footer-contact-phone {
+		float:left;
+		width:280px;
+		text-align:right;
+		margin-bottom:10px;
+		margin-right:20px;		
+	}
+
+	.footer-contact-email a {
+		line-height:30px;
+		float:left;
+		clear:left;
+		width:280px;	
+		text-align:right;	
+		margin-right:20px;
+	}	
+
+	.footer-social {
+		text-align:left;
+		float:left;
+		padding:20px 30px;
+	}
+
+	.footer-updates {
+		text-align:left;
+		float:left;
+	}
+
+}
+
+.footer-updates p {
+	margin-bottom:10px;
+}
+
+.footer-updates .email {
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	@include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+	height: 20px;
+	font-size:14px;
+}
+
+.footer-legal {
+	margin-top:50px;
+	@include clearfix;
+}
+
+.copyright {
+	font-size:10px;
+	color: $COLOR_DARKGRAY;
+	margin-bottom: 0;
+	float:left;
+}
+
+.privacy-policy {
+	clear:both;
+	float:right;
+	display:inline;
+
 }
