@@ -10,11 +10,11 @@ class AdmissionApplication < ActiveRecord::Base
 	has_and_belongs_to_many :cohorts
 	validates_presence_of :cohorts, :if => :active_or_general?
 
-	has_many :logic_question_answers, dependent: :destroy
+	has_many :logic_question_answers, dependent: :destroy, :inverse_of => :admission_application
 	accepts_nested_attributes_for :logic_question_answers
 	validates_associated :logic_question_answers, :if => :active?, :message=>"must all be answered."
 	
-	has_many :profile_question_answers, dependent: :destroy
+	has_many :profile_question_answers, dependent: :destroy, :inverse_of => :admission_application
 	accepts_nested_attributes_for :profile_question_answers	
 	validates_associated :profile_question_answers, :if => :active?, :message=>"must all be answered."
 	
