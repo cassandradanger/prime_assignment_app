@@ -417,6 +417,11 @@ Section Styles (Page Featurettes)
 	padding:0 0 20px 0; // 1/2 vertical margin on itmems(30)
 }	
 
+.schedule-items {
+	padding:0;
+	list-style:none;	
+}
+
 .schedule-item {
 	background: $COLOR_SCREEN;
 	@include box-shadow;
