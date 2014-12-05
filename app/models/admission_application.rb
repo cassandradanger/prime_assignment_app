@@ -84,6 +84,7 @@ class AdmissionApplication < ActiveRecord::Base
 			self.application_status = "complete"
 			self.completed_at = Time.now
 			update_subscription(app_status: "Completed")
+			AdmissionApplicationMailer.admission_application_thank_you(self).deliver
 		end
 	end
 
