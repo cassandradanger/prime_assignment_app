@@ -72,7 +72,8 @@ Section Styles (Page Featurettes)
  @include breakpoint(mobile) {
 
 	.section-masthead .section-body {
-		padding-top:80px;	
+		padding-top:80px;
+		@include breakpoint(phone) { padding-top:20px; }
 	}
 
 	.section-masthead-logo {
@@ -166,6 +167,10 @@ Section Styles (Page Featurettes)
 	tr.first {
 		border-right: 15px solid $COLOR_DARK;
 		border-left: 15px solid $COLOR_DARK;
+		@include breakpoint(phone) { 
+			border-right: none;
+			border-left: none;
+		}
 
 		td {
 			background:$COLOR_DARK;
@@ -284,6 +289,7 @@ Section Styles (Page Featurettes)
 
 .block-statistic-number {
 	font-size:73px;
+	@include breakpoint(phone) { font-size:60px;}	
 	line-height:90px;
 	color:$COLOR_BRIGHT;
 
@@ -479,6 +485,13 @@ Section Styles (Page Featurettes)
 
 }
 
+@include breakpoint(phone) {
+	.schedule-item {
+		height:200px;
+	}
+
+}
+
 @include breakpoint(desktop) {
 	.schedule-planner {
 		@extend %clearfix;
@@ -641,6 +654,13 @@ Section Styles (Page Featurettes)
 
 	h3 {
 		padding-left:125px;
+		@include breakpoint(phone) {
+			padding-top:70px;
+			padding-left: 0px;
+			background:$COLOR_LIGHTGRAY asset-url("bg-minnesota.svg") 0 0 no-repeat;
+			background-size:50px auto;
+			text-align:left;
+		}
 		background:$COLOR_LIGHTGRAY asset-url("bg-minnesota.svg") 0 50% no-repeat;
 		min-height:100px;
 		margin-bottom:20px;
@@ -795,6 +815,7 @@ Section Styles (Page Featurettes)
 	margin-right:30px;
 	width:150px;
 	@include breakpoint(desktop) {width:auto;}	
+	@include breakpoint(phone) {width:240px; padding:20px 0; margin:0 auto; float:none; display:block;}		
 }
 
 

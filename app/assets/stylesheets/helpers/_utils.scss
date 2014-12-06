@@ -21,12 +21,15 @@ needed when absolute positioning isn't enough */
   @if $point == desktop {
     @media (min-width: $WIDTH_DESKTOP) { @content; }
   }
-  @else if $point == tablet {
+  @if $point == tablet {
     @media (min-width: $WIDTH_TABLET) { @content; }
   }
   @if $point == mobile {
     @media (max-width: $WIDTH_DESKTOP) { @content; }
   }  
+  @if $point == phone {
+    @media (max-width: 320px) { @content; }
+  }    
 }
 
 /* isAlwaysHidden is irreversible with CSS. It is a more strict way of hidding,
