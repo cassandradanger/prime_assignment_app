@@ -579,7 +579,7 @@ Section Styles (Page Featurettes)
 .difference-item-apprenticeship {
 	background-position: 0 100%;
 	background-repeat:no-repeat;
-	background-color: rgba(0,0,0,.75);
+	background-color: #404040;
 	background-image: asset-url('bg-difference-apprenticeship.jpg');
 	background-size: auto auto;		
 	@extend %clearfix;	

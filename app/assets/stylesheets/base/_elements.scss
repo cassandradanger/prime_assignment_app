@@ -57,6 +57,14 @@ ol {
 	padding-left:25px;
 }
 
+a {
+	color: $COLOR_DARK;
+}
+
+a:hover {
+	color: $COLOR_BRIGHT;
+}
+
 
 .button, .btn {
 	background: $COLOR_DARK;

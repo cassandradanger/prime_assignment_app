@@ -3,7 +3,7 @@
 //= require jquery_ujs
 //= require modernizr/modernizr
 //= require jquery-waypoints/waypoints
-
+//= require litebox/litebox
 
 $('.section-masthead-logo').waypoint(
     {
@@ -95,4 +95,22 @@ $(window).scroll(function() {
     $('.difference-item-doing').css("background-position-y", ($('.difference-item-doing')[0].getBoundingClientRect().top / speed) + "px");       
     $('.difference-item-apprenticeship').css("background-position-y", ($('.difference-item-apprenticeship')[0].getBoundingClientRect().top / speed) + "px");       
     $('.video-header-video').css("top", -($(window).scrollTop() / 5) + "px");       
+});
+
+
+$('.litebox').liteBox({
+  revealSpeed: 400,
+  background: 'rgba(0,0,0,.8)',
+  overlayClose: true,
+  escKey: true,
+  navKey: true,
+  callbackInit: function() {},
+  callbackBeforeOpen: function() {},
+  callbackAfterOpen: function() {},
+  callbackBeforeClose: function() {},
+  callbackAfterClose: function() {},
+  callbackError: function() {},
+  callbackPrev: function() {},
+  callbackNext: function() {},
+  errorMessage: 'Error loading content.'
 });

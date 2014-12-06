@@ -4,3 +4,61 @@
  Legacy Styles
 ------------------------------------------------------------------------ */
 
+.navigation {
+	display:none;
+}
+
+.logo-link {
+	background: asset-url('logo-prime-horizontal.png') 50% 50% no-repeat;
+	position:absolute;
+	top:10px;
+	left:50%;
+	margin-left:-70px;
+	height:39px;
+	width:142px;
+	display:block;
+	img {
+		display:none;
+	}
+}
+
+.navigation-button {
+	display:none;
+}
+
+.section-masthead {		
+
+	h1 {
+		background: $COLOR_BLACK;
+	}
+
+	.section-masthead-logo {
+		background: asset-url('logo-prime.png') 0px 0px no-repeat;
+		height:125px;
+		width:113px;
+		display:block;
+		margin:80px auto 20px auto;
+
+		img {
+			display:none;
+		}
+	}
+
+}
+
+.section-body {
+	width: 940px;
+}
+
+.program-diagram {
+	display:none;
+}
+
+.sidebar-funding {
+	h3 {
+		padding-left:0;
+		height:auto;
+		min-height:auto;
+		margin-bottom:20px;
+	}
+}
