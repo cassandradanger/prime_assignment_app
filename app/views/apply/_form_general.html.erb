@@ -7,10 +7,11 @@
 <%= f.input :city, required:true %>
 <%= f.input :state, required:true %>
 <%= f.input :zip_code, required:true %>
-<h3>Education and Employment</h3>
+<h3>Education, Employment and Goals</h3>
 <%= f.input :legal_status, collection: ["US Citizen","Permanent Resident","Other"], required:true %>
 <%= f.input :education, collection: ["High School","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed", required:true %>
 <%= f.input :employment_status, collection: ["Employed Fulltime","Employed Parttime","Unemployed"], required:true %>
+<%= f.input :goal, label: "After graduating from Prime my goal is to...", collection: ["Find work as a software engineer","Start a new business","Return to a previous job","Return to school","Other"], required: true %>
 <h3>Income</h3>
 <%= f.input :income, label:"Current Annual Income", hint: "Example: 25000 (This will help us determine your eligibility for aid and will be verified later.)", as: :string, wrapper_html: { class: "currency"} %>
 <h3>Links and Social Accounts</h3>

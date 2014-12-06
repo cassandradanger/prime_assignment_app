@@ -45,11 +45,31 @@ Section Styles (Page Featurettes)
 
 }
 
- @include breakpoint(mobile) {
+.video-header-still {
+	position:absolute;
+	display:block;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	background: asset-url('bg-masthead.jpg') 50% 50% no-repeat;
+	z-index:-1;
+}
 
-	.section-masthead {
-		background: asset-url('bg-masthead.jpg') 50% 50% no-repeat;
-	}
+.video-shadow {
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	background: linear-gradient(rgba(0,0,0,.5) 0%, rgba(0,0,0,.35) 1%, rgba(0,0,0,.2) 2%, rgba(0,0,0,.1) 3%, rgba(0,0,0,0) 4%, rgba(0,0,0,0) 96%, rgba(0,0,0,.1) 97%, rgba(0,0,0,.2) 98%, rgba(0,0,0,.35) 99%, rgba(0,0,0,.5) 100%);
+}
+
+.video-header-video {
+	display:none;
+}
+
+ @include breakpoint(mobile) {
 
 	.section-masthead .section-body {
 		padding-top:80px;	
@@ -69,10 +89,6 @@ Section Styles (Page Featurettes)
 	    margin: 0 auto 20px auto;
 	}
 
-}
-
-.video-header-video {
-	display:none;
 }
 
  @include breakpoint(desktop) {
@@ -104,15 +120,6 @@ Section Styles (Page Featurettes)
 		left:0;
 		z-index: -1;
 		overflow:hidden;
-	}
-
-	.video-shadow {
-		position:absolute;
-		top:0;
-		right:0;
-		bottom:0;
-		left:0;
-		background: linear-gradient(rgba(0,0,0,.5) 0%, rgba(0,0,0,.35) 1%, rgba(0,0,0,.2) 2%, rgba(0,0,0,.1) 3%, rgba(0,0,0,0) 4%, rgba(0,0,0,0) 96%, rgba(0,0,0,.1) 97%, rgba(0,0,0,.2) 98%, rgba(0,0,0,.35) 99%, rgba(0,0,0,.5) 100%);
 	}
 
 	.video-header-video {
@@ -676,7 +683,7 @@ Section Styles (Page Featurettes)
 
 	.tuition-plan {
 		float:left;
-		min-height:305px;
+		min-height:275px;
 		width:22.44%;
 		margin-right:36px;	
 		position:relative;
@@ -820,5 +827,9 @@ Section Styles (Page Featurettes)
 			float:right;
 		}
 	}
+}
+
+.license-notice {
+	color:$COLOR_LIGHTGRAY;
 }
 

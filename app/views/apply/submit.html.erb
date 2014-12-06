@@ -90,8 +90,8 @@
 	</div>
 
 	<h3>Legal Notices</h3>
-
-	<%= f.input :payment_plan, as: :boolean, label: "If accepted, I know I will be required to provide a $1,500 deposit to hold my position; I know how I will secure funds to pay my full tuition.", error: false %>
+	<%= f.input :payment_option, collection: {"Prepay Plan ($1,500 deposit, $10,500 in 1 payment) *$500 discount*"=>"Prepay","Payment Plan ($1,500 deposit, $11,000 in 12 payments)"=>"Payments","Deferred Payment Plan ($1,500 deposit, $11,000 in 24 or 36 payments)"=>"Deferral"}, label: "How do you intend to pay for Prime?" %>
+	<%= f.input :payment_plan, as: :boolean, label: "If accepted, I know I will be required to provide a $1,500 deposit to secure my spot.", error: false %>
 	<%= f.button :submit, "Submit your application", class: "button" %>
 
 <% end %>

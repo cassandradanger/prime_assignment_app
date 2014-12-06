@@ -19,6 +19,8 @@ FactoryGirl.define do
 	referral_source "Search engine"
 	payment_plan "1"
 	education "High School"
+	goal "Work as a software engineer"
+	payment_option "Prepay"
 
 	user
 	after(:create) do |application| 
