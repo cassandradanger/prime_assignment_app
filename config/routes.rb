@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     resources :profile_questions    
     resources :cohorts
   end
-  
+
+  get '/launch', to: 'home#launch'
+
   root 'home#index'
 
 end
