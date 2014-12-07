@@ -3,11 +3,9 @@
 }
 
 @include breakpoint(desktop) {
-
   .layout {
     padding-top:$HEADER_HEIGHT;
   }
-
 }
 
 
