@@ -1,0 +1,79 @@
+body.home {
+
+	.layout {
+		padding-top:0;
+	}
+
+	.layout-body {
+	  max-width:none;
+	  padding:0;
+	}
+
+	.layout-header {
+		position: fixed;
+		background: $COLOR_BLACK;
+		height: $HEADER_HEIGHT;
+		width:100%;
+		top: 0;
+		left:0;
+		z-index:2;
+	}
+
+	 @include breakpoint(mobile) {
+
+		.logo {
+			position: absolute;
+			width: 100%;
+			height: $HEADER_HEIGHT;
+			z-index:1;
+			background: $COLOR_BLACK asset-url('bg-navigation.svg') 10px 10px no-repeat;
+		}
+
+		.logo-link {
+			position:absolute;
+			// top:10px;
+			left:50%;
+			margin-left:-70px;
+		}
+
+	}
+
+
+	 @include breakpoint(desktop) {
+
+	 	.logo {
+	 		left:0px;
+	 		margin-left:0px;
+	 		position:absolute;
+	 		display:none;
+	 		z-index:1;
+	 	}
+
+	 	.layout-header-fixed .logo {
+	 		display:block;
+	 	}
+
+	 	.layout-header {
+	 		background:none;
+	 		position:absolute;
+	 		top:50px;
+	 	}
+
+	 	.layout-header-fixed {
+	 		background:rgba(0,0,0,1);
+	 		position: fixed;
+	 		top:0;
+		    @include transition(background .5s ease-out);
+			z-index:2;
+			-webkit-transform: translateZ(0); // fixes isssue with fixed positioning not working in come version of chrome		
+	 	}
+
+	  	.layout-header-banner {
+	 		position:relative;
+	 		width:940px;
+	 		margin:0 auto;
+	 	}
+
+	 }	
+
+}

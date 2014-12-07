@@ -33,7 +33,7 @@
     <meta name="msapplication-TileImage" content="<%= image_path('mstile-144x144.png') %>">       
 
     <!-- STYLESHEETS -->
-    <%= stylesheet_link_tag 'admissions', media: 'screen, projection', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'screen, projection', 'data-turbolinks-track' => true %>
 
     <!--[if lte IE 8]><%= stylesheet_link_tag 'legacy', media: 'screen, projection', 'data-turbolinks-track' => true %><![endif]-->
     <%= stylesheet_link_tag 'print', media: 'print', 'data-turbolinks-track' => true %>
@@ -41,29 +41,46 @@
     <!-- FONTS -->
     <link href="//cloud.webtype.com/css/13d3f5c4-524e-44f4-8bbf-ead2cd9fdc3d.css" rel="stylesheet" type="text/css" />    
 
+    <%= yield :head %>
+
 </head>
-<body>
+<body class="<%= params[:controller] %> <%= params[:action] %>">
     
     <div class="layout <%= "layout-logged-in" if user_signed_in? && params[:controller] == "apply" %>">
 
-        <div class="layout-header layout-header-fixed <%= "layout-header-logged-in" if user_signed_in? && params[:controller] == "apply" %>">
+        <div class="layout-header <% unless params[:controller] == "home" && params[:action] == "index" %>layout-header-fixed<% end %> <%= "layout-header-logged-in" if user_signed_in? && params[:controller] == "apply" %>">
             <div class="layout-header-banner">
                 <div class="logo">
                     <a href="<%= root_path %>" class="logo-link">
                         <%= image_tag "logo-prime-horizontal.svg", :alt=>"Prime - Software Engineering Academy", :itemprop=>"logo" %>
                         <h1 class="isHidden" itemprop="name">Prime Software Engineering Academy</h1>
                     </a>
-                </div>                
+                </div>
+                <% if params[:controller] == "home" && params[:action] == "index" %>
+                <button class="navigation-button">Menu</button>
+                <div class="navigation">
+                    <h2 class="isHidden">Navigation</h2>
+                    <ul class="navigation-menu">
+                        <li class="navigation-menu-item"><a href="#program" class="navigation-menu-item-link navigation-menu-item-link-program slider-link">Program</a></li>
+                        <li class="navigation-menu-item"><a href="#curriculum" class="navigation-menu-item-link navigation-menu-item-link-curriculum slider-link">Curriculum</a></li>
+                        <li class="navigation-menu-item"><a href="#tuition" class="navigation-menu-item-link navigation-menu-item-link-tuition slider-link">Tuition</a></li>
+                        <li class="navigation-menu-item"><a href="#network" class="navigation-menu-item-link navigation-menu-item-link-network slider-link">Network</a></li>
+                        <li class="navigation-menu-item"><a href="#about" class="navigation-menu-item-link navigation-menu-item-link-about slider-link">About</a></li>
+                        <li class="navigation-menu-item"><a href="/apply" class="navigation-menu-item-link button">Apply</a></li>
+                    </ul>
+                </div><!-- /navigation -->
+                <% end %>
+
             </div><!-- /layout-header-banner -->
             <% if user_signed_in? && params[:controller] == "apply"%>         
             <div class="layout-header-navigation-banner">    
-                <ol class="navigation-menu admissions-menu <%= "disabled" if params[:controller] == "apply" && @admission_application.completed? %>">
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(step == :start ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "General", wizard_path(:general), :class=>"admissions-menu-item-link"+(step == :general ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Personal", wizard_path(:personal), :class=>"admissions-menu-item-link"+(step == :personal ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Logic", wizard_path(:logic), :class=>"admissions-menu-item-link"+(step == :logic ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Technical", wizard_path(:technical), :class=>"admissions-menu-item-link"+(step == :technical ? " admissions-menu-item-linkCurrent" : "" ) %></li>
-                    <li class="navigation-menu-item admissions-menu-item"><%= link_to "Review", wizard_path(:submit), :class=>"admissions-menu-item-link"+(step == :submit ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                <ol class="admissions-menu <%= "disabled" if params[:controller] == "apply" && @admission_application.completed? %>">
+                    <li class="admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(step == :start ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="admissions-menu-item"><%= link_to "General", wizard_path(:general), :class=>"admissions-menu-item-link"+(step == :general ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="admissions-menu-item"><%= link_to "Personal", wizard_path(:personal), :class=>"admissions-menu-item-link"+(step == :personal ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="admissions-menu-item"><%= link_to "Logic", wizard_path(:logic), :class=>"admissions-menu-item-link"+(step == :logic ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="admissions-menu-item"><%= link_to "Technical", wizard_path(:technical), :class=>"admissions-menu-item-link"+(step == :technical ? " admissions-menu-item-linkCurrent" : "" ) %></li>
+                    <li class="admissions-menu-item"><%= link_to "Review", wizard_path(:submit), :class=>"admissions-menu-item-link"+(step == :submit ? " admissions-menu-item-linkCurrent" : "" ) %></li>
                 </ol>            
                 <%= link_to "Account", edit_user_registration_path, :class=>"admissions-menu-account" %>
                 <%= link_to "Log Out", destroy_user_session_path, :method => :delete, :class=>"admissions-menu-logout" %>               

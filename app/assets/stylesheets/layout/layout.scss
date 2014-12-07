@@ -2,6 +2,15 @@
   width: 100%;
 }
 
+@include breakpoint(desktop) {
+
+  .layout {
+    padding-top:$HEADER_HEIGHT;
+  }
+
+}
+
+
 .alert {
 	border-radius:4px;
 	color: $COLOR_WHITE;

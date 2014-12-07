@@ -1,0 +1,59 @@
+body.apply {
+
+	@include breakpoint(desktop) {
+
+	  .layout-logged-in {
+	   padding-top:100px; 
+	  }
+
+	  .layout-header-navigation-banner {
+	    width:100%;
+	    background:#4D4D4D;
+	    top:$HEADER_HEIGHT;
+	  }
+
+	}
+
+	.review {
+	  background:#CCCCCC;
+	  color:$COLOR_DARKGRAY;
+	  padding:40px;
+	  @include box-shadow(0px 3px 8px 2px rgba(0,0,0,.25) inset);
+
+	  dt {
+	    font-weight:bold;
+	    margin-right:10px;
+	  }
+	  dd {
+	    margin-bottom:5px;
+	  }
+	}
+
+
+	@include breakpoint(desktop) {
+		.review {
+			dt {
+				width:170px;
+				text-align:right;
+				float:left;
+				clear:left;
+				margin-right:10px;
+			}
+
+			dd {
+				float:left;
+				margin-bottom:0px;
+			}
+
+			dl {
+				@include clearfix;
+			}
+
+			h3 {
+				clear:both;
+			}
+		}
+
+	}
+
+}
