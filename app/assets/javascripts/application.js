@@ -88,14 +88,17 @@ $('.slider-link').click(
     }
 );
 
-$(window).scroll(function() {
-    var speed = 10.0;
-    $('.difference-item-inside').css("background-position-y", ($('.difference-item-inside')[0].getBoundingClientRect().top / speed) + "px");               
-    $('.difference-item-experts').css("background-position-y", ($('.difference-item-experts')[0].getBoundingClientRect().top / speed) + "px");
-    $('.difference-item-doing').css("background-position-y", ($('.difference-item-doing')[0].getBoundingClientRect().top / speed) + "px");       
-    $('.difference-item-apprenticeship').css("background-position-y", ($('.difference-item-apprenticeship')[0].getBoundingClientRect().top / speed) + "px");       
-    $('.video-header-video').css("top", -($(window).scrollTop() / 5) + "px");       
-});
+// Add parallax effect for homepage
+if($('body').hasClass("home")&& $('body').hasClass("index")) {
+  $(window).scroll(function() {
+      var speed = 10.0;
+      $('.difference-item-inside').css("background-position-y", ($('.difference-item-inside')[0].getBoundingClientRect().top / speed) + "px");               
+      $('.difference-item-experts').css("background-position-y", ($('.difference-item-experts')[0].getBoundingClientRect().top / speed) + "px");
+      $('.difference-item-doing').css("background-position-y", ($('.difference-item-doing')[0].getBoundingClientRect().top / speed) + "px");       
+      $('.difference-item-apprenticeship').css("background-position-y", ($('.difference-item-apprenticeship')[0].getBoundingClientRect().top / speed) + "px");       
+      $('.video-header-video').css("top", -($(window).scrollTop() / 5) + "px");       
+  });
+}
 
 
 $('.litebox').liteBox({

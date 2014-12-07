@@ -89,8 +89,10 @@
         </div><!-- /layout-header -->
 
         <div class="layout-body">
-            <% flash.each do |name, msg| %>
-                <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+            <% unless params[:controller] == "home" && params[:action] == "index" %>
+                <% flash.each do |name, msg| %>
+                    <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+                <% end %>
             <% end %>
             <!-- CONTENT -->         
             <%= yield %>

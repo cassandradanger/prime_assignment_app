@@ -53,7 +53,11 @@ describe AdmissionApplication do
 			@admission_application.application_status = "complete"
 			@admission_application.should_not be_valid
 		end
-
 	end
 
+	it 'should send an email when created' do
+		mailcount = ActionMailer::Base.deliveries.count
+		@admission_application = FactoryGirl.create(:admission_application)
+		ActionMailer::Base.deliveries.count.should == mailcount+1
+	end
 end

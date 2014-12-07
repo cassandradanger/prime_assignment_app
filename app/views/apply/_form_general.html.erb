@@ -9,8 +9,8 @@
 <%= f.input :zip_code, required:true %>
 <h3>Education, Employment and Goals</h3>
 <%= f.input :legal_status, collection: ["US Citizen","Permanent Resident","Other"], required:true %>
-<%= f.input :education, collection: ["High School","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed", required:true %>
-<%= f.input :employment_status, collection: ["Employed Fulltime","Employed Parttime","Unemployed"], required:true %>
+<%= f.input :education, collection: ["High School","Some College","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed", required:true %>
+<%= f.input :employment_status, collection: ["Employed Full-time","Employed Part-time","Self Employed","Unemployed"], required:true %>
 <%= f.input :goal, label: "After graduating from Prime my goal is to...", collection: ["Find work as a software engineer","Start a new business","Return to a previous job","Return to school","Other"], required: true %>
 <h3>Income</h3>
 <%= f.input :income, label:"Current Annual Income", hint: "Example: 25000 (This will help us determine your eligibility for aid and will be verified later.)", as: :string, wrapper_html: { class: "currency"} %>
@@ -18,8 +18,8 @@
 <%= f.input :linkedin_account, label: "Link to your LinkedIn profile", hint:"Example: http://www.linkedin.com/in/myprofile" %>
 <%= f.input :twitter_account, label: "Your Twitter username", hint:"Example: \"goprimeacademy\" (do not include the @ symbol)" %>
 <%= f.input :github_account, label: "Your Github username", hint:"Example: \"primeacademy\"" %>
-<%= f.input :website_link, label: "Your personal website", hint:"Example: http://myawesomewebsite.com" %>
-<%= f.input :referral_source, collection: ["Search Engine","Personal Referral","Media Coverage","Other"], label: "How did you hear about Prime?", required:true %>
+<%= f.input :website_link, label: "Your personal website if you have one", hint:"Example: http://myawesomewebsite.com" %>
+<%= f.input :referral_source, collection: ["Search Engine","Advertising","Personal Referral","Media Coverage","Other"], label: "How did you hear about Prime?", required:true %>
 <h3>Cohorts *</h3>
 <p>Check the box for each cohort that would work for you. Selecting more cohorts improves your chances at acceptance.</p>
 <%= f.association :cohorts, as: :check_boxes, label_method: :label, label: false, error: false %>
