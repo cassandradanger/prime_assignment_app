@@ -171,15 +171,12 @@ body.apply {
 }
 
 .logic_question_answer {
-	padding-bottom:45px;
-	border-bottom:1px solid $COLOR_BLACK;
-	margin-bottom:45px;
 }
 
 .logic_question_answer + .logic_question_answer {
-	padding-bottom:0px;
-	border-bottom:none;
-	margin-bottom:35px;
+	padding-top:45px;
+	border-top:1px solid $COLOR_BLACK;
+	margin-top:45px;
 }
 
 
