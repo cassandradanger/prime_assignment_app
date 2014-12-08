@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206061851) do
+ActiveRecord::Schema.define(version: 20141208154458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20141206061851) do
     t.integer  "question_image_file_size"
     t.datetime "question_image_updated_at"
     t.boolean  "published"
+    t.integer  "position"
   end
 
   create_table "profile_question_answers", force: true do |t|
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(version: 20141206061851) do
     t.text     "scoring_guideline_5"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   create_table "users", force: true do |t|
