@@ -1,9 +1,9 @@
 <%= f.simple_fields_for :logic_question_answers do |answer_form| %>
 	<%= div_for answer_form.object do %>
+		<label><%= answer_form.object.logic_question.question %></label>
 		<% if answer_form.object.logic_question.question_image.file? -%>
 		<div><%= image_tag answer_form.object.logic_question.question_image.url %></div>
 		<% end -%>
-		<label><%= answer_form.object.logic_question.question %></label>
 		<%= answer_form.input :answer, collection: [:A, :B, :C, :D, "I don't know."], :as=>:radio_buttons %>
 		<%= answer_form.hidden_field :logic_question_id, :value=>answer_form.object.logic_question.id %>
 		<%= answer_form.hidden_field :id, :value=>answer_form.object.id %>
