@@ -21,8 +21,25 @@
 
 en:
   activerecord:
-      attributes:
-          admission_application:
-            cohorts: "Selected cohort(s)"
-            profile_question_answers: "Profile questions"
-            logic_question_answers: "Logic questions"
+    attributes:
+      admission_application:
+        cohorts: "Selected cohort(s)"
+        profile_question_answers: "Profile questions"
+        logic_question_answers: "Logic questions"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Please Specify an Email"
+              taken: "Please use a different Email"
+              invalid: "Please Specify a valid Email"
+            password:
+              blank: "Please Specify a Password"
+              confirmation: "Password does not match"
+            password_confirmation:
+              blank: "Please Specify a Password Confirmation"
+            first_name:
+              blank: "Please Specify First Name"
+            last_name:
+              blank: "Please Specify Last Name"
