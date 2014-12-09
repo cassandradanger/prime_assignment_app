@@ -25,6 +25,7 @@ class AdmissionApplication < ActiveRecord::Base
 	validates_numericality_of :income, allow_blank: true
 	validates :payment_option, :presence => true, :if => :active?
 	validates_acceptance_of :payment_plan, :if => :active?, :message=>"must be acknowledged", allow_nil: false
+	validates :income, :numericality => { :less_than_or_equal_to => 100000000000 }, allow_blank: true
 
 	def name
 		"#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
