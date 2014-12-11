@@ -295,16 +295,17 @@
 <div class="section section-tuition" id="tuition">
     <div class="section-body">
     	<h2>Tuition: How Much To Change Your Future?</h2>
-        <p>We offer three payment plans to help make Prime accessible to everyone.</p>        
+        <p>Tuition for Prime is set at $12,500. We provide a $500 prepayment discount and offer several financing plans to help make Prime accessible to everyone. If you have a question about our tuition <%= mail_to "hello@primeacademy.io","contact us", encode: "javascript" %> and we'll get you an answer.</p>        
     
         <div class="tuition-plans">
 
             <div class="tuition-plans-banner"></div>
 
             <div class="tuition-plan tuition-plan-prepay">
-                <h3><span>Option 1 </span>Prepay</h3>
-                <div class="tuition-plan-price"><span>$</span>12,000<span>*</span></div>
-                <p>Payments:</p>
+                <h3>Prepayment</h3>
+                <div class="tuition-plan-price"><span>$</span>12,000</div>
+                <div class="tuition-plan-subtitle">Incl. $500 Discount</div>
+                <p>Details:</p>
                 <ul>
                     <li>$1,500 due on acceptance</li>
                     <li>$10,500 due week 7</li>
@@ -313,31 +314,37 @@
             </div>
 
             <div class="tuition-plan tuition-plan-asyougo">
-                <h3><span>Option 2 </span>Payments</h3>
-                <div class="tuition-plan-price"><span>$</span>12,500<span>&dagger;</span></div>
-                <p>Payments:</p>
+                <h3>12 Month Financing</h3>
+                <div class="tuition-plan-price"><span>$</span>12,800</div>
+                <div class="tuition-plan-subtitle">Incl. $300 interest*</div>
+                <p>Details:</p>
                 <ul>
                     <li>$1,500 due on acceptance</li>
-                    <li>12 monthly payments begin after prework</li>
+                    <li>Interest only payments during school</li>
+                    <li>Full payments begin after graduation</li>                    
+                    <li>5% APR</li>
                 </ul>
-                <p class="tuition-plan-notes">&dagger; does not include interest</p>                
+                <p class="tuition-plan-notes">* interest costs are estimates</p>                
             </div>
 
             <div class="tuition-plan tuition-plan-defer">
-                <h3><span>Option 3 </span>Deferred</h3>
-                <div class="tuition-plan-price"><span>$</span>12,500<span>&dagger;</span></div>
-                <p>Payments:</p>
+                <h3>36 Month Financing</h3>
+                <div class="tuition-plan-price"><span>$</span>14,160</div>
+                <div class="tuition-plan-subtitle">Incl. $1,660 interest*</div>
+                <p>Details:</p>
                 <ul>
                     <li>$1,500 due on acceptance</li>
-                    <li>2 or 3 year terms available</li>
-                    <li>Monthly payments begin after graduation</li>                    
+                    <li>Interest only payments during school</li>
+                    <li>Full payments begin after graduation</li>                    
+                    <li>7% APR</li>
                 </ul>
-                <p class="tuition-plan-notes">&dagger; does not include interest</p>
+                <p class="tuition-plan-notes">* interest costs are estimates</p>                
             </div>
+
         </div>
 
         <p>Your tuition supports Prime’s industry-leading instruction staff, excellent student:teacher ratio, development of our hiring and apprenticeship network and ongoing curriculum development. Prime has established relationships with financial institutions to ensure students with a history of financial responsibility have the option to finance their tuition through a low interest loan with payments deferred until after you’ve completed the program. Indicate you’re interested in financing when prompted in your application if you’d like us to connect you.</p>
-        <p>Prime partners with respected third party financial institutions to provide payment plan and deferral options, terms and details of these plans are subject to change.</p>
+        <p>Prime partners with respected third party financial institutions to provide payment plan and deferral options, terms and details of these plans are subject to change. Estimated interest costs above assume financing full tuition less the $1,500 downpayment, though students are free to finance part of their tution if they are willing to make a larger downpayment.</p>
 
         <div class="sidebar-funding">
             <h3>Financial Support For Minnesota Students Available</h3>
@@ -385,6 +392,7 @@
             <li><%= link_to image_tag("partners/logo-mnit.png", class: "partner-logo"), "http://mn.gov/mnit", class: "partner-link" %></li>
             <li><%= link_to image_tag("partners/logo-myriad.png", class: "partner-logo"), "http://myriadmobile.com", class: "partner-link" %></li>
             <li><%= link_to image_tag("partners/logo-nerdery.png", class: "partner-logo"), "http://www.nerdery.com", class: "partner-link" %></li>
+            <li><%= link_to image_tag("partners/logo-olson.png", class: "partner-logo"), "http://www.olson.com", class: "partner-link" %></li>
             <li><%= link_to image_tag("partners/logo-periscope.png", class: "partner-logo"), "http://www.periscope.com", class: "partner-link" %></li>
             <li><%= link_to image_tag("partners/logo-phdl.png", class: "partner-logo"), "http://phdigitallabs.com", class: "partner-link" %></li>
             <li><%= link_to image_tag("partners/logo-roberthalf.png", class: "partner-logo"), "http://www.roberthalf.com/technology", class: "partner-link" %></li>            
