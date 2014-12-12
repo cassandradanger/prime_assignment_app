@@ -713,6 +713,7 @@ body.home.index {
 		font-family:$INTERSTATE;
 		line-height:40px;
 		margin-bottom:5px;
+		text-align:center;
 
 		span {
 			font-size:20px;
@@ -724,6 +725,7 @@ body.home.index {
 		font-family:$INTERSTATE_LIGHT;
 		font-size:20px;		
 		margin-bottom:15px;
+		text-align:center;		
 	}
 
 	.tuition-plan-notes {
@@ -788,7 +790,7 @@ body.home.index {
 
 		.tuition-plan {
 			float:left;
-			min-height:340px;
+			min-height:290px;
 			width:22.44%;
 			margin-right:36px;	
 			position:relative;
