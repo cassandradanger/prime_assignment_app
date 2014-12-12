@@ -1,4 +1,5 @@
 <%= f.simple_fields_for :logic_question_answers do |answer_form| %>
+<% if answer_form.object.logic_question.present?  %>
 	<%= div_for answer_form.object do %>
 		<label class="logic_question_prompt"><%= answer_form.object.logic_question.question %></label>
 		<% if answer_form.object.logic_question.question_image.file? -%>
@@ -8,4 +9,5 @@
 		<%= answer_form.hidden_field :logic_question_id, :value=>answer_form.object.logic_question.id %>
 		<%= answer_form.hidden_field :id, :value=>answer_form.object.id %>
 	<% end %>
+<% end %>
 <% end %>
