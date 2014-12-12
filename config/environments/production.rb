@@ -78,6 +78,7 @@ Rails.application.configure do
 
   # Setup mailer url options
   config.action_mailer.default_url_options = { host: 'primeacademy.io' }
+  config.action_mailer.asset_host = ENV['ASSET_HOST']
 
   # Setup mailer options
   config.action_mailer.delivery_method = :smtp
