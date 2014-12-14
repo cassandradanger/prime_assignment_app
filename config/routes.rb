@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   get '/launch', to: 'home#launch'
+  get '/live', to: 'home#live'
 
   root 'home#index'
 

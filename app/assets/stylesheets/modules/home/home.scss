@@ -312,7 +312,29 @@ body.home.index {
 	}
 
 
+	.section-hangout {
+		background: $COLOR_BRIGHT;
+		color: $COLOR_WHITE;
+		text-align:center;
+		
+		.section-body {
+			background: asset-url("bg-questions.svg") 0 50% no-repeat, asset-url("bg-questions.svg") 100% 50% no-repeat;
+		}
 
+		h2 {
+			margin-bottom:0px;
+			margin-top:0px;
+			line-height:1.1em;
+		}
+
+		p {
+			margin-bottom:20px;
+		}
+	
+		.button {
+			background: $COLOR_BLACK;
+		}
+	}
 
 
 
