@@ -333,6 +333,9 @@ body.home.index {
 	
 		.button {
 			background: $COLOR_BLACK;
+			display:block;
+			max-width:400px;
+			margin:0 auto;
 		}
 	}
 
