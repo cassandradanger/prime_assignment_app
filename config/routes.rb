@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   # Public routes
   devise_for :users, :path=>"applicant", path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
   resources :apply
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
     resources :logic_questions
     resources :profile_questions    
     resources :cohorts
+    resources :admission_applications    
   end
 
   get '/launch', to: 'home#launch'

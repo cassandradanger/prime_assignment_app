@@ -1,5 +1,7 @@
 class AdmissionApplication < ActiveRecord::Base
 
+	scope :completed, -> { where(application_status: "complete") }
+
 	before_validation :populate_questions_on_submit
 	before_save :check_for_completion
 	after_create :populate_questions, on: :create
