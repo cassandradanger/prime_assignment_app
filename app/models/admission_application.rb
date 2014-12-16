@@ -9,7 +9,7 @@ class AdmissionApplication < ActiveRecord::Base
 	
 	belongs_to :user
 
-	has_and_belongs_to_many :cohorts
+	has_and_belongs_to_many :cohorts, :order => { applications_close: :asc }
 	validates_presence_of :cohorts, :if => :active_or_general?
 
 	has_many :logic_question_answers, -> { includes(:logic_question).order('logic_questions.position') }, dependent: :destroy, :inverse_of => :admission_application
