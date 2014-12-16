@@ -20,7 +20,8 @@ class AdmissionApplication < ActiveRecord::Base
 	accepts_nested_attributes_for :profile_question_answers	
 	validates_associated :profile_question_answers, :if => :active?, :message=>"must all be answered."
 	
-	validates :last_name, :first_name, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :goal, :referral_source, :phone, :resume_link, :presence => true, :if => :active_or_general?, length: { maximum: 255 }	
+	validates :last_name, :first_name, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :goal, :referral_source, :phone, :presence => true, :if => :active_or_general?, length: { maximum: 255 }	
+	validates :resume_link, presence: true, :if => :active?
 	validates :website_link, :linkedin_account, :resume_link, :payment_option, :twitter_account, :github_account, :middle_name, length: { maximum: 255 }
 	validates_format_of :website_link, :linkedin_account, :with => URI::regexp(%w(http https)), allow_blank: true, message: "is not a valid URL", :if => :active_or_general?
 	validates_format_of :resume_link, :with => URI::regexp(%w(http https)), allow_blank: true, message: "is not a valid URL", :if => :active?
