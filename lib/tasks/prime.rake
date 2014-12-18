@@ -1,5 +1,4 @@
 namespace :prime do
-  # require 'colorize'
 
   desc "Can be used to change email addresses in a database dump to 'dev' + id '@junk.com'"
   task clean_email_from_data: :environment do

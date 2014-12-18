@@ -51,7 +51,7 @@
     <div class="admin-menu">
         <h3>Admin</h3>    
         <ul class="admin-navigation">
-            <li><%= link_to "Dashboard", admin_dashboard_path %></li>
+            <li><%= link_to "Dashboard", dashboard_path %></li>
             <li><%= link_to "Applications", admission_applications_path %></li>
             <li><%= link_to "Cohorts", cohorts_path %></li>
             <li><%= link_to "Logic Questions", logic_questions_path %></li>
@@ -117,6 +117,9 @@
     <!-- JAVASCRIPT -->
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <%= javascript_include_tag 'application' %>
+
+    <!-- Chartkick -->
+    <%= yield :charts_js %>
 
     <!-- ANALYTICS -->
     <script>

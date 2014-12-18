@@ -2,10 +2,6 @@ Rails.application.routes.draw do
 
 
 
-  namespace :admin do
-  get 'dashboard', to: 'dashboard#index'
-  end
-
   # Public routes
   devise_for :users, :path=>"applicant", path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
   resources :apply
@@ -17,6 +13,7 @@ Rails.application.routes.draw do
     resources :profile_questions    
     resources :cohorts
     resources :admission_applications
+    get 'dashboard', to: 'dashboard#index'
   end
 
   get '/launch', to: 'home#launch'
