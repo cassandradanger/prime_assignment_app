@@ -42,10 +42,6 @@
     <!-- FONTS -->
     <link href="//cloud.webtype.com/css/13d3f5c4-524e-44f4-8bbf-ead2cd9fdc3d.css" rel="stylesheet" type="text/css" />
 
-    <!-- JAVASCRIPT -->
-    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-    <%= javascript_include_tag 'application' %>
-
     <%= yield :head %>
 
 </head>
@@ -118,7 +114,9 @@
         <%= render "layouts/footer" %>
     </div><!-- /layout -->
 
-
+    <!-- JAVASCRIPT -->
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+    <%= javascript_include_tag 'application' %>
 
     <!-- ANALYTICS -->
     <script>
@@ -129,6 +127,11 @@
       ga('create', '<%= ENV['GOOGLE_ANALYTICS_ID'] %>', 'auto');
       ga('require', 'displayfeatures');
       ga('send', 'pageview');
+    </script>
+
+    <!-- PAGE SPECIFIC JS -->
+    <script>
+        <%= yield :page_javascript %>
     </script>
 
 </body>
