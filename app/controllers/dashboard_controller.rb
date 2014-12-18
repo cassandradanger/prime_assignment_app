@@ -1,4 +1,4 @@
-class Admin::DashboardController < ApplicationController
+class DashboardController < ApplicationController
   require('groupdate')
   before_filter :authenticate_admin!
 
