@@ -40,6 +40,11 @@ gem "airbrake"
 gem "gibbon"
 # Encode email addresses
 gem "actionview-encoded_mail_to"
+# Grouping: Goes hand in hand with Chartkick
+gem "groupdate"
+# Used by the admin dashboard
+gem "chartkick"
+
 
 group :production do 
 	# Use Heroku deployment

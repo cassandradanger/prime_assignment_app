@@ -5,6 +5,7 @@
 //= require jquery-waypoints/waypoints
 //= require litebox/litebox
 
+
 // jQuery plugin to prevent double submission of forms
 jQuery.fn.preventDoubleSubmission = function() {
   $(this).on('submit',function(e){
