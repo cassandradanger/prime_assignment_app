@@ -73,6 +73,21 @@ class AdmissionApplication < ActiveRecord::Base
 		end
 	end
 
+	def logic_questions_score
+		score = 0
+		logic_question_answers.each do |a|
+			if a.answer != "I don't know"
+				if a.answer == a.logic_question.solution
+					score = score + 1
+				else
+					score = score - 1
+				end
+			end
+		end
+		score
+	end
+
+
 	private
 
 	def send_welcome
