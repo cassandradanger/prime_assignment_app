@@ -13,7 +13,10 @@ Rails.application.routes.draw do
     resources :profile_questions    
     resources :cohorts
     resources :admission_applications
+
+    get 'dashboard/index', to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index'
+
   end
 
   get '/launch', to: 'home#launch'
