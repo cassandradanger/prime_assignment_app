@@ -31,12 +31,19 @@ class AdmissionApplication < ActiveRecord::Base
 	validates_acceptance_of :payment_plan, :if => :active?, :message=>"must be acknowledged", allow_nil: false
 	validates :income, :numericality => { :less_than_or_equal_to => 1000000, :message=>"Seriously?" }, allow_blank: true
 
+	scope :started, -> { where.not(first_name: nil).where.not(last_name: nil).where.not(address: nil) }
+	scope :has_referral, -> { started.where.not(referral_source: nil) }
+
 	def name
 		"#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
 	end
 
 	def full_address
 		"#{self.address}\n#{self.city}, #{self.state} #{self.zip_code}" unless self.address.blank? || self.city.blank? || self.state.blank? || self.zip_code.blank?
+	end
+
+	def started?
+		not( self.first_name.blank? && self.last_name.blank? && self.address.blank?)
 	end
 
 	def completed?
