@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   require('groupdate')
   before_filter :authenticate_admin!
+  layout 'application-admin'
 
   def index
     @user_count = User.count

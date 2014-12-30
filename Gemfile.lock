@@ -33,12 +33,16 @@ GEM
       builder
       multi_json
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (4.0.2.2)
+      execjs
     aws-sdk (1.59.0)
       aws-sdk-v1 (= 1.59.0)
     aws-sdk-v1 (1.59.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.9)
+    bootstrap-sass (3.2.0.2)
+      sass (~> 3.2)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -219,7 +223,9 @@ PLATFORMS
 DEPENDENCIES
   actionview-encoded_mail_to
   airbrake
+  autoprefixer-rails
   aws-sdk
+  bootstrap-sass (~> 3.2.0)
   capybara
   chartkick
   coffee-rails (~> 4.0.0)
