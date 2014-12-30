@@ -1,5 +1,4 @@
-class CohortsController < ApplicationController
-  before_filter :authenticate_admin!
+class CohortsController < Admin::ApplicationController
   before_action :set_cohort, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

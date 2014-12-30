@@ -1,5 +1,4 @@
-class LogicQuestionsController < ApplicationController
-  before_filter :authenticate_admin!
+class LogicQuestionsController < Admin::ApplicationController
   before_action :set_logic_question, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

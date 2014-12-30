@@ -1,5 +1,4 @@
-class AdmissionApplicationsController < ApplicationController
-  before_filter :authenticate_admin!
+class AdmissionApplicationsController < Admin::ApplicationController
   before_action :set_admission_application, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   devise_for :admins, :path=>"admin", path_names: { sign_in: 'login', sign_out: 'logout' }
   scope '/admin' do
     resources :logic_questions
-    resources :profile_questions    
     resources :cohorts
     resources :admission_applications
+    resources :profile_questions
+  end
+
+  namespace 'admin' do
     get 'dashboard/index', to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index'
   end
