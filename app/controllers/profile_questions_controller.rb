@@ -1,7 +1,5 @@
-class ProfileQuestionsController < ApplicationController
-  before_filter :authenticate_admin!
+class ProfileQuestionsController < Admin::ApplicationController
   before_action :set_profile_question, only: [:show, :edit, :update, :destroy]
-
   respond_to :html
 
   def index
