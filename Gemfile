@@ -44,6 +44,10 @@ gem "actionview-encoded_mail_to"
 gem "groupdate"
 # Used by the admin dashboard
 gem "chartkick"
+# Bootstrap css
+gem 'bootstrap-sass', '~> 3.2.0'
+# Recommended for Bootstrap
+gem 'autoprefixer-rails'
 
 
 group :production do 
