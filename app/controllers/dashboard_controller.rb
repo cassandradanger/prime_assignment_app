@@ -1,4 +1,4 @@
-class Admin::DashboardController < Admin::ApplicationController
+class DashboardController < AdminApplicationController
   require('groupdate')
 
 

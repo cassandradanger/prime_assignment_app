@@ -1,4 +1,4 @@
-class AdmissionApplicationsController < Admin::ApplicationController
+class AdmissionApplicationsController < AdminApplicationController
   before_action :set_admission_application, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

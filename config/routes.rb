@@ -13,11 +13,9 @@ Rails.application.routes.draw do
     resources :cohorts
     resources :admission_applications
     resources :profile_questions
-  end
-
-  namespace 'admin' do
     get 'dashboard/index', to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index'
+    root 'dashboard#index', as: :admin_root_path
   end
 
   get '/launch', to: 'home#launch'

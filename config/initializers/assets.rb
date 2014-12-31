@@ -6,5 +6,6 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( home.css admissions.css print.css legacy.css admin.css application-admin.css )
+Rails.application.config.assets.precompile += %w( bootstrap-theme.css application-admin.css )
+Rails.application.config.assets.precompile += %w( home.css admissions.css print.css legacy.css admin.css )
 Rails.application.config.assets.precompile += %w( application-admin.js )

@@ -57,12 +57,12 @@
       </button>
       <a class="navbar-brand" href="<%= root_path %>">
         <%= image_tag "logo-prime-horizontal.svg", :alt=>"Prime - Software Engineering Academy", :itemprop=>"logo" %>
-        <h1 class="isHidden" itemprop="name">Prime Software Engineering Academy</h1>
+        <h1 class="sr-only" itemprop="name">Prime Software Engineering Academy</h1>
       </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Logout", destroy_admin_session_path %></li>
+        <li><%= link_to "Logout", destroy_admin_session_path, :method => :delete %></li>
       </ul>
     </div>
   </div>
@@ -72,7 +72,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li><%= link_to "Dashboard", admin_dashboard_path %></li>
+        <li><%= link_to "Dashboard", dashboard_path %></li>
         <li><%= link_to "Applications", admission_applications_path %></li>
         <li><%= link_to "Cohorts", cohorts_path %></li>
         <li><%= link_to "Logic Questions", logic_questions_path %></li>
