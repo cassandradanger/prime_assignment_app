@@ -1,4 +1,4 @@
-class ProfileQuestionsController < Admin::ApplicationController
+class ProfileQuestionsController < AdminApplicationController
   before_action :set_profile_question, only: [:show, :edit, :update, :destroy]
   respond_to :html
 

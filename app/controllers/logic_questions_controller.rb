@@ -1,4 +1,4 @@
-class LogicQuestionsController < Admin::ApplicationController
+class LogicQuestionsController < AdminApplicationController
   before_action :set_logic_question, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

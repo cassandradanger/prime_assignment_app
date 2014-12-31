@@ -1,4 +1,4 @@
-class CohortsController < Admin::ApplicationController
+class CohortsController < AdminApplicationController
   before_action :set_cohort, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
