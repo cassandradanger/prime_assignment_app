@@ -29,15 +29,7 @@
     </div>
   </div>
 
-  <div class="col-md-3 col-xs-12">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Accepted</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margin">0</h1>
-        <small>Accepted Applications</small>
-      </div>
-    </div>
-  </div>
+
 </div>
 
 <div class="row">
@@ -49,31 +41,13 @@
       <div class="ibox-content">
         <div class="row">
           <div class="col-lg-9 no-margin no-padding">
-            <%= line_chart @apps_by_create_date60 %>
+            <%= line_chart @apps_by_create_date60 , library: {chartArea: {left: 50, top: 40, height:'75%', width:'85%'}}%>
           </div>
-          <div class="col-lg-3 no-margin no-padding">
-            <ul class="stat-list">
-              <li>
-                <h2 class="no-margin">5</h2>
-                <small>Complete Apps for 4/1/2015 Cohort</small>
-                <div class="stat-percent">
-                  25%
-                </div>
-                <div class="progress progress-mini">
-                  <div class="progress-bar" style="width: 25%;"></div>
-                </div>
-              </li>
-            </ul>
-          </div>
+
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div>
-  <h3>Completed Applictions</h3>
-  <%= line_chart @apps_by_completed_date60 %>
 </div>
 
 
