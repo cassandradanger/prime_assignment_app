@@ -4,11 +4,14 @@ class AdmissionApplicationsController < AdminApplicationController
   respond_to :html
 
   def index
-    if params[:cohort_id]
+    @cohort_id = params[:cohort_id] || nil
+    if @cohort_id
       @admission_applications = Cohort.find(params[:cohort_id]).admission_applications.all
     else
       @admission_applications = AdmissionApplication.all
     end
+    @cohort_id = params[:cohort_id]
+    @cohorts = Cohort.all
     respond_with(@admission_applications)
   end
 

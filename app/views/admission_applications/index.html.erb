@@ -3,6 +3,11 @@
 <p>Total Applications: <%= @admission_applications.count %></p>
 <p>Completed Applications: <%= AdmissionApplication.completed.count %></p>
 
+<%= form_tag(admission_applications_path, method: "get") do %>
+    <%= label_tag(:cohort_id, "Cohort:") %>
+    <%= select_tag(:cohort_id, content_tag(:option,'All',:value=>"")+options_from_collection_for_select(@cohorts, :id, :name, @cohort_id) ) %>
+    <%= submit_tag("Search") %>
+<% end %>
 <table class="table table-condensed table-hover">
   <thead>
     <tr>
