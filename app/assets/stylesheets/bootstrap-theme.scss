@@ -1,8 +1,25 @@
 
+$sidebar-default-color:              $navbar-default-color; //#777
+$sidebar-default-bg:                 $navbar-default-bg; //#f8f8f8 ;
+$sidebar-default-border:             $navbar-default-border; //darken($navbar-default-bg, 6.5%) !default;
+
+// Navbar links
+//$navbar-default-link-color:                #777 !default;
+//$navbar-default-link-hover-color:          #333 !default;
+//$navbar-default-link-hover-bg:             transparent !default;
+//$navbar-default-link-active-color:         #555 !default;
+//$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
+
+$sidebar-background-base:     $gray-dark;
+$sidebar-color-base:          #fff;
+
 body {
   padding-top: 50px;
 }
 
+.bg-gray{
+  background-color: #f3f3f4;
+}
 /*
  * Main content
  */
@@ -25,13 +42,6 @@ body {
   border-bottom: 1px solid #eee;
 }
 
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
-.navbar-fixed-top {
-  border: 0;
-}
 
 /* Hide for mobile, show later */
 .sidebar {
@@ -48,8 +58,8 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: $gray-dark;
-    border-right: 1px solid $gray-lighter;
+    background-color: $sidebar-background-base;
+    border-right: 1px solid $sidebar-background-base;
   }
 }
 
@@ -62,12 +72,13 @@ body {
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
+  color: darken($sidebar-color-base,20%);
 }
 .nav-sidebar > li > .active > a,
 .nav-sidebar > li > a:hover,
 .nav-sidebar > li > a:focus {
-  color: #fff;
-  background-color: lighten($gray-dark,3%);
+  color:            $sidebar-color-base;
+  background-color: darken($sidebar-background-base,3%);
 }
 
 .ibox {
@@ -88,8 +99,8 @@ body {
   background-color: #ffffff;
   border-color: $gray-lighter;
   border-image: none;
-  border-style: solid solid none;
-  border-width: 4px 0px 0;
+  border-style: solid solid solid;
+  border-width: 4px 1px 1px;
   color: inherit;
   margin-bottom: 0;
   padding: 14px 15px 7px;
@@ -101,8 +112,8 @@ body {
   padding: 15px 20px 20px 20px;
   border-color: $gray-lighter;
   border-image: none;
-  border-style: solid solid none;
-  border-width: 1px 0px;
+  border-style: solid solid solid;
+  border-width: 1px 1px;
 }
 
 .stat-list li:first-child {
