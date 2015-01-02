@@ -48,6 +48,11 @@ feature 'A visitor who is not logged in' do
 			current_path.should == new_admin_session_path
 		end
 
+		scenario 'dashboard and is redirected to the admin login' do
+			visit dashboard_path
+			current_path.should == new_admin_session_path
+		end
+
 	end
 
 end
