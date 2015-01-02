@@ -84,11 +84,13 @@ class AdmissionApplication < ActiveRecord::Base
 	def logic_questions_score
 		score = 0
 		logic_question_answers.each do |a|
-			if a.answer != "I don't know"
-				if a.answer == a.logic_question.solution
-					score = score + 1
-				else
-					score = score - 1
+			if a.logic_question.present?
+				if a.answer != "I don't know"
+					if a.answer == a.logic_question.solution
+						score = score + 1
+					else
+						score = score - 1
+					end
 				end
 			end
 		end
