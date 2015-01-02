@@ -1,0 +1,7 @@
+<%= div_for profile_question_answer do %>
+	<h4><%= simple_format profile_question_answer.profile_question.question %></h4>
+	<%= simple_format profile_question_answer.answer %>
+	<%= answer_form.input :score %>
+	<%= answer_form.hidden_field :profile_question_id, :value=>answer_form.object.profile_question.id %>
+	<%= answer_form.hidden_field :id, :value=>answer_form.object.id %>		
+<% end %>
