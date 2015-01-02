@@ -19,7 +19,7 @@ describe AdmissionApplication do
 
 		it 'should be invalid' do
 			@admission_application.application_step = "submit"
-			@admission_application.application_status = "complete"
+			# @admission_application.application_status = "complete"
 			@admission_application.should_not be_valid
 		end
 	end
@@ -31,7 +31,7 @@ describe AdmissionApplication do
 
 		it 'should be valid' do
 			@admission_application.application_step = "submit"
-			@admission_application.application_status = "complete"
+			# @admission_application.application_status = "complete"
 			@admission_application.should be_valid
 		end
 
@@ -50,7 +50,7 @@ describe AdmissionApplication do
 		it 'should be invalid if a new profile question is added' do
 			FactoryGirl.create(:profile_question)
 			@admission_application.application_step = "submit"
-			@admission_application.application_status = "complete"
+			# @admission_application.application_status = "complete"
 			@admission_application.should_not be_valid
 		end
 	end

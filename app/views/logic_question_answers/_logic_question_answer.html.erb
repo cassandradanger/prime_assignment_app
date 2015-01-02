@@ -1,0 +1,7 @@
+<%= div_for logic_question_answer do %>
+	<label class="logic_question_prompt"><%= logic_question_answer.logic_question.question %></label>
+	<% if logic_question_answer.logic_question.question_image.file? -%>
+	<div><%= image_tag logic_question_answer.logic_question.question_image.url %></div>
+	<% end -%>
+	<p><%= logic_question_answer.answer %></p>
+<% end %>

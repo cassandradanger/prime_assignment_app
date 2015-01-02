@@ -51,7 +51,8 @@ class AdmissionApplication < ActiveRecord::Base
 	end
 
 	def active?
-		application_step == 'submit'
+		# Allow for modification of records after submission (in scoring) without verification
+		application_step == 'submit' && application_status != "complete"
 	end
 
 	def active_or_logic?
@@ -94,6 +95,13 @@ class AdmissionApplication < ActiveRecord::Base
 		score
 	end
 
+	def profile_questions_score
+		score = 0
+		profile_question_answers.each do |a|
+			score = score + a.score.to_i
+		end
+		score
+	end
 
 	private
 

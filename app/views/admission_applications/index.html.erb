@@ -9,6 +9,8 @@
       <th>Email</th>
       <th>Applicant</th>
       <th>Status</th>
+      <th>Logic</th>
+      <th>Profile</th>
       <th>First Login</th>
       <th>Last Login</th>
       <th colspan="3"></th>
@@ -21,6 +23,8 @@
         <td><%= admission_application.user.email %></td>
         <td><%= admission_application.name %></td>
         <td><%= admission_application.application_status %></td>
+        <td><%= admission_application.logic_questions_score if admission_application.completed? %></td>
+        <td><%= admission_application.profile_questions_score if admission_application.completed? %></td>
         <td><%= admission_application.created_at.to_formatted_s(:short) %></td>
         <td><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
         <td><%= link_to 'Show', admission_application %></td>
