@@ -4,8 +4,10 @@
 <p>Completed Applications: <%= AdmissionApplication.completed.count %></p>
 
 <%= form_tag(admission_applications_path, method: "get") do %>
-    <%= label_tag(:cohort_id, "Cohort:") %>
-    <%= select_tag(:cohort_id, content_tag(:option,'All',:value=>"")+options_from_collection_for_select(@cohorts, :id, :name, @cohort_id) ) %>
+    <%= label_tag(:cohort, "Cohort:") %>
+    <%= select_tag(:cohort, content_tag(:option,'All',:value=>"")+options_from_collection_for_select(@cohorts, :id, :name, @cohort_id) ) %>
+    <%= label_tag(:app_status, "Status:") %>
+    <%= select_tag(:app_status, options_for_select([['All', ''], ['Complete', 'complete']],@app_status) ) %>
     <%= submit_tag("Search") %>
 <% end %>
 <table class="table table-condensed table-hover">
