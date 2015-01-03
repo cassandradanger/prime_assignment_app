@@ -1,9 +1,15 @@
 class AdmissionApplication < ActiveRecord::Base
+  include Filterable
 
 	scope :completed, -> { where(application_status: "complete") }
+	scope :started, -> { where.not(first_name: nil).where.not(last_name: nil).where.not(address: nil) }
+	scope :has_referral, -> { started.where.not(referral_source: nil) }
+	scope :app_status, -> (status) { where(application_status: status) }
+	scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
 
 	before_validation :populate_questions_on_submit
 	before_save :check_for_completion
+
 	after_create :populate_questions, on: :create
 	after_create :send_welcome, :update_subscription
 	
@@ -31,8 +37,6 @@ class AdmissionApplication < ActiveRecord::Base
 	validates_acceptance_of :payment_plan, :if => :active?, :message=>"must be acknowledged", allow_nil: false
 	validates :income, :numericality => { :less_than_or_equal_to => 1000000, :message=>"Seriously?" }, allow_blank: true
 
-	scope :started, -> { where.not(first_name: nil).where.not(last_name: nil).where.not(address: nil) }
-	scope :has_referral, -> { started.where.not(referral_source: nil) }
 
 	def name
 		"#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
