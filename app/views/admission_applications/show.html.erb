@@ -30,11 +30,13 @@
 			<dt>Employment Status</dt>
 			<dd><%= @admission_application.employment_status || "incomplete" %></dd>
 		</dl>
+
 		<h3>Income</h3>
 		<dl>
 			<dt>Annual Income</dt>
 			<dd><dd><%= number_to_currency(@admission_application.income, precision: 0) || "incomplete" %></dd></dd>
 		</dl>
+
 		<h3>Links and Social Accounts</h3>
 		<dl>
 			<dt>LinkedIn</dt>
@@ -46,6 +48,14 @@
 			<dt>Your Website</dt>
 			<dd><%= @admission_application.website_link || "incomplete" %></dd>					
 		</dl>
+		
+		<h3>Technical Challenges</h3>
+		<% if @admission_application.resume_link.blank? %>
+		<p>You have not yet submitted your resume link.</p>
+		<% else %>
+		<p>Your resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
+		<% end %>
+
 		<h3>Cohorts</h3>
 		<p>You indicated interest in the following cohorts:</p>
 		<ul>
@@ -78,12 +88,4 @@
 		<p>Interface coming soon...</p>
 	</div>
 
-	<div role="tabpanel" class="tab-pane" id="technical">
-		<h3>Technical Challenges</h3>
-		<% if @admission_application.resume_link.blank? %>
-		<p>You have not yet submitted your resume link.</p>
-		<% else %>
-		<p>Your resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
-		<% end %>
-	</div>
 </div>
