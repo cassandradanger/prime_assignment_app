@@ -51,7 +51,7 @@
 		
 		<h3>Technical Challenges</h3>
 		<p>Resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
-		<%= simple_form_for @admission_application do |f| -%>
+		<%= simple_form_for @admission_application, :namespace=>"resume_score" do |f| -%>
 			<%= f.input :resume_score, collection: 1..5 %>
 			<%= f.submit "Update Scores" %>
 		<% end %>
@@ -67,8 +67,7 @@
 	</div>
 	<div role="tabpanel" class="tab-pane" id="profile">
 		<h3>Profile Questions</h3>
-		<!--
-		<%= simple_form_for @admission_application do |f| -%>
+		<%= simple_form_for @admission_application, :namespace=>"profile_score" do |f| -%>
 			<%= f.simple_fields_for :profile_question_answers do |answer_form| %>
 				<%= div_for answer_form.object do %>
 					<h4><%= simple_format answer_form.object.profile_question.question %></h4>
@@ -80,7 +79,6 @@
 			<% end %>
 			<%= f.submit "Update Scores" %>
 		<% end %>
-		-->
 	</div>
 	<div role="tabpanel" class="tab-pane" id="logic">
 		<h3>Logic Questions</h3>
