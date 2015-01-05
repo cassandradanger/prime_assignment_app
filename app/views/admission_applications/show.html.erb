@@ -53,6 +53,7 @@
 		<p>Resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
 		<%= simple_form_for @admission_application, :namespace=>"resume_score" do |f| -%>
 			<%= f.input :resume_score, collection: 1..5 %>
+			<%= f.input :resume_notes %>
 			<%= f.submit "Update Scores" %>
 		<% end %>
 
