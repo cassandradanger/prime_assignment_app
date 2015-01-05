@@ -48,6 +48,8 @@ gem "chartkick"
 gem 'bootstrap-sass', '~> 3.2.0'
 # Recommended for Bootstrap
 gem 'autoprefixer-rails'
+# JQuery Data Tables
+gem 'jquery-datatables-rails', '~> 3.1.1'
 
 
 group :production do 

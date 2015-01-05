@@ -11,10 +11,9 @@ $border-radius-small:       0px;
 @import "bootstrap-sprockets.scss";
 @import "bootstrap";
 @import "bootstrap-theme";
+@import 'dataTables/bootstrap/3/jquery.dataTables.bootstrap';
 
-/*
- * Base structure
- */
+
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 

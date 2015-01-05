@@ -10,7 +10,7 @@
     <%= select_tag(:app_status, options_for_select([['All', ''], ['Complete', 'complete']],@app_status) ) %>
     <%= submit_tag("Search") %>
 <% end %>
-<table class="table table-condensed table-hover">
+<table class="table table-condensed table-hover" id="admission-application-datatable">
   <thead>
     <tr>
       <th>Email</th>
@@ -20,7 +20,7 @@
       <th>Profile</th>
       <th>First Login</th>
       <th>Last Login</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -34,9 +34,12 @@
         <td><%= admission_application.profile_questions_score if admission_application.completed? %></td>
         <td><%= admission_application.created_at.to_formatted_s(:short) %></td>
         <td><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
-        <td><%= link_to 'Show', admission_application %></td>
-        <td><%#= link_to 'Edit', edit_admission_application_path(admission_application) %></td>
-        <td><%#= link_to 'Destroy', admission_application, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Show', admission_application %>
+          <%#= link_to 'Edit', edit_admission_application_path(admission_application) %>
+          <%#= link_to 'Destroy', admission_application, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+
       </tr>
     <% end %>
   </tbody>
