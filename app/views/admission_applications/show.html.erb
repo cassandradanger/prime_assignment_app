@@ -50,11 +50,12 @@
 		</dl>
 		
 		<h3>Technical Challenges</h3>
-		<% if @admission_application.resume_link.blank? %>
-		<p>You have not yet submitted your resume link.</p>
-		<% else %>
-		<p>Your resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
+		<p>Resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
+		<%= simple_form_for @admission_application do |f| -%>
+			<%= f.input :resume_score, collection: 1..5 %>
+			<%= f.submit "Update Scores" %>
 		<% end %>
+
 
 		<h3>Cohorts</h3>
 		<p>You indicated interest in the following cohorts:</p>
