@@ -5,6 +5,7 @@ $(document).ready ->
     searching: false,
     pageLength: 50,
     lengthChange: false,
+    stateSave: true,
     columnDefs: [
       orderable: false, targets: [7]
     ]
