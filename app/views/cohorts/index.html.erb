@@ -3,6 +3,7 @@
 <table class="table table-condensed table-hover">
   <thead>
     <tr>
+      <th>Name</th>
       <th>Prework start</th>
       <th>Classroom start</th>
       <th>Graduation</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @cohorts.each do |cohort| %>
       <tr>
+        <td><%= cohort.name %></td>
         <td><%= cohort.prework_start %></td>
         <td><%= cohort.classroom_start %></td>
         <td><%= cohort.graduation %></td>

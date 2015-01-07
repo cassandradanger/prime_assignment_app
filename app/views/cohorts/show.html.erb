@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<h3>
+  <%= @cohort.name %>
+</h3>
+
 <p>
   <strong>Prework start:</strong>
   <%= @cohort.prework_start %>
@@ -23,6 +27,11 @@
 <p>
   <strong>Applications close:</strong>
   <%= @cohort.applications_close %>
+</p>
+
+<p>
+  <strong>Target Size:</strong>
+  <%= @cohort.target_size %>
 </p>
 
 <%= link_to 'Edit', edit_cohort_path(@cohort) %> |
