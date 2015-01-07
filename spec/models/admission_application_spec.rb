@@ -7,8 +7,10 @@ describe AdmissionApplication do
 		RSpec.configure do |config|
 		  config.mock_with :rspec do |mocks|
 		    mocks.verify_partial_doubles = false
+				mocks.syntax = [:should, :expect]
 		  end
 		end
+		#allow(Gibbon::API).to receive_message_chain(:lists, :subscribe).and_return(nil)
 		Gibbon::API.stub_chain(:lists, :subscribe).and_return(nil)
 	end
 
