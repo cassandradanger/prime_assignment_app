@@ -9,7 +9,7 @@ $sidebar-default-border:             $navbar-default-border; //darken($navbar-de
 //$navbar-default-link-active-color:         #555 !default;
 //$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
 
-$sidebar-background-base:     $gray-dark;
+$sidebar-background-base:     $gray-darker;
 $sidebar-color-base:          #fff;
 
 body {
@@ -18,6 +18,9 @@ body {
 
 .bg-gray{
   background-color: #f3f3f4;
+}
+.navbar {
+  border-bottom: 1px solid $sidebar-background-base;
 }
 /*
  * Main content
