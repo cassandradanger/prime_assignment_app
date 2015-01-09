@@ -10,6 +10,6 @@ class DashboardController < AdminApplicationController
     @apps_by_completed_date60 = AdmissionApplication.completed.where('created_at > ?',60.days.ago).group_by_day(:created_at, format: "%m/%d").count
     @apps_by_payment_option = AdmissionApplication.completed.group(:payment_option).count
     @apps_by_referral_source = AdmissionApplication.has_referral.group(:referral_source).count
-    @apps_by_referral_source_date60 = AdmissionApplication.has_referral.where('created_at > ?',60.days.ago).group(:referral_source).group_by_day(:created_at, format: "%m/%d").count
+    @apps_by_referral_source_date7 = AdmissionApplication.has_referral.where('created_at >= ?',7.days.ago).group(:referral_source).group_by_day(:created_at, format: "%m/%d").count
   end
 end

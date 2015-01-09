@@ -41,10 +41,10 @@
       <div class="ibox-content">
         <div class="row">
           <div class="col-lg-8 ">
-            <%= column_chart @apps_by_create_date60 , library: {theme:'maximized'}%>
+            <%= line_chart @apps_by_create_date60, library: {theme: 'maximized'} %>
           </div>
           <div class="col-lg-4">
-            <%= pie_chart @apps_by_payment_option , library:{theme:'maximized'}%>
+
           </div>
         </div>
       </div>
@@ -52,20 +52,34 @@
   </div>
 </div>
 
+
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <div class="ibox">
       <div class="ibox-title">
         <h5>Referral Source</h5>
       </div>
       <div class="ibox-content ">
         <div class="row">
-          <div class="col-lg-4 ">
-            <%= pie_chart @apps_by_referral_source , library:{theme:'maximized'}%>
+        <div class="col-lg-6">
+          <%= pie_chart @apps_by_referral_source, library: {theme: 'maximized'} %>
+        </div>
+          <div class="col-lg-6">
+            <%= line_chart @apps_by_referral_source_date7, library: {theme: 'maximized'} %>
           </div>
-          <div class="col-lg-8 ">
-            <%= column_chart @apps_by_referral_source_date60, stacked: true, library: {theme:'maximized'} %>
-          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Payment Option</h5>
+      </div>
+      <div class="ibox-content ">
+        <div>
+          <%= pie_chart @apps_by_payment_option, library: {theme: 'maximized'} %>
         </div>
       </div>
     </div>
