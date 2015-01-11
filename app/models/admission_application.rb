@@ -15,8 +15,6 @@ class AdmissionApplication < ActiveRecord::Base
 	
 	belongs_to :user
 
-	has_many :notes, as: :notable
-
 	has_and_belongs_to_many :cohorts, :order => { applications_close: :asc }
 	validates_presence_of :cohorts, :if => :active_or_general?
 
