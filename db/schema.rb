@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105174950) do
+ActiveRecord::Schema.define(version: 20150109215609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,19 @@ ActiveRecord::Schema.define(version: 20150105174950) do
     t.boolean  "published"
     t.integer  "position"
   end
+
+  create_table "notes", force: true do |t|
+    t.text     "content"
+    t.string   "sub_type"
+    t.integer  "admin_id"
+    t.integer  "notable_id"
+    t.string   "notable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["admin_id"], name: "index_notes_on_admin_id", using: :btree
+  add_index "notes", ["notable_id", "notable_type"], name: "index_notes_on_notable_id_and_notable_type", using: :btree
 
   create_table "profile_question_answers", force: true do |t|
     t.text     "answer"
