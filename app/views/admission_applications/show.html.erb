@@ -21,10 +21,11 @@
 </div>
 <br/>
 <ul class="nav nav-tabs" role="tablist" id="applicationNav">
-  <li class="active"><a href="#general">General</a></li>
-  <li><a href="#profile">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
-  <li><a href="#logic">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
-  <li><a href="#interview">Interview</a></li>
+	<li class="active"><a href="#general">General</a></li>
+	<li><a href="#technical">Technical (<%= @admission_application.resume_score.to_i %>)</a></li>
+	<li><a href="#profile">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
+	<li><a href="#logic">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
+	<li><a href="#interview">Interview</a></li>	
 </ul>
 
 <div class="tab-content">
@@ -47,60 +48,60 @@
       </dd>
     </dl>
 
-    <h3>Links and Social Accounts</h3>
-    <dl>
-      <dt>LinkedIn</dt>
-      <dd><%= @admission_application.linkedin_account || "incomplete" %></dd>
-      <dt>Twitter</dt>
-      <dd><%= @admission_application.twitter_account || "incomplete" %></dd>
-      <dt>Github</dt>
-      <dd><%= @admission_application.github_account || "incomplete" %></dd>
-      <dt>Your Website</dt>
-      <dd><%= @admission_application.website_link || "incomplete" %></dd>
-    </dl>
-
-    <h3>Technical Challenges</h3>
-
-    <p>Resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
-    <%= simple_form_for @admission_application, :namespace => "resume_score" do |f| -%>
-        <%= f.input :resume_score, collection: 1..5 %>
-        <%= f.input :resume_notes %>
-        <%= f.submit "Update Scores" %>
-    <% end %>
+		<h3>Links and Social Accounts</h3>
+		<dl>
+			<dt>LinkedIn</dt>
+			<dd><%= @admission_application.linkedin_account || "incomplete" %></dd>		
+			<dt>Twitter</dt>
+			<dd><%= @admission_application.twitter_account || "incomplete" %></dd>				
+			<dt>Github</dt>
+			<dd><%= @admission_application.github_account || "incomplete" %></dd>	
+			<dt>Your Website</dt>
+			<dd><%= @admission_application.website_link || "incomplete" %></dd>					
+		</dl>
+		
 
 
-    <h3>Cohorts</h3>
 
-    <p>You indicated interest in the following cohorts:</p>
-    <ul>
-      <% @admission_application.cohorts.each do |cohort| %>
-          <li><%= cohort.label %></li>
+		<h3>Cohorts</h3>
+		<p>You indicated interest in the following cohorts:</p>
+		<ul>
+			<% @admission_application.cohorts.each do |cohort| %>
+			<li><%= cohort.label %></li>
+			<% end %>
+		</ul>
+	</div>
+    <div role="tabpanel" class="tab-pane" id="technical">
+      <h3>Technical Challenges</h3>
+      <p>Resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>.</p>
+      <%= simple_form_for @admission_application, :namespace=>"resume_score" do |f| -%>
+          <%= f.input :resume_score, collection: 1..5 %>
+          <%= f.input :resume_notes %>
+          <%= f.submit "Update Scores" %>
       <% end %>
-    </ul>
-  </div>
-  <div role="tabpanel" class="tab-pane" id="profile">
-    <h3>Profile Questions</h3>
-    <%= simple_form_for @admission_application, :namespace => "profile_score" do |f| -%>
-        <%= f.simple_fields_for :profile_question_answers do |answer_form| %>
-            <%= div_for answer_form.object do %>
-                <h4><%= simple_format answer_form.object.profile_question.question %></h4>
-                <%= simple_format answer_form.object.answer %>
-                <%= answer_form.input :score, collection: 1..5 %>
-                <%= answer_form.hidden_field :profile_question_id, :value => answer_form.object.profile_question.id %>
-                <%= answer_form.hidden_field :id, :value => answer_form.object.id %>
-            <% end %>
-        <% end %>
-        <%= f.submit "Update Scores" %>
-    <% end %>
-  </div>
-  <div role="tabpanel" class="tab-pane" id="logic">
-    <h3>Logic Questions</h3>
-    <%= render @admission_application.logic_question_answers %>
-  </div>
-  <div role="tabpanel" class="tab-pane" id="interview">
-    <h3>Interview</h3>
-
-    <p>Interface coming soon...</p>
-  </div>
+    </div>
+	<div role="tabpanel" class="tab-pane" id="profile">
+		<h3>Profile Questions</h3>
+		<%= simple_form_for @admission_application, :namespace=>"profile_score" do |f| -%>
+			<%= f.simple_fields_for :profile_question_answers do |answer_form| %>
+				<%= div_for answer_form.object do %>
+					<h4><%= simple_format answer_form.object.profile_question.question %></h4>
+					<%= simple_format answer_form.object.answer %>
+					<%= answer_form.input :score, collection: 1..5 %>
+					<%= answer_form.hidden_field :profile_question_id, :value=>answer_form.object.profile_question.id %>
+					<%= answer_form.hidden_field :id, :value=>answer_form.object.id %>		
+				<% end %>			
+			<% end %>
+			<%= f.submit "Update Scores" %>
+		<% end %>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="logic">
+		<h3>Logic Questions</h3>
+		<%= render @admission_application.logic_question_answers %>
+	</div>
+	<div role="tabpanel" class="tab-pane" id="interview">
+		<h3>Interview</h3>
+		<p>Interface coming soon...</p>
+	</div>
 
 </div>
