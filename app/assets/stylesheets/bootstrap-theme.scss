@@ -65,6 +65,9 @@ body {
   }
 }
 
+.navbar {
+  border: 1px solid $sidebar-background-base;
+}
 /* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
@@ -107,6 +110,14 @@ body {
   margin-bottom: 0;
   padding: 14px 15px 7px;
   height: 48px;
+  > h5 {
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 0 5px;
+    padding: 0;
+    text-overflow: ellipsis;
+    float: left;
+  }
 }
 .ibox-content {
   background-color: #ffffff;
@@ -125,13 +136,17 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+  > li {
+    margin-top: 15px;
+    position: relative;
+    > h3 {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
 }
 .stat-percent {
   float: right;
-}
-.stat-list li {
-  margin-top: 15px;
-  position: relative;
 }
 
 .no-margin {
@@ -153,4 +168,18 @@ body {
 .progress-mini .progress-bar {
   height: 5px;
   margin-bottom: 0px;
+}
+
+.btn-white {
+  color: inherit;
+  background: white;
+  border: 1px solid #e7eaec;
+}
+.btn-white:hover,
+.btn-white:focus,
+.btn-white:active,
+.btn-white.active,
+.open .dropdown-toggle.btn-white {
+  color: inherit;
+  border: 1px solid #d2d2d2;
 }

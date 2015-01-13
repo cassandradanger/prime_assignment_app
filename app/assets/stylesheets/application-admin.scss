@@ -4,14 +4,14 @@
 $gray-base:              #000;
 $brand-primary:          #337277;
 
-$border-radius-base:        0px;
-$border-radius-large:       0px;
-$border-radius-small:       0px;
+$border-radius-base:        2px;
+$border-radius-large:       2px;
+$border-radius-small:       2px;
 
 @import "bootstrap-sprockets.scss";
 @import "bootstrap";
 @import "bootstrap-theme";
-@import 'dataTables/bootstrap/3/jquery.dataTables.bootstrap';
+@import "dataTables/bootstrap/3/jquery.dataTables.bootstrap";
 
 
 

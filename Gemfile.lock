@@ -43,6 +43,7 @@ GEM
     bcrypt (3.1.9)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
+    bootstrap_form (2.2.0)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -112,6 +113,8 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     metaclass (0.0.4)
+    migration_data (0.0.4)
+      rails (>= 4.0.0.rc1)
     mime-types (2.4.3)
     mini_portile (0.6.1)
     minitest (5.4.3)
@@ -231,6 +234,7 @@ DEPENDENCIES
   autoprefixer-rails
   aws-sdk
   bootstrap-sass (~> 3.2.0)
+  bootstrap_form
   capybara
   chartkick
   coffee-rails (~> 4.0.0)
@@ -243,6 +247,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-datatables-rails (~> 3.1.1)
   jquery-rails
+  migration_data
   mocha
   paperclip (~> 4.2)
   pg
