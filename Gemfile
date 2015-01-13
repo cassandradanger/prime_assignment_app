@@ -48,8 +48,12 @@ gem "chartkick"
 gem 'bootstrap-sass', '~> 3.2.0'
 # Recommended for Bootstrap
 gem 'autoprefixer-rails'
+# Bootstrap form element helper
+gem 'bootstrap_form'
 # JQuery Data Tables
 gem 'jquery-datatables-rails', '~> 3.1.1'
+# Used to migrate data with a rake db:migrate task
+gem 'migration_data'
 
 
 group :production do 

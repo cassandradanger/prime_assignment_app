@@ -1,14 +1,18 @@
 class AdmissionApplication < ActiveRecord::Base
   include Filterable
 
-	scope :completed, -> { where(application_status: "complete") }
-	scope :started, -> { where.not(first_name: nil).where.not(last_name: nil).where.not(address: nil) }
+	scope :completed, -> { where.not(application_status: "not_started").where.not(application_status: "started") }
+	scope :started, -> { where.not(application_status: "not_started") }
+	scope :accepted, -> { where(application_status: "interview_passed").where(application_status: "placed") }
+	scope :placed, -> { where(application_status: "placed") }
 	scope :has_referral, -> { started.where.not(referral_source: nil) }
 	scope :app_status, -> (status) { where(application_status: status) }
 	scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
 
 	before_validation :populate_questions_on_submit
-	before_save :check_for_completion
+	before_save :update_status
+
+	after_initialize :init
 
 	after_create :populate_questions, on: :create
 	after_create :send_welcome, :update_subscription
@@ -37,6 +41,15 @@ class AdmissionApplication < ActiveRecord::Base
 	validates_acceptance_of :payment_plan, :if => :active?, :message=>"must be acknowledged", allow_nil: false
 	validates :income, :numericality => { :less_than_or_equal_to => 1000000, :message=>"Seriously?" }, allow_blank: true
 
+	STATUS_OPTIONS = [{id: 'not_started', name: "Not Started"},
+										 			{id: 'started', name: 'Started'},
+													{id: 'complete', name: 'Complete'},
+													{id: 'needs_scheduling', name: 'Needs Scheduling'},
+													{id: 'scheduled', name: 'Scheduled'},
+													{id: 'interview_passed', name: 'Interview Passed'},
+													{id: 'placed', name: 'Placed'},
+													{id: 'declined', name: 'Declined'},
+										]
 
 	def name
 		"#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
@@ -47,16 +60,17 @@ class AdmissionApplication < ActiveRecord::Base
 	end
 
 	def started?
-		not( self.first_name.blank? && self.last_name.blank? && self.address.blank?)
+		application_status != "not_started"
 	end
 
 	def completed?
-		application_status == "complete"
+		(application_status != "not_started" && application_status != "started")
 	end
 
 	def active?
 		# Allow for modification of records after submission (in scoring) without verification
-		application_step == 'submit' && application_status != "complete"
+		# TODO - this seems really fragile and error prone.  Come back and take a look at this.
+		application_step == 'submit' && (application_status == "started" || application_status == "not_started" || application_status.blank?)
 	end
 
 	def active_or_logic?
@@ -109,7 +123,19 @@ class AdmissionApplication < ActiveRecord::Base
 		score
 	end
 
+	def self.application_status_options
+		# [%w[Started started],%w[Complete complete],%w[Needs\ Scheduling needs_scheduling],
+		#  %w[Scheduled scheduled],%w[Interview\ Passed interview_passed],
+		#  %w[Placed placed], %w[Paid paid],%w[Declined declined]]
+
+		options_array = STATUS_OPTIONS.map{ |status| [status[:name], status[:id]] }
+	end
+
 	private
+
+	def init
+		self.application_status ||= "not_started"
+	end
 
 	def send_welcome
 		AdmissionApplicationMailer.admission_application_welcome(self).deliver
@@ -120,13 +146,21 @@ class AdmissionApplication < ActiveRecord::Base
 		Gibbon::API.lists.subscribe({:id => ENV['MAILCHIMP_LIST'], :email => {:email => self.user.email}, :merge_vars => {:FNAME => self.first_name, :LNAME => self.last_name, :APP_STATUS => options[:app_status], :ADM_STATUS => options[:adm_status], :GROUPINGS => [{ :name => "I am a:", :groups => ['Applicant']}]}, :double_optin => false, :update_existing => true})		
 	end
 
-	# After validation, detect if the application is being submitted and set completed flags
-	def check_for_completion
+
+	def update_status
+		# After validation, detect if the application is being submitted and set completed flags
 		if active?
 			self.application_status = "complete"
+			self.application_step = "thanks"
 			self.completed_at = Time.now
 			update_subscription(app_status: "Completed")
 			AdmissionApplicationMailer.admission_application_thank_you(self).deliver
+		else
+			# Set the status to started if the status isn't set but the user has submitted
+			# a page.
+			if self.application_step && !self.application_status
+				self.application_status = "started"
+			end
 		end
 	end
 
