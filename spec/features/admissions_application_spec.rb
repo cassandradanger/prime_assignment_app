@@ -36,7 +36,11 @@ feature 'A logged in visitor' do
 		page.has_content?('Submit')
 	end
 
-	feature 'without a completed profile' do
+	feature 'starts with new profile' do
+
+		before :each do
+			@admission_application = FactoryGirl.create(:new_admission_application, user: @user)
+		end
 
 		scenario 'tries to submit their application and is displayed an error' do
 			visit '/apply/submit'
@@ -46,11 +50,43 @@ feature 'A logged in visitor' do
 		    page.has_content?('problem')
 		end
 
-		scenario 'tries to submit the incomplete general page and recieves an error' do
+		scenario 'tries to submit the incomplete general page and receives an error' do
 			visit '/apply/general'
 			click_button 'Save Your Application and Continue'
 		    current_path.should == '/apply/general'			
 		    page.has_content?('problem')
+		end
+
+		scenario 'tries to submit a complete general page and navigates to the personal page' do
+			visit '/apply/general'
+			fill_in 'admission_application_first_name', with: 'FirstName'
+			fill_in 'admission_application_last_name', with: 'LastName'
+			fill_in 'admission_application_phone', with: '123-123-1233'
+			fill_in 'admission_application_address', with: '123 Some St.'
+			fill_in 'admission_application_city', with: 'Some City'
+			fill_in 'admission_application_state', with: 'MN'
+			fill_in 'admission_application_zip_code', with: '90210'
+			select 'US Citizen', from: 'admission_application_legal_status'
+			select 'High School', from: 'admission_application_education'
+			select 'Employed Full-time', from: 'admission_application_employment_status'
+			select 'Find work as a software engineer', from: 'admission_application_goal'
+			fill_in 'admission_application_income', with: '45000'
+			select 'Search Engine', from: 'admission_application_referral_source'
+	#		check '#admission_application_cohort_ids_1'
+			click_button 'Save Your Application and Continue'
+			current_path.should == '/apply/personal'
+		end
+
+		scenario 'reviews the application expecting a profile error' do
+			visit '/apply/submit'
+			page.has_content?("Profile questions must all be answered")
+		end
+
+		scenario 'tries to submit a complete personal page and navigates to the logic page' do
+			visit '/apply/personal'
+			all("textarea").each { |t| t.text("Answer to the question.") }
+			click_button 'Save Your Application and Continue'
+			current_path.should == '/apply/logic'
 		end
 
 	end
@@ -58,7 +94,7 @@ feature 'A logged in visitor' do
 	feature 'with a complete profile' do
 
 		before :each do
-			@admission_application = FactoryGirl.create(:admission_application, user: @user)
+			@admission_application = FactoryGirl.create(:complete_admission_application, user: @user)
 		end
 
 		scenario 'visits the submit page and submits their application without accepting the payment plan' do
