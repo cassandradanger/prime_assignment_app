@@ -12,13 +12,15 @@
   </dd>
 </dl>
 
-
-<div>
-  <%= bootstrap_form_for(@admission_application, namespace: 'app_status', layout: :inline) do |f| %>
+<div class="row">
+<div class="col-lg-3">
+  <%= bootstrap_form_for(@admission_application, namespace: 'app_status', layout: :vertical) do |f| %>
       <%= f.select(:application_status, AdmissionApplication.application_status_options, label: "Status") %>
       <%= f.submit "Update Status" %>
   <% end %>
 </div>
+</div>
+
 <br/>
 <ul class="nav nav-tabs" role="tablist" id="applicationNav">
 	<li class="active"><a href="#general">General</a></li>
