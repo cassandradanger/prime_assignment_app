@@ -51,4 +51,39 @@ feature 'A logged in administrator' do
     end
   end
 
+  feature 'views admission application screen' do
+
+    before :each do
+      @admission_application = FactoryGirl.create(:complete_admission_application)
+    end
+
+    scenario 'verifies content' do
+      visit admission_application_path(@admission_application)
+      page.has_content?(@admission_application.first_name)
+      page.has_content?(@admission_application.last_name)
+      page.has_content?(@admission_application.email)
+    end
+
+    scenario 'tries to add a call note' do
+      visit admission_application_path(@admission_application)
+      fill_in 'comment_content', with: 'This is a test note'
+      click_button "Add Call Note"
+      current_path.should == admission_application_path(@admission_application)
+      page.has_content?("Note created successfully!")
+      page.has_content?("This is a test note")
+    end
+
+    scenario 'tries to update the technical challenge form' do
+      visit admission_application_path(@admission_application)
+      # click_link 'Technical ()'
+      select '3', from: 'resume_score_admission_application_resume_score'
+      fill_in 'resume_score_admission_application_comments_attributes_0_content', with: 'This is a technical note'
+      click_button 'technical_score_submit'
+      current_path.should == admission_application_path(@admission_application)
+      page.has_content?('Technical (3)')
+      page.has_content?('Application updated successfully!')
+      page.has_content?('This is a technical note')
+    end
+  end
+
 end

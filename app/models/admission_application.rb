@@ -19,6 +19,8 @@ class AdmissionApplication < ActiveRecord::Base
 	
 	belongs_to :user
 
+	has_many :comments, as: :is_commentable
+
 	has_and_belongs_to_many :cohorts, :order => { applications_close: :asc }
 	validates_presence_of :cohorts, :if => :active_or_general?
 
@@ -29,6 +31,8 @@ class AdmissionApplication < ActiveRecord::Base
 	has_many :profile_question_answers, -> { includes(:profile_question).order('profile_questions.position') }, dependent: :destroy, :inverse_of => :admission_application
 	accepts_nested_attributes_for :profile_question_answers	
 	validates_associated :profile_question_answers, :if => :active?, :message=>"must all be answered."
+
+	accepts_nested_attributes_for :comments, reject_if: proc { |attributes| attributes['content'].blank? && attributes['id'].blank?}
 	
 	validates :last_name, :first_name, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :goal, :referral_source, :phone, :presence => true, :if => :active_or_general?, length: { maximum: 255 }	
 	validates :resume_link, presence: true, :if => :active?
@@ -49,6 +53,11 @@ class AdmissionApplication < ActiveRecord::Base
 													{id: 'interview_passed', name: 'Interview Passed'},
 													{id: 'placed', name: 'Placed'},
 													{id: 'declined', name: 'Declined'},
+										]
+
+	COMMENT_TYPE = [{id: 'call note', name: 'Call Note'},
+										{id: 'interview', name: 'Interview'},
+										{id: 'technical', name: "Technical Challenge"}
 										]
 
 	def name
@@ -129,6 +138,10 @@ class AdmissionApplication < ActiveRecord::Base
 		#  %w[Placed placed], %w[Paid paid],%w[Declined declined]]
 
 		options_array = STATUS_OPTIONS.map{ |status| [status[:name], status[:id]] }
+	end
+
+	def self.comment_sub_type_options
+		options_array = COMMENT_TYPE.map{ |status| [status[:name], status[:id]] }
 	end
 
 	private
