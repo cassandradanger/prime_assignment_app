@@ -57,7 +57,7 @@
                     <% already_processed_first_pass = false %>   
                     <% @cohorts.each do |cohort| -%>    
                         <tr <% unless already_processed_first_pass %>class="first"<% end %>>
-                            <td><%= 30.days.from_now > cohort.applications_close ? "In " + (cohort.applications_close - Date.today).to_i.to_s + " Days" : cohort.applications_close.strftime("%b %e") %></td>
+                            <td><%= cohort.applications_close == Date.today ? "Today" : cohort.applications_close.strftime("%b %e") %></td>
                             <td><%= cohort.prework_start.strftime("%b %e") %></td>
                             <td><%= cohort.classroom_start.strftime("%b %e") %></td>
                             <td><%= cohort.graduation.strftime("%b %e") %></td>
