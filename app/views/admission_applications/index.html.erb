@@ -37,7 +37,7 @@
         <td><%= admission_application.created_at.to_formatted_s(:short) %></td>
         <td><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
         <td>
-          <%= link_to 'Show', admission_application %>
+          <%= link_to 'Show', admission_application_path(admission_application) %>
           <%#= link_to 'Edit', edit_admission_application_path(admission_application) %>
           <%#= link_to 'Destroy', admission_application, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>

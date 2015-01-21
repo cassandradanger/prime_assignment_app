@@ -1,0 +1,9 @@
+<div class="feed-element">
+  <div>
+    <small class="pull-right text-navy"><%= time_ago_in_words(comment.created_at) unless comment.created_at.blank? %> ago</small>
+    <strong><%= comment.admin.email unless comment.admin.blank? || comment.admin.email.blank? %></strong>
+
+    <div><%= simple_format(raw comment.content) %></div>
+    <small class="text-muted"><%= "#{comment.sub_type.to_s.capitalize} - #{comment.created_at.to_formatted_s(:long_ordinal)}" %></small>
+  </div>
+</div>

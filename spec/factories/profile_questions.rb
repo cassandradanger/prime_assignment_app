@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :profile_question do
     question "Profile question goes here?"
-	published true
+	  published true
   end
-
 end

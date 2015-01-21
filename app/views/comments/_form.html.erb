@@ -1,0 +1,5 @@
+<%= bootstrap_form_for [context, comment] do |f| %>
+    <%= f.text_area :content, hide_label: :true, placeholder: placeholder ||= "Add a note...", rows: 5 %>
+    <%= f.hidden_field :sub_type %>
+    <%= f.submit button_text ||= "Add Note" %>
+<% end %>

@@ -14,6 +14,21 @@ describe AdmissionApplication do
 		Gibbon::API.stub_chain(:lists, :subscribe).and_return(nil)
 	end
 
+	describe 'when new' do
+		it 'should have a valid factory' do
+			FactoryGirl.create(:new_admission_application).should be_valid
+		end
+
+		it 'should have a valid complete factory' do
+			FactoryGirl.build(:complete_admission_application).should be_valid
+		end
+
+		it 'should have its status set to not_started' do
+			a = AdmissionApplication.new
+			a.application_status.should == "not_started"
+		end
+	end
+
 	describe 'without any information' do
 		before do
 			@admission_application = AdmissionApplication.new
@@ -24,11 +39,13 @@ describe AdmissionApplication do
 			# @admission_application.application_status = "complete"
 			@admission_application.should_not be_valid
 		end
+
+
 	end
 
 	describe 'with complete information' do
-		before do
-			@admission_application = FactoryGirl.create(:admission_application)
+		before :each do
+			@admission_application = FactoryGirl.create(:complete_admission_application)
 		end
 
 		it 'should be valid' do

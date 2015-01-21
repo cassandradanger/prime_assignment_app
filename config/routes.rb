@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   scope '/admin' do
     resources :logic_questions
     resources :cohorts
-    resources :admission_applications
+    resources :admission_applications do
+      resources :comments, only: [:new, :create, :edit, :update]
+    end
     resources :profile_questions
     get 'dashboard/index', to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index'
