@@ -101,6 +101,26 @@
 </div>
 
 <div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Completed Applications</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <div class="col-lg-9 ">
+            <%= line_chart @apps_by_completed_date60, library: {theme: 'maximized'} %>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
   <div class="col-lg-8">
     <div class="ibox">
       <div class="ibox-title">
