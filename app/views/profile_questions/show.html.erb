@@ -1,39 +1,48 @@
-<p id="notice"><%= notice %></p>
+<% content_for :page_title, "Profile Question" %>
 
-<p>
-  <strong>Question:</strong>
-  <%= @profile_question.question %>
-</p>
+<div class="ibox-content">
 
-<p>
-  <strong>Published:</strong>
-  <%= @profile_question.published %>
-</p>
+  <p>
+    <strong>Question:</strong>
+    <%= @profile_question.question %>
+  </p>
 
-<p>
-  <strong>Scoring guideline 1:</strong>
-  <%= @profile_question.scoring_guideline_1 %>
-</p>
+  <p>
+    <strong>Published:</strong>
+    <%= @profile_question.published %>
+  </p>
 
-<p>
-  <strong>Scoring guideline 2:</strong>
-  <%= @profile_question.scoring_guideline_2 %>
-</p>
+  <p>
+    <strong>Scoring guideline 1:</strong>
+    <%= @profile_question.scoring_guideline_1 %>
+  </p>
 
-<p>
-  <strong>Scoring guideline 3:</strong>
-  <%= @profile_question.scoring_guideline_3 %>
-</p>
+  <p>
+    <strong>Scoring guideline 2:</strong>
+    <%= @profile_question.scoring_guideline_2 %>
+  </p>
 
-<p>
-  <strong>Scoring guideline 4:</strong>
-  <%= @profile_question.scoring_guideline_4 %>
-</p>
+  <p>
+    <strong>Scoring guideline 3:</strong>
+    <%= @profile_question.scoring_guideline_3 %>
+  </p>
 
-<p>
-  <strong>Scoring guideline 5:</strong>
-  <%= @profile_question.scoring_guideline_5 %>
-</p>
+  <p>
+    <strong>Scoring guideline 4:</strong>
+    <%= @profile_question.scoring_guideline_4 %>
+  </p>
 
-<%= link_to 'Edit', edit_profile_question_path(@profile_question) %> |
-<%= link_to 'Back', profile_questions_path %>
+  <p>
+    <strong>Scoring guideline 5:</strong>
+    <%= @profile_question.scoring_guideline_5 %>
+  </p>
+
+  <p>
+    <strong>Position:</strong>
+    <%= @profile_question.position %>
+  </p>
+
+  <%= link_to 'Edit', edit_profile_question_path(@profile_question) %> |
+  <%= link_to 'Back', profile_questions_path %>
+
+</div>

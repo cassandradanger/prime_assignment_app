@@ -1,5 +1,13 @@
-<h1>New Profile Question</h1>
+<% content_for :page_title, "New Profile Question" %>
 
-<%= render 'form' %>
+<div class="ibox-content">
+  <div class="row m-b-md">
+    <div class="col-md-4">
 
-<%= link_to 'Back', profile_questions_path %>
+      <%= render 'form' %>
+
+    </div>
+  </div>
+
+  <%= link_to 'Back', profile_questions_path %>
+</div>

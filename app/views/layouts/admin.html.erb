@@ -1,0 +1,134 @@
+<!doctype html>
+<html class="no-js" lang="en-us">
+<head>
+  <!-- META DATA -->
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--[if IE]>
+  <meta http-equiv="cleartype" content="on"/><![endif]-->
+
+  <!-- SEO -->
+  <title>PrimeAcademy.io :: <%= yield :page_title %></title>
+  <meta name="description" content="Public recruiting website for Prime."/>
+  <meta name="author" content=""/>
+
+  <!-- SECURITY -->
+  <%= csrf_meta_tags %>
+
+  <!-- ICONS -->
+  <link rel="apple-touch-icon" sizes="57x57" href="<%= image_path('apple-touch-icon-57x57.png') %>">
+  <link rel="apple-touch-icon" sizes="114x114" href="<%= image_path('apple-touch-icon-114x114.png') %>">
+  <link rel="apple-touch-icon" sizes="72x72" href="<%= image_path('apple-touch-icon-72x72.png') %>">
+  <link rel="apple-touch-icon" sizes="144x144" href="<%= image_path('apple-touch-icon-144x144.png') %>">
+  <link rel="apple-touch-icon" sizes="60x60" href="<%= image_path('apple-touch-icon-60x60.png') %>">
+  <link rel="apple-touch-icon" sizes="120x120" href="<%= image_path('apple-touch-icon-120x120.png') %>">
+  <link rel="apple-touch-icon" sizes="76x76" href="<%= image_path('apple-touch-icon-76x76.png') %>">
+  <link rel="apple-touch-icon" sizes="152x152" href="<%= image_path('apple-touch-icon-152x152.png') %>">
+  <link rel="apple-touch-icon" sizes="180x180" href="<%= image_path('apple-touch-icon-180x180.png') %>">
+  <link rel="icon" type="image/png" href="a<%= image_path('favicon-192x192.png" sizes="192x192') %>">
+  <link rel="icon" type="image/png" href="<%= image_path('favicon-160x160.png" sizes="160x160') %>">
+  <link rel="icon" type="image/png" href="<%= image_path('favicon-96x96.png') %>" sizes="96x96">
+  <link rel="icon" type="image/png" href="<%= image_path('favicon-16x16.png') %>" sizes="16x16">
+  <link rel="icon" type="image/png" href="<%= image_path('favicon-32x32.png') %>" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="<%= image_path('mstile-144x144.png') %>">
+
+  <!-- STYLESHEETS -->
+  <%= stylesheet_link_tag 'application-admin', media: 'screen, projection', 'data-turbolinks-track' => true %>
+
+  <!--[if lte IE 8]><%= stylesheet_link_tag 'legacy', media: 'screen, projection', 'data-turbolinks-track' => true %><![endif]-->
+  <%= stylesheet_link_tag 'print', media: 'print', 'data-turbolinks-track' => true %>
+
+  <!-- FONTS -->
+  <link href="//cloud.webtype.com/css/13d3f5c4-524e-44f4-8bbf-ead2cd9fdc3d.css" rel="stylesheet" type="text/css"/>
+
+  <%= yield :head %>
+
+</head>
+<body>
+
+<div id="wrapper">
+
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav" id="side-menu">
+        <li class="nav-header">
+          <div class="profile-element">
+            <span>
+                <%= link_to image_tag("logo-prime-horizontal.svg", :alt => "Prime - Software Engineering Academy", :itemprop => "logo"), root_path  %>
+              <h1 class="sr-only" itemprop="name">Prime Software Engineering Academy</h1>
+            </span>
+          </div>
+          <div class="logo-element">
+            <%= link_to image_tag("logo-prime-square.svg", :alt => "Prime - Software Engineering Academy", :itemprop => "logo"), root_path %>
+          </div>
+        </li>
+        <%= render_navigation renderer: :prime_renderer %>
+      </ul>
+
+    </div>
+  </nav>
+
+  <div id="page-wrapper" class="gray-bg">
+    <div class="row border-bottom">
+      <nav class="navbar navbar-static-top <%= @display_page_header ? '' : 'white-bg' %>" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+          <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+          <!--form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+            <div class="form-group">
+              <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search" >
+            </div>
+          </form-->
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+          <li>
+            <%= link_to '<i class="fa fa-sign-out"></i> Logout'.html_safe, destroy_admin_session_path, :method => :delete %>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+    <% if @display_page_header %>
+        <%= render "layouts/admin/page_header"  %>
+    <% end %>
+    <div class="wrapper wrapper-content">
+        <!-- FLASH MESSAGE -->
+        <%= flash_messages %>
+        <!-- CONTENT -->
+        <%= yield %>
+        <!-- END OF CONTENT -->
+    </div>
+    <%= render "layouts/admin/footer"  %>
+
+  </div>
+</div>
+
+
+<!-- JAVASCRIPT -->
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<%= javascript_include_tag 'application-admin' %>
+
+<!-- Chartkick -->
+<%= yield :charts_js %>
+
+<!-- ANALYTICS -->
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', '<%= ENV['GOOGLE_ANALYTICS_ID'] %>', 'auto');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
+</script>
+
+</body>
+</html>

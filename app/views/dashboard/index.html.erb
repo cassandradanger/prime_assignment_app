@@ -1,134 +1,126 @@
-<div class="row">
-  <div class="col-md-3 col-xs-12">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Users</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margin"><%= @user_count %></h1>
-        <small>Total Users</small>
+
+  <div class="row">
+    <div class="col-md-3 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-title"><h5>Users</h5></div>
+        <div class="ibox-content">
+          <h1 class="no-margin"><%= @user_count %></h1>
+          <small>Total Users</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-title"><h5>Started</h5></div>
+        <div class="ibox-content">
+          <h1 class="no-margin"><%= @apps_count %></h1>
+          <small>Started Applications</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-title"><h5>Complete</h5></div>
+        <div class="ibox-content">
+          <h1 class="no-margin"><%= @apps_completed_count %></h1>
+          <small>Completed Applications</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="ibox">
+        <div class="ibox-title"><h5>Accepted</h5></div>
+        <div class="ibox-content">
+          <h1 class="no-margin"><%= @apps_accepted_count %></h1>
+          <small>Accepted Applications</small>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-md-3 col-xs-12">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Started</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margin"><%= @apps_count %></h1>
-        <small>Started Applications</small>
-      </div>
-    </div>
-  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5>New Applications</h5>
 
-  <div class="col-md-3 col-xs-12">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Complete</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margin"><%= @apps_completed_count %></h1>
-        <small>Completed Applications</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3 col-xs-12">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Accepted</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margin"><%= @apps_accepted_count %></h1>
-        <small>Accepted Applications</small>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="ibox">
-      <div class="ibox-title">
-        <h5>New Applications</h5>
-
-        <!--div class="pull-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-xs btn-white active">All</button>
-            <button type="button" class="btn btn-xs btn-white ">Beta Cohort</button>
-          </div>
-        </div-->
-      </div>
-      <div class="ibox-content">
-        <div class="row">
-          <div class="col-lg-9 ">
-            <%= line_chart @apps_by_create_date60, library: {theme: 'maximized'} %>
-          </div>
-          <div class="col-lg-3">
-            <!--ul class="stat-list">
-              <li>
-                <h3 class="no-margins"><%= @apps_count %></h3>
-                <small>Started Applications</small>
-                <div class="stat-percent">100% <i class="fa fa-level-up text-navy"></i></div>
-                <div class="progress progress-mini">
-                  <div style="width: 100%;" class="progress-bar progress-bar-success"></div>
-                </div>
-              </li>
-              <li>
-                <h3 class="no-margins "><%= @apps_completed_count %></h3>
-                <small>Complete Applications</small>
-                <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
-                <div class="progress progress-mini">
-                  <div style="width: 60%;" class="progress-bar progress-bar-warning"></div>
-                </div>
-              </li>
-              <li>
-                <h3 class="no-margins"><%= @apps_completed_count %></h3>
-                <small>Accepted Applications</small>
-                <div class="stat-percent">20% <i class="fa fa-level-down text-navy"></i></div>
-                <div class="progress progress-mini">
-                  <div style="width: 20%;" class="progress-bar progress-bar-danger"></div>
-                </div>
-              </li>
-              <li>
-                <h3 class="no-margins "><%= @apps_completed_count %></h3>
-                <small>Confirmed Applications</small>
-                <div class="stat-percent">0% <i class="fa fa-level-down text-navy"></i></div>
-                <div class="progress progress-mini">
-                  <div style="width: 0%;" class="progress-bar progress-bar-danger"></div>
-                </div>
-              </li>
-            </ul-->
+          <!--div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-xs btn-white active">All</button>
+              <button type="button" class="btn btn-xs btn-white ">Beta Cohort</button>
+            </div>
+          </div-->
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-lg-9 ">
+              <%= line_chart @apps_by_create_date60, library: {theme: 'maximized'} %>
+            </div>
+            <div class="col-lg-3">
+              <!--ul class="stat-list">
+                <li>
+                  <h3 class="no-margins"><%= @apps_count %></h3>
+                  <small>Started Applications</small>
+                  <div class="stat-percent">100% <i class="fa fa-level-up text-navy"></i></div>
+                  <div class="progress progress-mini">
+                    <div style="width: 100%;" class="progress-bar progress-bar-success"></div>
+                  </div>
+                </li>
+                <li>
+                  <h3 class="no-margins "><%= @apps_completed_count %></h3>
+                  <small>Complete Applications</small>
+                  <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                  <div class="progress progress-mini">
+                    <div style="width: 60%;" class="progress-bar progress-bar-warning"></div>
+                  </div>
+                </li>
+                <li>
+                  <h3 class="no-margins"><%= @apps_completed_count %></h3>
+                  <small>Accepted Applications</small>
+                  <div class="stat-percent">20% <i class="fa fa-level-down text-navy"></i></div>
+                  <div class="progress progress-mini">
+                    <div style="width: 20%;" class="progress-bar progress-bar-danger"></div>
+                  </div>
+                </li>
+                <li>
+                  <h3 class="no-margins "><%= @apps_completed_count %></h3>
+                  <small>Confirmed Applications</small>
+                  <div class="stat-percent">0% <i class="fa fa-level-down text-navy"></i></div>
+                  <div class="progress progress-mini">
+                    <div style="width: 0%;" class="progress-bar progress-bar-danger"></div>
+                  </div>
+                </li>
+              </ul-->
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-8">
-    <div class="ibox">
-      <div class="ibox-title">
-        <h5>Referral Source</h5>
-      </div>
-      <div class="ibox-content ">
-        <div class="row">
-        <div class="col-lg-6">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5>Referral Source</h5>
+        </div>
+        <div class="ibox-content ">
           <%= pie_chart @apps_by_referral_source, library: {theme: 'maximized'} %>
         </div>
-          <div class="col-lg-6">
-            <%= line_chart @apps_by_referral_source_date7, library: {theme: 'maximized'} %>
-          </div>
-        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-lg-4">
-    <div class="ibox">
-      <div class="ibox-title">
-        <h5>Payment Option</h5>
-      </div>
-      <div class="ibox-content ">
-        <div>
-          <%= pie_chart @apps_by_payment_option, library: {theme: 'maximized'} %>
+    <div class="col-lg-4">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5>Payment Option</h5>
+        </div>
+        <div class="ibox-content ">
+            <%= pie_chart @apps_by_payment_option, library: {theme: 'maximized'} %>
         </div>
       </div>
     </div>
   </div>
-</div>

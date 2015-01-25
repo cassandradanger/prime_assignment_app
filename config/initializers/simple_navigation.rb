@@ -1,0 +1,4 @@
+
+
+
+SimpleNavigation.register_renderer prime_renderer: PrimeAdminNavRenderer

@@ -10,4 +10,6 @@ $(document).ready ->
       orderable: false, targets: [8]
     ]
 
+  $('.chosen-select').chosen
+    allow_single_deselect: true
 

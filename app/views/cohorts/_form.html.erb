@@ -1,17 +1,13 @@
-<%= simple_form_for(@cohort) do |f| %>
-  <%= f.error_notification %>
+<%= bootstrap_form_for(@cohort) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :prework_start %>
-    <%= f.input :classroom_start %>
-    <%= f.input :graduation %>
-    <%= f.input :applications_open %>
-    <%= f.input :applications_close %>
-    <%= f.input :target_size %>
-  </div>
+    <%= f.text_field :name %>
+    <%= f.text_field :prework_start, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
+    <%= f.text_field :classroom_start, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
+    <%= f.text_field :graduation, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
+    <%= f.text_field :applications_open, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"   %>
+    <%= f.text_field :applications_close, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <%= f.text_field :target_size %>
+
+    <%= f.submit "Save" %>
 <% end %>

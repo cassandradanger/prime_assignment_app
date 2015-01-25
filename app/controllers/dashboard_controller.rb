@@ -1,7 +1,6 @@
 class DashboardController < AdminApplicationController
   require('groupdate')
 
-
   def index
     @user_count = User.count
     @apps_count = AdmissionApplication.started.count
@@ -13,5 +12,9 @@ class DashboardController < AdminApplicationController
     @apps_by_payment_option = AdmissionApplication.completed.group(:payment_option).count
     @apps_by_referral_source = AdmissionApplication.has_referral.group(:referral_source).count
     @apps_by_referral_source_date7 = AdmissionApplication.has_referral.where('created_at >= ?',14.days.ago).group(:referral_source).group_by_day(:created_at, format: "%m/%d/%Y").count
+  end
+
+  def set_display_page_header
+    @display_page_header = false
   end
 end

@@ -1,16 +1,11 @@
-<%= simple_form_for(@logic_question) do |f| %>
-  <%= f.error_notification %>
+<%= bootstrap_form_for(@logic_question) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :question %>
+    <%= f.text_area :question, rows: 5 %>
     <%= image_tag @logic_question.question_image.url %>
-    <%= f.input :question_image %>
-    <%= f.input :solution %>
-    <%= f.input :position %>
-    <%= f.input :published %>
-  </div>
+    <%= f.file_field :question_image %>
+    <%= f.text_field :solution %>
+    <%= f.text_field :position %>
+    <%= f.check_box :published %>
+    <%= f.submit "Save" %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
 <% end %>
