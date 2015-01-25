@@ -1,183 +1,230 @@
-<h3><%= @admission_application.name %></h3>
-<dl>
-  <dt>Email</dt>
-  <dd><%= @admission_application.user.email %></dd>
-  <dt>Phone</dt>
-  <dd><%= @admission_application.phone || "incomplete" %></dd>
-  <dt>Address</dt>
-  <dd>
-    <address>
-      <%= simple_format(@admission_application.full_address) || "incomplete" %>
-    </address>
-  </dd>
-</dl>
+<% content_for :page_title, "Application :: #{@admission_application.name}" %>
 
-<div class="row">
-  <div class="col-lg-3">
-    <%= bootstrap_form_for(@admission_application, namespace: 'app_status', layout: :vertical) do |f| %>
-        <%= f.select(:application_status, AdmissionApplication.application_status_options, label: "Status") %>
-        <%= f.submit "Update Status" %>
-    <% end %>
+<div class="ibox-content">
+  <h3><%= @admission_application.name %></h3>
+  <dl>
+    <dt>Email</dt>
+    <dd><%= @admission_application.user.email %></dd>
+    <dt>Phone</dt>
+    <dd><%= @admission_application.phone || "incomplete" %></dd>
+    <dt>Address</dt>
+    <dd>
+      <address>
+        <%= simple_format(@admission_application.full_address) || "incomplete" %>
+      </address>
+    </dd>
+  </dl>
+
+  <div class="row">
+    <div class="col-lg-3">
+      <%= bootstrap_form_for(@admission_application, namespace: 'app_status', layout: :vertical) do |f| %>
+          <%= f.select(:application_status, AdmissionApplication.application_status_options, label: "Status") %>
+          <%= f.submit "Update Status" %>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<br/>
-<ul class="nav nav-tabs" role="tablist" id="admission-application-index-tabs">
-  <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-  <li><a href="#technical" data-toggle="tab">Technical (<%= @admission_application.resume_score.to_i %>)</a></li>
-  <li><a href="#profile" data-toggle="tab">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
-  <li><a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
-  <li><a href="#interview" data-toggle="tab">Interview</a></li>
-</ul>
+  <br/>
+  <ul class="nav nav-tabs" role="tablist" id="admission-application-index-tabs">
+    <li class="active"><a href="#general" data-toggle="tab">General</a></li>
+    <li><a href="#technical" data-toggle="tab">Technical (<%= @admission_application.resume_score.to_i %>)</a></li>
+    <li><a href="#profile" data-toggle="tab">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
+    <li><a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
+    <li><a href="#interview" data-toggle="tab">Interview</a></li>
+  </ul>
 
-<div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="general">
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Education and Employment</h3>
-        <dl>
-          <dt>Legal Status</dt>
-          <dd><%= @admission_application.legal_status || "incomplete" %></dd>
-          <dt>Education</dt>
-          <dd><%= @admission_application.education || "incomplete" %></dd>
-          <dt>Employment Status</dt>
-          <dd><%= @admission_application.employment_status || "incomplete" %></dd>
-        </dl>
+  <!-- GENERAL -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active gray-bg" id="general">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="ibox m-t-lg m-l-lg">
+            <div class="ibox-title">
+              <h3>Education and Employment</h3>
+            </div>
+            <div class="ibox-content">
 
-        <h3>Income</h3>
-        <dl>
-          <dt>Annual Income</dt>
-          <dd>
-          <dd><%= number_to_currency(@admission_application.income, precision: 0) || "incomplete" %></dd>
-          </dd>
-        </dl>
+              <dl>
+                <dt>Legal Status</dt>
+                <dd><%= @admission_application.legal_status || "incomplete" %></dd>
+                <dt>Education</dt>
+                <dd><%= @admission_application.education || "incomplete" %></dd>
+                <dt>Employment Status</dt>
+                <dd><%= @admission_application.employment_status || "incomplete" %></dd>
+              </dl>
 
-        <h3>Links and Social Accounts</h3>
-        <dl>
-          <dt>LinkedIn</dt>
-          <dd><%= @admission_application.linkedin_account || "incomplete" %></dd>
-          <dt>Twitter</dt>
-          <dd><%= @admission_application.twitter_account || "incomplete" %></dd>
-          <dt>Github</dt>
-          <dd><%= @admission_application.github_account || "incomplete" %></dd>
-          <dt>Your Website</dt>
-          <dd><%= @admission_application.website_link || "incomplete" %></dd>
-        </dl>
+              <h3>Income</h3>
+              <dl>
+                <dt>Annual Income</dt>
+                <dd>
+                <dd><%= number_to_currency(@admission_application.income, precision: 0) || "incomplete" %></dd>
+                </dd>
+              </dl>
+
+              <h3>Links and Social Accounts</h3>
+              <dl>
+                <dt>LinkedIn</dt>
+                <dd><%= @admission_application.linkedin_account || "incomplete" %></dd>
+                <dt>Twitter</dt>
+                <dd><%= @admission_application.twitter_account || "incomplete" %></dd>
+                <dt>Github</dt>
+                <dd><%= @admission_application.github_account || "incomplete" %></dd>
+                <dt>Your Website</dt>
+                <dd><%= @admission_application.website_link || "incomplete" %></dd>
+              </dl>
 
 
-        <h3>Cohorts</h3>
+              <h3>Cohorts</h3>
 
-        <p>You indicated interest in the following cohorts:</p>
-        <ul>
-          <% @admission_application.cohorts.each do |cohort| %>
-              <li><%= cohort.label %></li>
-          <% end %>
-        </ul>
-      </div>
-
-      <div class="col-md-5">
-        <h3>Notes</h3>
-
-        <div class="ibox">
-          <div class="ibox-content ibox-heading">
-            <%= render "comments/form", context: @admission_application, comment: @new_comment, button_text: "Add Call Note" %>
+              <p>You indicated interest in the following cohorts:</p>
+              <ul>
+                <% @admission_application.cohorts.each do |cohort| %>
+                    <li><%= cohort.label %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
-          <% if @admission_application.comments.count > 0 %>
-              <div class="ibox-content">
-                <div class="feed-activity-list">
-                  <% @admission_application.comments.each do |comment| %>
-                    <% if !comment.id.nil? %>
-                      <%= render "comments/list", comment: comment %>
+        </div>
+
+        <div class="col-md-5">
+          <div class="ibox m-t-lg">
+            <div class="ibox-title">
+              <h3>Notes</h3>
+            </div>
+            <div class="ibox-content">
+              <%= render "comments/form", context: @admission_application, comment: @new_comment, button_text: "Add Call Note" %>
+            </div>
+            <% if @admission_application.comments.count > 0 %>
+                <div class="ibox-content">
+                  <div class="feed-activity-list">
+                    <% @admission_application.comments.each do |comment| %>
+                        <% if !comment.id.nil? %>
+                            <%= render "comments/list", comment: comment %>
+                        <% end %>
                     <% end %>
-                  <% end %>
+                  </div>
                 </div>
-              </div>
-          <% else %>
-              <div class="ibox-content">
-                <div class="feed-activity-list">
-                  <div class="feed-element">
-                    <div>
-                      No Notes
+            <% else %>
+                <div class="ibox-content">
+                  <div class="feed-activity-list">
+                    <div class="feed-element">
+                      <div>
+                        No Notes
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div role="tabpanel" class="tab-pane" id="technical">
-    <div class="row">
-      <div class="col-lg-4">
-        <h3>Technical Challenges</h3>
-
-        <p>Resume is viewable at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>
-          .</p>
-        <%= bootstrap_form_for @admission_application, :namespace => "resume_score" do |f| -%>
-            <%= f.select(:resume_score, 1..5, prompt: "") %>
-            <%= f.fields_for :comments, @tech_comment do |ff| %>
-                <%= ff.text_area :content, label: "Technical Challenge Note", rows: 5, placeholder: "Add Note..." %>
-                <%= ff.hidden_field :id %>
-                <%= ff.hidden_field :sub_type %>
-                <%= ff.hidden_field :admin_id %>
-            <% end %>
-            <%= f.submit "Update Scores", id: "technical_score_submit" %>
-        <% end %>
-
-      </div>
-      <div class="col-md-5 col-md-offset-2">
-        <h3>Notes</h3>
-
-        <div class="ibox">
-
-          <% if @admission_application.comments.technical.count > 0 %>
-              <div class="ibox-content">
-                <div class="feed-activity-list">
-                  <% @admission_application.comments.technical.each do |comment| %>
-                      <%= render "comments/list", comment: comment %>
+    <!-- TECHNICAL CHALLENGE -->
+    <div role="tabpanel" class="tab-pane gray-bg" id="technical">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="ibox m-t-lg m-l-lg">
+            <div class="ibox-title">
+              <h3>Technical Challenges</h3>
+            </div>
+            <div class="ibox-content">
+              <p>Resume is viewable
+                at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>
+                .</p>
+              <%= bootstrap_form_for @admission_application, :namespace => "resume_score" do |f| -%>
+                  <%= f.select(:resume_score, 1..5, prompt: "") %>
+                  <%= f.fields_for :comments, @tech_comment do |ff| %>
+                      <%= ff.text_area :content, label: "Technical Challenge Note", rows: 5, placeholder: "Add Note..." %>
+                      <%= ff.hidden_field :id %>
+                      <%= ff.hidden_field :sub_type %>
+                      <%= ff.hidden_field :admin_id %>
                   <% end %>
+                  <%= f.submit "Update Scores", id: "technical_score_submit" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+
+          <div class="ibox m-t-lg">
+            <div class="ibox-title">
+              <h3>Notes</h3>
+            </div>
+            <% if @admission_application.comments.technical.count > 0 %>
+                <div class="ibox-content">
+                  <div class="feed-activity-list">
+                    <% @admission_application.comments.technical.each do |comment| %>
+                        <%= render "comments/list", comment: comment %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-          <% else %>
-              <div class="ibox-content">
-                <div class="feed-activity-list">
-                  <div class="feed-element">
-                    <div>
-                      No Technical Challenge Notes
+            <% else %>
+                <div class="ibox-content">
+                  <div class="feed-activity-list">
+                    <div class="feed-element">
+                      <div>
+                        No Technical Challenge Notes
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div role="tabpanel" class="tab-pane" id="profile">
-    <h3>Profile Questions</h3>
-    <%= simple_form_for @admission_application, :namespace => "profile_score" do |f| -%>
-        <%= f.simple_fields_for :profile_question_answers do |answer_form| %>
-            <%= div_for answer_form.object do %>
-                <h4><%= simple_format answer_form.object.profile_question.question %></h4>
-                <%= simple_format answer_form.object.answer %>
-                <%= answer_form.input :score, collection: 1..5 %>
-                <%= answer_form.hidden_field :profile_question_id, :value => answer_form.object.profile_question.id %>
-                <%= answer_form.hidden_field :id, :value => answer_form.object.id %>
-            <% end %>
-        <% end %>
-        <%= f.submit "Update Scores" %>
-    <% end %>
-  </div>
-  <div role="tabpanel" class="tab-pane" id="logic">
-    <h3>Logic Questions</h3>
-    <%= render @admission_application.logic_question_answers %>
-  </div>
-  <div role="tabpanel" class="tab-pane" id="interview">
-    <h3>Interview</h3>
 
-    <p>Interface coming soon...</p>
-  </div>
+    <!-- PROFILE -->
+    <div role="tabpanel" class="tab-pane gray-bg" id="profile">
+      <div class="row">
+        <div class="col-sm-11">
+          <div class="ibox m-t-lg m-l-lg">
+            <div class="ibox-title">
+              <h3>Profile Questions</h3>
+            </div>
+            <div class="ibox-content">
+              <%= bootstrap_form_for @admission_application, :namespace => "profile_score", layout: "vertical" do |f| -%>
+                  <%= f.fields_for :profile_question_answers do |answer_form| %>
+                      <%= div_for answer_form.object do %>
+                          <h4><%= simple_format answer_form.object.profile_question.question %></h4>
+                          <%= simple_format answer_form.object.answer %>
+                          <div class="row">
+                            <div class="col-md-3">
+                              <%= answer_form.select :score, 1..5, prompt: "", hide_label: true %>
+                            </div>
+                          </div>
+                          <%= answer_form.hidden_field :profile_question_id, :value => answer_form.object.profile_question.id %>
+                          <%= answer_form.hidden_field :id, :value => answer_form.object.id %>
+                      <% end %>
+                  <% end %>
+                  <%= f.submit "Update Scores" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div role="tabpanel" class="tab-pane gray-bg" id="logic">
+      <div class="row">
+        <div class="col-sm-11">
+          <div class="ibox m-t-lg m-l-lg">
+            <div class="ibox-title">
+              <h3>Logic Questions</h3>
+            </div>
+            <div class="ibox-content">
+              <%= render @admission_application.logic_question_answers %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="interview">
+      <h3>Interview</h3>
+
+      <p>Interface coming soon...</p>
+    </div>
+
+  </div>
 </div>

@@ -1,5 +1,13 @@
-<h1>New Logic Question</h1>
+<% content_for :page_title, "New Logic Question" %>
 
-<%= render 'form' %>
+<div class="ibox-content">
+  <div class="row m-b-md">
+    <div class="col-md-4">
 
-<%= link_to 'Back', logic_questions_path %>
+      <%= render 'form' %>
+
+    </div>
+  </div>
+
+  <%= link_to 'Back', logic_questions_path %>
+</div>

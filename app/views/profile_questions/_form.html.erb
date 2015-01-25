@@ -1,18 +1,12 @@
-<%= simple_form_for(@profile_question) do |f| %>
-  <%= f.error_notification %>
+<%= bootstrap_form_for(@profile_question) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :question %>
-    <%= f.input :published %>
-    <%= f.input :scoring_guideline_1 %>
-    <%= f.input :scoring_guideline_2 %>
-    <%= f.input :scoring_guideline_3 %>
-    <%= f.input :scoring_guideline_4 %>
-    <%= f.input :scoring_guideline_5 %>
-    <%= f.input :position %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <%= f.text_area :question, rows: 5 %>
+    <%= f.check_box :published %>
+    <%= f.text_area :scoring_guideline_1, rows: 5  %>
+    <%= f.text_area :scoring_guideline_2, rows: 5  %>
+    <%= f.text_area :scoring_guideline_3, rows: 5  %>
+    <%= f.text_area :scoring_guideline_4, rows: 5  %>
+    <%= f.text_area :scoring_guideline_5, rows: 5  %>
+    <%= f.text_field :position %>
+    <%= f.submit "Save" %>
 <% end %>

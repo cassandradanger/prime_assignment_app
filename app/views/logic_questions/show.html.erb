@@ -1,5 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% content_for :page_title, "Logic Question" %>
 
+<div class="ibox-content">
 <p>
   <strong>Question:</strong>
   <%= @logic_question.question %>
@@ -18,3 +19,4 @@
 
 <%= link_to 'Edit', edit_logic_question_path(@logic_question) %> |
 <%= link_to 'Back', logic_questions_path %>
+</div>

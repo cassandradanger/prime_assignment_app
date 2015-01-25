@@ -32,6 +32,8 @@ GEM
     airbrake (4.1.0)
       builder
       multi_json
+    animate-rails (1.0.7)
+      rails
     arel (5.0.1.20140414130214)
     autoprefixer-rails (4.0.2.2)
       execjs
@@ -41,6 +43,8 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.9)
+    bootstrap-datepicker-rails (1.3.1.1)
+      railties (>= 3.0)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     bootstrap_form (2.2.0)
@@ -52,6 +56,16 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     chartkick (1.3.2)
+    chosen-rails (1.3.0)
+      coffee-rails (>= 3.2)
+      compass-rails (>= 1.1.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
+    chosen-sass-bootstrap-rails (0.0.4)
+      bootstrap-sass (~> 3.1)
+      chosen-rails
+      compass-rails (~> 2.0)
+      sass-rails (~> 4.0)
     chunky_png (1.3.3)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -86,6 +100,8 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     fssm (0.2.10)
     gibbon (1.1.4)
       httparty
@@ -189,6 +205,8 @@ GEM
       rdoc (~> 4.0)
     shoulda-matchers (2.7.0)
       activesupport (>= 3.0.0)
+    simple-navigation (3.14.0)
+      activesupport (>= 2.3.2)
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
@@ -231,17 +249,21 @@ PLATFORMS
 DEPENDENCIES
   actionview-encoded_mail_to
   airbrake
+  animate-rails
   autoprefixer-rails
   aws-sdk
+  bootstrap-datepicker-rails
   bootstrap-sass (~> 3.2.0)
   bootstrap_form
   capybara
   chartkick
+  chosen-sass-bootstrap-rails
   coffee-rails (~> 4.0.0)
   compass-rails
   database_cleaner
   devise
   factory_girl_rails
+  font-awesome-rails
   gibbon
   groupdate
   jbuilder (~> 2.0)
@@ -258,6 +280,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   shoulda-matchers
+  simple-navigation
   simple_form
   spring
   spring-commands-rspec

@@ -54,6 +54,13 @@ gem 'bootstrap_form'
 gem 'jquery-datatables-rails', '~> 3.1.1'
 # Used to migrate data with a rake db:migrate task
 gem 'migration_data'
+# Awesome fonts...
+gem "font-awesome-rails"
+# https://github.com/daneden/animate.css
+gem "animate-rails"
+gem "simple-navigation"
+gem 'chosen-sass-bootstrap-rails'
+gem 'bootstrap-datepicker-rails'
 
 
 group :production do 

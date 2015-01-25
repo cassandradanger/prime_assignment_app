@@ -1,4 +1,5 @@
 
+
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 $gray-base:              #000;
@@ -10,7 +11,11 @@ $border-radius-small:       2px;
 
 @import "bootstrap-sprockets.scss";
 @import "bootstrap";
-@import "bootstrap-theme";
+@import "font-awesome.css";
+@import "animate";
+@import "chosen_bootstrap";
+@import "bootstrap-datepicker3";
+@import "admin/style";
 @import "dataTables/bootstrap/3/jquery.dataTables.bootstrap";
 
 

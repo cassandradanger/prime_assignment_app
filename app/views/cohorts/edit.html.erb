@@ -1,6 +1,11 @@
-<h1>Editing Cohort</h1>
+<% content_for :page_title, "Edit Cohort :: #{@cohort.name}" %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @cohort %> |
-<%= link_to 'Back', cohorts_path %>
+<div class="ibox-content">
+  <div class="row m-b-md">
+    <div class="col-md-4">
+      <%= render 'form' %>
+    </div>
+  </div>
+  <%= link_to 'Show', @cohort %> |
+  <%= link_to 'Back', cohorts_path %>
+</div>
