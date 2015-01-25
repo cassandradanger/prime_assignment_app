@@ -58,7 +58,7 @@
       <div class="ibox-content">
         <div class="row">
           <div class="col-lg-9 ">
-            <%= line_chart @apps_by_created_and_completed_date60, library: {theme: 'maximized'} %>
+            <%= line_chart dashboard_chart_data_path(type: 'created_and_completed'), library: {theme: 'maximized'} %>
           </div>
           <div class="col-lg-3">
             <!--ul class="stat-list">
@@ -129,7 +129,7 @@
         <h5>Referral Source</h5>
       </div>
       <div class="ibox-content ">
-        <%= pie_chart @apps_by_referral_source, library: {theme: 'maximized'} %>
+        <%= pie_chart dashboard_chart_data_path(type: 'referral_source'), library: {theme: 'maximized'} %>
       </div>
     </div>
   </div>
@@ -140,8 +140,9 @@
         <h5>Payment Option</h5>
       </div>
       <div class="ibox-content ">
-        <%= pie_chart @apps_by_payment_option, library: {theme: 'maximized'} %>
+        <%= pie_chart dashboard_chart_data_path(type: 'payment_option'), library: {theme: 'maximized'} %>
       </div>
     </div>
   </div>
+
 </div>

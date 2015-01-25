@@ -15,8 +15,10 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :edit, :update]
     end
     resources :profile_questions
-    get 'dashboard/index', to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index'
+    get 'dashboard/index', to: 'dashboard#index'
+    get 'dashboard/chart/:type(/:filter)', to: 'dashboard#chart', as: 'dashboard_chart_data'
+
     root 'dashboard#index', as: :admin_root_path
   end
 
