@@ -38,8 +38,8 @@ class DashboardController < AdminApplicationController
   private
   def merge_started_and_complete
     [
-        {name: "started", data: @apps_by_create_date60},
-        {name: "complete", data: @apps_by_completed_date60}
+        {name: "Started", data: @apps_by_create_date60},
+        {name: "Complete", data: @apps_by_completed_date60}
     ]
   end
 end
