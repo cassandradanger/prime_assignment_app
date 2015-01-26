@@ -66,6 +66,7 @@ gem 'bootstrap-datepicker-rails'
 group :production do 
 	# Use Heroku deployment
 	gem 'rails_12factor'
+	gem 'font_assets'
 end
 
 group :development do

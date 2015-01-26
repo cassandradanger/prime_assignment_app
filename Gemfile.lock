@@ -102,6 +102,8 @@ GEM
       railties (>= 3.0.0)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
+    font_assets (0.1.11)
+      rack
     fssm (0.2.10)
     gibbon (1.1.4)
       httparty
@@ -264,6 +266,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   font-awesome-rails
+  font_assets
   gibbon
   groupdate
   jbuilder (~> 2.0)
