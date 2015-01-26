@@ -99,9 +99,5 @@ Rails.application.configure do
     }  
   }
 
-  config.action_dispatch.default_headers.merge!({
-      'Access-Control-Allow-Origin' =>  ENV['ASSET_HOST'],
-      'Access-Control-Request-Method' => '*'
-  })
 
 end
