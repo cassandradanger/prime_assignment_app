@@ -40,10 +40,10 @@
         <div class="col-md-6">
           <div class="ibox m-t-lg m-l-lg">
             <div class="ibox-title">
-              <h3>Education and Employment</h3>
+              <h3>Information</h3>
             </div>
             <div class="ibox-content">
-
+              <h4>Education and Employment</h4>
               <dl>
                 <dt>Legal Status</dt>
                 <dd><%= @admission_application.legal_status || "incomplete" %></dd>
@@ -51,9 +51,11 @@
                 <dd><%= @admission_application.education || "incomplete" %></dd>
                 <dt>Employment Status</dt>
                 <dd><%= @admission_application.employment_status || "incomplete" %></dd>
+                <dt>Goal</dt>
+                <dd><%= @admission_application.goal || "incomplete" %></dd>
               </dl>
 
-              <h3>Income</h3>
+              <h4>Income</h4>
               <dl>
                 <dt>Annual Income</dt>
                 <dd>
@@ -61,20 +63,20 @@
                 </dd>
               </dl>
 
-              <h3>Links and Social Accounts</h3>
+              <h4>Links and Social Accounts</h4>
               <dl>
                 <dt>LinkedIn</dt>
-                <dd><%= @admission_application.linkedin_account || "incomplete" %></dd>
+                <dd><%= @admission_application.linkedin_account.blank? ? 'incomplete' : @admission_application.linkedin_account %></dd>
                 <dt>Twitter</dt>
-                <dd><%= @admission_application.twitter_account || "incomplete" %></dd>
+                <dd><%= @admission_application.twitter_account.blank? ? 'incomplete' : @admission_application.twitter_account %></dd>
                 <dt>Github</dt>
-                <dd><%= @admission_application.github_account || "incomplete" %></dd>
+                <dd><%= @admission_application.github_account.blank? ? 'incomplete' : @admission_application.github_account %></dd>
                 <dt>Your Website</dt>
-                <dd><%= @admission_application.website_link || "incomplete" %></dd>
+                <dd><%= @admission_application.website_link.blank? ? 'incomplete' : @admission_application.website_link %></dd>
               </dl>
 
 
-              <h3>Cohorts</h3>
+              <h4>Cohorts</h4>
 
               <p>You indicated interest in the following cohorts:</p>
               <ul>
