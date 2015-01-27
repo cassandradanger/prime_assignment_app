@@ -171,7 +171,7 @@ class AdmissionApplication < ActiveRecord::Base
 		else
 			# Set the status to started if the status isn't set but the user has submitted
 			# a page.
-			if self.application_step && !self.application_status
+			if !self.application_step.nil? && self.application_status == 'not_started'
 				self.application_status = "started"
 			end
 		end
