@@ -1,0 +1,12 @@
+<small class="pull-right text-navy"><%= time_ago_in_words(comment.created_at) unless comment.created_at.blank? %> ago</small>
+<strong><%= comment.admin.name_and_email unless comment.admin.blank? || comment.admin.email.blank? %></strong>
+
+<div><%= simple_format(raw comment.content) %></div>
+<small class="text-muted"><%= "#{comment.sub_type.to_s.capitalize} - #{comment.created_at.to_formatted_s(:long_ordinal)}" %></small>
+<small class="pull-right">
+  <%= link_to "Edit", edit_admission_application_comment_path(context, comment), remote: true %>
+  |
+  <%= link_to "Delete", [context, comment], method: :delete,
+              data: { confirm: 'Are you sure?' },
+              remote: true %>
+</small>
