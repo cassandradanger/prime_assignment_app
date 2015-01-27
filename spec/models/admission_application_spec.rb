@@ -25,22 +25,29 @@ describe AdmissionApplication do
 
 		it 'should have its status set to not_started' do
 			a = AdmissionApplication.new
-			a.application_status.should == "not_started"
+			a.application_status.should == 'not_started'
 		end
 	end
 
 	describe 'without any information' do
 		before do
-			@admission_application = AdmissionApplication.new
+			@admission_application = FactoryGirl.create(:new_admission_application)
 		end
 
 		it 'should be invalid' do
-			@admission_application.application_step = "submit"
-			# @admission_application.application_status = "complete"
+			@admission_application.application_step = 'submit'
+			# @admission_application.application_status = 'complete'
 			@admission_application.should_not be_valid
 		end
 
-
+		it 'should set the status to started when the step is populated and status = not_stated' do
+			@admission_application.application_step = 'logic'
+			@admission_application.application_status = 'not_started'
+			@admission_application.should be_valid
+			@admission_application.active?.should == false
+			@admission_application.save
+			@admission_application.application_status.should == 'started'
+		end
 	end
 
 	describe 'with complete information' do
@@ -49,29 +56,31 @@ describe AdmissionApplication do
 		end
 
 		it 'should be valid' do
-			@admission_application.application_step = "submit"
-			# @admission_application.application_status = "complete"
+			@admission_application.application_step = 'submit'
+			# @admission_application.application_status = 'complete'
 			@admission_application.should be_valid
 		end
 
 		it 'should be marked as complete when submitted' do
-			@admission_application.application_step = "submit"
+			@admission_application.application_step = 'submit'
 			@admission_application.save
-			@admission_application.application_status.should == "complete"
+			@admission_application.application_status.should == 'complete'
 		end
 
 		it 'should record the completed_at time when submitted' do
-			@admission_application.application_step = "submit"
+			@admission_application.application_step = 'submit'
 			@admission_application.save
 			@admission_application.completed_at.should_not be_nil
 		end
 
 		it 'should be invalid if a new profile question is added' do
 			FactoryGirl.create(:profile_question)
-			@admission_application.application_step = "submit"
-			# @admission_application.application_status = "complete"
+			@admission_application.application_step = 'submit'
+			# @admission_application.application_status = 'complete'
 			@admission_application.should_not be_valid
 		end
+
+
 	end
 
 	it 'should send an email when created' do
