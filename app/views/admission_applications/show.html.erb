@@ -35,10 +35,10 @@
 
   <!-- GENERAL -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active gray-bg" id="general">
+    <div role="tabpanel" class="tab-pane active gray-bg container-fluid" id="general">
       <div class="row">
         <div class="col-md-6">
-          <div class="ibox m-t-lg m-l-lg">
+          <div class="ibox m-t-md">
             <div class="ibox-title">
               <h3>Information</h3>
             </div>
@@ -88,8 +88,8 @@
           </div>
         </div>
 
-        <div class="col-md-5">
-          <div class="ibox m-t-lg">
+        <div class="col-md-6">
+          <div class="ibox m-t-md">
             <div class="ibox-title">
               <h3>Notes</h3>
             </div>
@@ -101,7 +101,7 @@
                   <div class="feed-activity-list">
                     <% @admission_application.comments.each do |comment| %>
                         <% if !comment.id.nil? %>
-                            <%= render "comments/list", comment: comment %>
+                            <%= render "comments/list", context: @admission_application, comment: comment %>
                         <% end %>
                     <% end %>
                   </div>
@@ -123,17 +123,20 @@
     </div>
 
     <!-- TECHNICAL CHALLENGE -->
-    <div role="tabpanel" class="tab-pane gray-bg" id="technical">
+    <div role="tabpanel" class="tab-pane gray-bg container-fluid" id="technical">
       <div class="row">
-        <div class="col-lg-4">
-          <div class="ibox m-t-lg m-l-lg">
+        <div class="col-md-6">
+          <div class="ibox m-t-md">
             <div class="ibox-title">
               <h3>Technical Challenges</h3>
             </div>
             <div class="ibox-content">
-              <p>Resume is viewable
-                at <%= link_to @admission_application.resume_link, @admission_application.resume_link %>
-                .</p>
+              <dl>
+                <dt>Resume</dt>
+                <dd><%= link_to @admission_application.resume_link, @admission_application.resume_link %></dd>
+              </dl>
+              <div class="row">
+              <div class="col-lg-9">
               <%= bootstrap_form_for @admission_application, :namespace => "resume_score" do |f| -%>
                   <%= f.select(:resume_score, 1..5, prompt: "") %>
                   <%= f.fields_for :comments, @tech_comment do |ff| %>
@@ -144,12 +147,14 @@
                   <% end %>
                   <%= f.submit "Update Scores", id: "technical_score_submit" %>
               <% end %>
+              </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-5 col-md-offset-2">
+        <div class="col-md-6">
 
-          <div class="ibox m-t-lg">
+          <div class="ibox m-t-md">
             <div class="ibox-title">
               <h3>Notes</h3>
             </div>
@@ -157,7 +162,7 @@
                 <div class="ibox-content">
                   <div class="feed-activity-list">
                     <% @admission_application.comments.technical.each do |comment| %>
-                        <%= render "comments/list", comment: comment %>
+                        <%= render "comments/list", context: @admission_application, comment: comment %>
                     <% end %>
                   </div>
                 </div>
@@ -178,10 +183,10 @@
     </div>
 
     <!-- PROFILE -->
-    <div role="tabpanel" class="tab-pane gray-bg" id="profile">
+    <div role="tabpanel" class="tab-pane gray-bg container-fluid" id="profile">
       <div class="row">
-        <div class="col-sm-11">
-          <div class="ibox m-t-lg m-l-lg">
+        <div class="col-sm-12">
+          <div class="ibox m-t-md">
             <div class="ibox-title">
               <h3>Profile Questions</h3>
             </div>
@@ -208,10 +213,10 @@
       </div>
     </div>
 
-    <div role="tabpanel" class="tab-pane gray-bg" id="logic">
+    <div role="tabpanel" class="tab-pane gray-bg container-fluid" id="logic">
       <div class="row">
         <div class="col-sm-11">
-          <div class="ibox m-t-lg m-l-lg">
+          <div class="ibox m-t-md">
             <div class="ibox-title">
               <h3>Logic Questions</h3>
             </div>

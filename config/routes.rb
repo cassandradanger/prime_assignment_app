@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :logic_questions
     resources :cohorts
     resources :admission_applications do
-      resources :comments, only: [:new, :create, :edit, :update]
+      resources :comments, only: [:new, :create, :edit, :update, :destroy]
     end
     resources :profile_questions
     get 'dashboard', to: 'dashboard#index'

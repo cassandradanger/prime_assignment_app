@@ -1,0 +1,2 @@
+$('div#<%= dom_id(@comment) -%>').html('<%= escape_javascript(render("comments/form",
+context: @context, comment: @comment, button_text: 'Update', remote: true) )  -%>');
