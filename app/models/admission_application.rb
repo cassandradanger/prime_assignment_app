@@ -3,7 +3,7 @@ class AdmissionApplication < ActiveRecord::Base
 
 	scope :completed, -> { where.not(application_status: "not_started").where.not(application_status: "started") }
 	scope :started, -> { where.not(application_status: "not_started") }
-	scope :accepted, -> { where(application_status: "interview_passed").where(application_status: "placed") }
+	scope :accepted, -> { where(application_status: ["interview_passed","placed"]) }
 	scope :placed, -> { where(application_status: "placed") }
 	scope :has_referral, -> { started.where.not(referral_source: nil) }
 	scope :app_status, -> (status) { where(application_status: status) }
