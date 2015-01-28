@@ -18,7 +18,24 @@ $border-radius-small:       2px;
 @import "admin/style";
 @import "dataTables/bootstrap/3/jquery.dataTables.bootstrap";
 
+/*
+ * The following is used only in the development environment to aid in distinguishing which environment the browser
+ * is rendering.
+ */
+$dev-header-color1: rgba(255, 0, 0, .2);
+$dev-header-color2: rgba(255, 255, 0, .2);
+$dev-header-color3: rgba(0, 255, 0, .2);
+$dev-header-color4: rgba(0, 255, 255, .2);
+$dev-header-color5: rgba(0, 0, 255, .2);
+$dev-header-color6: rgba(255, 0, 255, .2);
 
+.navbar-static-top.dev {
+  background: -webkit-linear-gradient($dev-header-color1,$dev-header-color2,$dev-header-color3, $dev-header-color4,$dev-header-color5,$dev-header-color6);
+  background: -o-linear-gradient($dev-header-color1,$dev-header-color2,$dev-header-color3, $dev-header-color4,$dev-header-color5,$dev-header-color6);
+  background: -moz-linear-gradient($dev-header-color1,$dev-header-color2,$dev-header-color3, $dev-header-color4,$dev-header-color5,$dev-header-color6);
+  background: linear-gradient($dev-header-color1,$dev-header-color2,$dev-header-color3, $dev-header-color4,$dev-header-color5,$dev-header-color6);
+}
+/* End of custom styles for the development environment */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 
