@@ -25,8 +25,8 @@ class DashboardController < AdminApplicationController
       when 'payment_option'
         render json: AdmissionApplication.completed.group(:payment_option).count
       when 'created_and_completed'
-        @apps_by_create_date60 = AdmissionApplication.started.where('created_at > ?', 60.days.ago).group_by_day(:created_at, format: "%m/%d/%Y").count
-        @apps_by_completed_date60 = AdmissionApplication.completed.where('completed_at > ?', 60.days.ago).group_by_day(:completed_at, format: "%m/%d/%Y").count
+        @apps_by_create_date60 = AdmissionApplication.started.group_by_day(:created_at, range: 60.days.ago.midnight..DateTime.now, format: "%m/%d/%Y").count
+        @apps_by_completed_date60 = AdmissionApplication.completed.group_by_day(:completed_at, range: 60.days.ago.midnight..DateTime.now, format: "%m/%d/%Y").count
         render json: merge_started_and_complete
     end
   end
