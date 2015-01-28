@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3 col-xs-12">
+  <div class="col-md-3 col-sm-6">
     <div class="ibox">
       <div class="ibox-title"><h5>Users</h5></div>
       <div class="ibox-content">
@@ -10,7 +10,7 @@
   </div>
 
 
-  <div class="col-md-3 col-xs-12">
+  <div class="col-md-3 col-sm-6">
     <div class="ibox">
       <div class="ibox-title"><h5>Started</h5></div>
       <div class="ibox-content">
@@ -21,7 +21,7 @@
   </div>
 
 
-  <div class="col-md-3 col-xs-12">
+  <div class="col-md-3 col-sm-6">
     <div class="ibox">
       <div class="ibox-title"><h5>Complete</h5></div>
       <div class="ibox-content">
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="col-md-3 col-xs-12">
+  <div class="col-md-3 col-sm-6">
     <div class="ibox">
       <div class="ibox-title"><h5>Accepted</h5></div>
       <div class="ibox-content">
@@ -60,8 +60,8 @@
           <div class="col-md-12 ">
             <%= line_chart dashboard_chart_data_path(type: 'created_and_completed'), library: {theme: 'maximized',legend: {position: 'in', alignment: 'end'}} %>
           </div>
-          <div class="col-lg-3">
-            <!--ul class="stat-list">
+          <!--div class="col-lg-3">
+            <ul class="stat-list">
                 <li>
                   <h3 class="no-marginss"><%= @apps_count %></h3>
                   <small>Started Applications</small>
@@ -94,8 +94,8 @@
                     <div style="width: 0%;" class="progress-bar progress-bar-danger"></div>
                   </div>
                 </li>
-              </ul-->
-          </div>
+              </ul>
+          </div-->
         </div>
       </div>
     </div>
