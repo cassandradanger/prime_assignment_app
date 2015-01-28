@@ -50,17 +50,20 @@
       <div class="ibox-title">
         <h5>New Users, Started and Complete Applications</h5>
 
-        <!--div class="pull-right">
-          <div class="btn-group">
-            <button type="button" class="btn btn-xs btn-white active">All</button>
-            <button type="button" class="btn btn-xs btn-white ">Beta Cohort</button>
-          </div>
-        </div-->
+        <div class="pull-right">
+          <%= bootstrap_form_tag url: dashboard_path, method: 'get' do |f| %>
+              <div class="btn-group">
+                <%= f.button 'Week', name: 'apps_time_filter', value: 'week', class: (@app_line_time_filter == 'week') ? 'btn btn-xs btn-white time-filter active' : 'btn btn-xs btn-white time-filter' %>
+                <%= f.button 'Month', name: 'apps_time_filter', value: 'month', class: (@app_line_time_filter == 'month') ? 'btn btn-xs btn-white time-filter active' : 'btn btn-xs btn-white time-filter' %>
+                <%= f.button 'Quarter', name: 'apps_time_filter', value: 'quarter', class: (@app_line_time_filter == 'quarter') ? 'btn btn-xs btn-white time-filter active' : 'btn btn-xs btn-white time-filter' %>
+              </div>
+          <% end %>
+        </div>
       </div>
       <div class="ibox-content">
         <div class="row">
           <div class="col-md-12 ">
-            <%= line_chart dashboard_chart_data_path(type: 'created_and_completed'), library: {theme: 'maximized',legend: {position: 'in', alignment: 'end'}} %>
+            <%= line_chart dashboard_chart_data_path(type: 'created_and_completed',time_filter: @app_line_time_filter), library: {theme: 'maximized', legend: {position: 'in', alignment: 'end'}} %>
           </div>
           <!--div class="col-lg-3">
             <ul class="stat-list">
@@ -111,7 +114,7 @@
         <h5>Referral Source</h5>
       </div>
       <div class="ibox-content ">
-        <%= pie_chart dashboard_chart_data_path(type: 'referral_source'),  library: {theme: 'maximized'} %>
+        <%= pie_chart dashboard_chart_data_path(type: 'referral_source'), library: {theme: 'maximized'} %>
       </div>
     </div>
   </div>
