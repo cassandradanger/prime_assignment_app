@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :profile_questions
     get 'dashboard', to: 'dashboard#index'
     get 'dashboard/index', to: 'dashboard#index'
-    get 'dashboard/chart/:type(/:filter)', to: 'dashboard#chart', as: 'dashboard_chart_data'
+    get 'dashboard/chart/:type(/:time_filter)', to: 'dashboard#chart', as: 'dashboard_chart_data'
 
     root 'dashboard#index', as: :admin_root_path
   end
