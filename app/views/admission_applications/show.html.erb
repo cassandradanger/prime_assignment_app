@@ -26,16 +26,16 @@
 
   <br/>
   <ul class="nav nav-tabs" role="tablist" id="admission-application-index-tabs">
-    <li class="active"><a href="#general" data-toggle="tab">General</a></li>
-    <li><a href="#technical" data-toggle="tab">Technical (<%= @admission_application.resume_score.to_i %>)</a></li>
-    <li><a href="#profile" data-toggle="tab">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
-    <li><a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
-    <li><a href="#interview" data-toggle="tab">Interview</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab].blank? || cookies[:admission_application_index_active_tab] == 'general' %>><a href="#general" data-toggle="tab">General</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'technical' %>><a href="#technical" data-toggle="tab">Technical (<%= @admission_application.resume_score.to_i %>)</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'profile' %>><a href="#profile" data-toggle="tab">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'logic' %>><a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>><a href="#interview" data-toggle="tab">Interview</a></li>
   </ul>
 
   <!-- GENERAL -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active gray-bg container-fluid" id="general">
+    <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab].blank? || cookies[:admission_application_index_active_tab] == 'general' %>tab-pane gray-bg container-fluid" id="general">
       <div class="row">
         <div class="col-md-6">
           <div class="ibox m-t-md">
@@ -123,7 +123,7 @@
     </div>
 
     <!-- TECHNICAL CHALLENGE -->
-    <div role="tabpanel" class="tab-pane gray-bg container-fluid" id="technical">
+    <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'technical' %>tab-pane gray-bg container-fluid" id="technical">
       <div class="row">
         <div class="col-md-6">
           <div class="ibox m-t-md">
@@ -136,18 +136,18 @@
                 <dd><%= link_to @admission_application.resume_link, @admission_application.resume_link %></dd>
               </dl>
               <div class="row">
-              <div class="col-lg-9">
-              <%= bootstrap_form_for @admission_application, :namespace => "resume_score" do |f| -%>
-                  <%= f.select(:resume_score, 1..5, prompt: "") %>
-                  <%= f.fields_for :comments, @tech_comment do |ff| %>
-                      <%= ff.text_area :content, label: "Technical Challenge Note", rows: 5, placeholder: "Add Note..." %>
-                      <%= ff.hidden_field :id %>
-                      <%= ff.hidden_field :sub_type %>
-                      <%= ff.hidden_field :admin_id %>
+                <div class="col-lg-9">
+                  <%= bootstrap_form_for @admission_application, :namespace => "resume_score" do |f| -%>
+                      <%= f.select(:resume_score, 1..5, prompt: "") %>
+                      <%= f.fields_for :comments, @tech_comment do |ff| %>
+                          <%= ff.text_area :content, label: "Technical Challenge Note", rows: 5, placeholder: "Add Note..." %>
+                          <%= ff.hidden_field :id %>
+                          <%= ff.hidden_field :sub_type %>
+                          <%= ff.hidden_field :admin_id %>
+                      <% end %>
+                      <%= f.submit "Update Scores", id: "technical_score_submit" %>
                   <% end %>
-                  <%= f.submit "Update Scores", id: "technical_score_submit" %>
-              <% end %>
-              </div>
+                </div>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@
     </div>
 
     <!-- PROFILE -->
-    <div role="tabpanel" class="tab-pane gray-bg container-fluid" id="profile">
+    <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'profile' %>tab-pane gray-bg container-fluid" id="profile">
       <div class="row">
         <div class="col-sm-12">
           <div class="ibox m-t-md">
@@ -213,7 +213,7 @@
       </div>
     </div>
 
-    <div role="tabpanel" class="tab-pane gray-bg container-fluid" id="logic">
+    <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'logic' %>tab-pane gray-bg container-fluid" id="logic">
       <div class="row">
         <div class="col-sm-11">
           <div class="ibox m-t-md">
@@ -227,10 +227,41 @@
         </div>
       </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="interview">
-      <h3>Interview</h3>
-
-      <p>Interface coming soon...</p>
+    <!-- INTERVIEW -->
+    <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>tab-pane gray-bg container-fluid" id="interview">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="ibox m-t-md">
+            <div class="ibox-title">
+              <h3>Notes</h3>
+            </div>
+            <div class="ibox-content">
+              <%= render "comments/form", context: @admission_application, comment: @new_interview_comment, placeholder: 'Add interview note...', button_text: "Add Interview Note" %>
+            </div>
+            <% if @admission_application.comments.interview.count > 0 %>
+                <div class="ibox-content">
+                  <div class="feed-activity-list">
+                    <% @admission_application.comments.interview.each do |comment| %>
+                        <% if !comment.id.nil? %>
+                            <%= render "comments/list", context: @admission_application, comment: comment %>
+                        <% end %>
+                    <% end %>
+                  </div>
+                </div>
+            <% else %>
+                <div class="ibox-content">
+                  <div class="feed-activity-list">
+                    <div class="feed-element">
+                      <div>
+                        No Interview Notes
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>

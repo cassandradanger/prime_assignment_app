@@ -58,9 +58,14 @@ gem 'migration_data'
 gem "font-awesome-rails"
 # https://github.com/daneden/animate.css
 gem "animate-rails"
+# Builds the admin navigation from a config file
 gem "simple-navigation"
+# Multi-select fields
 gem 'chosen-sass-bootstrap-rails'
+# Custom date picker based on Bootstrap.
 gem 'bootstrap-datepicker-rails'
+# jQuery cookies
+gem 'jquery-cookie-rails'
 
 
 group :production do 

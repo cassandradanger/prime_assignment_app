@@ -19,6 +19,7 @@ class AdmissionApplicationsController < AdminApplicationController
     @admission_application
     @tech_comment = @admission_application.comments.build(sub_type: "technical", admin: current_admin)
     @new_comment = Comment.new(sub_type: "call note")
+    @new_interview_comment = Comment.new(sub_type: "interview")
   end
 
   def edit
