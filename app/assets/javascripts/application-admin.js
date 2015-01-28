@@ -8,6 +8,7 @@
 //= require admin/metisMenu
 //= require chosen-jquery
 //= require bootstrap-datepicker
+//= require jquery.cookie
 //= require_tree .
 
 
@@ -15,10 +16,10 @@
 // Custom scripts
 $(document).ready(function () {
 
-    $('.nav-tabs a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
+    //$('.nav-tabs a').click(function (e) {
+    //    e.preventDefault()
+    //    $(this).tab('show')
+    //})
     // MetsiMenu
     $('#side-menu').metisMenu();
 
