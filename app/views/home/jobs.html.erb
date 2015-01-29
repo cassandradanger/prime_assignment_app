@@ -1,3 +1,21 @@
+<% content_for :head do %>
+
+    <!-- FACEBOOK -->
+    <meta property="og:url" content="<%= root_url %>" />
+    <meta property="og:title" content="Prime Digital Academy Seeks Instructor" />
+    <meta property="og:description" content="Prime is an intense, immersive 18-30 week training experience focused teaching people the fundamentals of software development through experiential learning and apprenticeship. Join the team and help train a new generation of developers." />
+    <meta property="og:image" content="<%= asset_url("image-social-share.jpg") %>" />
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@goprimeacademy" />
+    <meta name="twitter:creator" content="@goprimeacademy">
+    <meta name="twitter:title" content="Prime Software Engineering Academy Seeks Instructor" />
+    <meta name="twitter:description" content="Prime is an intense, immersive 18-30 week training experience focused teaching people the fundamentals of software development through experiential learning and apprenticeship. Join the team and help train a new generation of developers." />
+    <meta name="twitter:image:src" content="<%= asset_url("image-social-share.jpg") %>">
+
+<% end %>
+
 <h1>Help Train a New Generation of Software Engineers at Prime</h1>
 
 <p>Prime Digital Academy is an 18 week accelerated learning program teaching foundational software engineering skills through a fullstack Javascript development curriculum. The 18 week program is supplemented by an apprenticeship network with dozens of companies signed up to bringing graduates of the program onboard to continue their learning on-the-job at an impressive list of the area’s best workplaces. Prime is distinguished from other programs through it's tight connection with the industry. Founded by and co-located alongside 500+ employee custom software powerhouse, <%= link_to "The Nerdery", "http://nerdery.com" %>, Prime students get to learn the industry from the inside.</p>
