@@ -340,6 +340,30 @@ body.home.index {
 	}
 
 
+	.section-jobs {
+		background: $COLOR_DARK;
+		color: $COLOR_WHITE;
+		text-align:center;
+		
+		h2 {
+			margin-bottom:0px;
+			margin-top:0px;
+			line-height:1.1em;
+		}
+
+		p {
+			margin-bottom:20px;
+		}
+	
+		.button {
+			background: $COLOR_BLACK;
+			display:block;
+			max-width:400px;
+			margin:0 auto;
+		}
+	}
+
+
 
 
 	.section-numbers {

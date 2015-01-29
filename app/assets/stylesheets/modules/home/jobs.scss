@@ -1,0 +1,14 @@
+@include breakpoint(desktop) {
+
+	.jobs-column {
+		float:left;
+		width:45%;
+		padding-right:5%;
+	}
+
+	.jobs-header-interested {
+		clear:both;
+		padding-top:20px;
+	}
+
+}
