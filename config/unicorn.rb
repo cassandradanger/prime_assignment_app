@@ -1,5 +1,13 @@
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 15
+
+# extend the timeout when using the debugger.
+if ENV['RACK_ENV'] == 'development'
+  if ENV['IDE_PROCESS_DISPATCHER']
+    timeout 30 * 60 * 60 * 24
+  end
+end
+
 preload_app true
 
 before_fork do |server, worker|
@@ -9,7 +17,7 @@ before_fork do |server, worker|
   end
 
   defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.connection.disconnect!
+      ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |server, worker|
@@ -18,5 +26,5 @@ after_fork do |server, worker|
   end
 
   defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.establish_connection
+      ActiveRecord::Base.establish_connection
 end
