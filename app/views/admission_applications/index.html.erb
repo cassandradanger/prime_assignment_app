@@ -9,7 +9,7 @@
   <div class="col-md-4 float-e-margins">
     <%= bootstrap_form_tag url: admission_applications_path, method: "get", layout: :vertical do |f| %>
       <%= f.select(:cohort, options_from_collection_for_select(@cohorts, :id, :name, @cohort_id),{label: "Cohort", prompt: "All"}) %>
-      <%= f.select :app_status, options_for_select(@status_options, @app_status),{label: "Status", prompt: "All"} %>
+      <%= f.select :app_status, grouped_options_for_select(@status_options, @app_status),{label: "Status", prompt: "All"} %>
       <%= f.submit "Search" %>
   <% end %>
   </div>

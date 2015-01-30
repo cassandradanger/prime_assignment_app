@@ -6,7 +6,7 @@ class AdmissionApplication < ActiveRecord::Base
 	scope :accepted, -> { where(application_status: ["interview_passed","placed"]) }
 	scope :placed, -> { where(application_status: "placed") }
 	scope :has_referral, -> { started.where.not(referral_source: nil) }
-	scope :app_status, -> (status) { where(application_status: status) }
+	scope :app_status, -> (status) { (self.is_status_filter_scope?(status))? send(status) : where(application_status: status) }
 	scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
 
 	before_validation :populate_questions_on_submit
@@ -54,6 +54,11 @@ class AdmissionApplication < ActiveRecord::Base
 													{id: 'placed', name: 'Placed'},
 													{id: 'declined', name: 'Declined'},
 										]
+
+	STATUS_FILTER_SCOPES = [
+			{id: 'completed', name: 'Completed'},
+			{id: 'accepted', name: 'Accepted'}
+	]
 
 	COMMENT_TYPE = [{id: 'call note', name: 'Call Note'},
 										{id: 'interview', name: 'Interview'},
@@ -140,6 +145,14 @@ class AdmissionApplication < ActiveRecord::Base
 		options_array = STATUS_OPTIONS.map{ |status| [status[:name], status[:id]] }
 	end
 
+	def self.application_status_filter_scope_options
+		# [%w[Started started],%w[Complete complete],%w[Needs\ Scheduling needs_scheduling],
+		#  %w[Scheduled scheduled],%w[Interview\ Passed interview_passed],
+		#  %w[Placed placed], %w[Paid paid],%w[Declined declined]]
+
+		options_array = STATUS_FILTER_SCOPES.map{ |status| [status[:name], status[:id]] }
+	end
+
 	def self.comment_sub_type_options
 		options_array = COMMENT_TYPE.map{ |status| [status[:name], status[:id]] }
 	end
@@ -148,6 +161,16 @@ class AdmissionApplication < ActiveRecord::Base
 
 	def init
 		self.application_status ||= "not_started"
+	end
+
+	def self.is_status_filter_scope?(val)
+		rtn = false
+		options_array = STATUS_FILTER_SCOPES.each do |scope|
+			if scope[:id] == val.to_s
+				rtn = true
+			end
+		end
+		rtn
 	end
 
 	def send_welcome

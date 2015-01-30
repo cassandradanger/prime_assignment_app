@@ -9,7 +9,7 @@ class AdmissionApplicationsController < AdminApplicationController
     set_default_params(:app_status)
 
     @admission_applications = AdmissionApplication.filter(params.slice(:cohort,:app_status))
-    @status_options = AdmissionApplication.application_status_options
+    @status_options = [['Status',AdmissionApplication.application_status_options],['Filter',AdmissionApplication.application_status_filter_scope_options]]
     @cohort_id = params[:cohort]
     @app_status = params[:app_status]
     @cohorts = Cohort.all
