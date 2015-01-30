@@ -4,7 +4,6 @@ class AdmissionApplicationsController < AdminApplicationController
   respond_to :html
 
   def index
-
     set_default_params(:cohort)
     set_default_params(:app_status)
 

@@ -1,7 +1,17 @@
 <%= div_for logic_question_answer do %>
-	<label class="logic_question_prompt"><%= logic_question_answer.logic_question.question %></label>
-	<% if logic_question_answer.logic_question.question_image.file? -%>
-	<div><%= image_tag logic_question_answer.logic_question.question_image.url %></div>
-	<% end -%>
-	<p><%= logic_question_answer.answer %></p>
+
+    <% if logic_question_answer.answer == logic_question_answer.logic_question.solution %>
+        <span class="answer-success"><i class="fa fa-check"></i></span>
+    <% elsif logic_question_answer.answer == "I don't know." %>
+        <span class="answer-warning"><i class="fa fa-times"></i></span>
+    <% else %>
+        <span class="answer-error"><i class="fa fa-times"></i></span>
+    <% end %>
+
+    <label class="logic_question_prompt"><%= logic_question_answer.logic_question.question %> <%= logic_question_answer.answer %></label>
+
+    <% if logic_question_answer.logic_question.question_image.file? -%>
+        <div><%= image_tag logic_question_answer.logic_question.question_image.url %></div>
+    <% end -%>
+
 <% end %>
