@@ -37,7 +37,13 @@ $dev-header-color6: rgba(255, 0, 255, .2);
 }
 /* End of custom styles for the development environment */
 
-/* Move down content because we have a fixed navbar that is 50px tall */
+div.dataTables_filter label {
+  font-weight: bold;
+  input {
+    margin-left: 10px;
+    font-weight: normal;
+  }
+}
 
 
 

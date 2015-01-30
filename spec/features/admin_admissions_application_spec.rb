@@ -67,8 +67,10 @@ feature 'A logged in administrator' do
 
     scenario 'tries to add a call note' do
       visit admission_application_path(@admission_application)
-      fill_in 'comment_content', with: 'This is a test note'
-      click_button "Add Call Note"
+      within("#new_comment") do
+        fill_in 'comment_content', with: 'This is a test note'
+        click_button "Add Call Note"
+      end
       current_path.should == admission_application_path(@admission_application)
       page.has_content?("Note created successfully!")
       page.has_content?("This is a test note")

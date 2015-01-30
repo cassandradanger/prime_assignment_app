@@ -236,7 +236,7 @@
               <h3>Notes</h3>
             </div>
             <div class="ibox-content">
-              <%= render "comments/form", context: @admission_application, comment: @new_interview_comment, placeholder: 'Add interview note...', button_text: "Add Interview Note" %>
+              <%= render "comments/form", context: @admission_application, comment: @new_interview_comment, form_id: 'interview_new_comment', placeholder: 'Add interview note...', button_text: "Add Interview Note" %>
             </div>
             <% if @admission_application.comments.interview.count > 0 %>
                 <div class="ibox-content">
