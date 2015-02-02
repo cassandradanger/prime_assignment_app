@@ -7,7 +7,7 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require admin/metisMenu
 //= require chosen-jquery
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 //= require jquery.cookie
 //= require_tree .
 
