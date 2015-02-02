@@ -54,12 +54,22 @@ SimpleNavigation::Configuration.run do |navigation|
     #                            when the item should be highlighted, you can set a regexp which is matched
     #                            against the current URI.  You may also use a proc, or the symbol <tt>:subpath</tt>.
     #
-    primary.item :dashboard, '<i class="fa fa-line-chart"></i><span class="nav-label">Dashboard</span>', dashboard_path, highlights_on: Proc.new {
-                             current_page?(admin_root_path_path) || current_page?(dashboard_path)}
-    primary.item :applications, '<i class="fa fa-users"></i><span class="nav-label">Applications</span>', admission_applications_path , highlights_on: :subpath
-    primary.item :cohorts, '<i class="fa fa-university"></i><span class="nav-label">Cohorts</span>', cohorts_path , highlights_on: :subpath
-    primary.item :logic_questions, '<i class="fa fa-question"></i><span class="nav-label">Logic Questions</span>', logic_questions_path , highlights_on: :subpath
-    primary.item :profile_questions, '<i class="fa fa-user"></i><span class="nav-label">Profile Questions</span>', profile_questions_path , highlights_on: :subpath
+    primary.item :dashboard, 'Dashboard', dashboard_path, opts: {icon: 'fa fa-line-chart'}, highlights_on: :subpath
+
+    # do |dashboard|
+    #   dashboard.dom_class = 'nav nav-second-level'
+    #   dashboard.item :web_analytics, 'Applications', dashboard_path
+    #   dashboard.item :web_analytics, 'Web Analytics', dashboard_web_analytics_path
+    # end
+
+
+
+    #Proc.new {
+     #                        current_page?(admin_root_path_path) || current_page?(dashboard_path)}
+    primary.item :applications, 'Applications', admission_applications_path, opts: {icon: 'fa fa-users'}, highlights_on: :subpath
+    primary.item :cohorts, 'Cohorts', cohorts_path, opts: {icon: 'fa fa-university'}, highlights_on: :subpath
+    primary.item :logic_questions, 'Logic Questions', logic_questions_path, opts: {icon: 'fa fa-question'}, highlights_on: :subpath
+    primary.item :profile_questions, 'Profile Questions', profile_questions_path, opts: {icon: 'fa fa-user'}, highlights_on: :subpath
 
     # Add an item which has a sub navigation (same params, but with block)
     # primary.item :key_2, 'name', url, options do |sub_nav|

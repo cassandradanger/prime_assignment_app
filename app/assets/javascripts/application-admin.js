@@ -21,7 +21,9 @@ $(document).ready(function () {
     //    $(this).tab('show')
     //})
     // MetsiMenu
-    $('#side-menu').metisMenu();
+    $('#side-menu').metisMenu({
+        toggle: false
+    });
 
     // Collapse ibox function
     $('.collapse-link').click( function() {

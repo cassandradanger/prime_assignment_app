@@ -12,11 +12,11 @@
 # The id can also be explicitely specified by setting the id in the
 # html-options of the 'item' method in the config/navigation.rb file.
 class PrimeAdminNavRenderer < SimpleNavigation::Renderer::Base
-  def render(item_container,sub_nav = false)
+  def render(item_container)
     if skip_if_empty? && item_container.empty?
       ''
     else
-      if sub_nav
+      if item_container.level > 1
         tag = options[:ordered] ? :ol : :ul
         content = list_content(item_container)
         content.html_safe
@@ -29,20 +29,39 @@ class PrimeAdminNavRenderer < SimpleNavigation::Renderer::Base
     end
   end
 
-  def render_sub_navigation_for(item)
-    item.sub_navigation.render(options,true)
-  end
-
   private
 
   def list_content(item_container)
     item_container.items.map { |item|
       li_options = item.html_options.except(:link)
-      li_content = tag_for(item)
       if include_sub_navigation?(item)
-        li_content << render_sub_navigation_for(item)
+        li_content = li_header(item)
+      elsif item.html_options[:opts]
+        li_content = li_icon(item)
+      else
+        li_content = tag_for(item)
       end
-      content_tag(:li, li_content, li_options)
+      if include_sub_navigation?(item)
+        li_content << self.render_sub_navigation_for(item)
+      end
+      content_tag(:li, li_content, li_options.except(:opts))
     }.join
   end
+
+  def li_icon(item)
+    icon = nil
+    if item.html_options[:opts] && item.html_options[:opts][:icon]
+      icon = content_tag(:i, nil, {class: item.html_options[:opts][:icon]})
+    end
+    content_tag(:a, icon + content_tag(:span, item.name, {class: 'nav-label'}), {:href => item.url, :method => item.method}.merge(item.html_options.except(:class, :id, :opts)))
+  end
+
+  def li_header(item)
+    icon = nil
+    if item.html_options[:opts] && item.html_options[:opts][:icon]
+      icon = content_tag(:i, nil, {class: item.html_options[:opts][:icon]})
+    end
+    content_tag(:a,icon + content_tag(:span, item.name, {class: 'nav-label'}) + content_tag(:span, nil, class: 'fa arrow'), {:href => item.url, :method => item.method}.merge(item.html_options.except(:class, :id, :opts)))
+  end
+
 end

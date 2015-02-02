@@ -12,6 +12,10 @@
   color: white;
 }
 
+.nav > li.selected > a {
+  color: white;
+}
+
 .navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
   background-color: darken($nav-bg, 3%);
   color: white;
@@ -143,7 +147,7 @@
   transition-duration: 0.5s;
 }
 
-.nav > li.active {
+.nav > li.selected {
   border-left: 4px solid darken($navy, 2%);
   background: darken($nav-bg, 3%);
 }
