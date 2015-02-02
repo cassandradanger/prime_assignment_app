@@ -53,7 +53,7 @@
     <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>>
       <a href="#interview" data-toggle="tab">Interview (<%= @admission_application.interview_score %>)</a></li>
     <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'demographics' %>>
-      <a href="#demographics" data-toggle="tab">Demographics</a></li>      
+      <a href="#demographics" data-toggle="tab">Demographics</a></li>
   </ul>
 
   <!-- GENERAL -->
@@ -279,7 +279,7 @@
                     <%= f.check_box :race_other, label: "Other" %>
                     <%= f.text_field :dependents, label: "Number of dependents" %>
                   <%= f.select(:geography, ["Urban","Suburban","Rural"], prompt: "") %>
-                  <%= f.check_box :veteran, label: "Are you a United States Military Veteran?" %>                    
+                  <%= f.check_box :veteran, label: "Are you a United States Military Veteran?" %>
                   <%= f.submit "Update Demographics" %>
               <% end %>
             </div>
