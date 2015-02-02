@@ -1,39 +1,40 @@
 <% content_for :page_title, "Cohorts" %>
 
 <div class="ibox-content">
-<table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline no-footer" id="cohorts-datatable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Prework start</th>
-      <th>Classroom start</th>
-      <th>Graduation</th>
-      <th>Applications open</th>
-      <th>Applications close</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cohorts.each do |cohort| %>
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline no-footer" id="cohorts-datatable">
+      <thead>
       <tr>
-        <td><%= cohort.name %></td>
-        <td><%= cohort.prework_start %></td>
-        <td><%= cohort.classroom_start %></td>
-        <td><%= cohort.graduation %></td>
-        <td><%= cohort.applications_open %></td>
-        <td><%= cohort.applications_close %></td>
-        <td><%= link_to 'Show', cohort %></td>
-        <td><%= link_to 'Edit', edit_cohort_path(cohort) %></td>
-        <td><%= link_to 'Destroy', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th class="hidden-xs hidden-sm">Prework start</th>
+        <th>Classroom start</th>
+        <th class="hidden-xs hidden-sm">Graduation</th>
+        <th class="hidden-xs hidden-sm">Applications open</th>
+        <th class="hidden-xs hidden-sm">Applications close</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @cohorts.each do |cohort| %>
+          <tr>
+            <td><%= cohort.name %></td>
+            <td class="hidden-xs hidden-sm"><%= cohort.prework_start %></td>
+            <td><%= cohort.classroom_start %></td>
+            <td class="hidden-xs hidden-sm"><%= cohort.graduation %></td>
+            <td class="hidden-xs hidden-sm"><%= cohort.applications_open %></td>
+            <td class="hidden-xs hidden-sm"><%= cohort.applications_close %></td>
+            <td><%= link_to 'Show', cohort %></td>
+            <td><%= link_to 'Edit', edit_cohort_path(cohort) %></td>
+            <td><%= link_to 'Destroy', cohort, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
 
-<%= link_to 'New Cohort', new_cohort_path, {class: "btn btn-default"} %>
+  <%= link_to 'New Cohort', new_cohort_path, {class: "btn btn-default"} %>
 </div>

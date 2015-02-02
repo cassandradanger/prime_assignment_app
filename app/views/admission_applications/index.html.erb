@@ -6,49 +6,50 @@
   <p>Completed Applications: <%= AdmissionApplication.completed.count %></p>
 
   <div class="row">
-  <div class="col-md-4 float-e-margins">
-    <%= bootstrap_form_tag url: admission_applications_path, method: "get", layout: :vertical do |f| %>
-      <%= f.select(:cohort, options_from_collection_for_select(@cohorts, :id, :name, @cohort_id),{label: "Cohort", prompt: "All"}) %>
-      <%= f.select :app_status, grouped_options_for_select(@status_options, @app_status),{label: "Status", prompt: "All"} %>
-      <%= f.submit "Search" %>
-  <% end %>
+    <div class="col-md-4 float-e-margins">
+      <%= bootstrap_form_tag url: admission_applications_path, method: "get", layout: :vertical do |f| %>
+          <%= f.select(:cohort, options_from_collection_for_select(@cohorts, :id, :name, @cohort_id), {label: "Cohort", prompt: "All"}) %>
+          <%= f.select :app_status, grouped_options_for_select(@status_options, @app_status), {label: "Status", prompt: "All"} %>
+          <%= f.submit "Search" %>
+      <% end %>
+    </div>
   </div>
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="admission-application-datatable">
+      <thead>
+      <tr>
+        <th class="hidden-xs">Email</th>
+        <th>Applicant</th>
+        <th>Status</th>
+        <th class="hidden-xs">Logic</th>
+        <th class="hidden-xs">Profile</th>
+        <th class="hidden-xs">Resume</th>
+        <th class="hidden-xs hidden-sm">First Login</th>
+        <th class="hidden-xs hidden-sm">Last Login</th>
+        <th>&nbsp;</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @admission_applications.each do |admission_application| %>
+          <tr>
+            <td class="hidden-xs"><%= admission_application.user.email %></td>
+            <td><%= admission_application.name %></td>
+            <td><%= admission_application.application_status %></td>
+            <td class="hidden-xs"><%= admission_application.logic_questions_score if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed? %></td>
+            <td class="hidden-xs hidden-sm"><%= admission_application.created_at.to_formatted_s(:short) %></td>
+            <td class="hidden-xs hidden-sm"><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
+            <td>
+              <%= link_to 'Show', admission_application_path(admission_application) %>
+              <%#= link_to 'Edit', edit_admission_application_path(admission_application) %>
+              <%#= link_to 'Destroy', admission_application, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
-
-  <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="admission-application-datatable">
-    <thead>
-    <tr>
-      <th>Email</th>
-      <th>Applicant</th>
-      <th>Status</th>
-      <th>Logic</th>
-      <th>Profile</th>
-      <th>Resume</th>
-      <th>First Login</th>
-      <th>Last Login</th>
-      <th>&nbsp;</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @admission_applications.each do |admission_application| %>
-        <tr>
-          <td><%= admission_application.user.email %></td>
-          <td><%= admission_application.name %></td>
-          <td><%= admission_application.application_status %></td>
-          <td><%= admission_application.logic_questions_score if admission_application.completed? %></td>
-          <td><%= admission_application.profile_questions_score if admission_application.completed? %></td>
-          <td><%= admission_application.resume_score if admission_application.completed? %></td>
-          <td><%= admission_application.created_at.to_formatted_s(:short) %></td>
-          <td><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
-          <td>
-            <%= link_to 'Show', admission_application_path(admission_application) %>
-            <%#= link_to 'Edit', edit_admission_application_path(admission_application) %>
-            <%#= link_to 'Destroy', admission_application, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
 </div>
