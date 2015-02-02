@@ -13,6 +13,10 @@
         <%= simple_format(@admission_application.full_address) || "incomplete" %>
       </address>
     </dd>
+    <dt>First Login</dt>
+    <dd><%= time_ago_in_words(@admission_application.user.created_at)%> ago - <small class="text-muted"><%= @admission_application.user.created_at.to_formatted_s(:long_ordinal)%></small></dd>
+    <dt>Last Login</dt>
+    <dd><%= time_ago_in_words(@admission_application.user.last_sign_in_at)%> ago - <small class="text-muted"><%= @admission_application.user.last_sign_in_at.to_formatted_s(:long_ordinal)%></small></dd>
   </dl>
 
   <div class="row">
