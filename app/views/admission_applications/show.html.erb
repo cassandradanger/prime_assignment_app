@@ -13,10 +13,18 @@
         <%= simple_format(@admission_application.full_address) || "incomplete" %>
       </address>
     </dd>
-    <dt>First Login</dt>
-    <dd><%= time_ago_in_words(@admission_application.user.created_at)%> ago - <small class="text-muted"><%= @admission_application.user.created_at.to_formatted_s(:long_ordinal)%></small></dd>
-    <dt>Last Login</dt>
-    <dd><%= time_ago_in_words(@admission_application.user.last_sign_in_at)%> ago - <small class="text-muted"><%= @admission_application.user.last_sign_in_at.to_formatted_s(:long_ordinal)%></small></dd>
+    <% if !@admission_application.user.blank? %>
+        <dt>First Login</dt>
+        <dd><%= time_ago_in_words(@admission_application.user.created_at) if !@admission_application.user.created_at.blank? %>
+          ago -
+          <small class="text-muted"><%= @admission_application.user.created_at.to_formatted_s(:long_ordinal) %></small>
+        </dd>
+        <dt>Last Login</dt>
+        <dd><%= time_ago_in_words(@admission_application.user.last_sign_in_at) if !@admission_application.user.last_sign_in_at.blank? %>
+          ago -
+          <small class="text-muted"><%= @admission_application.user.last_sign_in_at.to_formatted_s(:long_ordinal) if !@admission_application.user.last_sign_in_at.blank? %></small>
+        </dd>
+    <% end %>
   </dl>
 
   <div class="row">
@@ -30,11 +38,16 @@
 
   <br/>
   <ul class="nav nav-tabs" role="tablist" id="admission-application-index-tabs">
-    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab].blank? || cookies[:admission_application_index_active_tab] == 'general' %>><a href="#general" data-toggle="tab">General</a></li>
-    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'technical' %>><a href="#technical" data-toggle="tab">Technical (<%= @admission_application.resume_score.to_i %>)</a></li>
-    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'profile' %>><a href="#profile" data-toggle="tab">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
-    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'logic' %>><a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
-    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>><a href="#interview" data-toggle="tab">Interview</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab].blank? || cookies[:admission_application_index_active_tab] == 'general' %>>
+      <a href="#general" data-toggle="tab">General</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'technical' %>>
+      <a href="#technical" data-toggle="tab">Technical (<%= @admission_application.resume_score.to_i %>)</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'profile' %>>
+      <a href="#profile" data-toggle="tab">Profile (<%= @admission_application.profile_questions_score %>)</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'logic' %>>
+      <a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>>
+      <a href="#interview" data-toggle="tab">Interview</a></li>
   </ul>
 
   <!-- GENERAL -->
