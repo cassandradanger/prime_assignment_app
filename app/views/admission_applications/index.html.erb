@@ -35,7 +35,7 @@
           <tr>
             <td class="hidden-xs"><%= admission_application.user.email %></td>
             <td><%= admission_application.name %></td>
-            <td><%= admission_application.application_status %></td>
+            <td><%= admission_application.application_status_name %></td>
             <td class="hidden-xs"><%= admission_application.logic_questions_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed? %></td>

@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
   default_scope { where(archived: false).order(created_at: :desc)}
   scope :technical, -> { where(sub_type: "technical") }
-  scope :call_note, -> { where(sub_type: "call note") }
+  scope :call_note, -> { where(sub_type: "call") }
   scope :interview, -> { where(sub_type: "interview") }
 
   validates :content, :admin, presence: true
