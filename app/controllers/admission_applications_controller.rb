@@ -50,6 +50,7 @@ class AdmissionApplicationsController < AdminApplicationController
                                                     :legal_status, :education, :employment_status, :goal, :income, :linkedin_account,
                                                     :twitter_account, :github_account, :website_link, :referral_source, :resume_link,
                                                     :payment_plan, :payment_option, :resume_score, :resume_notes, :application_status,
+                                                    :interview_score,
                                                     :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation],
                                                     :profile_question_answers_attributes => [:id,:profil_question_id,:answer,:score],
                                                     :cohort_ids => [],

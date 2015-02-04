@@ -5,6 +5,7 @@ class AdmissionApplication < ActiveRecord::Base
   scope :started, -> { where.not(application_status: "not_started") }
   scope :accepted, -> { where(application_status: ["interview_passed", "placed"]) }
   scope :placed, -> { where(application_status: "placed") }
+  scope :needs_interview_score, -> { where(application_status: ["scheduled", "interview_passed", "placed"]).where(interview_score: 0) }
   scope :has_referral, -> { started.where.not(referral_source: nil) }
   scope :app_status, -> (status) { (self.is_status_filter_scope?(status)) ? send(status) : where(application_status: status) }
   scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
@@ -58,9 +59,9 @@ class AdmissionApplication < ActiveRecord::Base
 
   STATUS_FILTER_SCOPES = {
       completed: 'Completed',
+      needs_interview_score: 'Needs Interview Score',
       accepted: 'Accepted'
   }
-
 
   COMMENT_TYPE = {
       call: 'Call Note',
@@ -68,6 +69,12 @@ class AdmissionApplication < ActiveRecord::Base
       technical: "Technical Challenge"
   }
 
+  INTERVIEW_SCORES = [
+      {id: '0', name: 'Not Interviewed'},
+      {id: '1', name: 'Unsatisfactory'},
+      {id: '3', name: 'Meets Expectations'},
+      {id: '5', name: 'Exceptional'}
+  ]
 
   def name
     "#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
@@ -141,6 +148,10 @@ class AdmissionApplication < ActiveRecord::Base
     score
   end
 
+  def self.interview_score_options
+    INTERVIEW_SCORES.map { |item| ["#{item[:id]} - #{item[:name]}", item[:id]] }
+  end
+
   def self.application_status_options
     self.options_array_from_simple_hash(STATUS_OPTIONS)
   end
@@ -155,6 +166,21 @@ class AdmissionApplication < ActiveRecord::Base
 
   def application_status_name
     STATUS_OPTIONS[self.application_status.to_sym].blank? ? self.application_status : STATUS_OPTIONS[self.application_status.to_sym]
+  end
+
+  def interview_score_name
+    name = self.interview_score
+    if self.interview_score == 0
+      name = ''
+    else
+      INTERVIEW_SCORES.each do |score|
+        if self.interview_score.to_s == score[:id].to_s
+          name = score[:name]
+          break
+        end
+      end
+    end
+    name
   end
 
   private

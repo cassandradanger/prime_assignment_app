@@ -24,6 +24,7 @@
         <th class="hidden-xs">Logic</th>
         <th class="hidden-xs">Profile</th>
         <th class="hidden-xs">Resume</th>
+        <th class="hidden-xs">Interview</th>
         <th class="hidden-xs hidden-sm">First Login</th>
         <th class="hidden-xs hidden-sm">Last Login</th>
         <th>&nbsp;</th>
@@ -39,6 +40,7 @@
             <td class="hidden-xs"><%= admission_application.logic_questions_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed? %></td>
             <td class="hidden-xs hidden-sm"><%= admission_application.created_at.to_formatted_s(:short) %></td>
             <td class="hidden-xs hidden-sm"><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
             <td>

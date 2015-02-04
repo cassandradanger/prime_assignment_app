@@ -47,7 +47,7 @@
     <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'logic' %>>
       <a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
     <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>>
-      <a href="#interview" data-toggle="tab">Interview</a></li>
+      <a href="#interview" data-toggle="tab">Interview (<%= @admission_application.interview_score %>)</a></li>
   </ul>
 
   <!-- GENERAL -->
@@ -247,6 +247,25 @@
     <!-- INTERVIEW -->
     <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>tab-pane gray-bg container-fluid" id="interview">
       <div class="row">
+        <div class="col-md-6">
+          <div class="ibox m-t-md">
+            <div class="ibox-title">
+              <h3>Interview Score</h3>
+            </div>
+            <div class="ibox-content">
+              <div class="row">
+<div class="col-lg-12">
+                  <%= bootstrap_form_for @admission_application, :namespace => "interview_score" do |f| -%>
+                      <%= f.select(:interview_score, AdmissionApplication.interview_score_options, label: "Interview Score") %>
+                      <%= f.submit "Update Scores", id: "interview_score_submit" %>
+                  <% end %>
+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div class="col-md-6">
           <div class="ibox m-t-md">
             <div class="ibox-title">
