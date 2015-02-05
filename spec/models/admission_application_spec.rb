@@ -1,91 +1,110 @@
-require "rails_helper"
+require 'rails_helper'
+require 'rspec/its'
 
 describe AdmissionApplication do
 
-	before do
-		# Prevent actually calling the Mailchimp API
-		RSpec.configure do |config|
-		  config.mock_with :rspec do |mocks|
-		    mocks.verify_partial_doubles = false
-				mocks.syntax = [:should, :expect]
-		  end
-		end
-		#allow(Gibbon::API).to receive_message_chain(:lists, :subscribe).and_return(nil)
-		Gibbon::API.stub_chain(:lists, :subscribe).and_return(nil)
-	end
+  before do
+    # Prevent actually calling the Mailchimp API
+    RSpec.configure do |config|
+      config.mock_with :rspec do |mocks|
+        mocks.verify_partial_doubles = false
+        mocks.syntax = [:should, :expect]
+      end
+    end
+    #allow(Gibbon::API).to receive_message_chain(:lists, :subscribe).and_return(nil)
+    Gibbon::API.stub_chain(:lists, :subscribe).and_return(nil)
+  end
 
-	describe 'when new' do
-		it 'should have a valid factory' do
-			FactoryGirl.create(:new_admission_application).should be_valid
-		end
+  it { should respond_to(:application_status_name) }
 
-		it 'should have a valid complete factory' do
-			FactoryGirl.build(:complete_admission_application).should be_valid
-		end
+  it { should respond_to(:interview_score_name) }
 
-		it 'should have its status set to not_started' do
-			a = AdmissionApplication.new
-			a.application_status.should == 'not_started'
-		end
-	end
+  it { AdmissionApplication.should respond_to(:interview_score_options) }
 
-	describe 'without any information' do
-		before do
-			@admission_application = FactoryGirl.create(:new_admission_application)
-		end
+  it { AdmissionApplication.should respond_to(:application_status_options) }
 
-		it 'should be invalid' do
-			@admission_application.application_step = 'submit'
-			# @admission_application.application_status = 'complete'
-			@admission_application.should_not be_valid
-		end
+  it { AdmissionApplication.should respond_to(:application_status_filter_scope_options) }
 
-		it 'should set the status to started when the step is populated and status = not_stated' do
-			@admission_application.application_step = 'logic'
-			@admission_application.application_status = 'not_started'
-			@admission_application.should be_valid
-			@admission_application.active?.should == false
-			@admission_application.save
-			@admission_application.application_status.should == 'started'
-		end
-	end
+  it { AdmissionApplication.should respond_to(:comment_sub_type_options) }
 
-	describe 'with complete information' do
-		before :each do
-			@admission_application = FactoryGirl.create(:complete_admission_application)
-		end
+  it 'should send an email when created' do
+    mailcount = ActionMailer::Base.deliveries.count
+    @admission_application = FactoryGirl.create(:admission_application)
+    ActionMailer::Base.deliveries.count.should == mailcount+1
+  end
 
-		it 'should be valid' do
-			@admission_application.application_step = 'submit'
-			# @admission_application.application_status = 'complete'
-			@admission_application.should be_valid
-		end
+  # context 'when new' do
+  #   let(:app) {AdmissionApplication.new}
+  #   it {app.application_status.should == 'not_started'}
+  # end
 
-		it 'should be marked as complete when submitted' do
-			@admission_application.application_step = 'submit'
-			@admission_application.save
-			@admission_application.application_status.should == 'complete'
-		end
+  context 'when new' do
+    let(:app) { AdmissionApplication.new }
+    subject { app }
+    its(:application_status) { should == 'not_started' }
 
-		it 'should record the completed_at time when submitted' do
-			@admission_application.application_step = 'submit'
-			@admission_application.save
-			@admission_application.completed_at.should_not be_nil
-		end
+    it 'should have a valid factory' do
+      FactoryGirl.create(:new_admission_application).should be_valid
+    end
 
-		it 'should be invalid if a new profile question is added' do
-			FactoryGirl.create(:profile_question)
-			@admission_application.application_step = 'submit'
-			# @admission_application.application_status = 'complete'
-			@admission_application.should_not be_valid
-		end
+    it 'should have a valid complete factory' do
+      FactoryGirl.build(:complete_admission_application).should be_valid
+    end
 
 
-	end
+    context 'without any information' do
+      let(:app) { FactoryGirl.create(:new_admission_application) }
+      subject { app }
 
-	it 'should send an email when created' do
-		mailcount = ActionMailer::Base.deliveries.count
-		@admission_application = FactoryGirl.create(:admission_application)
-		ActionMailer::Base.deliveries.count.should == mailcount+1
-	end
+      it 'should be invalid' do
+        app.application_step = 'submit'
+        expect(app).to_not be_valid
+      end
+
+      it 'should set the status to started when the step is populated and status = not_stated' do
+        app.application_step = 'logic'
+        app.application_status = 'not_started'
+        expect(app).to be_valid
+        expect(app.active?).to equal(false)
+        expect {app.save}.to change {app.application_status}.from('not_started').to('started')
+      end
+
+    end
+  end
+
+  describe 'with complete information' do
+
+    let(:app) {FactoryGirl.create(:complete_admission_application)}
+    subject { app }
+
+    its(:application_status) {should == 'not_started'}
+
+    it 'should be valid' do
+      app.application_step = 'submit'
+      expect(app).to be_valid
+    end
+
+    it 'should be marked as complete when submitted' do
+      app.application_step = 'submit'
+      expect {app.save}.to change {app.application_status}.from('not_started').to('complete')
+    end
+
+    it 'should record the completed_at time when submitted' do
+      app.application_step = 'submit'
+      app.save
+      expect(app.completed_at).to_not be_nil
+    end
+
+    it 'should have an application_status_name of Complete' do
+      app.application_status = 'complete'
+      expect(app.application_status_name).to eq('Complete')
+    end
+
+    it 'with new profile question should be invalid' do
+      FactoryGirl.create(:profile_question)
+      app.application_step = 'submit'
+      expect(app).to_not be_valid
+    end
+  end
+
 end

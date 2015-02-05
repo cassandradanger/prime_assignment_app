@@ -90,7 +90,8 @@ end
 
 group :development, :test do
 	gem 'factory_girl_rails'
-	gem 'rspec-rails'
+	gem 'rspec-rails', '~> 3.2.0'
+  gem 'rspec-its', '~> 1.1.0'
 end
 
 
