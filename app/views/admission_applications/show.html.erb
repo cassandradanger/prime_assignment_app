@@ -31,6 +31,9 @@
     <div class="col-lg-3">
       <%= bootstrap_form_for(@admission_application, namespace: 'app_status', layout: :vertical) do |f| %>
           <%= f.select(:application_status, AdmissionApplication.application_status_options, label: "Status") %>
+          <div id="assigned_cohort" class="<%= 'hidden' unless @admission_application.application_status == 'placed'%>">
+            <%= f.collection_select(:assigned_cohort_id, @admission_application.cohorts, :id, :name ,{include_blank: 'Unassigned', label: 'Assigned Cohort'} ) %>
+          </div>
           <%= f.submit "Update Status" %>
       <% end %>
     </div>

@@ -11,7 +11,7 @@ class AdmissionApplication < ActiveRecord::Base
   scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
 
   before_validation :populate_questions_on_submit
-  before_save :update_status
+  before_save :update_status, :check_assigned_cohort
 
   after_initialize :init
 
@@ -19,6 +19,7 @@ class AdmissionApplication < ActiveRecord::Base
   after_create :send_welcome, :update_subscription
 
   belongs_to :user
+  belongs_to :assigned_cohort, class_name: "Cohort"
 
   has_many :comments, as: :is_commentable
 
@@ -90,6 +91,10 @@ class AdmissionApplication < ActiveRecord::Base
 
   def completed?
     (application_status != "not_started" && application_status != "started")
+  end
+
+  def placed?
+    application_status == "placed"
   end
 
   def active?
@@ -223,6 +228,10 @@ class AdmissionApplication < ActiveRecord::Base
   # Converts a hash to an array for select option lists
   def self.options_array_from_simple_hash(hash)
     options_array = hash.map { |key, status| [status, key] }
+  end
+
+  def check_assigned_cohort
+    self.assigned_cohort_id = nil unless self.placed?
   end
 
 end

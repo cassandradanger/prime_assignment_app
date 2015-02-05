@@ -24,6 +24,16 @@ $(document).ready ->
       orderable: false, targets: [8]
     ]
 
+  $('#app_status_admission_application_application_status').change (e) ->
+    updateAssignedCohortDiv()
+
+  updateAssignedCohortDiv = ->
+    if $('#app_status_admission_application_application_status').val() == 'placed'
+      $('#assigned_cohort').removeClass('hidden')
+    else
+      $('#assigned_cohort').addClass('hidden')
+
+
 
 
 
