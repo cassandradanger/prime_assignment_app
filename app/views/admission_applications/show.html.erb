@@ -80,9 +80,7 @@
               <h4>Income</h4>
               <dl>
                 <dt>Annual Income</dt>
-                <dd>
                 <dd><%= number_to_currency(@admission_application.income, precision: 0) || "incomplete" %></dd>
-                </dd>
               </dl>
 
               <h4>Links and Social Accounts</h4>
@@ -96,6 +94,13 @@
                 <dt>Your Website</dt>
                 <dd><%= @admission_application.website_link.blank? ? 'incomplete' : @admission_application.website_link %></dd>
               </dl>
+
+              <h4>Payments</h4>
+              <dl>
+                <dt>Expected Payment Source</dt>
+                <dd><%= @admission_application.payment_option %></dd>
+              </dl>
+
 
 
               <h4>Cohorts</h4>
