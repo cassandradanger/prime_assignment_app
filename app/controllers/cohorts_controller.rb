@@ -42,6 +42,8 @@ class CohortsController < AdminApplicationController
         render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.has_referral.group(:referral_source).count
       when 'education'
         render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.has_referral.group(:education).count
+      when 'gender'
+        render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.has_referral.group(:gender).count
       when 'payment_option'
         render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group(:payment_option).count
       when 'created_and_completed'
