@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#index'
     get 'dashboard/index', to: 'dashboard#index'
     get 'dashboard/chart/:type(/:time_filter)', to: 'dashboard#chart', as: 'dashboard_chart_data'
+    get 'cohort/chart/:cohort_id/:type(/:time_filter)', to: 'cohorts#chart', as: 'cohort_chart_data'
 
     root 'dashboard#index', as: :admin_root_path
   end

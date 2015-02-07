@@ -1,5 +1,41 @@
 <% content_for :page_title, "Cohort :: #{@cohort.name}" %>
 
+<div class="row">
+  <div class="col-md-4">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Referral Source</h5>
+      </div>
+      <div class="ibox-content ">
+        <%= pie_chart cohort_chart_data_path(cohort_id: @cohort, type: 'referral_source'), library: {theme: 'maximized'} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Payment Option</h5>
+      </div>
+      <div class="ibox-content ">
+        <%= pie_chart cohort_chart_data_path(cohort_id: @cohort, type: 'payment_option'), library: {theme: 'maximized'} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Education</h5>
+      </div>
+      <div class="ibox-content ">
+        <%= pie_chart cohort_chart_data_path(cohort_id: @cohort, type: 'education'), library: {theme: 'maximized'} %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="ibox-content">
 <h3>
   <%= @cohort.name %>
