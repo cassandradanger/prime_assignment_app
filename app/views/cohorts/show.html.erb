@@ -54,7 +54,7 @@
       <div class="ibox-content">
         <div class="row">
           <div class="col-md-12 ">
-            <%= bar_chart cohort_chart_data_path(cohort_id: @cohort, type: 'age'), library: {theme: 'maximized', legend: {position: 'in', alignment: 'end'}} %>
+            <%= column_chart cohort_chart_data_path(cohort_id: @cohort, type: 'age'), library: {theme: 'maximized', legend: {position: 'in', alignment: 'end'}} %>
           </div>
         </div>
       </div>
