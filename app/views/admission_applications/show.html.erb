@@ -260,7 +260,7 @@
               <h3>Demographics</h3>
             </div>
             <div class="ibox-content">
-              <%= bootstrap_form_for @admission_application, :namespace => "profile_score", layout: "vertical" do |f| -%>
+              <%= bootstrap_form_for @admission_application, :namespace => "demographics_form", layout: "vertical" do |f| -%>
                   <%= f.date_field :birthdate %>
                   <%= f.select(:gender, ["Male","Female","Other"], prompt: "") %>
                   <h4>Race and Ethnicity</h4>
