@@ -53,7 +53,7 @@ class AdmissionApplicationsController < AdminApplicationController
                                                     :legal_status, :education, :employment_status, :goal, :income, :linkedin_account,
                                                     :twitter_account, :github_account, :website_link, :referral_source, :resume_link,
                                                     :payment_plan, :payment_option, :resume_score, :resume_notes, :application_status,
-                                                    :interview_score, :assigned_cohort_id,
+                                                    :interview_score, :assigned_cohort_id, :birthdate, :gender, :race_hispanic, :race_nativeamerican, :race_asian, :race_black, :race_islander, :race_white, :race_other, :dependents, :geography, :veteran,
                                                     :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation],
                                                     :profile_question_answers_attributes => [:id,:profil_question_id,:answer,:score],
                                                     :cohort_ids => [],

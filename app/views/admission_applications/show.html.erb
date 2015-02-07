@@ -51,6 +51,8 @@
       <a href="#logic" data-toggle="tab">Logic (<%= @admission_application.logic_questions_score %>) </a></li>
     <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>>
       <a href="#interview" data-toggle="tab">Interview (<%= @admission_application.interview_score %>)</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'demographics' %>>
+      <a href="#demographics" data-toggle="tab">Demographics</a></li>      
   </ul>
 
   <!-- GENERAL -->
@@ -247,6 +249,40 @@
         </div>
       </div>
     </div>
+
+
+    <!-- DEMOGRAPHICS -->
+    <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'demographics' %>tab-pane gray-bg container-fluid" id="demographics">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="ibox m-t-md">
+            <div class="ibox-title">
+              <h3>Demographics</h3>
+            </div>
+            <div class="ibox-content">
+              <%= bootstrap_form_for @admission_application, :namespace => "profile_score", layout: "vertical" do |f| -%>
+                  <%= f.date_field :birthdate %>
+                  <%= f.select(:gender, ["Male","Female","Other"], prompt: "") %>
+                  <h4>Race and Ethnicity</h4>
+                    <%= f.check_box :race_hispanic, label: "Hispanic or Latino" %>
+                    <%= f.check_box :race_nativeamerican, label: "American Indian or Alaska Native" %>
+                    <%= f.check_box :race_asian, label: "Asian" %>
+                    <%= f.check_box :race_black, label: "Black or African American" %>
+                    <%= f.check_box :race_islander, label: "Native Hawaiian or Other Pacific Islander" %>
+                    <%= f.check_box :race_white, label: "White" %>
+                    <%= f.check_box :race_other, label: "Other" %>
+                    <%= f.text_field :dependents, label: "Number of dependents" %>
+                  <%= f.select(:geography, ["Urban","Suburban","Rural"], prompt: "") %>
+                  <%= f.check_box :veteran, label: "Are you a United States Military Veteran?" %>                    
+                  <%= f.submit "Update Demographics" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- INTERVIEW -->
     <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'interview' %>tab-pane gray-bg container-fluid" id="interview">
       <div class="row">

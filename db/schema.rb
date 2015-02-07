@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205194010) do
+ActiveRecord::Schema.define(version: 20150207035249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,18 @@ ActiveRecord::Schema.define(version: 20150205194010) do
     t.text     "resume_notes"
     t.integer  "interview_score",                 default: 0
     t.integer  "assigned_cohort_id"
+    t.string   "gender"
+    t.integer  "dependents"
+    t.string   "geography"
+    t.date     "birthdate"
+    t.boolean  "veteran"
+    t.boolean  "race_hispanic"
+    t.boolean  "race_nativeamerican"
+    t.boolean  "race_asian"
+    t.boolean  "race_black"
+    t.boolean  "race_islander"
+    t.boolean  "race_white"
+    t.boolean  "race_other"
   end
 
   create_table "admission_applications_cohorts", force: true do |t|
