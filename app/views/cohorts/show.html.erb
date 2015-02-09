@@ -83,7 +83,7 @@
       <div class="ibox-content ">
         <%= pie_chart cohort_chart_data_path(cohort_id: @cohort, type: 'payment_option'), library: {theme: 'maximized'} %>
       </div>
-      <small>Of <%= @cohort.assigned_admission_applications.aid_eligible.count %> eligible students <%= @cohort.assigned_admission_applications.aid_eligible.not_aid_seeking.count %> are not seeking aid.</small>
+      <small>Of <%= @cohort.assigned_admission_applications.aid_eligible.count %> eligible students <%= @cohort.assigned_admission_applications.aid_eligible.not_aid_seeking.count %> are not seeking aid. <%= @cohort.assigned_admission_applications.aid_seeking.aid_ineligible.count %> aid seekers aren't eligible.</small>
     </div>
   </div>
 
