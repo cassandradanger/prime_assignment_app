@@ -10,7 +10,7 @@ class AdmissionApplication < ActiveRecord::Base
   scope :app_status, -> (status) { (self.is_status_filter_scope?(status)) ? send(status) : where(application_status: status) }
   scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
 
-  scope :aid_eligble, -> { where("? < 23341", :income) }
+  scope :aid_eligible, -> { where(income: 0...23340) }
 
   before_validation :populate_questions_on_submit
   before_save :update_status, :check_assigned_cohort
