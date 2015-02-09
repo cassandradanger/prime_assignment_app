@@ -12,6 +12,8 @@ class AdmissionApplication < ActiveRecord::Base
 
   # scope :aid_eligible, -> { where(income: 0...23340) }
   scope :aid_eligible, -> { where("(income <= 23341 AND (dependents = 0 OR dependents IS NULL)) OR (income <= 31460 AND dependents = 1) OR (income <= 39580 AND dependents = 2) OR (income <= 47700 AND dependents = 3) OR (income <= 55820 AND dependents = 4) OR (income <= 63940 AND dependents = 5) OR (income <= 72060 AND dependents = 6) OR (income <= 80180 AND dependents = 7)") }
+  scope :aid_seeking, -> { where(application_status: "placed") }
+  scope :not_aid_seeking, -> { where.not(application_status: "placed") }
 
   before_validation :populate_questions_on_submit
   before_save :update_status, :check_assigned_cohort
