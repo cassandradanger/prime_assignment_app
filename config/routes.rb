@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/launch', to: 'home#launch'
   get '/live', to: 'home#live'
   get '/jobs', to: 'home#jobs'
+  get '/catalog', to: redirect('/assets/documents/catalog.pdf')
 
   root 'home#index'
 
