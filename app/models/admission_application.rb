@@ -194,6 +194,11 @@ class AdmissionApplication < ActiveRecord::Base
     name
   end
 
+  # Set or update Mailchimp list subscription for completed
+  def update_mailchimp(options = {app_status: "In Progress", adm_status: "Unevaluated"})
+    Gibbon::API.lists.subscribe({:id => ENV['MAILCHIMP_LIST'], :email => {:email => self.user.email}, :merge_vars => { :APP_STATUS => self.application_status, :ADM_STATUS => "Accepted", :START_ON => self.assigned_cohort.prework_start, :COHORT=> self.assigned_cohort.id, :AID_ELIG => (AdmissionApplication.aid_eligible.exists?(self) ? "YES" : "") }, :double_optin => false, :update_existing => true})
+  end
+
   private
 
   def init
