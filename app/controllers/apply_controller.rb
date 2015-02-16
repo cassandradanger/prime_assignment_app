@@ -49,7 +49,18 @@ class ApplyController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admission_application_params
-      params.require(:admission_application).permit(:first_name, :middle_name, :last_name, :phone, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :goal, :income, :linkedin_account, :twitter_account, :github_account, :website_link, :referral_source, :resume_link, :payment_plan, :payment_option, :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation], :profile_question_answers_attributes => [:id,:profil_question_id,:answer], :cohort_ids => [])
+      params.require(:admission_application).permit(:first_name, :middle_name, :last_name, :phone, :address,
+                                                    :city, :state, :zip_code, :legal_status, :education,
+                                                    :employment_status, :goal, :income, :linkedin_account,
+                                                    :twitter_account, :github_account, :website_link,
+                                                    :referral_source, :resume_link, :payment_plan,
+                                                    :payment_option, :gender, :birthdate, :dependents,
+                                                    :geography, :veteran, :race_hispanic, :race_nativeamerican,
+                                                    :race_asian, :race_black, :race_islander, :race_white,
+                                                    :race_other,
+                                                    :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation],
+                                                    :profile_question_answers_attributes => [:id,:profil_question_id,:answer],
+                                                    :cohort_ids => [])
     end
 
 end

@@ -7,6 +7,23 @@
 <%= f.input :city, required:true %>
 <%= f.input :state, required:true %>
 <%= f.input :zip_code, required:true %>
+<h3>Demographics</h3>
+<%= f.input :birthdate, label: 'Date of birth', as: :date, start_year: Date.today.year - 90,
+            end_year: Date.today.year - 16, order: [:month,:day,:year]%>
+<%= f.input :gender, collection: ['Male','Female','Other'] %>
+<%= f.input :dependents, as: :integer %>
+<%= f.input :geography, collection: ['Urban','Suburban','Rural'] %>
+<%= f.input :veteran, label: 'Are you a United States Military Veteran?',collection: [['Yes','true'],['No','false']] %>
+
+<h3>To which racial or ethnic group(s) do you most identify?</h3>
+<%= f.input :race_hispanic, label: 'Hispanic or Latino',as: :boolean %>
+<%= f.input :race_nativeamerican, label: 'American Indian or Alaska Native',as: :boolean %>
+<%= f.input :race_asian, label: 'Asian',as: :boolean %>
+<%= f.input :race_black, label: 'Black or African American',as: :boolean %>
+<%= f.input :race_islander, label: 'Native Hawaiian or Other Pacific Islander',as: :boolean %>
+<%= f.input :race_white, label: 'White',as: :boolean %>
+<%= f.input :race_other, label: 'Other',as: :boolean %>
+
 <h3>Education, Employment and Goals</h3>
 <%= f.input :legal_status, collection: ["US Citizen","Permanent Resident","Other"], required:true %>
 <%= f.input :education, collection: ["High School","Some College","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed", required:true %>
