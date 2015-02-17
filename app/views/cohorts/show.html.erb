@@ -99,6 +99,45 @@
   </div>
 </div>
 
+<div class="ibox-content">
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="admission-application-datatable">
+      <thead>
+      <tr>
+        <th class="hidden-xs">Email</th>
+        <th>Applicant</th>
+        <th>Status</th>
+        <th class="hidden-xs">Logic</th>
+        <th class="hidden-xs">Profile</th>
+        <th class="hidden-xs">Resume</th>
+        <th class="hidden-xs">Interview</th>
+        <th class="hidden-xs hidden-sm">First Login</th>
+        <th class="hidden-xs hidden-sm">Last Login</th>
+        <th>&nbsp;</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cohort.assigned_admission_applications.each do |admission_application| %>
+          <tr>
+            <td class="hidden-xs"><%= admission_application.user.email %></td>
+            <td><%= admission_application.name %></td>
+            <td><%= admission_application.application_status_name %></td>
+            <td class="hidden-xs"><%= admission_application.logic_questions_score if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed? %></td>
+            <td class="hidden-xs hidden-sm"><%= admission_application.created_at.to_formatted_s(:short) %></td>
+            <td class="hidden-xs hidden-sm"><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
+            <td>
+              <%= link_to 'Show', admission_application_path(admission_application) %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <div class="ibox-content">
 <h3>
