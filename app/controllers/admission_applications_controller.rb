@@ -5,13 +5,15 @@ class AdmissionApplicationsController < AdminApplicationController
 
   def index
     set_default_params(:cohort)
+    set_default_params(:assigned_cohort)
     set_default_params(:app_status)
 
-    @admission_applications = AdmissionApplication.filter(params.slice(:cohort,:app_status))
+    @admission_applications = AdmissionApplication.filter(params.slice(:cohort,:assigned_cohort,:app_status))
     @status_options = [['Status',AdmissionApplication.application_status_options],['Filter',AdmissionApplication.application_status_filter_scope_options]]
     @cohort_id = params[:cohort]
     @app_status = params[:app_status]
-    @cohorts = Cohort.all
+    @assigned_cohort_id = params[:assigned_cohort]
+    @cohorts = Cohort.all.order(:id)
   end
 
   def show

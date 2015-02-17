@@ -28,7 +28,8 @@ $(document).ready ->
     updateAssignedCohortDiv()
 
   updateAssignedCohortDiv = ->
-    if $('#app_status_admission_application_application_status').val() == 'placed'
+    status = $('#app_status_admission_application_application_status').val()
+    if status == 'placed' or status == 'confirmed'
       $('#assigned_cohort').removeClass('hidden')
     else
       $('#assigned_cohort').addClass('hidden')

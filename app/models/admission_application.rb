@@ -3,11 +3,12 @@ class AdmissionApplication < ActiveRecord::Base
 
   scope :completed, -> { where.not(application_status: "not_started").where.not(application_status: "started") }
   scope :started, -> { where.not(application_status: "not_started") }
-  scope :accepted, -> { where(application_status: ["interview_passed", "placed"]) }
+  scope :accepted, -> { where(application_status: ["interview_passed", "placed","confirmed"]) }
   scope :placed, -> { where(application_status: "placed") }
   scope :needs_interview_score, -> { where(application_status: ["scheduled", "interview_passed", "placed"]).where(interview_score: 0) }
   scope :has_referral, -> { started.where.not(referral_source: nil) }
   scope :app_status, -> (status) { (self.is_status_filter_scope?(status)) ? send(status) : where(application_status: status) }
+  scope :assigned_cohort, -> (cohort) { where(assigned_cohort: cohort)}
   scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
 
   # scope :aid_eligible, -> { where(income: 0...23340) }
@@ -61,6 +62,7 @@ class AdmissionApplication < ActiveRecord::Base
       scheduled: 'Scheduled',
       interview_passed: 'Interview Passed',
       placed: 'Placed',
+      confirmed: 'Confirmed',
       declined: 'Declined'
   }
 
@@ -87,6 +89,10 @@ class AdmissionApplication < ActiveRecord::Base
     "#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
   end
 
+  def assigned_cohort_name
+    self.assigned_cohort.name unless self.assigned_cohort_id.blank?
+  end
+
   def full_address
     "#{self.address}\n#{self.city}, #{self.state} #{self.zip_code}" unless self.address.blank? || self.city.blank? || self.state.blank? || self.zip_code.blank?
   end
@@ -100,7 +106,7 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def placed?
-    application_status == "placed"
+    application_status == "placed" || application_status == 'confirmed'
   end
 
   def active?

@@ -8,7 +8,8 @@
   <div class="row">
     <div class="col-md-4 float-e-margins">
       <%= bootstrap_form_tag url: admission_applications_path, method: "get", layout: :vertical do |f| %>
-          <%= f.select(:cohort, options_from_collection_for_select(@cohorts, :id, :name, @cohort_id), {label: "Cohort", prompt: "All"}) %>
+          <%= f.select(:cohort, options_from_collection_for_select(@cohorts, :id, :name, @cohort_id), {label: "Cohort Applied To", prompt: "All"}) %>
+          <%= f.select(:assigned_cohort, options_from_collection_for_select(@cohorts, :id, :name, @assigned_cohort_id), {label: "Cohort Assigned To", prompt: "All"}) %>
           <%= f.select :app_status, grouped_options_for_select(@status_options, @app_status), {label: "Status", prompt: "All"} %>
           <%= f.submit "Search" %>
       <% end %>
@@ -25,8 +26,7 @@
         <th class="hidden-xs">Profile</th>
         <th class="hidden-xs">Resume</th>
         <th class="hidden-xs">Interview</th>
-        <th class="hidden-xs hidden-sm">First Login</th>
-        <th class="hidden-xs hidden-sm">Last Login</th>
+        <th class="hidden-xs hidden-sm">Assigned Cohort</th>
         <th>&nbsp;</th>
       </tr>
       </thead>
@@ -41,8 +41,7 @@
             <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed? %></td>
-            <td class="hidden-xs hidden-sm"><%= admission_application.created_at.to_formatted_s(:short) %></td>
-            <td class="hidden-xs hidden-sm"><%= admission_application.user.last_sign_in_at.to_formatted_s(:short) %></td>
+            <td class="hidden-xs hidden-sm"><%= admission_application.assigned_cohort_name %></td>
             <td>
               <%= link_to 'Show', admission_application_path(admission_application) %>
               <%#= link_to 'Edit', edit_admission_application_path(admission_application) %>
