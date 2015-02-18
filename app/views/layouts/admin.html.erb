@@ -70,7 +70,7 @@
     </div>
   </nav>
 
-  <div id="page-wrapper" class="gray-bg">
+  <div id="page-wrapper" class="gray-bg<%= ' sidebar-content' if @sidebar_content %>">
     <div class="row border-bottom">
       <nav class="navbar navbar-static-top<%= @display_page_header ? '' : ' white-bg' %><%= ' dev' if ENV['RACK_ENV'] == 'development'  %>" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -90,6 +90,11 @@
 
       </nav>
     </div>
+
+    <% if @sidebar_content %>
+        <%= yield :right_side_bar %>
+    <% end %>
+
     <% if @display_page_header %>
         <%= render "layouts/admin/page_header"  %>
     <% end %>
