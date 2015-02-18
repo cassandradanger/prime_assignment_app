@@ -13,7 +13,7 @@ class AdmissionApplicationsController < AdminApplicationController
     @cohort_id = params[:cohort]
     @app_status = params[:app_status]
     @assigned_cohort_id = params[:assigned_cohort]
-    @cohorts = Cohort.all.order(:id)
+    @cohorts = Cohort.all
   end
 
   def show

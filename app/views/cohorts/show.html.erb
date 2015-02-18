@@ -1,17 +1,14 @@
 <% content_for :page_title, "Cohort :: #{@cohort.name}" %>
+<% content_for :page_title_nav do %>
+    <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_cohort_url(@cohort), class: 'btn btn-white btn-sm' %>
+    <%= link_to('<i class="fa fa-times"></i> Delete'.html_safe, @cohort, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-white btn-sm') unless @cohort.has_applications? %>
+<% end %>
+
+
+
+
 
 <div class="row">
-  <div class="col-md-3 col-sm-6">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Users</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margins"><%= @cohort.admission_applications.count %></h1>
-        <small>Total Registrations</small>
-      </div>
-    </div>
-  </div>
-
-
   <div class="col-md-3 col-sm-6">
     <div class="ibox">
       <div class="ibox-title"><h5>Applicants</h5></div>
@@ -21,7 +18,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="col-md-3 col-sm-6">
     <div class="ibox">
@@ -35,15 +31,30 @@
 
   <div class="col-md-3 col-sm-6">
     <div class="ibox">
-      <div class="ibox-title"><h5>Accepted Students</h5></div>
+      <div class="ibox-title"><h5>Accepted</h5></div>
       <div class="ibox-content">
-        <h1 class="no-margins"><%= @cohort.assigned_admission_applications.count %></h1>
-        <small>Total Students</small>
+        <h1 class="no-margins"><%= @cohort.accepted_application_count %></h1>
+        <div class="stat-percent font-bold <%= @cohort.accepted_application_pct >= 80 ? 'text-navy' : 'text-danger' %>">
+          <%= number_to_percentage(@cohort.accepted_application_pct,precision:0) %>
+        </div>
+        <small>Accepted Students</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-sm-6">
+    <div class="ibox">
+      <div class="ibox-title"><h5>Confirmed</h5></div>
+      <div class="ibox-content">
+        <h1 class="no-margins"><%= @cohort.confirmed_application_count %></h1>
+        <div class="stat-percent font-bold <%= @cohort.confirmed_application_pct >= 80 ? 'text-navy' : 'text-danger' %>">
+          <%= number_to_percentage(@cohort.confirmed_application_pct,precision:0) %>
+        </div>
+        <small>Confirmed Students</small>
       </div>
     </div>
   </div>
 </div>
-
 
 <div class="row">
   <div class="col-lg-12">

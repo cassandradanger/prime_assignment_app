@@ -89,6 +89,11 @@ class AdmissionApplication < ActiveRecord::Base
     "#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
   end
 
+  def age
+    now = Time.now.utc.to_date
+    now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
+
   def assigned_cohort_name
     self.assigned_cohort.name unless self.assigned_cohort_id.blank?
   end

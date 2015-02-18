@@ -4,8 +4,10 @@ class CohortsController < AdminApplicationController
   respond_to :html
 
   def index
-    @cohorts = Cohort.all
-    respond_with(@cohorts)
+    set_default_params(:status)
+
+    @cohorts = Cohort.filter(params.slice(:status))
+    @status_filter = params[:status]
   end
 
   def show
@@ -47,14 +49,14 @@ class CohortsController < AdminApplicationController
       when 'payment_option'
         render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group(:payment_option).count
       when 'age'
-        render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group_by_year(:birthdate, format: "%Y").count
+        render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group("date_part('year',age(birthdate))").order("date_part_year_age_birthdate").count
       when 'created_and_completed'
         filter = 90.days.ago.midnight
         case params[:time_filter]
           when 'week'
             filter = 1.week.ago.midnight
           when 'month'
-            filter =  1.month.ago.midnight
+            filter = 1.month.ago.midnight
         end
         @new_users_date60 = Cohort.find(params[:cohort_id]).assigned_admission_applications.group_by_day(:created_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
         @apps_by_create_date60 = Cohort.find(params[:cohort_id]).assigned_admission_applications.started.group_by_day(:created_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
@@ -65,11 +67,23 @@ class CohortsController < AdminApplicationController
 
 
   private
-    def set_cohort
-      @cohort = Cohort.find(params[:id])
-    end
+  def set_cohort
+    @cohort = Cohort.find(params[:id])
+  end
 
-    def cohort_params
-      params.require(:cohort).permit(:name, :prework_start, :classroom_start, :graduation, :applications_open, :applications_close, :target_size)
-    end
+  def cohort_params
+    params.require(:cohort).permit(:name, :prework_start, :classroom_start, :graduation, :applications_open, :applications_close, :target_size)
+  end
+
+  def set_default_params(param)
+    session_name = "cohort_#{param}_filter".to_sym
+    params[param] ||= session[session_name]
+    session[session_name] = params[param]
+  end
+
+  def group_apps_by_age
+    apps = Cohort.find(params[:cohort_id]).assigned_admission_applications
+    output = {}
+
+  end
 end
