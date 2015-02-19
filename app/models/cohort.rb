@@ -46,6 +46,39 @@ class Cohort < ActiveRecord::Base
     pct_of_target(self.confirmed_application_count)
   end
 
+  def accepted_applicants_by_age_group
+    rtn = AdmissionApplication.select('(s.d * 5)')
+      .from('generate_series(0, 20) s(d)')
+      .joins("left outer join admission_applications a on s.d = floor(date_part('year',age(a.birthdate)) / 5)")
+      .where('a.assigned_cohort_id = ?', self.id)
+      .group('s.d')
+      .order('s.d').count('(s.d * 5)')
+    rtn2 = Hash.new
+    rtn.each do |key,val|
+      rtn2["#{(key*5)} - #{(key*5)+4}"]=val
+    end
+    rtn2
+  end
+  # def accepted_applicants_by_age_group
+  #   query = <<-SQL
+  #
+  #     select (5 * s.d) as group, count(date_part('year',age(a.birthdate))) as count
+  #     from generate_series(0, 20) s(d)
+  #     left outer join admission_applications a on s.d = floor(date_part('year',age(a.birthdate)) / 5)
+  #     where a.assigned_cohort_id = 1
+  #     group by s.d
+  #     order by s.d
+  #
+  #   SQL
+  #   Cohort.unscoped.find_by_sql(query)
+  #   # select("select 10 * s.d")
+  #   #     .from('from generate_series(0, 10) s(d)')
+  #   #     # .joins("left outer join cohorts c on s.d = floor(date_part('year',age(c.birthdate)) / 10)")
+  #   #     # .where("c.id = ?",self.id)
+  #   #     # .group("s.d")
+  #   #     # .order("s.d")
+  # end
+
   protected
   def pct_of_target(num)
     val = (num.fdiv(self.target_size)*100).to_int

@@ -4,74 +4,92 @@
     <%= link_to('<i class="fa fa-times"></i> Delete'.html_safe, @cohort, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-white btn-sm') unless @cohort.has_applications? %>
 <% end %>
 
-
-
-
-
 <div class="row">
-  <div class="col-md-3 col-sm-6">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Applicants</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margins"><%= @cohort.admission_applications.started.count %></h1>
-        <small>Started Applications</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3 col-sm-6">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Completed</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margins"><%= @cohort.admission_applications.completed.count %></h1>
-        <small>Completed Applications</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3 col-sm-6">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Accepted</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margins"><%= @cohort.accepted_application_count %></h1>
-        <div class="stat-percent font-bold <%= @cohort.accepted_application_pct >= 80 ? 'text-navy' : 'text-danger' %>">
-          <%= number_to_percentage(@cohort.accepted_application_pct,precision:0) %>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="ibox">
+          <div class="ibox-title"><h5>Applicants</h5></div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%= @cohort.admission_applications.started.count %></h1>
+            <small>Started Applications</small>
+          </div>
         </div>
-        <small>Accepted Students</small>
       </div>
-    </div>
-  </div>
 
-  <div class="col-md-3 col-sm-6">
-    <div class="ibox">
-      <div class="ibox-title"><h5>Confirmed</h5></div>
-      <div class="ibox-content">
-        <h1 class="no-margins"><%= @cohort.confirmed_application_count %></h1>
-        <div class="stat-percent font-bold <%= @cohort.confirmed_application_pct >= 80 ? 'text-navy' : 'text-danger' %>">
-          <%= number_to_percentage(@cohort.confirmed_application_pct,precision:0) %>
+      <div class="col-md-3 col-sm-6">
+        <div class="ibox">
+          <div class="ibox-title"><h5>Completed</h5></div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%= @cohort.admission_applications.completed.count %></h1>
+            <small>Completed Applications</small>
+          </div>
         </div>
-        <small>Confirmed Students</small>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="ibox">
+          <div class="ibox-title"><h5>Accepted</h5></div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%= @cohort.accepted_application_count %></h1>
+
+            <div class="stat-percent font-bold <%= @cohort.accepted_application_pct >= 80 ? 'text-navy' : 'text-danger' %>">
+              <%= number_to_percentage(@cohort.accepted_application_pct, precision: 0) %>
+            </div>
+            <small>Accepted Students</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="ibox">
+          <div class="ibox-title"><h5>Confirmed</h5></div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%= @cohort.confirmed_application_count %></h1>
+
+            <div class="stat-percent font-bold <%= @cohort.confirmed_application_pct >= 80 ? 'text-navy' : 'text-danger' %>">
+              <%= number_to_percentage(@cohort.confirmed_application_pct, precision: 0) %>
+            </div>
+            <small>Confirmed Students</small>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="ibox">
-      <div class="ibox-title">
-      <h5>Year of Birth</h5>
-      </div>
-      <div class="ibox-content">
-        <div class="row">
-          <div class="col-md-12 ">
-            <%= column_chart cohort_chart_data_path(cohort_id: @cohort, type: 'age'), library: {theme: 'maximized'} %>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Ages Ranges</h5>
+          </div>
+          <div class="ibox-content">
+            <div class="row">
+              <div class="col-md-12 ">
+                <%= column_chart cohort_chart_data_path(cohort_id: @cohort, type: 'age'), library: {theme: 'maximized'} %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="col-md-4">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>Timeline</h5>
+      </div>
+      <div class="ibox-content inspinia-timeline">
+        <%= render "cohorts/timeline", dateval: @cohort.applications_open , description: 'Open Enrollment', icon: 'fa-file-o' %>
+        <%= render "cohorts/timeline", dateval: @cohort.applications_close , description: 'Enrollment Closed',icon: 'fa-lock' %>
+        <%= render "cohorts/timeline", dateval: @cohort.prework_start , description: 'Pre-work', icon: 'fa-laptop' %>
+        <%= render "cohorts/timeline", dateval: @cohort.classroom_start , description: 'Classroom', icon: 'fa-institution' %>
+        <%= render "cohorts/timeline", dateval: @cohort.graduation , description: 'Graduation',icon: 'fa-graduation-cap' %>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 
 <div class="row">
@@ -94,7 +112,11 @@
       <div class="ibox-content ">
         <%= pie_chart cohort_chart_data_path(cohort_id: @cohort, type: 'payment_option'), library: {theme: 'maximized'} %>
       </div>
-      <small>Of <%= @cohort.assigned_admission_applications.aid_eligible.count %> eligible students <%= @cohort.assigned_admission_applications.aid_eligible.not_aid_seeking.count %> are not seeking aid. <%= @cohort.assigned_admission_applications.aid_seeking.aid_ineligible.count %> aid seekers aren't eligible.</small>
+      <small>Of <%= @cohort.assigned_admission_applications.aid_eligible.count %> eligible
+        students <%= @cohort.assigned_admission_applications.aid_eligible.not_aid_seeking.count %> are not seeking
+        aid. <%= @cohort.assigned_admission_applications.aid_seeking.aid_ineligible.count %> aid seekers aren't
+        eligible.
+      </small>
     </div>
   </div>
 
@@ -108,44 +130,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-<div class="ibox-content">
-<h3>
-  <%= @cohort.name %>
-</h3>
-
-<p>
-  <strong>Prework start:</strong>
-  <%= @cohort.prework_start %>
-</p>
-
-<p>
-  <strong>Classroom start:</strong>
-  <%= @cohort.classroom_start %>
-</p>
-
-<p>
-  <strong>Graduation:</strong>
-  <%= @cohort.graduation %>
-</p>
-
-<p>
-  <strong>Applications open:</strong>
-  <%= @cohort.applications_open %>
-</p>
-
-<p>
-  <strong>Applications close:</strong>
-  <%= @cohort.applications_close %>
-</p>
-
-<p>
-  <strong>Target Size:</strong>
-  <%= @cohort.target_size %>
-</p>
-
-<%= link_to 'Edit', edit_cohort_path(@cohort) %> |
-<%= link_to 'Back', cohorts_path %>
 </div>
