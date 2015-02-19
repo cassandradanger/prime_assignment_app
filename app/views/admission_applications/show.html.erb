@@ -35,7 +35,7 @@
           <div id="assigned_cohort" class="<%= 'hidden' unless @admission_application.placed? %>">
             <%= f.collection_select(:assigned_cohort_id, @admission_application.cohorts, :id, :name ,{include_blank: 'Unassigned', label: 'Assigned Cohort'} ) %>
           </div>
-          <%= f.submit "Update Status" %>
+          <%= f.submit "Update Status", class: 'btn btn-default btn-sm' %>
       <% end %>
     </div>
   </div>
@@ -173,7 +173,7 @@
                           <%= ff.hidden_field :sub_type %>
                           <%= ff.hidden_field :admin_id %>
                       <% end %>
-                      <%= f.submit "Update Scores", id: "technical_score_submit" %>
+                      <%= f.submit "Update Scores", id: "technical_score_submit", class: 'btn btn-default btn-sm' %>
                   <% end %>
                 </div>
               </div>
@@ -233,7 +233,7 @@
                           <%= answer_form.hidden_field :id, :value => answer_form.object.id %>
                       <% end %>
                   <% end %>
-                  <%= f.submit "Update Scores" %>
+                  <%= f.submit "Update Scores", class: 'btn btn-default btn-sm' %>
               <% end %>
             </div>
           </div>
@@ -280,7 +280,7 @@
                     <%= f.text_field :dependents, label: "Number of dependents" %>
                   <%= f.select(:geography, ["Urban","Suburban","Rural"], prompt: "") %>
                   <%= f.check_box :veteran, label: "Are you a United States Military Veteran?" %>
-                  <%= f.submit "Update Demographics" %>
+                  <%= f.submit "Update Demographics", class: 'btn btn-default btn-sm' %>
               <% end %>
             </div>
           </div>
@@ -302,7 +302,7 @@
 <div class="col-lg-12">
                   <%= bootstrap_form_for @admission_application, :namespace => "interview_score" do |f| -%>
                       <%= f.select(:interview_score, AdmissionApplication.interview_score_options, label: "Interview Score") %>
-                      <%= f.submit "Update Scores", id: "interview_score_submit" %>
+                      <%= f.submit "Update Scores", id: "interview_score_submit", class: 'btn btn-default btn-sm' %>
                   <% end %>
 </div>
               </div>

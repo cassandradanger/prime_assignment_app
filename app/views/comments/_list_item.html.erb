@@ -1,4 +1,4 @@
-<small class="pull-right text-navy"><%= time_ago_in_words(comment.created_at) unless comment.created_at.blank? %> ago</small>
+<small class="pull-right"><%= time_ago_in_words(comment.created_at) unless comment.created_at.blank? %> ago</small>
 <strong><%= comment.admin.name_and_email unless comment.admin.blank? || comment.admin.email.blank? %></strong>
 
 <div><%= simple_format(raw comment.content) %></div>

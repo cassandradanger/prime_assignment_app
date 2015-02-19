@@ -49,7 +49,8 @@ class CohortsController < AdminApplicationController
       when 'payment_option'
         render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group(:payment_option).count
       when 'age'
-        render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group("date_part('year',age(birthdate))").order("date_part_year_age_birthdate").count
+        # render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group("date_part('year',age(birthdate))").order("date_part_year_age_birthdate").count
+        render json: Cohort.find(params[:cohort_id]).accepted_applicants_by_age_group
       when 'created_and_completed'
         filter = 90.days.ago.midnight
         case params[:time_filter]
