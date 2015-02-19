@@ -11,7 +11,7 @@
           <%= f.select(:cohort, options_from_collection_for_select(@cohorts, :id, :name, @cohort_id), {label: "Cohort Applied To", prompt: "All"}) %>
           <%= f.select(:assigned_cohort, options_from_collection_for_select(@cohorts, :id, :name, @assigned_cohort_id), {label: "Cohort Assigned To", prompt: "All"}) %>
           <%= f.select :app_status, grouped_options_for_select(@status_options, @app_status), {label: "Status", prompt: "All"} %>
-          <%= f.submit "Search" %>
+          <%= f.submit "Search", class: 'btn btn-default btn-sm'%>
       <% end %>
     </div>
   </div>
@@ -43,7 +43,7 @@
             <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed? %></td>
             <td class="hidden-xs hidden-sm"><%= admission_application.assigned_cohort_name %></td>
             <td>
-              <%= link_to 'Show', admission_application_path(admission_application) %>
+              <%= link_to 'View'.html_safe, admission_application_path(admission_application) %>
               <%#= link_to 'Edit', edit_admission_application_path(admission_application) %>
               <%#= link_to 'Destroy', admission_application, method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
