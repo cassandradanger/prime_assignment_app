@@ -1,11 +1,12 @@
 class AdmissionApplication < ActiveRecord::Base
   include Filterable
 
-  scope :completed, -> { where.not(application_status: "not_started").where.not(application_status: "started") }
-  scope :started, -> { where.not(application_status: "not_started") }
-  scope :accepted, -> { where(application_status: ["interview_passed", "placed","confirmed"]) }
-  scope :placed, -> { where(application_status: "placed") }
-  scope :needs_interview_score, -> { where(application_status: ["scheduled", "interview_passed", "placed"]).where(interview_score: 0) }
+  scope :completed, -> { where.not(application_status: 'not_started').where.not(application_status: 'started') }
+  scope :started, -> { where.not(application_status: 'not_started') }
+  scope :accepted, -> { where(application_status: ['interview_passed', 'placed','confirmed']) }
+  scope :placed, -> { where(application_status: 'placed') }
+  scope :all_declined, -> { where(application_status: ['declined_by_applicant','declined_action_required','declined']) }
+  scope :needs_interview_score, -> { where(application_status: ['scheduled', 'interview_passed', 'placed']).where(interview_score: 0) }
   scope :has_referral, -> { started.where.not(referral_source: nil) }
   scope :app_status, -> (status) { (self.is_status_filter_scope?(status)) ? send(status) : where(application_status: status) }
   scope :assigned_cohort, -> (cohort) { where(assigned_cohort: cohort)}
@@ -55,7 +56,7 @@ class AdmissionApplication < ActiveRecord::Base
   validates :income, :numericality => {:less_than_or_equal_to => 1000000, :message => "Seriously?"}, allow_blank: true
 
   STATUS_OPTIONS = {
-      not_started: "Not Started",
+      not_started: 'Not Started',
       started: 'Started',
       complete: 'Complete',
       needs_scheduling: 'Needs Scheduling',
@@ -63,13 +64,16 @@ class AdmissionApplication < ActiveRecord::Base
       interview_passed: 'Interview Passed',
       placed: 'Placed',
       confirmed: 'Confirmed',
+      declined_by_applicant: 'Declined by Applicant',
+      declined_action_required: 'Declined, Action Required',
       declined: 'Declined'
   }
 
   STATUS_FILTER_SCOPES = {
       completed: 'Completed',
       needs_interview_score: 'Needs Interview Score',
-      accepted: 'Accepted'
+      accepted: 'Accepted',
+      all_declined: 'Declined'
   }
 
   COMMENT_TYPE = {
