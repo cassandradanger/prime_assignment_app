@@ -4,6 +4,8 @@
 <div class="ibox-content">
   <h3><%= @admission_application.name %></h3>
   <dl>
+    <dt>User ID</dt>
+    <dd><%= @admission_application.user.id %></dd>
     <dt>Email</dt>
     <dd><%= @admission_application.user.email %></dd>
     <dt>Phone</dt>
