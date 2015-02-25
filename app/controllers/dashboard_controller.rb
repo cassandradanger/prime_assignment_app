@@ -7,6 +7,9 @@ class DashboardController < AdminApplicationController
     @apps_completed_count = AdmissionApplication.completed.count
     @apps_accepted_count = AdmissionApplication.accepted.count
     @app_line_time_filter = set_apps_time_filter
+    @user_filter_count = User.where('created_at > ?', @time_filter).count
+    @apps_started_filter_count = AdmissionApplication.started.where('created_at > ?', @time_filter).count
+    @apps_completed_filter_count = AdmissionApplication.completed.where('completed_at > ?', @time_filter).count
     # @apps_by_create_date60 = AdmissionApplication.started.where('created_at > ?', 60.days.ago).group_by_day(:created_at, format: "%m/%d/%Y").count
     # @apps_by_completed_date60 = AdmissionApplication.completed.where('completed_at > ?', 60.days.ago).group_by_day(:completed_at, format: "%m/%d/%Y").count
     # @apps_by_create_date60.merge(@apps_by_completed_date60)
@@ -26,16 +29,10 @@ class DashboardController < AdminApplicationController
       when 'payment_option'
         render json: AdmissionApplication.completed.group(:payment_option).count
       when 'created_and_completed'
-        filter = 90.days.ago.midnight
-        case params[:time_filter]
-          when 'week'
-            filter = 1.week.ago.midnight
-          when 'month'
-            filter =  1.month.ago.midnight
-        end
-        @new_users_date60 = AdmissionApplication.group_by_day(:created_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
-        @apps_by_create_date60 = AdmissionApplication.started.group_by_day(:created_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
-        @apps_by_completed_date60 = AdmissionApplication.completed.group_by_day(:completed_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
+        set_apps_time_filter
+        @new_users_date60 = AdmissionApplication.group_by_day(:created_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
+        @apps_by_create_date60 = AdmissionApplication.started.group_by_day(:created_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
+        @apps_by_completed_date60 = AdmissionApplication.completed.group_by_day(:completed_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
         render json: merge_started_and_complete
     end
   end
@@ -60,6 +57,17 @@ class DashboardController < AdminApplicationController
       cookies[:dashboard_apps_time_filter] = params[:apps_time_filter]
       filter = params[:apps_time_filter]
     end
+    @time_filter = 90.days.ago.midnight
+    @time_filter_days = 90
+    case filter
+      when 'week'
+        @time_filter = 1.week.ago.midnight
+        @time_filter_days = 7
+      when 'month'
+        @time_filter =  1.month.ago.midnight
+        @time_filter_days = (Date.today - 1.month.ago.to_date).to_i
+    end
     filter
   end
+
 end

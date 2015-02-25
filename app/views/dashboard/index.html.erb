@@ -5,7 +5,7 @@
     <div class="ibox">
       <div class="ibox-title"><h5>Users</h5></div>
       <div class="ibox-content">
-        <h1 class="no-margins"><%= @user_count %></h1>
+        <h1 class="no-margins"><%= number_with_precision @user_count, precision: 0, delimiter: ',' %></h1>
         <small>Total Users</small>
       </div>
     </div>
@@ -16,7 +16,7 @@
     <div class="ibox">
       <div class="ibox-title"><h5>Started</h5></div>
       <div class="ibox-content">
-        <h1 class="no-margins"><%= @apps_count %></h1>
+        <h1 class="no-margins"><%= number_with_precision @apps_count, precision: 0, delimiter: ',' %></h1>
         <small>Started Applications</small>
       </div>
     </div>
@@ -25,9 +25,9 @@
 
   <div class="col-md-3 col-sm-6">
     <div class="ibox">
-      <div class="ibox-title"><h5>Complete</h5></div>
+      <div class="ibox-title"><h5>Completed</h5></div>
       <div class="ibox-content">
-        <h1 class="no-margins"><%= @apps_completed_count %></h1>
+        <h1 class="no-margins"><%= number_with_precision @apps_completed_count, precision: 0, delimiter: ',' %></h1>
         <small>Completed Applications</small>
       </div>
     </div>
@@ -37,7 +37,7 @@
     <div class="ibox">
       <div class="ibox-title"><h5>Accepted</h5></div>
       <div class="ibox-content">
-        <h1 class="no-margins"><%= @apps_accepted_count %></h1>
+        <h1 class="no-margins"><%= number_with_precision @apps_accepted_count, precision: 0, delimiter: ',' %></h1>
         <small>Accepted Applications</small>
       </div>
     </div>
@@ -61,8 +61,33 @@
       </div>
       <div class="ibox-content">
         <div class="row">
-          <div class="col-md-12 ">
+          <div class="col-md-9 ">
             <%= line_chart dashboard_chart_data_path(type: 'created_and_completed', time_filter: @app_line_time_filter), library: {theme: 'maximized', legend: {position: 'in', alignment: 'end'}} %>
+          </div>
+          <div class="col-md-3">
+            <ul class="stat-list">
+              <li>
+                <h2 class="no-margins"><%= number_with_precision @user_filter_count, precision: 0, delimiter: ',' %></h2>
+                <small>New Users in period</small>
+                <div class="stat-percent">
+                  <%= number_with_precision(@user_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %> / day
+                </div>
+              </li>
+              <li>
+                <h2 class="no-margins "><%= number_with_precision @apps_started_filter_count, precision: 0, delimiter: ',' %></h2>
+                <small>Started in period</small>
+                <div class="stat-percent">
+                  <%= number_with_precision(@apps_started_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %> / day
+                </div>
+              </li>
+              <li>
+                <h2 class="no-margins "><%= number_with_precision @apps_completed_filter_count, precision: 0, delimiter: ',' %></h2>
+                <small>Completed in period</small>
+                <div class="stat-percent">
+                  <%= number_with_precision(@apps_completed_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %> / day
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
