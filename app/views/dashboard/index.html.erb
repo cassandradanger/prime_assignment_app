@@ -49,6 +49,7 @@
     <div class="ibox">
       <div class="ibox-title">
         <h5>Applications</h5>
+
         <div class="pull-right">
           <%= bootstrap_form_tag url: dashboard_path, method: 'get' do |f| %>
               <div class="btn-group">
@@ -61,7 +62,7 @@
       </div>
       <div class="ibox-content">
         <div class="row">
-          <div class="col-md-9 ">
+          <div class="col-md-9 m-b-sm">
             <%= line_chart dashboard_chart_data_path(type: 'created_and_completed', time_filter: @app_line_time_filter), library: {theme: 'maximized', legend: {position: 'in', alignment: 'end'}} %>
           </div>
           <div class="col-md-3">
@@ -70,24 +71,108 @@
                 <h2 class="no-margins"><%= number_with_precision @user_filter_count, precision: 0, delimiter: ',' %></h2>
                 <small>New Users in period</small>
                 <div class="stat-percent">
-                  <%= number_with_precision(@user_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %> / day
+                  <%= number_with_precision(@user_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %>
+                  / day
                 </div>
               </li>
               <li>
                 <h2 class="no-margins "><%= number_with_precision @apps_started_filter_count, precision: 0, delimiter: ',' %></h2>
                 <small>Started in period</small>
                 <div class="stat-percent">
-                  <%= number_with_precision(@apps_started_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %> / day
+                  <%= number_with_precision(@apps_started_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %>
+                  / day
                 </div>
               </li>
               <li>
                 <h2 class="no-margins "><%= number_with_precision @apps_completed_filter_count, precision: 0, delimiter: ',' %></h2>
                 <small>Completed in period</small>
                 <div class="stat-percent">
-                  <%= number_with_precision(@apps_completed_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %> / day
+                  <%= number_with_precision(@apps_completed_filter_count.fdiv(@time_filter_days), precision: 1, delimiter: ',') %>
+                  / day
                 </div>
               </li>
             </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Cohorts</h5>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <div class="col-md-2">
+            <ul class="stat-list m-b-md">
+              <li>
+                <h2 class="no-margins"><%= @cohorts_active_count %></h2>
+                <small>Active Cohorts</small>
+              </li>
+              <li>
+                <h2 class="no-margins "><%= @cohorts_target_count %></h2>
+                <small>Target Head Count</small>
+              </li>
+              <li>
+                <h2 class="no-margins "><%= @cohorts_accepted_count %></h2>
+                <small>Accepted Applicants</small>
+                <div class="stat-percent font-bold <%= @cohorts_accepted_pct >= 80 ? 'text-navy' : 'text-danger' %>">
+                  <%= number_to_percentage(@cohorts_accepted_pct, precision: 0) %>
+                </div>
+                <div class="progress progress-mini">
+                  <div style="width: <%= number_to_percentage(@cohorts_accepted_pct) %>" class="progress-bar"></div>
+                </div>
+              </li>
+              <li>
+                <h2 class="no-margins"><%= @cohorts_confirmed_count %></h2>
+                <small>Confirmed Students</small>
+                <div class="stat-percent font-bold <%= @cohorts_confirmed_pct >= 80 ? 'text-navy' : 'text-danger' %>">
+                  <%= number_to_percentage(@cohorts_confirmed_pct, precision: 0) %>
+                </div>
+                <div class="progress progress-mini">
+                  <div style="width: <%= number_to_percentage(@cohorts_confirmed_pct) %>" class="progress-bar"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-10">
+            <div class="project-list table-responsive">
+              <table class="table table-hover" id="cohorts-table">
+                <tbody>
+                <% @cohorts.each do |cohort| %>
+                    <tr>
+                      <td class="hidden-xs hidden-sm">
+                        <%= cohort_status_label cohort.status %>
+                      </td>
+                      <td class="project-title">
+                        <%= link_to cohort.name, cohort %>
+                        <div class="hidden-xs">
+                          <small><%= cohort_full_label cohort %>
+                            <span class="hidden-sm">(<%= cohort_next_action_label cohort %>)</span></small>
+                        </div>
+                      </td>
+                      <td class="project-completion hidden-xs">
+                        <small>Accepted Applicants: <%= cohort.accepted_application_count %></small>
+                        <div class="progress progress-mini">
+                          <div style="width: <%= number_to_percentage(cohort.accepted_application_pct) %>" class="progress-bar"></div>
+                        </div>
+                      </td>
+                      <td class="project-completion">
+                        <small>Confirmed Students: <%= cohort.confirmed_application_count %></small>
+                        <div class="progress progress-mini">
+                          <div style="width: <%= number_to_percentage(cohort.confirmed_application_pct) %>" class="progress-bar"></div>
+                        </div>
+                      </td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

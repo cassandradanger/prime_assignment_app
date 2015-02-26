@@ -19,29 +19,16 @@
   <div class="m-t-md">
     <div class="project-list table-responsive">
       <table class="table table-hover" id="cohorts-table">
-        <!--thead>
-        <tr>
-          <th>Name</th>
-          <th class="hidden-xs hidden-sm">Prework start</th>
-          <th>Classroom start</th>
-          <th class="hidden-xs hidden-sm">Graduation</th>
-          <th class="hidden-xs hidden-sm">Applications open</th>
-          <th class="hidden-xs hidden-sm">Applications close</th>
-        </tr>
-        </thead-->
-
         <tbody>
         <% @cohorts.each do |cohort| %>
             <tr>
               <td class="hidden-xs hidden-sm">
-                <span class="label <%= cohort.active? ? 'label-primary' : 'label-default' %>">
-                  <%= cohort.status %>
-                </span>
+                <%= cohort_status_label cohort.status %>
               </td>
               <td class="project-title">
                 <%= link_to cohort.name, cohort %>
                 <div class="hidden-xs">
-                <small><%= cohort.label %></small>
+                <small><%= cohort_full_label cohort %> <span class="hidden-xs">(<%= cohort_next_action_label cohort %>)</span></small>
                 </div>
               </td>
               <td class="project-completion hidden-xs">

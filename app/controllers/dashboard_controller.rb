@@ -10,14 +10,13 @@ class DashboardController < AdminApplicationController
     @user_filter_count = User.where('created_at > ?', @time_filter).count
     @apps_started_filter_count = AdmissionApplication.started.where('created_at > ?', @time_filter).count
     @apps_completed_filter_count = AdmissionApplication.completed.where('completed_at > ?', @time_filter).count
-    # @apps_by_create_date60 = AdmissionApplication.started.where('created_at > ?', 60.days.ago).group_by_day(:created_at, format: "%m/%d/%Y").count
-    # @apps_by_completed_date60 = AdmissionApplication.completed.where('completed_at > ?', 60.days.ago).group_by_day(:completed_at, format: "%m/%d/%Y").count
-    # @apps_by_create_date60.merge(@apps_by_completed_date60)
-    # @apps_by_accepted_date60 = AdmissionApplication.accepted.where('created_at > ?', 60.days.ago).group_by_day(:created_at, format: "%m/%d").count
-    # @apps_by_payment_option = AdmissionApplication.completed.group(:payment_option).count
-    # @apps_by_referral_source = AdmissionApplication.has_referral.group(:referral_source).count
-    # @apps_by_referral_source_date7 = AdmissionApplication.has_referral.where('created_at >= ?', 60.days.ago).group(:referral_source).group_by_day(:created_at, format: "%m/%d/%Y").count
-    # @apps_by_created_and_completed_date60 = merge_started_and_complete
+    @cohorts = Cohort.active
+    @cohorts_active_count = Cohort.active.count
+    @cohorts_target_count = Cohort.active.sum(:target_size)
+    @cohorts_accepted_count = AdmissionApplication.where(assigned_cohort: @cohorts).count
+    @cohorts_confirmed_count = AdmissionApplication.where(assigned_cohort: @cohorts).where(application_status: 'confirmed').count
+    @cohorts_accepted_pct = @cohorts_target_count == 0 ? 0 : @cohorts_accepted_count.fdiv(@cohorts_target_count) * 100
+    @cohorts_confirmed_pct = @cohorts_target_count == 0 ? 0 : @cohorts_confirmed_count.fdiv(@cohorts_target_count) * 100
   end
 
   def chart

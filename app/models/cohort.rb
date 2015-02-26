@@ -26,10 +26,26 @@ class Cohort < ActiveRecord::Base
   end
 
   def status
-    status = 'Active'
-    status = 'Inactive' unless self.active?
+    # Status is based on where the cohort is in the process. - Date Based.
+    status = 'Unknown'
+    case
+      when Date.today <= applications_open
+        status = 'Pre-Applications'
+      when Date.today <= applications_close
+        status = 'Applications Open'
+      when Date.today <= prework_start
+        status = 'Applications Closed'
+      when Date.today <= classroom_start
+        status = 'Prework'
+      when Date.today <= graduation
+        status = 'Classroom'
+      else
+        status = 'Complete'
+    end
     status
   end
+
+
 
   def accepted_application_count
     self.assigned_admission_applications.count
