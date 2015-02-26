@@ -63,7 +63,7 @@
       <div class="ibox-content">
         <div class="row">
           <div class="col-md-9 m-b-sm">
-            <%= line_chart dashboard_chart_data_path(type: 'created_and_completed', time_filter: @app_line_time_filter), library: {theme: 'maximized', legend: {position: 'in', alignment: 'end'}} %>
+            <%= area_chart dashboard_chart_data_path(type: 'created_and_completed', time_filter: @app_line_time_filter), library: {theme: 'maximized',isStacked: false, legend: {position: 'in', alignment: 'end'}} %>
           </div>
           <div class="col-md-3">
             <ul class="stat-list">

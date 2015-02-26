@@ -32,6 +32,10 @@ class DashboardController < AdminApplicationController
         @new_users_date60 = AdmissionApplication.group_by_day(:created_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
         @apps_by_create_date60 = AdmissionApplication.started.group_by_day(:created_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
         @apps_by_completed_date60 = AdmissionApplication.completed.group_by_day(:completed_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
+        @new_users_date60 = convert_to_area @new_users_date60
+        @apps_by_create_date60 = convert_to_area @apps_by_create_date60
+        @apps_by_completed_date60 = convert_to_area @apps_by_completed_date60
+
         render json: merge_started_and_complete
     end
   end
@@ -67,6 +71,16 @@ class DashboardController < AdminApplicationController
         @time_filter_days = (Date.today - 1.month.ago.to_date).to_i
     end
     filter
+  end
+
+  def convert_to_area(original_val)
+    val = Hash.new
+    cnt = 0
+    original_val.each do |key,value|
+      cnt += value.to_i
+      val[key] = cnt
+    end
+    val
   end
 
 end
