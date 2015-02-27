@@ -84,10 +84,12 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
           <li>
+            <span class="m-r-sm text-muted welcome-message"><%= current_admin.name_or_email %></span>
+          </li>
+          <li>
             <%= link_to '<i class="fa fa-sign-out"></i> Logout'.html_safe, destroy_admin_session_path, :method => :delete %>
           </li>
         </ul>
-
       </nav>
     </div>
 

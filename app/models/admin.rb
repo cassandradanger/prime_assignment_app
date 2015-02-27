@@ -9,6 +9,10 @@ class Admin < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
   end
 
+  def name_or_email
+    self.name.blank? ? self.email : self.name
+  end
+
   def name_and_email
     self.name.blank? ? self.email : "#{self.name} <#{self.email}>"
   end

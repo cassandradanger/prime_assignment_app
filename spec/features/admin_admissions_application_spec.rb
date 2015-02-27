@@ -15,6 +15,9 @@ feature 'A logged in administrator' do
     within(".wrapper-content") do
       page.has_content?('New Applications')
     end
+    within('.navbar-right') do
+      page.has_content?(@admin.email)
+    end
   end
 
   scenario 'vists the dashboard page successfully' do
