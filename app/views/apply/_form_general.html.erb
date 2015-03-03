@@ -7,6 +7,24 @@
 <%= f.input :city, required:true %>
 <%= f.input :state, required:true %>
 <%= f.input :zip_code, required:true %>
+<h3>Demographics</h3>
+<p class="hint">Data from the questions in this section  help us to seek scholarship opportunities for Prime students; we will use your answers to identify scholarship opportunities for you. These questions are optional and your answers will not affect your admissions decision.</p>
+<%= f.input :birthdate, label: 'Date of birth', as: :date, start_year: Date.today.year - 90,
+            end_year: Date.today.year - 16, order: [:month,:day,:year]%>
+<%= f.input :gender, collection: ['Male','Female','Other'] %>
+<%= f.input :dependents, label:"How many legal dependents do you have?", as: :integer %>
+<%= f.input :geography, label:'How would you classify your home\'s geography?', collection: ['Urban','Suburban','Rural'] %>
+<%= f.input :veteran, label: 'Are you a United States Military Veteran?',collection: [['Yes','true'],['No','false']] %>
+
+<label style="display:block; margin-bottom:10px;">To which racial or ethnic group(s) do you most identify?</label>
+<%= f.input :race_hispanic, label: 'Hispanic or Latino',as: :boolean %>
+<%= f.input :race_nativeamerican, label: 'American Indian or Alaska Native',as: :boolean %>
+<%= f.input :race_asian, label: 'Asian',as: :boolean %>
+<%= f.input :race_black, label: 'Black or African American',as: :boolean %>
+<%= f.input :race_islander, label: 'Native Hawaiian or Other Pacific Islander',as: :boolean %>
+<%= f.input :race_white, label: 'White',as: :boolean %>
+<%= f.input :race_other, label: 'Other',as: :boolean %>
+
 <h3>Education, Employment and Goals</h3>
 <%= f.input :legal_status, collection: ["US Citizen","Permanent Resident","Other"], required:true %>
 <%= f.input :education, collection: ["High School","Some College","Associates Degree","Bachelors Degree","Graduate Degree"], label:"Highest level of education completed", required:true %>
