@@ -100,4 +100,30 @@ feature 'A logged in administrator' do
     end
   end
 
+  feature 'admission application edit screen' do
+
+    before :each do
+      @admission_application = FactoryGirl.create(:complete_admission_application)
+    end
+
+    scenario 'verifies content' do
+      visit edit_admission_application_path(@admission_application)
+      page.has_content?(@admission_application.first_name)
+      page.has_content?(@admission_application.last_name)
+    end
+
+    scenario 'tries to update record' do
+      visit edit_admission_application_path(@admission_application)
+      fill_in 'admission_application_birthdate', with: '05/15/1974'
+      select 'Male', from: 'admission_application_gender'
+      check 'admission_application_race_hispanic'
+      check 'admission_application_race_white'
+      fill_in 'admission_application_dependents', with: '5'
+      select 'Urban', from: 'admission_application_geography'
+      click_button 'Save'
+      current_path.should == admission_application_path(@admission_application)
+      page.has_content?('Application updated successfully')
+    end
+  end
+
 end

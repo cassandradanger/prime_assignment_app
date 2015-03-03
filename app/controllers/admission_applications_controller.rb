@@ -37,8 +37,8 @@ class AdmissionApplicationsController < AdminApplicationController
   end
 
   def destroy
-    @admission_application.destroy
-    respond_with(@admission_application)
+    # @admission_application.destroy
+    # respond_with(@admission_application)
   end
 
   private

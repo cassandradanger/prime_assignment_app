@@ -1,8 +1,9 @@
-<h1>Editing admission_application</h1>
+<% content_for :page_title, "Edit Application :: #{@admission_application.name}" %>
 
-<%= debug @admission_application.errors %>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @admission_application %> |
-<%= link_to 'Back', admission_applications_path %>
+<div class="ibox-content">
+  <div class="row m-b-md">
+    <div class="col-md-4">
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>
