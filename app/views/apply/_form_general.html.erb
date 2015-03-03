@@ -8,7 +8,7 @@
 <%= f.input :state, required:true %>
 <%= f.input :zip_code, required:true %>
 <h3>Demographics</h3>
-<p class="hint">Providing answers below may help us identify scholarship opportunities for you.</p>
+<p class="hint">Data from the questions in this section  help us to seek scholarship opportunities for Prime students; we will use your answers to identify scholarship opportunities for you. These questions are optional and your answers will not affect your admissions decision.</p>
 <%= f.input :birthdate, label: 'Date of birth', as: :date, start_year: Date.today.year - 90,
             end_year: Date.today.year - 16, order: [:month,:day,:year]%>
 <%= f.input :gender, collection: ['Male','Female','Other'] %>
