@@ -1,5 +1,5 @@
 <%= bootstrap_form_for([context, comment], html: { id: form_id ||= 'new_comment' }, remote: remote ||= false) do |f| %>
     <%= f.text_area :content, hide_label: :true, placeholder: placeholder ||= "Add a note...", rows: 5 %>
     <%= f.hidden_field :sub_type %>
-    <%= f.submit button_text ||= "Add Note", class: 'btn btn-default btn-sm'%>
+    <%= f.submit button_text ||= "Add Note", class: 'btn btn-primary btn-sm'%>
 <% end %>
