@@ -34,10 +34,6 @@
     <%= f.text_field :website_link, label: "Your personal website if you have one", hint:"Example: http://myawesomewebsite.com" %>
     <%= f.select :referral_source, ["Search Engine","Online Ad","Social Media Link","Radio Ad","Recruiting Event","Personal Referral","Media Coverage","Other"], label: "How did you hear about Prime?", required:true %>
 
-  <div class="form-inputs">
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <%= f.submit 'Save', class: 'btn btn-primary btn-sm' %>
+    <%= link_to 'Cancel', @admission_application, class: 'btn btn-link btn-sm' %>
 <% end %>
