@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get '/conduct', to: redirect('/assets/documents/conduct_guide.pdf')
   get '/program', to: redirect('/assets/documents/program_description.pdf')
   get '/ ', to: 'home#index'
+  get '/%C2%A0', to: 'home#index'
 
   root 'home#index'
 
