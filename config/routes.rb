@@ -29,9 +29,9 @@ Rails.application.routes.draw do
   get '/catalog', to: redirect('/assets/documents/catalog.pdf')
   get '/conduct', to: redirect('/assets/documents/conduct_guide.pdf')
   get '/program', to: redirect('/assets/documents/program_description.pdf')
-  get '/ ', to: 'home#index'
-  get '/%C2%A0', to: 'home#index'
 
   root 'home#index'
+
+  get '*path', to: 'home#index'
 
 end
