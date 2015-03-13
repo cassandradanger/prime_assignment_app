@@ -26,12 +26,11 @@ Rails.application.routes.draw do
   get '/launch', to: 'home#launch'
   get '/live', to: 'home#live'
   get '/jobs', to: 'home#jobs'
+  get '/volunteer', to: 'home#volunteer'
   get '/catalog', to: redirect('/assets/documents/catalog.pdf')
   get '/conduct', to: redirect('/assets/documents/conduct_guide.pdf')
   get '/program', to: redirect('/assets/documents/program_description.pdf')
 
   root 'home#index'
-
-  get '*path', to: 'home#index'
 
 end

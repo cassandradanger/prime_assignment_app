@@ -1,0 +1,23 @@
+@include breakpoint(desktop) {
+
+	.volunteer-column {
+		float:left;
+		width:40%;
+		padding:2% 5%;
+		margin-bottom:20px;
+	}
+
+}
+
+.volunteer-column .button {
+	display:block;
+	text-align:center;
+}
+
+.sidebar-students {
+	background:$COLOR_LIGHTGRAY;
+	padding:44px;
+	color:$COLOR_WHITE;
+	margin-top:30px;
+	clear:both;	
+}
