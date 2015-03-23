@@ -30,6 +30,11 @@
           ago -
           <small class="text-muted"><%= @admission_application.user.last_sign_in_at.to_formatted_s(:long_ordinal) if !@admission_application.user.last_sign_in_at.blank? %></small>
         </dd>
+        <dt>Completed Application</dt>
+        <dd><%= time_ago_in_words(@admission_application.user.completed_at) if !@admission_application.user.completed_at.blank? %>
+          ago -
+          <small class="text-muted"><%= @admission_application.user.completed_at.to_formatted_s(:long_ordinal) if !@admission_application.user.completed_at.blank? %></small>
+        </dd>        
     <% end %>
   </dl>
 
