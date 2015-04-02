@@ -1,3 +1,21 @@
+<% content_for :head do %>
+
+    <!-- FACEBOOK -->
+    <meta property="og:url" content="<%= root_url %>" />
+    <meta property="og:title" content="Prime Digital Academy - Volunteer as a mentor or a guest speaker." />
+    <meta property="og:description" content="Prime is looking for software developers in Minnesota who want to share their passion with our students. Volunteer as a mentor (10 hours over 3 months) or a guest speaker/panelist (as little as 1 hour, 1 time)." />
+    <meta property="og:image" content="<%= asset_url("image-social-volunteer-share.jpg") %>" />
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@goprimeacademy" />
+    <meta name="twitter:creator" content="@goprimeacademy">
+    <meta name="twitter:title" content="Volunteer at Prime Academy" />
+    <meta name="twitter:description" content="Prime is looking for software developers in Minnesota who want to share their passion with our students. Volunteer as a mentor (10 hours over 3 months) or a guest speaker/panelist (as little as 1 hour, 1 time)." />
+    <meta name="twitter:image:src" content="<%= asset_url("image-social-volunteer-share.jpg") %>">
+
+<% end %>
+
 <h1>Volunteer To Help Someone Code Tomorrow</h1>
 <p>Interested in supporting emerging talent in Minnesota's tech community? Prime Digital Academy is looking for local software professionals to help develop entry-level newcomers. We look forward to introducing you to our group of dedicated beginners that are eager to learn from your experiences and perspectives. We're currently seeking speakers/panelists and volunteer mentors but if you had something else in mind you can reach out to us at <%= mail_to "community@primeacademy.io", "community@primeacademy.io", encode: :javascript %> to share your ideas for getting involved. Thanks for your support!</p>
 
