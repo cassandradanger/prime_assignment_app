@@ -16,4 +16,16 @@ class Admin < ActiveRecord::Base
   def name_and_email
     self.name.blank? ? self.email : "#{self.name} <#{self.email}>"
   end
+
+  def status_is_active?
+    self.status == 'Active'
+  end
+
+  def active_for_authentication?
+    super && self.status_is_active?
+  end
+
+  def inactive_message
+    self.status_is_active? ? super : :account_inactive
+  end
 end

@@ -1,0 +1,33 @@
+<% content_for :page_title, "Employees" %>
+
+<div class="ibox-content">
+  <div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered table-hover dataTable dtr-inline no-footer" id="admins-datatable">
+      <thead>
+      <tr>
+        <th>Email</th>
+        <th class="hidden-xs hidden-sm">Name</th>
+        <th>Status</th>
+        <th class="hidden-xs hidden-sm">Last Login</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @admins.each do |admin| %>
+          <tr>
+            <td><%= admin.email %></td>
+            <td class="hidden-xs hidden-sm"><%= admin.name %></td>
+            <td><%= admin.status %></td>
+            <td class="hidden-xs hidden-sm"><%= admin.current_sign_in_at %></td>
+            <td><%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_admin_path(admin), class: 'btn btn-sm btn-white' %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <%= link_to 'New Employee', new_admin_path, {class: "btn btn-default btn-sm"} %>
+
+</div>

@@ -14,7 +14,16 @@ Rails.application.routes.draw do
     resources :admission_applications do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
     end
+
     resources :profile_questions
+
+    resources :admins, path: 'employees' do
+      member do
+        patch 'update_password'
+        get 'edit_password'
+      end
+    end
+
     get 'dashboard', to: 'dashboard#index'
     get 'dashboard/index', to: 'dashboard#index'
     get 'dashboard/chart/:type(/:time_filter)', to: 'dashboard#chart', as: 'dashboard_chart_data'

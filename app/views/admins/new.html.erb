@@ -1,0 +1,21 @@
+<% content_for :page_title, "New Employee" %>
+
+<div class="ibox-content">
+  <div class="row m-b-md">
+    <div class="col-md-4">
+
+      <%= bootstrap_form_for(@admin) do |f| %>
+          <%= f.alert_message "Please fix the errors below." %>
+          <%= f.text_field :email, required: true %>
+          <%= f.text_field :first_name, required: true  %>
+          <%= f.text_field :last_name, required: true  %>
+          <%= f.select :status, ['Active','Inactive'] %>
+          <%= f.password_field :password, label: "New password", required: true %>
+          <%= f.password_field :password_confirmation, label: "Confirm password", required: true %>
+          <%= f.submit 'Save', class: 'btn btn-primary btn-sm' %>
+          <%= link_to 'Cancel', admins_path, class: 'btn btn-link btn-sm' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

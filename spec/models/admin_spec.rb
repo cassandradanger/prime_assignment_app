@@ -5,4 +5,5 @@ describe Admin do
   it { should respond_to(:name) }
   it { should respond_to(:name_and_email) }
   it { should respond_to(:name_or_email) }
+  it { should respond_to(:status_is_active?)}
 end

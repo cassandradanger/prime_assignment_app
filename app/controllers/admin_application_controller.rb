@@ -8,8 +8,6 @@ class AdminApplicationController < ApplicationController
     @display_page_header = true
   end
 
-
-
   protected
 
   def layout_by_resource

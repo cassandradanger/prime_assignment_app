@@ -1,5 +1,19 @@
 require "rails_helper"
 
+feature 'An inactive administrator' do
+  before :each do
+    @admin = FactoryGirl.create(:inactive_admin)
+  end
+
+  scenario 'tries to login and fails' do
+    visit new_admin_session_path
+    fill_in 'admin_email', with: @admin.email
+    fill_in 'admin_password', with: @admin.password
+    click_button 'Login'
+    page.has_content?('Your account is inactive')
+  end
+end
+
 feature 'A logged in administrator' do
 
   before :each do
