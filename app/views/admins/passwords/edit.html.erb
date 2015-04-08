@@ -1,17 +1,19 @@
-<h2>Change your password</h2>
+<% content_for :page_title, "Change your password" %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<div class="middle-box text-center loginscreen">
 
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
-
-  <div class="form-inputs">
-    <%= f.input :password, label: "New password", required: true, autofocus: true %>
-    <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
+  <div class="1">
+    <h1 class="logo-name">
+      <%= link_to image_tag("logo-prime.svg", :alt => "Prime - Software Engineering Academy", :itemprop => "logo"), root_path %>
+    </h1>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
+  <div class="m-t-md">
+    <%= bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :put}) do |f| %>
+        <%= f.alert_message "Please fix the errors below." %>
+        <%= f.hidden_field :reset_password_token %>
+        <%= f.password_field :password, label: "New password", required: true, autofocus: true %>
+        <%= f.password_field :password_confirmation, label: "Confirm your new password", required: true %>
+        <%= f.submit "Change my password", class: 'btn btn-sm btn-primary' %>
+    <% end %>
   </div>
-<% end %>
+</div>
