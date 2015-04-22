@@ -22,6 +22,7 @@ class AdmissionApplication < ActiveRecord::Base
   before_save :update_status, :check_assigned_cohort
 
   after_initialize :init
+  before_save :check_for_status_change
 
   after_create :populate_questions, on: :create
   after_create :send_welcome, :update_subscription
@@ -258,6 +259,12 @@ class AdmissionApplication < ActiveRecord::Base
 
   def check_assigned_cohort
     self.assigned_cohort_id = nil unless self.placed?
+  end
+
+  def check_for_status_change
+    if self.application_status_changed?
+      self.application_status_updated_at = DateTime.now
+    end
   end
 
 end

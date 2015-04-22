@@ -26,6 +26,7 @@
         <th class="hidden-xs">Profile</th>
         <th class="hidden-xs">Resume</th>
         <th class="hidden-xs">Interview</th>
+        <th class="hidden-xs">Days Since Last Status Update</th>
         <th class="hidden-xs hidden-sm">Assigned Cohort</th>
         <th>&nbsp;</th>
       </tr>
@@ -41,6 +42,7 @@
             <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed? %></td>
             <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= (DateTime.now - admission_application.application_status_updated_at.to_datetime).to_i if admission_application.completed? %></td>
             <td class="hidden-xs hidden-sm"><%= admission_application.assigned_cohort_name %></td>
             <td>
               <%= link_to 'View'.html_safe, admission_application_path(admission_application) %>

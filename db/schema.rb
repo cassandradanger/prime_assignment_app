@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309152201) do
+ActiveRecord::Schema.define(version: 20150422180646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20150309152201) do
     t.boolean  "race_islander"
     t.boolean  "race_white"
     t.boolean  "race_other"
+    t.datetime "application_status_updated_at"
   end
 
   create_table "admission_applications_cohorts", force: true do |t|
