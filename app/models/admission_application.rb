@@ -6,6 +6,7 @@ class AdmissionApplication < ActiveRecord::Base
   scope :accepted, -> { where(application_status: ['interview_passed', 'placed','confirmed']) }
   scope :placed, -> { where(application_status: 'placed') }
   scope :all_declined, -> { where(application_status: ['declined_by_applicant','declined_action_required','declined']) }
+  scope :being_processed, -> { where(application_status: ['complete','needs_scheduling','scheduled','interview_passed','placed'])}
   scope :needs_interview_score, -> { where(application_status: ['scheduled', 'interview_passed', 'placed']).where(interview_score: 0) }
   scope :has_referral, -> { started.where.not(referral_source: nil) }
   scope :app_status, -> (status) { (self.is_status_filter_scope?(status)) ? send(status) : where(application_status: status) }
@@ -72,6 +73,7 @@ class AdmissionApplication < ActiveRecord::Base
 
   STATUS_FILTER_SCOPES = {
       completed: 'Completed',
+      being_processed: 'In Process',
       needs_interview_score: 'Needs Interview Score',
       accepted: 'Accepted',
       all_declined: 'Declined'
