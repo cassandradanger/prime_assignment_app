@@ -84,9 +84,9 @@ describe AdmissionApplication do
       expect(app).to be_valid
     end
 
-    it 'should be marked as complete when submitted' do
+    it 'should be marked as completed when submitted' do
       app.application_step = 'submit'
-      expect {app.save}.to change {app.application_status}.from('not_started').to('complete')
+      expect {app.save}.to change {app.application_status}.from('not_started').to('completed')
     end
 
     it 'should record the completed_at time when submitted' do
@@ -96,8 +96,8 @@ describe AdmissionApplication do
     end
 
     it 'should have an application_status_name of Complete' do
-      app.application_status = 'complete'
-      expect(app.application_status_name).to eq('Complete')
+      app.application_status = 'completed'
+      expect(app.application_status_name).to eq('Completed')
     end
 
     it 'with new profile question should be invalid' do
