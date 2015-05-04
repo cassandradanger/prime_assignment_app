@@ -2,7 +2,7 @@ module CohortHelper
   def cohort_status_label status
       text_style = 'label-primary'
       case status
-        when 'Pre-Application', 'Complete'
+        when 'Pre-Application', 'Completed'
           text_style = 'label-default'
         when 'Prework', 'Classroom'
           text_style = 'label-success'

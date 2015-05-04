@@ -3,7 +3,7 @@
 <div class="ibox-content">
   <p>Total Applications: <%= @admission_applications.count %></p>
 
-  <p>Completed Applications: <%= AdmissionApplication.completed.count %></p>
+  <p>Completed Applications: <%= AdmissionApplication.all_completed.count %></p>
 
   <div class="row">
     <div class="col-md-4 float-e-margins">

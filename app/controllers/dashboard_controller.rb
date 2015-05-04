@@ -4,12 +4,12 @@ class DashboardController < AdminApplicationController
   def index
     @user_count = User.count
     @apps_count = AdmissionApplication.started.count
-    @apps_completed_count = AdmissionApplication.completed.count
+    @apps_completed_count = AdmissionApplication.all_completed.count
     @apps_accepted_count = AdmissionApplication.accepted.count
     @app_line_time_filter = set_apps_time_filter
     @user_filter_count = User.where('created_at > ?', @time_filter).count
     @apps_started_filter_count = AdmissionApplication.started.where('created_at > ?', @time_filter).count
-    @apps_completed_filter_count = AdmissionApplication.completed.where('completed_at > ?', @time_filter).count
+    @apps_completed_filter_count = AdmissionApplication.all_completed.where('completed_at > ?', @time_filter).count
     @cohorts = Cohort.active
     @cohorts_active_count = Cohort.active.count
     @cohorts_target_count = Cohort.active.sum(:target_size)
@@ -26,12 +26,12 @@ class DashboardController < AdminApplicationController
       when 'education'
         render json: AdmissionApplication.has_referral.group(:education).count
       when 'payment_option'
-        render json: AdmissionApplication.completed.group(:payment_option).count
+        render json: AdmissionApplication.all_completed.group(:payment_option).count
       when 'created_and_completed'
         set_apps_time_filter
         @new_users_date60 = AdmissionApplication.group_by_day(:created_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
         @apps_by_create_date60 = AdmissionApplication.started.group_by_day(:created_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
-        @apps_by_completed_date60 = AdmissionApplication.completed.group_by_day(:completed_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
+        @apps_by_completed_date60 = AdmissionApplication.all_completed.group_by_day(:completed_at, range: @time_filter..DateTime.now, format: "%m/%d/%Y").count
         @new_users_date60 = convert_to_area @new_users_date60
         @apps_by_create_date60 = convert_to_area @apps_by_create_date60
         @apps_by_completed_date60 = convert_to_area @apps_by_completed_date60
@@ -49,7 +49,7 @@ class DashboardController < AdminApplicationController
     [
         {name: "New Users", data: @new_users_date60},
         {name: "Started", data: @apps_by_create_date60},
-        {name: "Complete", data: @apps_by_completed_date60}
+        {name: "Completed", data: @apps_by_completed_date60}
     ]
   end
 

@@ -1,12 +1,12 @@
 class AdmissionApplication < ActiveRecord::Base
   include Filterable
 
-  scope :completed, -> { where.not(application_status: 'not_started').where.not(application_status: 'started') }
+  scope :all_completed, -> { where.not(application_status: 'not_started').where.not(application_status: 'started') }
   scope :started, -> { where.not(application_status: 'not_started') }
   scope :accepted, -> { where(application_status: ['interview_passed', 'placed','confirmed']) }
   scope :placed, -> { where(application_status: 'placed') }
   scope :all_declined, -> { where(application_status: ['declined_by_applicant','declined_action_required','declined']) }
-  scope :being_processed, -> { where(application_status: ['complete','needs_scheduling','scheduled','interview_passed','placed'])}
+  scope :being_processed, -> { where(application_status: ['completed','needs_scheduling','scheduled','interview_passed','placed'])}
   scope :needs_interview_score, -> { where(application_status: ['scheduled', 'interview_passed', 'placed']).where(interview_score: 0) }
   scope :has_referral, -> { started.where.not(referral_source: nil) }
   scope :app_status, -> (status) { (self.is_status_filter_scope?(status)) ? send(status) : where(application_status: status) }
@@ -60,7 +60,7 @@ class AdmissionApplication < ActiveRecord::Base
   STATUS_OPTIONS = {
       not_started: 'Not Started',
       started: 'Started',
-      complete: 'Complete',
+      completed: 'Completed',
       needs_scheduling: 'Needs Scheduling',
       scheduled: 'Scheduled',
       interview_passed: 'Interview Passed',
@@ -72,7 +72,7 @@ class AdmissionApplication < ActiveRecord::Base
   }
 
   STATUS_FILTER_SCOPES = {
-      completed: 'Completed',
+      all_completed: 'Completed',
       being_processed: 'In Process',
       needs_interview_score: 'Needs Interview Score',
       accepted: 'Accepted',
@@ -240,7 +240,7 @@ class AdmissionApplication < ActiveRecord::Base
   def update_status
     # After validation, detect if the application is being submitted and set completed flags
     if active?
-      self.application_status = "complete"
+      self.application_status = "completed"
       self.application_step = "thanks"
       self.completed_at = Time.now
       update_subscription(app_status: "Completed")
