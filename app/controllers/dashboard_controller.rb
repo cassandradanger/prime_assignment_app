@@ -69,6 +69,9 @@ class DashboardController < AdminApplicationController
       when 'month'
         @time_filter =  1.month.ago.midnight
         @time_filter_days = (Date.today - 1.month.ago.to_date).to_i
+      when 'year'
+        @time_filter = 1.year.ago.midnight
+        @time_filter_days = 365
     end
     filter
   end
