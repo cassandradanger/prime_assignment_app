@@ -47,7 +47,7 @@ class CohortsController < AdminApplicationController
       when 'gender'
         render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.has_referral.group(:gender).count
       when 'payment_option'
-        render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group(:payment_option).count
+        render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.all_completed.group(:payment_option).count
       when 'age'
         # render json: Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group("date_part('year',age(birthdate))").order("date_part_year_age_birthdate").count
         render json: Cohort.find(params[:cohort_id]).accepted_applicants_by_age_group
@@ -61,7 +61,7 @@ class CohortsController < AdminApplicationController
         end
         @new_users_date60 = Cohort.find(params[:cohort_id]).assigned_admission_applications.group_by_day(:created_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
         @apps_by_create_date60 = Cohort.find(params[:cohort_id]).assigned_admission_applications.started.group_by_day(:created_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
-        @apps_by_completed_date60 = Cohort.find(params[:cohort_id]).assigned_admission_applications.completed.group_by_day(:completed_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
+        @apps_by_completed_date60 = Cohort.find(params[:cohort_id]).assigned_admission_applications.all_completed.group_by_day(:completed_at, range: filter..DateTime.now, format: "%m/%d/%Y").count
         render json: merge_started_and_complete
     end
   end
