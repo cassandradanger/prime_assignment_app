@@ -66,6 +66,8 @@ gem 'chosen-sass-bootstrap-rails'
 gem 'bootstrap-datepicker-rails'
 # jQuery cookies
 gem 'jquery-cookie-rails'
+# Workflow - https://github.com/geekq/workflow
+gem 'workflow'
 
 
 group :production do 

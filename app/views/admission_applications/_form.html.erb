@@ -1,4 +1,9 @@
 <%= bootstrap_form_for(@admission_application) do |f| %>
+    <h3>Status</h3>
+    <%= f.select(:application_status, AdmissionApplication.application_status_options, label: "Status") %>
+    <div id="assigned_cohort" class="<%= 'hidden' unless @admission_application.placed_or_confirmed? %>">
+      <%= f.collection_select(:assigned_cohort_id, @cohorts, :id, :name ,{include_blank: 'Unassigned', label: 'Assigned Cohort'} ) %>
+    </div>
     <h3>General</h3>
     <%= f.text_field :first_name, required:true %>
     <%= f.text_field :middle_name %>

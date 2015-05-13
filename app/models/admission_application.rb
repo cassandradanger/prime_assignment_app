@@ -1,4 +1,5 @@
 class AdmissionApplication < ActiveRecord::Base
+  include Workflow
   include Filterable
 
   scope :all_completed, -> { where.not(application_status: 'not_started').where.not(application_status: 'started') }
@@ -92,6 +93,66 @@ class AdmissionApplication < ActiveRecord::Base
       {id: '5', name: 'Exceptional'}
   ]
 
+  # Workflow definition
+  # Override the default column used by the Workflow gem to use the application_status column.
+  workflow_column :application_status
+
+  workflow do
+    state :not_started, :meta => {:name => 'Not Started'} do
+      event :start, :transitions_to => :started
+    end
+    state :started, :meta => {:name => 'Started'} do
+      event :complete, :transitions_to => :completed
+    end
+    state :completed, :meta => {:name => 'Completed'} do
+      event :need_schedule, :transitions_to => :needs_scheduling, :meta => {:name => 'Needs Scheduling', :btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
+      # See on_completed_entry
+    end
+    state :needs_scheduling, :meta => {:name => 'Needs Scheduling'} do
+      event :schedule, :transitions_to => :scheduled, :meta => {:name => 'Scheduled', :btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger'}
+    end
+    state :scheduled, :meta => {:name => 'Scheduled'} do
+      event :interview_pass, :transitions_to => :interview_passed, :meta => {:name => 'Interview Passed', :btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
+    end
+    state :interview_passed, :meta => {:name => 'Interview Passed'} do
+      event :place, :transitions_to => :placed, :meta => {:name => 'Placed', :btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
+      event :decline_by_applicant, :transitions_to => :declined_by_applicant, :meta => {:name => 'Decline by Applicant', :btn_class => 'btn-danger', :group => :declined}
+    end
+    state :placed, :meta => {:name => 'Placed'} do
+      event :confirm, :transitions_to => :confirmed, :meta => {:name => 'Confirmed', :btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
+      event :decline_by_applicant, :transitions_to => :declined_by_applicant, :meta => {:name => 'Decline by Applicant', :btn_class => 'btn-danger', :group => :declined}
+    end
+    state :confirmed, :meta => {:name => 'Confirmed'} do
+      event :drop, :transitions_to => :dropped_out, :meta => {:name => 'Dropped Out', :btn_class => 'btn-danger'}
+    end
+    state :declined, :meta => {:name => 'Declined'}
+    state :declined_action_required, :meta => {:name => 'Declined - Action Required'}
+    state :declined_by_applicant, :meta => {:name => 'Declined by Applicant'}
+    state :dropped_out, :meta => {:name => 'Dropped Out'}
+
+    # on_transition do |from, to, triggering_event, *event_args|
+    # end
+  end
+
+  # Workflow event handlers
+  def on_completed_entry(from, triggering_event, *event_args)
+    self.application_step = "thanks"
+    self.completed_at = Time.now
+    update_subscription(app_status: "Completed")
+    AdmissionApplicationMailer.admission_application_thank_you(self).deliver
+  end
+
+  # End of Workflow definition
+
   def name
     "#{self.first_name} #{self.middle_name} #{self.last_name}" unless self.first_name.blank? || self.last_name.blank?
   end
@@ -109,22 +170,19 @@ class AdmissionApplication < ActiveRecord::Base
     "#{self.address}\n#{self.city}, #{self.state} #{self.zip_code}" unless self.address.blank? || self.city.blank? || self.state.blank? || self.zip_code.blank?
   end
 
-  def started?
-    application_status != "not_started"
+  def completed_by_applicant?
+    self.current_state >= :completed
   end
 
-  def completed?
-    (application_status != "not_started" && application_status != "started")
-  end
-
-  def placed?
-    application_status == "placed" || application_status == 'confirmed'
+  def placed_or_confirmed?
+    self.placed? || self.confirmed?
+   # application_status == "placed" || application_status == 'confirmed'
   end
 
   def active?
     # Allow for modification of records after submission (in scoring) without verification
     # TODO - this seems really fragile and error prone.  Come back and take a look at this.
-    application_step == 'submit' && (application_status == "started" || application_status == "not_started" || application_status.blank?)
+    application_step == 'submit' && self.current_state < :completed
   end
 
   def active_or_logic?
@@ -181,8 +239,12 @@ class AdmissionApplication < ActiveRecord::Base
     INTERVIEW_SCORES.map { |item| ["#{item[:id]} - #{item[:name]}", item[:id]] }
   end
 
+  def self.workflow_state_name key
+    AdmissionApplication.workflow_spec.states[key].meta[:name]
+  end
+
   def self.application_status_options
-    self.options_array_from_simple_hash(STATUS_OPTIONS)
+    options_list = AdmissionApplication.workflow_spec.states.keys.map {|key| [AdmissionApplication.workflow_state_name(key),key]}
   end
 
   def self.application_status_filter_scope_options
@@ -194,7 +256,7 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def application_status_name
-    STATUS_OPTIONS[self.application_status.to_sym].blank? ? self.application_status : STATUS_OPTIONS[self.application_status.to_sym]
+    self.current_state.meta[:name]
   end
 
   def interview_score_name
@@ -218,9 +280,8 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   private
-
   def init
-    self.application_status ||= "not_started"
+
   end
 
   def self.is_status_filter_scope?(val)
@@ -240,16 +301,11 @@ class AdmissionApplication < ActiveRecord::Base
   def update_status
     # After validation, detect if the application is being submitted and set completed flags
     if active?
-      self.application_status = "completed"
-      self.application_step = "thanks"
-      self.completed_at = Time.now
-      update_subscription(app_status: "Completed")
-      AdmissionApplicationMailer.admission_application_thank_you(self).deliver
+      self.complete!
     else
       # Set the status to started if the status isn't set but the user has submitted
-      # a page.
-      if !self.application_step.nil? && self.application_status == 'not_started'
-        self.application_status = "started"
+      if !self.application_step.nil? && self.not_started?
+        self.start!
       end
     end
   end
@@ -260,7 +316,12 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def check_assigned_cohort
-    self.assigned_cohort_id = nil unless self.placed?
+    # Reset the cohort unless the user is placed, confirmed or has dropped out.
+    self.assigned_cohort_id = nil unless self.placed_or_confirmed? || self.dropped_out?
+    # If the cohort is set but the app's status is set to placed, then move it to confirmed.
+    if self.placed? && self.assigned_cohort != nil
+      self.confirm!
+    end
   end
 
   def check_for_status_change

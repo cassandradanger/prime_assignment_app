@@ -44,6 +44,7 @@ FactoryGirl.define do
       payment_option "Prepay"
 
       after(:create) do |application, evaluator|
+        application.start!
         application.cohorts = [create(:cohort)]
         application.logic_question_answers = create_list(:logic_question_answer, evaluator.logic_questions_count, admission_application: application)
         application.profile_question_answers = create_list(:profile_question_answer, evaluator.profile_questions_count, admission_application: application)

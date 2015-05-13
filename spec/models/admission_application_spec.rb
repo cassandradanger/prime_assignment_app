@@ -40,8 +40,9 @@ describe AdmissionApplication do
 
   context 'when new' do
     let(:app) { AdmissionApplication.new }
-    subject { app }
-    its(:application_status) { should == 'not_started' }
+    it 'should have a current state of not_started' do
+      expect(app.not_started?).to eq(true)
+    end
 
     it 'should have a valid factory' do
       FactoryGirl.create(:new_admission_application).should be_valid
@@ -77,7 +78,9 @@ describe AdmissionApplication do
     let(:app) {FactoryGirl.create(:complete_admission_application)}
     subject { app }
 
-    its(:application_status) {should == 'not_started'}
+    it 'should have a current_state == started' do
+      expect(app.started?).to eq(true)
+    end
 
     it 'should be valid' do
       app.application_step = 'submit'
@@ -86,7 +89,7 @@ describe AdmissionApplication do
 
     it 'should be marked as completed when submitted' do
       app.application_step = 'submit'
-      expect {app.save}.to change {app.application_status}.from('not_started').to('completed')
+      expect {app.save}.to change {app.application_status}.from('started').to('completed')
     end
 
     it 'should record the completed_at time when submitted' do
@@ -104,6 +107,17 @@ describe AdmissionApplication do
       FactoryGirl.create(:profile_question)
       app.application_step = 'submit'
       expect(app).to_not be_valid
+    end
+
+    it 'should change the status to Complete when using the workflow to change status' do
+      expect {app.complete!}.to change {app.current_state}.from('started').to('completed')
+    end
+
+    it 'should change the status to Confirmed when Placed and a cohort is set' do
+      app.application_status = 'placed'
+      app.save
+      app.assigned_cohort = FactoryGirl.create(:cohort)
+      expect {app.save}.to change {app.current_state}.from('placed').to('confirmed')
     end
   end
 
