@@ -38,11 +38,11 @@
             <td class="hidden-xs"><%= admission_application.user.email %></td>
             <td><%= admission_application.name %></td>
             <td><%= admission_application.application_status_name %></td>
-            <td class="hidden-xs"><%= admission_application.logic_questions_score if admission_application.completed? %></td>
-            <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed? %></td>
-            <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed? %></td>
-            <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed? %></td>
-            <td class="hidden-xs"><%= (DateTime.now - admission_application.application_status_updated_at.to_datetime).to_i if admission_application.completed? %></td>
+            <td class="hidden-xs"><%= admission_application.logic_questions_score if admission_application.completed_by_applicant? %></td>
+            <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed_by_applicant? %></td>
+            <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed_by_applicant? %></td>
+            <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed_by_applicant? %></td>
+            <td class="hidden-xs"><%= (DateTime.now - admission_application.application_status_updated_at.to_datetime).to_i if admission_application.completed_by_applicant? %></td>
             <td class="hidden-xs hidden-sm"><%= admission_application.assigned_cohort_name %></td>
             <td>
               <%= link_to 'View'.html_safe, admission_application_path(admission_application) %>

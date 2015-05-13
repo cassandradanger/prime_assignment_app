@@ -40,7 +40,7 @@ class ApplyController < ApplicationController
     end
 
     def redirect_completed_applicants
-		redirect_to wizard_path(:thanks) if @admission_application.completed? && step != :thanks
+		redirect_to wizard_path(:thanks) if @admission_application.completed_by_applicant? && step != :thanks
     end
 
 	def finish_wizard_path

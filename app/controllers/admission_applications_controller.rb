@@ -25,6 +25,7 @@ class AdmissionApplicationsController < AdminApplicationController
   end
 
   def edit
+    @cohorts = Cohort.all
   end
 
   def update
@@ -39,6 +40,13 @@ class AdmissionApplicationsController < AdminApplicationController
   def destroy
     # @admission_application.destroy
     # respond_with(@admission_application)
+  end
+
+  def workflow
+    @admission_application = AdmissionApplication.find(params[:id])
+    if @admission_application.process_event! params[:workflow_action]
+      redirect_to(admission_application_path @admission_application)
+    end
   end
 
   private

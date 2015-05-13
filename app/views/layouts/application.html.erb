@@ -82,7 +82,7 @@
             </div><!-- /layout-header-banner -->
             <% if user_signed_in? && params[:controller] == "apply"%>         
             <div class="layout-header-navigation-banner">    
-                <ol class="admissions-menu <%= "disabled" if params[:controller] == "apply" && @admission_application.completed? %>">
+                <ol class="admissions-menu <%= "disabled" if params[:controller] == "apply" && @admission_application.completed_by_applicant? %>">
                     <li class="admissions-menu-item"><%= link_to "Start", wizard_path(:start), :class=>"admissions-menu-item-link"+(step == :start ? " admissions-menu-item-linkCurrent" : "" ) %></li>
                     <li class="admissions-menu-item"><%= link_to "General", wizard_path(:general), :class=>"admissions-menu-item-link"+(step == :general ? " admissions-menu-item-linkCurrent" : "" ) %></li>
                     <li class="admissions-menu-item"><%= link_to "Personal", wizard_path(:personal), :class=>"admissions-menu-item-link"+(step == :personal ? " admissions-menu-item-linkCurrent" : "" ) %></li>

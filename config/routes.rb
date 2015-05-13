@@ -12,8 +12,13 @@ Rails.application.routes.draw do
     resources :logic_questions
     resources :cohorts
     resources :admission_applications do
+      member do
+        patch 'workflow/:workflow_action', to: 'admission_applications#workflow', as: 'workflow'
+      end
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
     end
+
+  #  patch 'admission_applications/:id/workflow/:workflow_action', to: 'admission_applications#workflow', as: 'admission_application_workflow'
 
     resources :profile_questions
 

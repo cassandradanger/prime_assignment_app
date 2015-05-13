@@ -82,6 +82,31 @@ feature 'A logged in administrator' do
       page.has_content?(@admission_application.email)
     end
 
+    scenario 'verifies workflow content and actions' do
+      @admission_application.complete!
+
+      visit admission_application_path(@admission_application)
+
+      next_state = AdmissionApplication.workflow_state_name(@admission_application.current_state.events[:need_schedule][0].transitions_to)
+      current_state = AdmissionApplication.workflow_state_name(@admission_application.current_state.to_sym)
+
+      within('#workflow-current-state') do
+        page.has_content?(current_state)
+      end
+
+      within('#workflow-buttons') do
+        page.has_content?('Update Status')
+        page.has_content?(next_state)
+        click_link next_state
+      end
+
+      current_path.should == admission_application_path(@admission_application)
+
+      within('#workflow-current-state') do
+        page.has_content?(next_state)
+      end
+    end
+
     scenario 'tries to add a call note' do
       visit admission_application_path(@admission_application)
       within("#new_comment") do
