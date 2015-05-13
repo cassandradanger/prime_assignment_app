@@ -105,34 +105,34 @@ class AdmissionApplication < ActiveRecord::Base
       event :complete, :transitions_to => :completed
     end
     state :completed, :meta => {:name => 'Completed'} do
-      event :need_schedule, :transitions_to => :needs_scheduling, :meta => {:name => 'Needs Scheduling', :btn_class => 'btn-primary'}
-      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
-      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
+      event :need_schedule, :transitions_to => :needs_scheduling, :meta => {:btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:btn_class => 'btn-danger', :group => :declined}
       # See on_completed_entry
     end
     state :needs_scheduling, :meta => {:name => 'Needs Scheduling'} do
-      event :schedule, :transitions_to => :scheduled, :meta => {:name => 'Scheduled', :btn_class => 'btn-primary'}
-      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger'}
+      event :schedule, :transitions_to => :scheduled, :meta => {:btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:btn_class => 'btn-danger'}
     end
     state :scheduled, :meta => {:name => 'Scheduled'} do
-      event :interview_pass, :transitions_to => :interview_passed, :meta => {:name => 'Interview Passed', :btn_class => 'btn-primary'}
-      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
-      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
+      event :interview_pass, :transitions_to => :interview_passed, :meta => {:btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:btn_class => 'btn-danger', :group => :declined}
     end
     state :interview_passed, :meta => {:name => 'Interview Passed'} do
-      event :place, :transitions_to => :placed, :meta => {:name => 'Placed', :btn_class => 'btn-primary'}
-      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
-      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
-      event :decline_by_applicant, :transitions_to => :declined_by_applicant, :meta => {:name => 'Decline by Applicant', :btn_class => 'btn-danger', :group => :declined}
+      event :place, :transitions_to => :placed, :meta => {:btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:btn_class => 'btn-danger', :group => :declined}
+      event :decline_by_applicant, :transitions_to => :declined_by_applicant, :meta => {:btn_class => 'btn-danger', :group => :declined}
     end
     state :placed, :meta => {:name => 'Placed'} do
-      event :confirm, :transitions_to => :confirmed, :meta => {:name => 'Confirmed', :btn_class => 'btn-primary'}
-      event :decline, :transitions_to => :declined, :meta => {:name => 'Decline', :btn_class => 'btn-danger', :group => :declined}
-      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:name => 'Decline with Action Required', :btn_class => 'btn-danger', :group => :declined}
-      event :decline_by_applicant, :transitions_to => :declined_by_applicant, :meta => {:name => 'Decline by Applicant', :btn_class => 'btn-danger', :group => :declined}
+      event :confirm, :transitions_to => :confirmed, :meta => {:btn_class => 'btn-primary'}
+      event :decline, :transitions_to => :declined, :meta => {:btn_class => 'btn-danger', :group => :declined}
+      event :decline_with_action, :transitions_to => :declined_action_required, :meta => {:btn_class => 'btn-danger', :group => :declined}
+      event :decline_by_applicant, :transitions_to => :declined_by_applicant, :meta => {:btn_class => 'btn-danger', :group => :declined}
     end
     state :confirmed, :meta => {:name => 'Confirmed'} do
-      event :drop, :transitions_to => :dropped_out, :meta => {:name => 'Dropped Out', :btn_class => 'btn-danger'}
+      event :drop, :transitions_to => :dropped_out, :meta => {:btn_class => 'btn-danger'}
     end
     state :declined, :meta => {:name => 'Declined'}
     state :declined_action_required, :meta => {:name => 'Declined - Action Required'}
@@ -319,9 +319,9 @@ class AdmissionApplication < ActiveRecord::Base
     # Reset the cohort unless the user is placed, confirmed or has dropped out.
     self.assigned_cohort_id = nil unless self.placed_or_confirmed? || self.dropped_out?
     # If the cohort is set but the app's status is set to placed, then move it to confirmed.
-    if self.placed? && self.assigned_cohort != nil
-      self.confirm!
-    end
+    # if self.placed? && self.assigned_cohort != nil
+    #   self.confirm!
+    # end
   end
 
   def check_for_status_change

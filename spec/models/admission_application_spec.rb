@@ -113,12 +113,12 @@ describe AdmissionApplication do
       expect {app.complete!}.to change {app.current_state}.from('started').to('completed')
     end
 
-    it 'should change the status to Confirmed when Placed and a cohort is set' do
-      app.application_status = 'placed'
-      app.save
-      app.assigned_cohort = FactoryGirl.create(:cohort)
-      expect {app.save}.to change {app.current_state}.from('placed').to('confirmed')
-    end
+    # it 'should change the status to Confirmed when Placed and a cohort is set' do
+    #   app.application_status = 'placed'
+    #   app.save
+    #   app.assigned_cohort = FactoryGirl.create(:cohort)
+    #   expect {app.save}.to change {app.current_state}.from('placed').to('confirmed')
+    # end
   end
 
 end
