@@ -6,5 +6,6 @@ FactoryGirl.define do
 		applications_open Date.today-1.day
 		applications_close Date.today+6.weeks
 		target_size 20
+    earnest_application_code 'earnest_app_code'
   end
 end

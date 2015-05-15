@@ -73,7 +73,7 @@ class CohortsController < AdminApplicationController
   end
 
   def cohort_params
-    params.require(:cohort).permit(:name, :prework_start, :classroom_start, :graduation, :applications_open, :applications_close, :target_size)
+    params.require(:cohort).permit(:name, :prework_start, :classroom_start, :graduation, :applications_open, :applications_close, :target_size, :earnest_application_code)
   end
 
   def set_default_params(param)
