@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   layout :layout_by_resource
 
+  def audited_user
+    current_user
+  end
+
   protected
 
   # Override the layout for the admin login page.

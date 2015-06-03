@@ -8,6 +8,10 @@ class AdminApplicationController < ApplicationController
     @display_page_header = true
   end
 
+  def audited_user
+    current_admin
+  end
+
   protected
 
   def layout_by_resource

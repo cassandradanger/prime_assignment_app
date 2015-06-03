@@ -18,10 +18,15 @@ class AdmissionApplicationsController < AdminApplicationController
 
   def show
     @admission_application
+    @audits = @admission_application.audits
     @tech_comment = @admission_application.comments.build(sub_type: "technical", admin: current_admin)
     @new_comment = Comment.new(sub_type: "call")
     @new_interview_comment = Comment.new(sub_type: "interview")
     @cohorts = Cohort.all
+  end
+
+  def audit_log
+    @audit_log = @admission_application.audits
   end
 
   def edit
@@ -64,7 +69,9 @@ class AdmissionApplicationsController < AdminApplicationController
                                                     :legal_status, :education, :employment_status, :goal, :income, :linkedin_account,
                                                     :twitter_account, :github_account, :website_link, :referral_source, :resume_link,
                                                     :payment_plan, :payment_option, :resume_score, :resume_notes, :application_status,
-                                                    :interview_score, :assigned_cohort_id, :birthdate, :gender, :race_hispanic, :race_nativeamerican, :race_asian, :race_black, :race_islander, :race_white, :race_other, :dependents, :geography, :veteran,
+                                                    :interview_score, :assigned_cohort_id, :birthdate, :gender, :race_hispanic,
+                                                    :race_nativeamerican, :race_asian, :race_black, :race_islander, :race_white,
+                                                    :race_other, :dependents, :geography, :veteran, :audit_comment,
                                                     :logic_question_answers_attributes => [:id,:logic_question_id,:answer,:explanation],
                                                     :profile_question_answers_attributes => [:id,:profil_question_id,:answer,:score],
                                                     :cohort_ids => [],

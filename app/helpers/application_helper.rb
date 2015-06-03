@@ -22,7 +22,7 @@ module ApplicationHelper
       end
     end
     if rtn != ''
-      rtn = content_tag(:dl, content_tag(:dt,'Update Status',{class: 'm-b-sm'}) + content_tag(:dd, rtn.html_safe))
+      rtn = content_tag(:dl, content_tag(:dt, 'Update Status', {class: 'm-b-sm'}) + content_tag(:dd, rtn.html_safe))
     end
     rtn.html_safe
   end
@@ -41,5 +41,19 @@ module ApplicationHelper
                              content_tag(:span, '', {class: 'caret'}) + content_tag(:span, 'Toggle Dropdown', {class: 'sr-only'}),
                              {class: 'btn btn-sm '+ app.current_state.events[first_item][0].meta[:btn_class] + ' dropdown-toggle', data: {toggle: 'dropdown'}})
     content_tag(:div, btn_group + ul_content, {class: 'btn-group m-r-sm '})
+  end
+
+  def admission_application_audit_user_label(audit)
+    rtn = ''
+    if audit.user.nil?
+      rtn = 'Unknown'
+    else
+      if audit.user.class.name == 'Admin'
+        rtn = "#{audit.user.name_or_email} (#{audit.user.class.name})"
+      else
+        rtn = audit.user.class.name
+      end
+    end
+    rtn
   end
 end

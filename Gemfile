@@ -68,6 +68,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'jquery-cookie-rails'
 # Workflow - https://github.com/geekq/workflow
 gem 'workflow'
+# Audit changes to ActiveRecord records.
+gem "audited-activerecord", "~> 4.0"
 
 
 group :production do 
