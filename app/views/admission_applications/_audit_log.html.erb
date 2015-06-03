@@ -1,0 +1,37 @@
+<div class="table-responsive">
+  <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="admission-application-audit-log">
+    <thead>
+    <tr>
+      <th>Action</th>
+      <th>Who</th>
+      <th>When</th>
+      <th>Changes</th>
+      <th>Notes</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @audits.reverse_each do |audit| %>
+        <tr>
+          <td><%= audit.action %></td>
+          <td><%= admission_application_audit_user_label audit %></td>
+          <td><%= time_ago_in_words audit.created_at %> ago
+            <span data-toggle="tooltip" title="" data-original-title="<%= audit.created_at.to_formatted_s(:long) %>"><i class="fa fa-info-circle"></i></span>
+          </td>
+          <td>
+            <% if audit.action != 'create' %>
+                <ul class="audit-change-list">
+                  <% audit.audited_changes.each do |item| %>
+                      <li><%= "#{item[0]}: #{item[1][0]}" %> <% if !item[1][0].nil? %><i class="fa fa-arrow-circle-right"></i><% end %> <%= item[1][1] %>
+                      </li>
+                  <% end %>
+                </ul>
+            <% end %>
+          </td>
+          <td><%= audit.comment %></td>
+
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

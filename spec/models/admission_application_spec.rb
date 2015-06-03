@@ -113,12 +113,25 @@ describe AdmissionApplication do
       expect {app.complete!}.to change {app.current_state}.from('started').to('completed')
     end
 
-    # it 'should change the status to Confirmed when Placed and a cohort is set' do
-    #   app.application_status = 'placed'
-    #   app.save
-    #   app.assigned_cohort = FactoryGirl.create(:cohort)
-    #   expect {app.save}.to change {app.current_state}.from('placed').to('confirmed')
-    # end
+    it 'should create an audit record when using the workflow' do
+      current_count = app.audits.count
+      app.complete!
+      expect(app.audits.count).to eq(current_count + 1)
+    end
+
+    it 'should create an audit record when saving with changes' do
+      current_count = app.audits.count
+      app.first_name = "#{app.first_name} test"
+      app.save
+      expect(app.audits.count).to eq(current_count + 1)
+    end
+
+    it 'should not create an audit record when saving without changes' do
+      current_count = app.audits.count
+      app.save
+      expect(app.audits.count).to eq(current_count)
+    end
+
   end
 
 end

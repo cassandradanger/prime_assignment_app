@@ -2,6 +2,8 @@ class AdmissionApplication < ActiveRecord::Base
   include Workflow
   include Filterable
 
+  audited on: [:create, :update], except: [:application_status_updated_at, :completed_at, :application_step]
+
   scope :all_completed, -> { where.not(application_status: 'not_started').where.not(application_status: 'started') }
   scope :started, -> { where.not(application_status: 'not_started') }
   scope :accepted, -> { where(application_status: ['interview_passed', 'placed','confirmed']) }
@@ -277,6 +279,13 @@ class AdmissionApplication < ActiveRecord::Base
   # Set or update Mailchimp list subscription for completed
   def update_mailchimp(options = {app_status: "In Progress", adm_status: "Unevaluated"})
     Gibbon::API.lists.subscribe({:id => ENV['MAILCHIMP_LIST'], :email => {:email => self.user.email}, :merge_vars => { :APP_STATUS => self.application_status, :ADM_STATUS => "Accepted", :START_ON => self.assigned_cohort.prework_start, :COHORT=> self.assigned_cohort.id, :AID_ELIG => (AdmissionApplication.aid_eligible.exists?(self) ? "YES" : "") }, :double_optin => false, :update_existing => true})
+  end
+
+  def persist_workflow_state(new_value)
+    # We are overriding the persist_workflow_state method to use an update call.
+    # We need to use update for the change to write to the audit log.
+    # TODO - come back and see if we can try to use update_attribute by adding that to audited.
+    update(self.class.workflow_column.to_sym => new_value, audit_comment: 'Workflow')
   end
 
   private

@@ -35,6 +35,11 @@ GEM
     animate-rails (1.0.7)
       rails
     arel (5.0.1.20140414130214)
+    audited (4.2.0)
+      rails-observers (~> 0.1.2)
+    audited-activerecord (4.2.0)
+      activerecord (~> 4.0)
+      audited (= 4.2.0)
     autoprefixer-rails (4.0.2.2)
       execjs
     aws-sdk (1.59.0)
@@ -166,6 +171,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.7)
       sprockets-rails (~> 2.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -259,6 +266,7 @@ DEPENDENCIES
   actionview-encoded_mail_to
   airbrake
   animate-rails
+  audited-activerecord (~> 4.0)
   autoprefixer-rails
   aws-sdk
   bootstrap-datepicker-rails
