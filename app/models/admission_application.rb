@@ -150,7 +150,7 @@ class AdmissionApplication < ActiveRecord::Base
     self.application_step = "thanks"
     self.completed_at = Time.now
     update_subscription(app_status: "Completed")
-    AdmissionApplicationMailer.admission_application_thank_you(self).deliver
+    AdmissionApplicationMailer.admission_application_thank_you(self).deliver_now
   end
 
   # End of Workflow definition
@@ -298,7 +298,7 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def send_welcome
-    AdmissionApplicationMailer.admission_application_welcome(self).deliver
+    AdmissionApplicationMailer.admission_application_welcome(self).deliver_now
   end
 
   # Set or update Mailchimp list subscription for applicants
