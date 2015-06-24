@@ -48,6 +48,13 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  # Set to :debug to see everything in the log.
+  config.log_level = :debug
+
+  # Use a different logger for distributed setups.
+  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
