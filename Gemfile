@@ -20,7 +20,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 # Use devise for user authentication and signup. Read more: https://github.com/plataformatec/devise
 gem 'devise'
 # Use wicked for multi-step wizard based application. Read more: https://github.com/schneems/wicked
@@ -35,7 +35,7 @@ gem "aws-sdk"
 # Use unicorn as the app server
 gem 'unicorn'
 # Use airbrake for error reporting
-gem "airbrake"	
+gem "airbrake"
 # Use gibbon for interaction with Mailchimp lists
 gem "gibbon"
 # Encode email addresses
@@ -71,33 +71,33 @@ gem 'workflow'
 # Audit changes to ActiveRecord records.
 gem "audited-activerecord", "~> 4.0"
 
-
-group :production do 
-	# Use Heroku deployment
-	gem 'rails_12factor'
-	gem 'font_assets'
+group :production do
+  # Use Heroku deployment
+  gem 'rails_12factor'
+  gem 'font_assets'
 end
 
 group :development do
-	# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-	gem 'spring'
-	gem 'spring-commands-rspec'
-	gem 'quiet_assets'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'quiet_assets'
 end
 
 group :test do
-	gem 'capybara'
-	gem 'shoulda-matchers'
-	gem 'mocha'
-  	gem 'database_cleaner'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'mocha'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
-	gem 'factory_girl_rails'
-	gem 'rspec-rails', '~> 3.2.0'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 3.2.0'
   gem 'rspec-its', '~> 1.1.0'
 end
 
+gem 'newrelic_rpm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
