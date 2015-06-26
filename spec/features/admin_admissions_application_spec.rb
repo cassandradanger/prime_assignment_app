@@ -31,6 +31,10 @@ feature 'A logged in administrator' do
     end
     within('.navbar-right') do
       page.has_content?(@admin.email)
+
+    end
+    within('#side-menu') do
+      page.has_css?('fa fa-line-chart')
     end
   end
 

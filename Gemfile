@@ -59,7 +59,7 @@ gem "font-awesome-rails"
 # https://github.com/daneden/animate.css
 gem "animate-rails"
 # Builds the admin navigation from a config file
-gem "simple-navigation"
+gem "simple-navigation", '~> 3.14.0'
 # Multi-select fields
 gem 'chosen-sass-bootstrap-rails'
 # Custom date picker based on Bootstrap.
