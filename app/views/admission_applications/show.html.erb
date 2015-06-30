@@ -56,7 +56,7 @@
     <div class="col-md-4">
       <%= bootstrap_form_for(@admission_application, namespace: 'app_status', layout: :vertical) do |f| %>
           <div id="assigned_cohort" class="<%= 'hidden' unless @admission_application.placed_or_confirmed? || @admission_application.dropped_out? %>">
-            <%= f.collection_select(:assigned_cohort_id, @cohorts, :id, :name ,{include_blank: 'Unassigned', label: 'Assigned Cohort'} ) %>
+            <%= f.collection_select(:assigned_cohort_id, @cohorts, :id, :name, {include_blank: 'Unassigned', label: 'Assigned Cohort'}) %>
             <%= f.submit "Update Cohort", class: 'btn btn-primary btn-sm' %>
           </div>
       <% end %>
@@ -77,6 +77,8 @@
       <a href="#interview" data-toggle="tab">Interview (<%= @admission_application.interview_score %>)</a></li>
     <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'demographics' %>>
       <a href="#demographics" data-toggle="tab">Demographics</a></li>
+    <li<%= ' class="active"'.html_safe if cookies[:admission_application_index_active_tab] == 'audit' %>>
+      <a href="#audit" data-toggle="tab">Change Log</a></li>
   </ul>
 
   <!-- GENERAL -->
@@ -124,7 +126,6 @@
                 <dt>Expected Payment Source</dt>
                 <dd><%= @admission_application.payment_option %></dd>
               </dl>
-
 
 
               <h4>Cohorts</h4>
@@ -196,6 +197,7 @@
                           <%= ff.hidden_field :sub_type %>
                           <%= ff.hidden_field :admin_id %>
                       <% end %>
+                      <%= f.hidden_field :audit_comment, value: 'Technical Challenge tab.' %>
                       <%= f.submit "Update Scores", id: "technical_score_submit", class: 'btn btn-primary btn-sm' %>
                   <% end %>
                 </div>
@@ -256,6 +258,7 @@
                           <%= answer_form.hidden_field :id, :value => answer_form.object.id %>
                       <% end %>
                   <% end %>
+                  <%= f.hidden_field :audit_comment, value: 'Profile tab.' %>
                   <%= f.submit "Update Scores", class: 'btn btn-primary btn-sm' %>
               <% end %>
             </div>
@@ -291,18 +294,19 @@
             <div class="ibox-content">
               <%= bootstrap_form_for @admission_application, :namespace => "demographics_form", layout: "vertical" do |f| -%>
                   <%= f.date_field :birthdate %>
-                  <%= f.select(:gender, ["Male","Female","Other"], prompt: "") %>
+                  <%= f.select(:gender, ["Male", "Female", "Other"], prompt: "") %>
                   <h4>Race and Ethnicity</h4>
-                    <%= f.check_box :race_hispanic, label: "Hispanic or Latino" %>
-                    <%= f.check_box :race_nativeamerican, label: "American Indian or Alaska Native" %>
-                    <%= f.check_box :race_asian, label: "Asian" %>
-                    <%= f.check_box :race_black, label: "Black or African American" %>
-                    <%= f.check_box :race_islander, label: "Native Hawaiian or Other Pacific Islander" %>
-                    <%= f.check_box :race_white, label: "White" %>
-                    <%= f.check_box :race_other, label: "Other" %>
-                    <%= f.text_field :dependents, label: "Number of dependents" %>
-                  <%= f.select(:geography, ["Urban","Suburban","Rural"], prompt: "") %>
+                  <%= f.check_box :race_hispanic, label: "Hispanic or Latino" %>
+                  <%= f.check_box :race_nativeamerican, label: "American Indian or Alaska Native" %>
+                  <%= f.check_box :race_asian, label: "Asian" %>
+                  <%= f.check_box :race_black, label: "Black or African American" %>
+                  <%= f.check_box :race_islander, label: "Native Hawaiian or Other Pacific Islander" %>
+                  <%= f.check_box :race_white, label: "White" %>
+                  <%= f.check_box :race_other, label: "Other" %>
+                  <%= f.text_field :dependents, label: "Number of dependents" %>
+                  <%= f.select(:geography, ["Urban", "Suburban", "Rural"], prompt: "") %>
                   <%= f.check_box :veteran, label: "Are you a United States Military Veteran?" %>
+                  <%= f.hidden_field :audit_comment, value: 'Demographics tab.' %>
                   <%= f.submit "Update Demographics", class: 'btn btn-primary btn-sm' %>
               <% end %>
             </div>
@@ -322,12 +326,13 @@
             </div>
             <div class="ibox-content">
               <div class="row">
-<div class="col-lg-12">
+                <div class="col-lg-12">
                   <%= bootstrap_form_for @admission_application, :namespace => "interview_score" do |f| -%>
                       <%= f.select(:interview_score, AdmissionApplication.interview_score_options, label: "Interview Score") %>
+                      <%= f.hidden_field :audit_comment, value: 'Interview tab.' %>
                       <%= f.submit "Update Scores", id: "interview_score_submit", class: 'btn btn-primary btn-sm' %>
                   <% end %>
-</div>
+                </div>
               </div>
             </div>
           </div>
@@ -367,6 +372,13 @@
         </div>
       </div>
     </div>
-
+    <!-- INTERVIEW -->
+    <div role="tabpanel" class="<%= 'active '.html_safe if cookies[:admission_application_index_active_tab] == 'audit' %>tab-pane gray-bg container-fluid" id="audit">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= render "audit_log" %>
+          </div>
+        </div>
+    </div>
   </div>
 </div>

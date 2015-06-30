@@ -39,4 +39,20 @@ namespace :prime do
        puts "FAILED! This will only run in development!"
      end
   end
+  task update_mailchimp: :environment do
+    puts "Begin updating all MailChimp subscriptions"
+    @apps = AdmissionApplication.all
+    counter = 0
+    @apps.each do |app|
+      app.update_mailchimp
+      counter += 1
+      if counter % 10 == 0
+        print "*"
+        STDOUT.flush
+      end
+    end
+    puts " "
+    puts "Complete"
+
+  end
 end

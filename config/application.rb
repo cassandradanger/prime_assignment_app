@@ -23,5 +23,7 @@ module PrimeacademyIo
     # config.i18n.default_locale = :de
 
     config.autoload_paths += %W("#{config.root}/app/navigation_renderers")
+
+    config.active_record.schema_format = :sql
   end
 end

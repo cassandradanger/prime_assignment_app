@@ -2,16 +2,18 @@ class AdmissionApplication < ActiveRecord::Base
   include Workflow
   include Filterable
 
+  audited on: [:create, :update], except: [:application_status_updated_at, :completed_at, :application_step]
+
   scope :all_completed, -> { where.not(application_status: 'not_started').where.not(application_status: 'started') }
   scope :started, -> { where.not(application_status: 'not_started') }
-  scope :accepted, -> { where(application_status: ['interview_passed', 'placed','confirmed']) }
+  scope :accepted, -> { where(application_status: ['interview_passed', 'placed', 'confirmed']) }
   scope :placed, -> { where(application_status: 'placed') }
-  scope :all_declined, -> { where(application_status: ['declined_by_applicant','declined_action_required','declined']) }
-  scope :being_processed, -> { where(application_status: ['completed','needs_scheduling','scheduled','interview_passed','placed'])}
+  scope :all_declined, -> { where(application_status: ['declined_by_applicant', 'declined_action_required', 'declined']) }
+  scope :being_processed, -> { where(application_status: ['completed', 'needs_scheduling', 'scheduled', 'interview_passed', 'placed']) }
   scope :needs_interview_score, -> { where(application_status: ['scheduled', 'interview_passed', 'placed']).where(interview_score: 0) }
   scope :has_referral, -> { started.where.not(referral_source: nil) }
   scope :app_status, -> (status) { (self.is_status_filter_scope?(status)) ? send(status) : where(application_status: status) }
-  scope :assigned_cohort, -> (cohort) { where(assigned_cohort: cohort)}
+  scope :assigned_cohort, -> (cohort) { where(assigned_cohort: cohort) }
   scope :cohort, lambda { |n| joins(:cohorts).where('cohorts.id = ?', n) }
 
   # scope :aid_eligible, -> { where(income: 0...23340) }
@@ -21,13 +23,13 @@ class AdmissionApplication < ActiveRecord::Base
   scope :not_aid_seeking, -> { where.not(payment_option: "Scholarship") }
 
   before_validation :populate_questions_on_submit
-  before_save :update_status, :check_assigned_cohort
+  before_save :update_status, :check_assigned_cohort, :check_for_status_change
+  after_save :update_email_subscriptions
 
   after_initialize :init
-  before_save :check_for_status_change
 
   after_create :populate_questions, on: :create
-  after_create :send_welcome, :update_subscription
+  after_create :send_welcome
 
   belongs_to :user
   belongs_to :assigned_cohort, class_name: "Cohort"
@@ -147,8 +149,7 @@ class AdmissionApplication < ActiveRecord::Base
   def on_completed_entry(from, triggering_event, *event_args)
     self.application_step = "thanks"
     self.completed_at = Time.now
-    update_subscription(app_status: "Completed")
-    AdmissionApplicationMailer.admission_application_thank_you(self).deliver
+    AdmissionApplicationMailer.admission_application_thank_you(self).deliver_now
   end
 
   # End of Workflow definition
@@ -176,7 +177,7 @@ class AdmissionApplication < ActiveRecord::Base
 
   def placed_or_confirmed?
     self.placed? || self.confirmed?
-   # application_status == "placed" || application_status == 'confirmed'
+    # application_status == "placed" || application_status == 'confirmed'
   end
 
   def active?
@@ -244,7 +245,7 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def self.application_status_options
-    options_list = AdmissionApplication.workflow_spec.states.keys.map {|key| [AdmissionApplication.workflow_state_name(key),key]}
+    options_list = AdmissionApplication.workflow_spec.states.keys.map { |key| [AdmissionApplication.workflow_state_name(key), key] }
   end
 
   def self.application_status_filter_scope_options
@@ -275,8 +276,41 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   # Set or update Mailchimp list subscription for completed
-  def update_mailchimp(options = {app_status: "In Progress", adm_status: "Unevaluated"})
-    Gibbon::API.lists.subscribe({:id => ENV['MAILCHIMP_LIST'], :email => {:email => self.user.email}, :merge_vars => { :APP_STATUS => self.application_status, :ADM_STATUS => "Accepted", :START_ON => self.assigned_cohort.prework_start, :COHORT=> self.assigned_cohort.id, :AID_ELIG => (AdmissionApplication.aid_eligible.exists?(self) ? "YES" : "") }, :double_optin => false, :update_existing => true})
+  def update_mailchimp
+    options = {
+        id: ENV['MAILCHIMP_LIST'],
+        email: {:email => self.user.email},
+        double_optin: false,
+        update_existing: true,
+        merge_vars: {
+            FNAME: self.first_name,
+            LNAME: self.last_name,
+            APP_STATUS: self.application_status,
+            ADM_STATUS: (self.placed_or_confirmed? ? "Accepted" : "Unevaluated"),
+            AID_ELIG: (AdmissionApplication.aid_eligible.exists?(self.id) ? "YES" : ""),
+            GROUPINGS: [{:name => "I am a:", :groups => ['Applicant']}]
+        }
+    }
+    if (self.placed_or_confirmed? && !self.assigned_cohort.nil?)
+      options[:merge_vars][:COHORT] = self.assigned_cohort.id
+      options[:merge_vars][:START_ON] = self.assigned_cohort.prework_start
+    else
+      options[:merge_vars][:COHORT] = ""
+      options[:merge_vars][:START_ON] = ""
+    end
+    begin
+      Gibbon::API.lists.subscribe(options)
+    rescue Gibbon::MailChimpError => e
+      Rails.logger.error "Gibbon::MailChimpError: #{e.code} - #{e.message}"
+    end
+
+  end
+
+  def persist_workflow_state(new_value)
+    # We are overriding the persist_workflow_state method to use an update call.
+    # We need to use update for the change to write to the audit log.
+    # TODO - come back and see if we can try to use update_attribute by adding that to audited.
+    update(self.class.workflow_column.to_sym => new_value, audit_comment: 'Workflow')
   end
 
   private
@@ -289,14 +323,8 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def send_welcome
-    AdmissionApplicationMailer.admission_application_welcome(self).deliver
+    AdmissionApplicationMailer.admission_application_welcome(self).deliver_now
   end
-
-  # Set or update Mailchimp list subscription for applicants
-  def update_subscription(options = {app_status: "In Progress", adm_status: "Unevaluated"})
-    Gibbon::API.lists.subscribe({:id => ENV['MAILCHIMP_LIST'], :email => {:email => self.user.email}, :merge_vars => {:FNAME => self.first_name, :LNAME => self.last_name, :APP_STATUS => options[:app_status], :ADM_STATUS => options[:adm_status], :GROUPINGS => [{:name => "I am a:", :groups => ['Applicant']}]}, :double_optin => false, :update_existing => true})
-  end
-
 
   def update_status
     # After validation, detect if the application is being submitted and set completed flags
@@ -327,6 +355,15 @@ class AdmissionApplication < ActiveRecord::Base
   def check_for_status_change
     if self.application_status_changed?
       self.application_status_updated_at = DateTime.now
+    end
+  end
+
+  def update_email_subscriptions
+    # This is a bit of a hack.  I got tired of trying to figure out how to tell if assigned_cohort had
+    # changed.  The _changed? method doesn't work because it is an association.  So instead of updating
+    # MailChimp on assigned_cohort_changed? I am updating it on every save if the state is at or above 'placed'.
+    if self.application_status_changed? || self.current_state >= :placed
+      self.update_mailchimp
     end
   end
 

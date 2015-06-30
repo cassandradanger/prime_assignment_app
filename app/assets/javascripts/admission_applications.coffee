@@ -34,6 +34,26 @@ $(document).ready ->
     else
       $('#assigned_cohort').addClass('hidden')
 
+  $('[data-toggle="tooltip"]').tooltip()
+
+  $('ul.audit-change-list').each ->
+    LiN = $(this).find('li').length
+    if( LiN > 3)
+      $('li', this).eq(2).nextAll().hide().addClass('toggleable')
+      $(this).append('<li><a href="#" class="more">More...</a></li>');
+
+  $('ul.audit-change-list').on 'click','.more', (e) ->
+    e.preventDefault()
+    if( $(this).hasClass('less') )
+      $(this).text('More...').removeClass('less')
+    else
+      $(this).text('Less...').addClass('less')
+    $(this).parent().siblings('li.toggleable').slideToggle()
+
+
+
+
+
 
 
 
