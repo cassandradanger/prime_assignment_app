@@ -8,12 +8,17 @@ class AdmissionApplicationsController < AdminApplicationController
     set_default_params(:assigned_cohort)
     set_default_params(:app_status)
 
-    @admission_applications = AdmissionApplication.filter(params.slice(:cohort,:assigned_cohort,:app_status))
-    @status_options = [['Status',AdmissionApplication.application_status_options],['Filter',AdmissionApplication.application_status_filter_scope_options]]
-    @cohort_id = params[:cohort]
-    @app_status = params[:app_status]
-    @assigned_cohort_id = params[:assigned_cohort]
-    @cohorts = Cohort.all
+    respond_to do |format|
+      format.html do
+        @admission_applications_count = AdmissionApplication.filter(params.slice(:cohort,:assigned_cohort,:app_status)).count
+        @status_options = [['Status',AdmissionApplication.application_status_options],['Filter',AdmissionApplication.application_status_filter_scope_options]]
+        @cohort_id = params[:cohort]
+        @app_status = params[:app_status]
+        @assigned_cohort_id = params[:assigned_cohort]
+        @cohorts = Cohort.all
+      end
+      format.json { render json: AdmissionApplicationDatatable.new(view_context, params)}
+    end
   end
 
   def show

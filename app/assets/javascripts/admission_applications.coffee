@@ -19,9 +19,12 @@ $(document).ready ->
     pagingType: 'full_numbers',
     pageLength: 50,
     lengthChange: false,
-    stateSave: true,
+    stateSave: false,
+    processing: true,
+    serverSide: true,
+    ajax: $('#admission-application-datatable').data('source'),
     columnDefs: [
-      orderable: false, targets: [8]
+      orderable: false, targets: [4,5,6,7,8,9]
     ]
 
   $('#app_status_admission_application_application_status').change (e) ->

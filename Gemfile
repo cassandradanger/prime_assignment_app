@@ -52,6 +52,7 @@ gem 'autoprefixer-rails'
 gem 'bootstrap_form'
 # JQuery Data Tables
 gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'ajax-datatables-rails'
 # Used to migrate data with a rake db:migrate task
 gem 'migration_data'
 # Awesome fonts...
@@ -70,6 +71,8 @@ gem 'jquery-cookie-rails'
 gem 'workflow'
 # Audit changes to ActiveRecord records.
 gem "audited-activerecord", "~> 4.0"
+# Pagination
+gem 'kaminari'
 
 group :production do
   # Use Heroku deployment

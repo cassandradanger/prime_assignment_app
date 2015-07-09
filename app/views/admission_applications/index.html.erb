@@ -1,7 +1,7 @@
 <% content_for :page_title, "Applications" %>
 
 <div class="ibox-content">
-  <p>Total Applications: <%= @admission_applications.count %></p>
+  <p>Total Applications: <%= @admission_applications_count %></p>
 
   <p>Completed Applications: <%= AdmissionApplication.all_completed.count %></p>
 
@@ -16,43 +16,26 @@
     </div>
   </div>
   <div class="table-responsive">
-    <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="admission-application-datatable">
+    <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="admission-application-datatable" data-source="<%= admission_applications_path(format: :json) %>">
       <thead>
       <tr>
-        <th class="hidden-xs">Email</th>
+        <th>Email</th>
         <th>Applicant</th>
         <th>Status</th>
+        <th class="hidden-xs">Last Status Update</th>
+        <th class="hidden-xs hidden-sm">Assigned Cohort</th>
         <th class="hidden-xs">Logic</th>
         <th class="hidden-xs">Profile</th>
         <th class="hidden-xs">Resume</th>
         <th class="hidden-xs">Interview</th>
-        <th class="hidden-xs">Days Since Last Status Update</th>
-        <th class="hidden-xs hidden-sm">Assigned Cohort</th>
         <th>&nbsp;</th>
       </tr>
       </thead>
 
       <tbody>
-      <% @admission_applications.each do |admission_application| %>
-          <tr>
-            <td class="hidden-xs"><%= admission_application.user.email %></td>
-            <td><%= admission_application.name %></td>
-            <td><%= admission_application.application_status_name %></td>
-            <td class="hidden-xs"><%= admission_application.logic_questions_score if admission_application.completed_by_applicant? %></td>
-            <td class="hidden-xs"><%= admission_application.profile_questions_score if admission_application.completed_by_applicant? %></td>
-            <td class="hidden-xs"><%= admission_application.resume_score if admission_application.completed_by_applicant? %></td>
-            <td class="hidden-xs"><%= admission_application.interview_score_name if admission_application.completed_by_applicant? %></td>
-            <td class="hidden-xs"><%= (DateTime.now - admission_application.application_status_updated_at.to_datetime).to_i if admission_application.completed_by_applicant? %></td>
-            <td class="hidden-xs hidden-sm"><%= admission_application.assigned_cohort_name %></td>
-            <td>
-              <%= link_to 'View'.html_safe, admission_application_path(admission_application) %>
-              <%#= link_to 'Edit', edit_admission_application_path(admission_application) %>
-              <%#= link_to 'Destroy', admission_application, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </td>
-
-          </tr>
-      <% end %>
       </tbody>
     </table>
   </div>
 </div>
+
+
