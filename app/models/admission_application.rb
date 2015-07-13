@@ -4,6 +4,8 @@ class AdmissionApplication < ActiveRecord::Base
 
   audited on: [:create, :update], except: [:application_status_updated_at, :completed_at, :application_step]
 
+  paginates_per 50
+
   scope :all_completed, -> { where.not(application_status: 'not_started').where.not(application_status: 'started') }
   scope :started, -> { where.not(application_status: 'not_started') }
   scope :accepted, -> { where(application_status: ['interview_passed', 'placed', 'confirmed']) }
@@ -213,27 +215,31 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def logic_questions_score
-    score = 0
-    logic_question_answers.each do |a|
-      if a.logic_question.present?
-        if a.answer != "I don't know"
-          if a.answer == a.logic_question.solution
-            score = score + 1
-          else
-            score = score - 1
+    if self.completed_by_applicant?
+      score = 0
+      logic_question_answers.each do |a|
+        if a.logic_question.present?
+          if a.answer != "I don't know"
+            if a.answer == a.logic_question.solution
+              score = score + 1
+            else
+              score = score - 1
+            end
           end
         end
       end
+      score
     end
-    score
   end
 
   def profile_questions_score
-    score = 0
-    profile_question_answers.each do |a|
-      score = score + a.score.to_i
+    if self.completed_by_applicant?
+      score = 0
+      profile_question_answers.each do |a|
+        score = score + a.score.to_i
+      end
+      score
     end
-    score
   end
 
   def self.interview_score_options
@@ -260,19 +266,36 @@ class AdmissionApplication < ActiveRecord::Base
     self.current_state.meta[:name]
   end
 
+  def days_since_status_update
+    if self.completed_by_applicant?
+      days = (DateTime.now - self.application_status_updated_at.to_datetime).to_i
+      case days
+        when 0
+          days = 'Today'
+        when 1
+          days = 'Yesterday'
+        else
+          days = "#{days} days ago"
+      end
+      days
+    end
+  end
+
   def interview_score_name
-    name = self.interview_score
-    if self.interview_score == 0
-      name = ''
-    else
-      INTERVIEW_SCORES.each do |score|
-        if self.interview_score.to_s == score[:id].to_s
-          name = score[:name]
-          break
+    if self.completed_by_applicant?
+      name = self.interview_score
+      if self.interview_score == 0
+        name = ''
+      else
+        INTERVIEW_SCORES.each do |score|
+          if self.interview_score.to_s == score[:id].to_s
+            name = score[:name]
+            break
+          end
         end
       end
+      name
     end
-    name
   end
 
   # Set or update Mailchimp list subscription for completed

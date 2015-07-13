@@ -27,6 +27,8 @@ describe AdmissionApplication do
 
   it { AdmissionApplication.should respond_to(:comment_sub_type_options) }
 
+  it { AdmissionApplication.new().should respond_to(:days_since_status_update) }
+
   it 'should send an email when created' do
     mailcount = ActionMailer::Base.deliveries.count
     @admission_application = FactoryGirl.create(:admission_application)
@@ -111,6 +113,11 @@ describe AdmissionApplication do
 
     it 'should change the status to Complete when using the workflow to change status' do
       expect {app.complete!}.to change {app.current_state}.from('started').to('completed')
+    end
+
+    it 'should provide Today as days since last update' do
+      app.complete!
+      expect(app.days_since_status_update).to eq('Today')
     end
 
     it 'should create an audit record when using the workflow' do
