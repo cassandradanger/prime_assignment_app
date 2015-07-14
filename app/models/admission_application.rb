@@ -2,6 +2,8 @@ class AdmissionApplication < ActiveRecord::Base
   include Workflow
   include Filterable
 
+  attr_accessor :just_started, :just_completed
+
   audited on: [:create, :update], except: [:application_status_updated_at, :completed_at, :application_step]
 
   paginates_per 50
@@ -151,8 +153,14 @@ class AdmissionApplication < ActiveRecord::Base
   def on_completed_entry(from, triggering_event, *event_args)
     self.application_step = "thanks"
     self.completed_at = Time.now
+    @just_completed = true
     AdmissionApplicationMailer.admission_application_thank_you(self).deliver_now
   end
+
+  def on_started_entry(from, triggering_event, *event_args)
+    @just_started = true
+  end
+
 
   # End of Workflow definition
 

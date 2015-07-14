@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 
   # Public routes
-  devise_for :users, :path=>"applicant", path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+  devise_for :users, :path=>"applicant", controllers: { registrations: 'registrations'}, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
   resources :apply
 
   # Admin routes

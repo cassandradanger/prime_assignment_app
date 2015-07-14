@@ -46,6 +46,14 @@ describe AdmissionApplication do
       expect(app.not_started?).to eq(true)
     end
 
+    it 'should have an instance variable of just_started not equal true' do
+      expect(app.just_started).to_not eq(true)
+    end
+
+    it 'should have an instance variable of just_completed not equal true' do
+      expect(app.just_completed).to_not eq(true)
+    end
+
     it 'should have a valid factory' do
       FactoryGirl.create(:new_admission_application).should be_valid
     end
@@ -72,6 +80,12 @@ describe AdmissionApplication do
         expect {app.save}.to change {app.application_status}.from('not_started').to('started')
       end
 
+      it 'should have just_started == true when started' do
+        app.application_step = 'logic'
+        app.application_status = 'not_started'
+        expect {app.save}.to change {app.just_started}.from(nil).to(true)
+      end
+
     end
   end
 
@@ -92,6 +106,11 @@ describe AdmissionApplication do
     it 'should be marked as completed when submitted' do
       app.application_step = 'submit'
       expect {app.save}.to change {app.application_status}.from('started').to('completed')
+    end
+
+    it 'should jave just_completed == true when completed' do
+      app.application_step = 'submit'
+      expect {app.save}.to change {app.just_completed}.from(nil).to(true)
     end
 
     it 'should record the completed_at time when submitted' do

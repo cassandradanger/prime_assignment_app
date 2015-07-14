@@ -1,0 +1,67 @@
+<!-- Google Code for Started Application Conversion Page -->
+<% if @user_created %>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 947148328;
+        var google_conversion_language = "en";
+        var google_conversion_format = "3";
+        var google_conversion_color = "ffffff";
+        var google_conversion_label = "Ipp3CND5_l0QqKzRwwM";
+        var google_remarketing_only = false;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/947148328/?label=Ipp3CND5_l0QqKzRwwM&amp;guid=ON&amp;script=0"/>
+      </div>
+    </noscript>
+
+    <% content_for :inline_javascript do %>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ga('send', 'event', 'application', 'created', 'PSEA');
+            });
+        </script>
+    <% end %>
+<% end %>
+
+<% if @user_started %>
+    <% content_for :inline_javascript do %>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ga('send', 'event', 'application', 'started', 'PSEA');
+            });
+        </script>
+    <% end %>
+<% end %>
+
+<% if @user_completed %>
+    <!-- Google Code for Completed Application Conversion Page -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 947148328;
+        var google_conversion_language = "en";
+        var google_conversion_format = "3";
+        var google_conversion_color = "ffffff";
+        var google_conversion_label = "DAzoCOCHhF4QqKzRwwM";
+        var google_remarketing_only = false;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/947148328/?label=DAzoCOCHhF4QqKzRwwM&amp;guid=ON&amp;script=0"/>
+      </div>
+    </noscript>
+
+    <% content_for :inline_javascript do %>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ga('send', 'event', 'application', 'completed', 'PSEA');
+            });
+        </script>
+    <% end %>
+<% end %>

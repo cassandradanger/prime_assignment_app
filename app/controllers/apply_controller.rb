@@ -9,12 +9,26 @@ class ApplyController < ApplicationController
   # GET /apply/{step}
   def show
     case step
+      when :start
+        if session[:user_created] == 1
+          session[:user_created] = ''
+          @user_created = true
+        end
       when :general
         @cohorts = Cohort.current
       when :submit
         # trigger final validation
         @admission_application.application_step = step.to_s
         @admission_application.valid?
+      when :thanks
+        if session[:user_completed] == 1
+          @user_completed = true
+          session[:user_completed] = ''
+        end
+    end
+    if session[:user_started] == 1
+      @user_started = true
+      session[:user_started] = ''
     end
     render_wizard
   end
@@ -24,6 +38,8 @@ class ApplyController < ApplicationController
     respond_to do |format|
       @admission_application.application_step = step.to_s
       if @admission_application.update(admission_application_params)
+        session[:user_started] = 1 if @admission_application.just_started
+        session[:user_completed] = 1 if @admission_application.just_completed
         format.html { redirect_to next_wizard_path }
       else
         flash.now[:error] = 'There was a problem with your submission, your changes have not yet been saved. Please make corrections and resubmit.'
