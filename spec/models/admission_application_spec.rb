@@ -108,7 +108,7 @@ describe AdmissionApplication do
       expect {app.save}.to change {app.application_status}.from('started').to('completed')
     end
 
-    it 'should jave just_completed == true when completed' do
+    it 'should have just_completed == true when completed' do
       app.application_step = 'submit'
       expect {app.save}.to change {app.just_completed}.from(nil).to(true)
     end
