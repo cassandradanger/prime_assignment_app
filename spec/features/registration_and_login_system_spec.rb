@@ -5,7 +5,8 @@ feature 'A visitor who is not logged in' do
 	feature 'clicks on apply' do
   
 	  before :each do
-	    @user = FactoryGirl.create(:user)
+	    @user = create(:user)
+      @user.admission_application = create(:admission_application, user: @user)
 	    visit '/apply'
 	  end
 
@@ -13,7 +14,7 @@ feature 'A visitor who is not logged in' do
 	  	current_path.should == new_user_session_path
 	  end
 
-	  scenario 'then logs in and is redirected to application start' do	  	
+	  scenario 'then logs in and is redirected to application start' do
 	    fill_in 'user_login_email', with: @user.email
 	    fill_in 'user_login_password', with: @user.password
 	    click_button 'Continue Your Application'
@@ -33,13 +34,13 @@ feature 'A visitor who is not logged in' do
 
 	feature 'requests the administration page for' do
 	
-		scenario 'logic questions and is redirected to the admin login' do
-			visit logic_questions_path
+		scenario 'applications and is redirected to the admin login' do
+			visit admission_applications_path
 			current_path.should == new_admin_session_path
 		end
 
-		scenario 'profile questions and is redirected to the admin login' do
-			visit profile_questions_path
+		scenario 'courses and is redirected to the admin login' do
+			visit courses_path
 			current_path.should == new_admin_session_path
 		end
 
@@ -51,10 +52,10 @@ feature 'A visitor who is not logged in' do
 		scenario 'dashboard and is redirected to the admin login' do
 			visit dashboard_path
 			current_path.should == new_admin_session_path
-		end
+    end
 
-		scenario 'dashboard and is redirected to the admin login' do
-			visit dashboard_path
+		scenario 'employees and is redirected to the admin login' do
+			visit admins_path
 			current_path.should == new_admin_session_path
 		end
 

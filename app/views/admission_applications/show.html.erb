@@ -1,4 +1,5 @@
 <% content_for :page_title, "Application :: #{@admission_application.name}" %>
+<% content_for :page_sub_title, @admission_application.course.label unless @admission_application.course.blank? %>
 <% content_for :page_title_nav do %>
     <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_admission_application_path(@admission_application), class: 'btn btn-white btn-sm' %>
 

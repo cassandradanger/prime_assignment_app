@@ -40,4 +40,4 @@
 <%= f.input :referral_source, collection: ["Search Engine","Online Ad","Social Media Link","Radio Ad","Recruiting Event","Personal Referral","Media Coverage","Other"], label: "How did you hear about Prime?", required:true %>
 <h3>Cohorts *</h3>
 <p>Check the box for each cohort that would work for you. Selecting more cohorts improves your chances at acceptance.</p>
-<%= f.association :cohorts, as: :check_boxes, label_method: :label, label: false, error: false, collection: Cohort.current %>
+<%= f.association :cohorts, as: :check_boxes, label_method: :label, label: false, error: false, collection: @cohorts %>

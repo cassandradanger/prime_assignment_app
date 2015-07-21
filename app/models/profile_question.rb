@@ -1,4 +1,10 @@
 class ProfileQuestion < ActiveRecord::Base
-	scope :current, -> { where(published: true) }
-	has_many :profile_question_answers
+
+  default_scope { order(:position) }
+  scope :current, -> { where(published: true).where(active: true) }
+  scope :active, -> { where(active: true) }
+
+  has_many :profile_question_answers
+  belongs_to :course
+
 end

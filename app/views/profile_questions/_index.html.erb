@@ -1,0 +1,41 @@
+<div class="ibox">
+  <div class="ibox-title">
+    <h5>Profile Questions</h5>
+    <span class="pull-right">
+      <%= link_to '<i class="fa fa-plus"></i>New Question'.html_safe, new_course_profile_question_path(@course), {class: "btn btn-white btn-sm ibox-title-btn" } %>
+    </span>
+  </div>
+  <div class="ibox-content">
+    <div class="table-responsive">
+      <table class="table table-condensed table-striped table-bordered table-hover dataTables-example dataTable dtr-inline no-footer" id="profile-questions-datatable">
+        <thead>
+        <tr>
+          <th>Question</th>
+          <th>Published</th>
+          <th class="hidden-xs hidden-sm">Scoring guideline 1</th>
+          <th class="hidden-xs hidden-sm">Scoring guideline 3</th>
+          <th class="hidden-xs hidden-sm">Scoring guideline 5</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @profile_questions.each do |profile_question| %>
+            <tr>
+              <td><%= profile_question.question %></td>
+              <td><%= profile_question.published %></td>
+              <td class="hidden-xs hidden-sm"><%= profile_question.scoring_guideline_1 %></td>
+              <td class="hidden-xs hidden-sm"><%= profile_question.scoring_guideline_3 %></td>
+              <td class="hidden-xs hidden-sm"><%= profile_question.scoring_guideline_5 %></td>
+              <td><%= link_to 'Show', [@course,profile_question] %></td>
+              <td><%= link_to 'Edit', edit_course_profile_question_path(@course,profile_question) %></td>
+              <td><%= link_to 'Destroy', [@course,profile_question], method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

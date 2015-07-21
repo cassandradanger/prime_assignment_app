@@ -68,8 +68,9 @@ SimpleNavigation::Configuration.run do |navigation|
      #                        current_page?(admin_root_path_path) || current_page?(dashboard_path)}
     primary.item :applications, 'Applications', admission_applications_path, opts: {icon: 'fa fa-users'}, highlights_on: :subpath
     primary.item :cohorts, 'Cohorts', cohorts_path, opts: {icon: 'fa fa-university'}, highlights_on: :subpath
-    primary.item :logic_questions, 'Logic Questions', logic_questions_path, opts: {icon: 'fa fa-question'}, highlights_on: :subpath
-    primary.item :profile_questions, 'Profile Questions', profile_questions_path, opts: {icon: 'fa fa-file-o'}, highlights_on: :subpath
+    primary.item :courses, 'Courses', courses_path, opts: {icon: 'fa fa-book'}, highlights_on: :subpath
+    # primary.item :logic_questions, 'Logic Questions', logic_questions_path, opts: {icon: 'fa fa-question'}, highlights_on: :subpath
+    # primary.item :profile_questions, 'Profile Questions', profile_questions_path, opts: {icon: 'fa fa-file-o'}, highlights_on: :subpath
     primary.item :employees, 'Employees', admins_path, opts: {icon: 'fa fa-user'}, highlights_on: :subpath
 
     # Add an item which has a sub navigation (same params, but with block)
