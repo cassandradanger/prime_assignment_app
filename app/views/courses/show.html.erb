@@ -1,0 +1,36 @@
+<% content_for :page_title, "Course :: #{@course.code} - #{@course.name}" %>
+<% content_for :page_title_nav do %>
+    <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_course_url(@course), class: 'btn btn-white btn-sm' %>
+    <%= link_to('<i class="fa fa-times"></i> Delete'.html_safe, @course, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-white btn-sm') if @course.cohorts.nil? %>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>Description</h5>
+      </div>
+      <div class="ibox-content">
+        <%= @course.description %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= render 'profile_questions/index' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= render 'logic_questions/index' %>
+  </div>
+</div>
+
+
+
+
+
+

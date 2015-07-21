@@ -14,8 +14,6 @@ class ApplyController < ApplicationController
           session[:user_created] = ''
           @user_created = true
         end
-      when :general
-        @cohorts = Cohort.current
       when :submit
         # trigger final validation
         @admission_application.application_step = step.to_s
@@ -53,6 +51,7 @@ class ApplyController < ApplicationController
   def set_admission_application
     @user = current_user
     @admission_application = @user.admission_application || @user.create_admission_application()
+    @cohorts = @admission_application.course.cohorts.current
   end
 
   def redirect_completed_applicants

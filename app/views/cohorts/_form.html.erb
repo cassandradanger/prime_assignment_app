@@ -1,11 +1,18 @@
 <%= bootstrap_form_for(@cohort) do |f| %>
 
     <%= f.text_field :name %>
-    <%= f.text_field :prework_start, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
-    <%= f.text_field :classroom_start, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
-    <%= f.text_field :graduation, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
-    <%= f.text_field :applications_open, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"   %>
-    <%= f.text_field :applications_close, prepend: '<i class="fa fa-calendar"></i>'.html_safe ,class: "datepicker"  %>
+    <% if !@cohort.persisted? %>
+        <%= f.collection_select(:course_id, @courses, :id, :label) %>
+    <% else %>
+        <%= f.static_control label: "Course" do %>
+            <%= @cohort.course.label %>
+        <% end %>
+    <% end %>
+    <%= f.text_field :prework_start, prepend: '<i class="fa fa-calendar"></i>'.html_safe, class: "datepicker" %>
+    <%= f.text_field :classroom_start, prepend: '<i class="fa fa-calendar"></i>'.html_safe, class: "datepicker" %>
+    <%= f.text_field :graduation, prepend: '<i class="fa fa-calendar"></i>'.html_safe, class: "datepicker" %>
+    <%= f.text_field :applications_open, prepend: '<i class="fa fa-calendar"></i>'.html_safe, class: "datepicker" %>
+    <%= f.text_field :applications_close, prepend: '<i class="fa fa-calendar"></i>'.html_safe, class: "datepicker" %>
 
     <%= f.text_field :target_size %>
     <%= f.text_field :earnest_application_code %>

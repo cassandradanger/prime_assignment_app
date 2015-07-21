@@ -1,0 +1,33 @@
+<% content_for :page_title, "Courses" %>
+
+<div class="ibox">
+  <div class="ibox-title">
+    <h5>Courses</h5>
+    <span class="pull-right">
+      <%= link_to '<i class="fa fa-plus"></i>New Course'.html_safe, new_course_path, {class: "btn btn-white btn-sm ibox-title-btn"} %>
+    </span>
+  </div>
+  <div class="ibox-content">
+    <div class="project-list table-responsive">
+      <table class="table table-hover" id="courses-table">
+        <tbody>
+        <% @courses.each do |course| %>
+            <tr>
+              <td class="project-title">
+                <%= link_to "#{course.code} - #{course.name}", course %>
+                <div class="hidden-xs">
+                  <small><%= course.description %></small>
+                </div>
+              </td>
+              <td class="text-right">
+                <%= link_to '<i class="fa fa-folder"></i> View'.html_safe, course, class: 'btn btn-white btn-sm' %>
+                <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_course_path(course), class: 'btn btn-white btn-sm' %>
+                <%= link_to('<i class="fa fa-times"></i> Delete'.html_safe, course, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-white btn-sm') if course.cohorts.nil? %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

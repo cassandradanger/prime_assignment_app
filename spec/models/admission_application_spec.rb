@@ -53,46 +53,49 @@ describe AdmissionApplication do
     it 'should have an instance variable of just_completed not equal true' do
       expect(app.just_completed).to_not eq(true)
     end
+  end
+  context 'without any information' do
+    let(:app) { FactoryGirl.create(:new_admission_application) }
+    subject { app }
 
     it 'should have a valid factory' do
-      FactoryGirl.create(:new_admission_application).should be_valid
+      expect(app).to be_valid
     end
 
-    it 'should have a valid complete factory' do
-      FactoryGirl.build(:complete_admission_application).should be_valid
+    it 'should have an assigned cohort' do
+      expect(app.cohorts.count).to equal(1)
     end
 
-
-    context 'without any information' do
-      let(:app) { FactoryGirl.create(:new_admission_application) }
-      subject { app }
-
-      it 'should be invalid' do
-        app.application_step = 'submit'
-        expect(app).to_not be_valid
-      end
-
-      it 'should set the status to started when the step is populated and status = not_stated' do
-        app.application_step = 'logic'
-        app.application_status = 'not_started'
-        expect(app).to be_valid
-        expect(app.active?).to equal(false)
-        expect {app.save}.to change {app.application_status}.from('not_started').to('started')
-      end
-
-      it 'should have just_started == true when started' do
-        app.application_step = 'logic'
-        app.application_status = 'not_started'
-        expect {app.save}.to change {app.just_started}.from(nil).to(true)
-      end
-
+    it 'should be invalid' do
+      app.application_step = 'submit'
+      expect(app).to_not be_valid
     end
+
+    it 'should set the status to started when the step is populated and status = not_stated' do
+      app.application_step = 'logic'
+      app.application_status = 'not_started'
+      expect(app).to be_valid
+      expect(app.active?).to equal(false)
+      expect { app.save }.to change { app.application_status }.from('not_started').to('started')
+    end
+
+    it 'should have just_started == true when started' do
+      app.application_step = 'logic'
+      app.application_status = 'not_started'
+      expect { app.save }.to change { app.just_started }.from(nil).to(true)
+    end
+
   end
+
 
   describe 'with complete information' do
 
-    let(:app) {FactoryGirl.create(:complete_admission_application)}
+    let(:app) { FactoryGirl.create(:complete_admission_application) }
     subject { app }
+
+    it 'should have a valid complete factory' do
+      expect(app).to be_valid
+    end
 
     it 'should have a current_state == started' do
       expect(app.started?).to eq(true)
@@ -105,12 +108,12 @@ describe AdmissionApplication do
 
     it 'should be marked as completed when submitted' do
       app.application_step = 'submit'
-      expect {app.save}.to change {app.application_status}.from('started').to('completed')
+      expect { app.save }.to change { app.application_status }.from('started').to('completed')
     end
 
     it 'should have just_completed == true when completed' do
       app.application_step = 'submit'
-      expect {app.save}.to change {app.just_completed}.from(nil).to(true)
+      expect { app.save }.to change { app.just_completed }.from(nil).to(true)
     end
 
     it 'should record the completed_at time when submitted' do
@@ -125,13 +128,15 @@ describe AdmissionApplication do
     end
 
     it 'with new profile question should be invalid' do
-      FactoryGirl.create(:profile_question)
+      app.profile_question_answers.each do |question|
+        question.answer = ''
+      end
       app.application_step = 'submit'
       expect(app).to_not be_valid
     end
 
     it 'should change the status to Complete when using the workflow to change status' do
-      expect {app.complete!}.to change {app.current_state}.from('started').to('completed')
+      expect { app.complete! }.to change { app.current_state }.from('started').to('completed')
     end
 
     it 'should provide Today as days since last update' do

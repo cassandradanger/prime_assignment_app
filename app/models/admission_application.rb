@@ -32,10 +32,12 @@ class AdmissionApplication < ActiveRecord::Base
 
   after_initialize :init
 
+  before_create :populate_course
   after_create :populate_questions, on: :create
   after_create :send_welcome
 
   belongs_to :user
+  belongs_to :course
   belongs_to :assigned_cohort, class_name: "Cohort"
 
   has_many :comments, as: :is_commentable
@@ -53,6 +55,8 @@ class AdmissionApplication < ActiveRecord::Base
 
   accepts_nested_attributes_for :comments, reject_if: proc { |attributes| attributes['content'].blank? && attributes['id'].blank? }
 
+  # When practical change to check for the presence of a course.  Commented because there isn't a good way to handle errors.
+  # validates_presence_of :course
   validates :last_name, :first_name, :address, :city, :state, :zip_code, :legal_status, :education, :employment_status, :goal, :referral_source, :phone, :presence => true, :if => :active_or_general?, length: {maximum: 255}
   validates :resume_link, presence: true, :if => :active?
   validates :website_link, :linkedin_account, :resume_link, :payment_option, :twitter_account, :github_account, :middle_name, length: {maximum: 255}
@@ -214,12 +218,22 @@ class AdmissionApplication < ActiveRecord::Base
 
   # add questions upon creation of a new application
   def populate_questions
-    LogicQuestion.current.each do |question|
-      logic_question_answers.find_or_create_by!(logic_question_id: question.id)
+    populate_course
+    if self.logic_question_answers.count == 0
+      self.course.logic_questions.current.each do |question|
+        logic_question_answers.find_or_create_by!(logic_question_id: question.id)
+      end
     end
-    ProfileQuestion.current.each do |question|
-      profile_question_answers.find_or_create_by!(profile_question_id: question.id)
+    if self.profile_question_answers.count == 0
+      self.course.profile_questions.current.each do |question|
+        profile_question_answers.find_or_create_by!(profile_question_id: question.id)
+      end
     end
+  end
+
+  def populate_course
+    code = ENV['DEFAULT_COURSE_CODE'] || 'PSEA'
+    self.course = Course.find_by_code(code) if self.course.nil?
   end
 
   def logic_questions_score

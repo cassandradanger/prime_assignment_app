@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
 
 
-
   # Public routes
-  devise_for :users, :path=>"applicant", controllers: { registrations: 'registrations'}, path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+  devise_for :users, :path => "applicant", controllers: {registrations: 'registrations'}, path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'register'}
+
   resources :apply
 
   # Admin routes
-  devise_for :admins, :path=>"admin", path_names: { sign_in: 'login', sign_out: 'logout' }
+  devise_for :admins, :path => "admin", path_names: {sign_in: 'login', sign_out: 'logout'}
   scope '/admin' do
-    resources :logic_questions
+
     resources :cohorts
     resources :admission_applications do
       member do
@@ -18,9 +18,10 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create, :edit, :update, :destroy]
     end
 
-  #  patch 'admission_applications/:id/workflow/:workflow_action', to: 'admission_applications#workflow', as: 'admission_application_workflow'
+    resources :courses do
+      resources :logic_questions, :profile_questions, except: :index
+    end
 
-    resources :profile_questions
 
     resources :admins, path: 'employees' do
       member do

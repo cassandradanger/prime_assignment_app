@@ -5,7 +5,6 @@ class CohortsController < AdminApplicationController
 
   def index
     set_default_params(:status)
-
     @cohorts = Cohort.filter(params.slice(:status))
     @status_filter = params[:status]
   end
@@ -16,6 +15,7 @@ class CohortsController < AdminApplicationController
 
   def new
     @cohort = Cohort.new
+    @courses = Course.active
     respond_with(@cohort)
   end
 
@@ -73,7 +73,7 @@ class CohortsController < AdminApplicationController
   end
 
   def cohort_params
-    params.require(:cohort).permit(:name, :prework_start, :classroom_start, :graduation, :applications_open, :applications_close, :target_size, :earnest_application_code)
+    params.require(:cohort).permit(:name, :prework_start, :classroom_start, :graduation, :applications_open, :applications_close, :target_size, :earnest_application_code, :course_id)
   end
 
   def set_default_params(param)

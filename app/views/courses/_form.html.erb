@@ -1,0 +1,9 @@
+<%= bootstrap_form_for(@course) do |f| %>
+
+    <%= f.text_field :code %>
+    <%= f.text_field :name %>
+    <%= f.text_area :description %>
+
+    <%= f.submit "Save", class: 'btn btn-primary btn-sm' %>
+<% end %>
+

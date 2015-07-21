@@ -1,4 +1,5 @@
 <% content_for :page_title, "Cohort :: #{@cohort.name}" %>
+<% content_for :page_sub_title, @cohort.course.label unless @cohort.course.nil? %>
 <% content_for :page_title_nav do %>
     <%= link_to '<i class="fa fa-pencil"></i> Edit'.html_safe, edit_cohort_url(@cohort), class: 'btn btn-white btn-sm' %>
     <%= link_to('<i class="fa fa-times"></i> Delete'.html_safe, @cohort, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-white btn-sm') unless @cohort.has_applications? %>
@@ -111,12 +112,13 @@
       </div>
       <div class="ibox-content ">
         <%= pie_chart cohort_chart_data_path(cohort_id: @cohort, type: 'payment_option'), library: {theme: 'maximized'} %>
+        <small>Of <%= @cohort.assigned_admission_applications.aid_eligible.count %> eligible
+          students <%= @cohort.assigned_admission_applications.aid_eligible.not_aid_seeking.count %> are not seeking
+          aid. <%= @cohort.assigned_admission_applications.aid_seeking.aid_ineligible.count %> aid seekers aren't
+          eligible.
+        </small>
       </div>
-      <small>Of <%= @cohort.assigned_admission_applications.aid_eligible.count %> eligible
-        students <%= @cohort.assigned_admission_applications.aid_eligible.not_aid_seeking.count %> are not seeking
-        aid. <%= @cohort.assigned_admission_applications.aid_seeking.aid_ineligible.count %> aid seekers aren't
-        eligible.
-      </small>
+
     </div>
   </div>
 

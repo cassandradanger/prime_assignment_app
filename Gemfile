@@ -85,6 +85,7 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'quiet_assets'
+  gem 'launchy'
 end
 
 group :test do

@@ -2,6 +2,8 @@ FactoryGirl.define do
 
   factory :admission_application do
     application_status "not_started"
+    course
+    user
 
     # logic_question_count and profile_question_count is declared as a transient
     # attribute and available in attributes on the factory, as well as the callback
@@ -11,11 +13,9 @@ FactoryGirl.define do
       profile_questions_count 5
     end
 
-    user
-
     factory :new_admission_application do
       after(:create) do |application, evaluator|
-        application.cohorts = [create(:cohort)]
+        application.cohorts = [create(:cohort, course: application.course)]
         application.logic_question_answers = create_list(:logic_question_answer, evaluator.logic_questions_count, admission_application: application, answer: nil)
         application.profile_question_answers = create_list(:profile_question_answer, evaluator.profile_questions_count, admission_application: application, answer: nil)
       end
@@ -45,7 +45,7 @@ FactoryGirl.define do
 
       after(:create) do |application, evaluator|
         application.start!
-        application.cohorts = [create(:cohort)]
+        application.cohorts = [create(:cohort, course: application.course)]
         application.logic_question_answers = create_list(:logic_question_answer, evaluator.logic_questions_count, admission_application: application)
         application.profile_question_answers = create_list(:profile_question_answer, evaluator.profile_questions_count, admission_application: application)
       end

@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@logic_question) do |f| %>
+<%= bootstrap_form_for([@course,@logic_question]) do |f| %>
 
     <%= f.text_area :question, rows: 5 %>
     <%= image_tag @logic_question.question_image.url %>
