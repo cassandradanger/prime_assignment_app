@@ -73,6 +73,8 @@ gem 'workflow'
 gem "audited-activerecord", "~> 4.0"
 # Pagination
 gem 'kaminari'
+# Timeout troubleshooting
+gem "rack-timeout"
 
 group :production do
   # Use Heroku deployment

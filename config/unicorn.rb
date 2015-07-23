@@ -1,5 +1,5 @@
-worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
-timeout 15
+worker_processes Integer(ENV["UNICORN_WEB_CONCURRENCY"] || 3)
+timeout Integer(ENV['UNICORN_TIMEOUT'] || 15)
 
 # extend the timeout when using the debugger.
 if ENV['RACK_ENV'] == 'development'
