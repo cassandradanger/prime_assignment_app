@@ -874,6 +874,27 @@ CREATE UNIQUE INDEX index_admins_on_reset_password_token ON admins USING btree (
 
 
 --
+-- Name: index_admission_applications_cohorts_on_cohort_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_admission_applications_cohorts_on_cohort_id ON admission_applications_cohorts USING btree (cohort_id);
+
+
+--
+-- Name: index_admission_applications_on_application_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_admission_applications_on_application_status ON admission_applications USING btree (application_status);
+
+
+--
+-- Name: index_admission_applications_on_assigned_cohort_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_admission_applications_on_assigned_cohort_id ON admission_applications USING btree (assigned_cohort_id);
+
+
+--
 -- Name: index_admission_applications_on_course_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -916,10 +937,24 @@ CREATE INDEX index_comments_on_is_commentable_id_and_is_commentable_type ON comm
 
 
 --
+-- Name: index_logic_question_answers_on_admission_application_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_logic_question_answers_on_admission_application_id ON logic_question_answers USING btree (admission_application_id);
+
+
+--
 -- Name: index_logic_questions_on_course_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_logic_questions_on_course_id ON logic_questions USING btree (course_id);
+
+
+--
+-- Name: index_profile_question_answers_on_admission_application_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_profile_question_answers_on_admission_application_id ON profile_question_answers USING btree (admission_application_id);
 
 
 --
@@ -1055,4 +1090,12 @@ INSERT INTO schema_migrations (version) VALUES ('20150716180445');
 INSERT INTO schema_migrations (version) VALUES ('20150717135750');
 
 INSERT INTO schema_migrations (version) VALUES ('20150720160555');
+
+INSERT INTO schema_migrations (version) VALUES ('20150723194902');
+
+INSERT INTO schema_migrations (version) VALUES ('20150723195346');
+
+INSERT INTO schema_migrations (version) VALUES ('20150723195400');
+
+INSERT INTO schema_migrations (version) VALUES ('20150723200102');
 
