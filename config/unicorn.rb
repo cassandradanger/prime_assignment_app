@@ -1,4 +1,4 @@
-worker_processes Integer(ENV["UNICORN_WEB_CONCURRENCY"] || 3)
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout Integer(ENV['UNICORN_TIMEOUT'] || 15)
 
 # extend the timeout when using the debugger.
