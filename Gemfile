@@ -71,15 +71,20 @@ gem 'jquery-cookie-rails'
 gem 'workflow'
 # Audit changes to ActiveRecord records.
 gem "audited-activerecord", "~> 4.0"
+# Queue
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+# Does what is says.  Mandrill API integration for sending email using templates maintained in mandrill and mail chimp.
+gem 'mandrill-api', require: 'mandrill'
 # Pagination
 gem 'kaminari'
 # Timeout troubleshooting
 gem "rack-timeout"
 
-group :production do
-  # Use Heroku deployment
-  gem 'rails_12factor'
-  gem 'font_assets'
+group :production do 
+	# Use Heroku deployment
+	gem 'rails_12factor'
+	gem 'font_assets'
 end
 
 group :development do

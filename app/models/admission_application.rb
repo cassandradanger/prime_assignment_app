@@ -158,7 +158,8 @@ class AdmissionApplication < ActiveRecord::Base
     self.application_step = "thanks"
     self.completed_at = Time.now
     @just_completed = true
-    AdmissionApplicationMailer.admission_application_thank_you(self).deliver_now
+    Delayed::Job.enqueue Email::Application::ThankYouEmailJob.new(self.id)
+    # AdmissionApplicationMailer.admission_application_thank_you(self).deliver_now
   end
 
   def on_started_entry(from, triggering_event, *event_args)
@@ -196,7 +197,6 @@ class AdmissionApplication < ActiveRecord::Base
 
   def active?
     # Allow for modification of records after submission (in scoring) without verification
-    # TODO - this seems really fragile and error prone.  Come back and take a look at this.
     application_step == 'submit' && self.current_state < :completed
   end
 
@@ -368,7 +368,8 @@ class AdmissionApplication < ActiveRecord::Base
   end
 
   def send_welcome
-    AdmissionApplicationMailer.admission_application_welcome(self).deliver_now
+    Delayed::Job.enqueue Email::Application::WelcomeEmailJob.new(self.id)
+    # AdmissionApplicationMailer.admission_application_welcome(self).deliver_now
   end
 
   def update_status

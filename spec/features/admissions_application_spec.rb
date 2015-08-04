@@ -7,7 +7,7 @@ feature 'A logged in visitor' do
       @user = create(:user)
       # @course = create(:course)
       @user.admission_application = @admission_application = create(:new_admission_application, user: @user)
-      # @cohort = create(:cohort, course: @course)
+      @cohort = @admission_application.cohorts[0]
 
       visit new_user_session_path
       fill_in 'user_login_email', with: @user.email
@@ -87,7 +87,7 @@ feature 'A logged in visitor' do
       select 'Find work as a software engineer', from: 'admission_application_goal'
       fill_in 'admission_application_income', with: '45000'
       select 'Search Engine', from: 'admission_application_referral_source'
-      check build(:cohort).label
+      check "admission_application_cohort_ids_#{@cohort.id}"
       click_button 'Save Your Application and Continue'
       current_path.should == '/apply/personal'
     end

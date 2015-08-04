@@ -30,9 +30,12 @@ describe AdmissionApplication do
   it { AdmissionApplication.new().should respond_to(:days_since_status_update) }
 
   it 'should send an email when created' do
-    mailcount = ActionMailer::Base.deliveries.count
+    expect(Delayed::Job.count).to eq(0)
+    # mailcount = ActionMailer::Base.deliveries.count
     @admission_application = FactoryGirl.create(:admission_application)
-    ActionMailer::Base.deliveries.count.should == mailcount+1
+    # ActionMailer::Base.deliveries.count.should == mailcount+1
+    expect(Delayed::Job.count).to eq(1)
+    expect(Delayed::Worker.new.work_off).to eq([1, 0]) # Returns [successes, failures]
   end
 
   # context 'when new' do

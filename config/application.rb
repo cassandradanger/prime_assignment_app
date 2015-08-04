@@ -2,8 +2,6 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -25,5 +23,8 @@ module PrimeacademyIo
     config.autoload_paths += %W("#{config.root}/app/navigation_renderers")
 
     config.active_record.schema_format = :sql
+
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end

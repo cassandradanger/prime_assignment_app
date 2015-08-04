@@ -2,6 +2,7 @@
 capybara-*.html
 .rspec
 /log
+/backups
 /tmp
 /js
 /db/*.sqlite3

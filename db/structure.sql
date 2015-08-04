@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -81,6 +95,7 @@ CREATE TABLE admission_applications (
     first_name character varying(255),
     middle_name character varying(255),
     last_name character varying(255),
+    date_of_birth date,
     email character varying(255),
     city character varying(255),
     state character varying(255),
@@ -130,7 +145,6 @@ CREATE TABLE admission_applications (
     race_white boolean,
     race_other boolean,
     application_status_updated_at timestamp without time zone,
-    date_of_birth date,
     course_id integer
 );
 
@@ -1082,6 +1096,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150427175943');
 INSERT INTO schema_migrations (version) VALUES ('20150515162424');
 
 INSERT INTO schema_migrations (version) VALUES ('20150527025016');
+
+INSERT INTO schema_migrations (version) VALUES ('20150617180830');
 
 INSERT INTO schema_migrations (version) VALUES ('20150716175829');
 

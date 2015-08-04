@@ -25,7 +25,7 @@ namespace :prime do
        error_count = 0
        @apps.each do |app|
           app.email = "dev#{app.user.id}@junk.com"
-          if app.save
+          if app.save_without_auditing
              counter += 1
           else
              error_count += 1

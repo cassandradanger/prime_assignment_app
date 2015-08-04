@@ -40,11 +40,6 @@ class DashboardController < AdminApplicationController
     end
   end
 
-  # For testing timeouts
-  def timeout
-    sleep 30
-  end
-
   def set_display_page_header
     @display_page_header = false
   end
