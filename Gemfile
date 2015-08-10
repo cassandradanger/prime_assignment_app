@@ -108,7 +108,7 @@ group :development, :test do
   gem 'rspec-its', '~> 1.1.0'
 end
 
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
