@@ -1,5 +1,7 @@
 require "rails_helper"
 
+require "rails_helper"
+
 feature 'A logged in visitor' do
   feature 'starts with new profile' do
     before :each do

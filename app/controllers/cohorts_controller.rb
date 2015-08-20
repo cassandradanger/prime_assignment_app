@@ -1,5 +1,6 @@
 class CohortsController < AdminApplicationController
   before_action :set_cohort, only: [:show, :edit, :update, :destroy]
+  before_action :set_courses, only: [:new, :create]
 
   respond_to :html
 
@@ -15,7 +16,6 @@ class CohortsController < AdminApplicationController
 
   def new
     @cohort = Cohort.new
-    @courses = Course.active
     respond_with(@cohort)
   end
 
@@ -24,13 +24,19 @@ class CohortsController < AdminApplicationController
 
   def create
     @cohort = Cohort.new(cohort_params)
-    @cohort.save
-    respond_with(@cohort)
+    if @cohort.save
+      respond_with(@cohort)
+    else
+      render :new
+    end
   end
 
   def update
-    @cohort.update(cohort_params)
-    respond_with(@cohort)
+    if @cohort.update(cohort_params)
+      respond_with(@cohort)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -70,6 +76,10 @@ class CohortsController < AdminApplicationController
   private
   def set_cohort
     @cohort = Cohort.find(params[:id])
+  end
+
+  def set_courses
+    @courses = Course.active
   end
 
   def cohort_params

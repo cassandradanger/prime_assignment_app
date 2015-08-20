@@ -11,7 +11,9 @@ class Cohort < ActiveRecord::Base
   has_many :assigned_admission_applications, class_name: "AdmissionApplication", foreign_key: "assigned_cohort_id", inverse_of: 'assigned_cohort'
   belongs_to :course
 
-  validates_presence_of :target_size, :earnest_application_code,:course
+  validates_presence_of :target_size, :earnest_application_code, :course
+  validates_presence_of :prework_start, :classroom_start, :graduation, :applications_open, :applications_close
+
   validates_numericality_of :target_size
 
   def label
