@@ -93,6 +93,7 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'quiet_assets'
   gem 'launchy'
+  gem 'railroady'
 end
 
 group :test do

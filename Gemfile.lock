@@ -205,6 +205,7 @@ GEM
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.2.4)
+    railroady (1.3.1)
     rails (4.2.1)
       actionmailer (= 4.2.1)
       actionpack (= 4.2.1)
@@ -357,6 +358,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rack-timeout
+  railroady
   rails (= 4.2.1)
   rails_12factor
   rspec-its (~> 1.1.0)
