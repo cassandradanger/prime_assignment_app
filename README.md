@@ -66,3 +66,10 @@ When pulling, use rebase instead of merge which results in a cleaner, more linea
 
 *These notes are written for an OSX environment.*
 
+*These notes are written for an OSX environment.*
+
+1. Create a directory to put the source code in: `mkdir prime`
+2. Change directories to the source code directory: `cd prime`
+3. Clone the repository into the current directory (*__Important__ - don't forget the dot on the end*): `git clone https://github.com/markhurlburt/primeacademy.io.git .`
+4. If you don't have bundler installed, install it now: `gem install bundler`
+5. Use bundler to install the required gem files: `bundler install`
