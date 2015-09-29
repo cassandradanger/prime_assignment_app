@@ -7,20 +7,20 @@ PrimeAcademy.io website codebase
 ###Local Machine Installation
 ####Windows
 
-1. Download Git for Windows (select the latest Git-* file, not msysgit)
+1. Download [Git for Windows](https://git-for-windows.github.io/) (select the latest Git-* file, not msysgit)
   1. If you plan on using TortoiseGit, you may want to disable Git's default Windows Explorer Integration options
   2. "Adjusting your PATH Environment": Select Run Git from the Windows Command Prompt
   3. "Configuring line ending conversions": Select Checkout as-is, commit Unix-style line endings
 2. Open a Command Prompt window and enter the following:
   1. `git config --global user.name "{Your Full Name}"`
   2. `git config --global user.email {your email address}`
-3. Optionally install TortoiseGit
+3. Optionally install [TortoiseGit](http://code.google.com/p/tortoisegit/downloads/list?q=label:Featured)
 4. Optionally follow the 'Recommended Configuration' steps below.
 
 ####OSX
 
-1. Download the latest OSX Installer for Git.<br>
-  *Alternatively, install it through Homebrew using: brew install git*
+1. Download the latest [OSX Installer](http://code.google.com/p/git-osx-installer/downloads/list?can=3) for Git.<br>
+  *Alternatively, install it through [Homebrew](http://mxcl.github.com/homebrew/) using: brew install git*
 2. Open a Terminal window and enter the following:
   1. `git config --global user.name "Your FullName"`
   2. `git config --global user.email short-username@nerdery.com`
@@ -61,3 +61,8 @@ OSX:
 ###Configuration to Consider
 
 When pulling, use rebase instead of merge which results in a cleaner, more linear history: `git config --global branch.autosetuprebase always`
+
+##Installing site localy for development
+
+*These notes are written for an OSX environment.*
+
